@@ -4,14 +4,21 @@ using UnityEngine;
 
 public class Barrier : MonoBehaviour
 {
-    bool doorStatus = false;
+    //Invertierte Barriere, zB. Brücke
+    public bool isBridge = false;
+
+    bool barrierStatus = false;
+    
 
     Renderer BarrierRenderer;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        if(isBridge)
+        {
+            barrierStatus = true;
+        }
     }
 
     // Update is called once per frame
@@ -22,13 +29,23 @@ public class Barrier : MonoBehaviour
 
     public void ChangeDoor(bool isOpen)
     {
-        if(!doorStatus && isOpen || doorStatus && !isOpen)
+        
+        if(!barrierStatus && isOpen || barrierStatus && !isOpen)
         {
-            //Collision deaktivieren
-            this.GetComponent<MeshCollider>().enabled = !isOpen;
-            //Transparenz erhöhen
-            //BarrierRenderer.material.color.a = isOpen ? 100 : 200;
-            this.doorStatus = isOpen;
+           if(isBridge)
+            {
+                //Collision deaktivieren
+                this.GetComponent<MeshCollider>().enabled = isOpen;
+                //Transparenz erhöhen
+                //BarrierRenderer.material.color.a = isOpen ? 100 : 200;   
+            } else
+            {
+                //Collision deaktivieren
+                this.GetComponent<MeshCollider>().enabled = !isOpen;
+                //Transparenz erhöhen
+                //BarrierRenderer.material.color.a = isOpen ? 100 : 200;
+            }
+            this.barrierStatus = isOpen;
         }
         
         
