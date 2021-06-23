@@ -1,65 +1,75 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.Threading;
 using UnityEngine;
 
-public class BarrierTrigger : MonoBehaviour
+public class PressurePlateTrigger : MonoBehaviour
 {
- 
-   
-    
-    GameObject Door;
+
     public Barrier barrier;
-
     bool IsOpen = false;
-
+    bool HasFirstColObj = false;
     int CollionsObjCount = 0;
 
-    public float speed = 1.0f;
-
+   public  GameObject LowerPressurePlate;
     Renderer PressurePlateRenderer;
- 
 
+    public float speed = 1f;
+
+    public const float YOffset = 0.01f;
+
+
+    Transform InitTrans = null;
 
     // Start is called before the first frame update
     void Start()
     {
+
         //Fetch the Renderer component of the GameObject
         PressurePlateRenderer = GetComponent<Renderer>();
-      
         PressurePlateRenderer.material.color = Color.red;
 
+        InitTrans = gameObject.transform;
 
     }
+
     // Update is called once per frame
     void Update()
     {
+
+
+
         {
-
-            float step = speed * Time.deltaTime;
-
             if (IsOpen)
             {
-             
-                barrier.ChangeDoor(true);
+
+                gameObject.transform.position = Vector3.MoveTowards(gameObject.transform.position, new Vector3(gameObject.transform.position.x, 0.65f, gameObject.transform.position.z), speed * Time.deltaTime);
+                //barrier.ChangeDoor(true);
             }
             else
             {
 
-                barrier.ChangeDoor(false);
+                if (HasFirstColObj) {
+                    gameObject.transform.position = Vector3.MoveTowards(gameObject.transform.position, new Vector3(gameObject.transform.position.x, 0.7f, gameObject.transform.position.z), speed * Time.deltaTime);
+                }
+          
+             
+ 
+                // barrier.ChangeDoor(false);
             }
 
 
         }
 
     }
-
-
     private void OnCollisionEnter(Collision collision)
     {
+
+        HasFirstColObj = true;
         CollionsObjCount++;
         IsOpen = true;
         PressurePlateRenderer.material.color = Color.green;
+
+      
     }
 
     private void OnCollisionExit(Collision collision)
@@ -74,7 +84,5 @@ public class BarrierTrigger : MonoBehaviour
 
 
     }
-
-    
 
 }
