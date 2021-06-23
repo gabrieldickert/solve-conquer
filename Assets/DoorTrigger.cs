@@ -12,10 +12,15 @@ public class DoorTrigger : MonoBehaviour
     public float speed = 1.0f;
 
     int CollionsObjCount = 0;
+
+    Renderer PressurePlateRenderer;
+
     // Start is called before the first frame update
     void Start()
     {
-        
+        //Fetch the Renderer component of the GameObject
+        PressurePlateRenderer = GetComponent<Renderer>();
+        PressurePlateRenderer.material.color = Color.red;
     }
     // Update is called once per frame
     void Update()
@@ -40,8 +45,8 @@ public class DoorTrigger : MonoBehaviour
     private void OnCollisionEnter(Collision collision)
     {
         CollionsObjCount++;
-            IsOpen = true;
-        
+        IsOpen = true;
+        PressurePlateRenderer.material.color = Color.green;
     }
 
     private void OnCollisionExit(Collision collision)
@@ -51,9 +56,10 @@ public class DoorTrigger : MonoBehaviour
         if(CollionsObjCount == 0)
         {
             IsOpen = false;
-
+            PressurePlateRenderer.material.color = Color.red;
         }
 
      
     }
+
 }
