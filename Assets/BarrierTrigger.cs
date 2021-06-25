@@ -1,19 +1,16 @@
+
 using System.Collections;
-using System.Collections.Generic;
-using System.Collections.Specialized;
-using System.Threading;
+
 using UnityEngine;
 
 public class BarrierTrigger : MonoBehaviour
 {
-
-    
-    GameObject Door;
     public Barrier barrier;
 
     bool IsOpen = false;
 
     int CollionsObjCount = 0;
+    public int TriggerId;
 
     Renderer PressurePlateRenderer;
     Vector3 initPos;
@@ -37,14 +34,15 @@ public class BarrierTrigger : MonoBehaviour
             float step = 1f * Time.deltaTime; // calculate distance to move
             if (IsOpen)
             {
-
-                barrier.ChangeDoor(true);
                 gameObject.transform.position = Vector3.MoveTowards(gameObject.transform.position, new Vector3(initPos.x, initPos.y - plateOffset, initPos.z), step);
+                barrier.ChangeDoor(true);
+                EventsManager.instance.OnPressurePlateEnable(TriggerId);
             }
             else
             {
-                barrier.ChangeDoor(false);
                 gameObject.transform.position = Vector3.MoveTowards(gameObject.transform.position, initPos, step);
+                barrier.ChangeDoor(false);
+                EventsManager.instance.OnPressurePlateDisable(TriggerId);
             }
 
 
