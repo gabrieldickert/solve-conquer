@@ -27,8 +27,7 @@ public class ObjectBarrier : MonoBehaviour
     //Make the ObjectBarrier Red so it cannot be passed with Objects in Hands
       gameObject.GetComponent<Renderer>().material.color = new Color(255, 0, 0, 0.1f);
       
-        //Default no Mesh Colliding
-      this.gameObject.GetComponent<MeshCollider>().enabled = false;
+
 
     }
 
