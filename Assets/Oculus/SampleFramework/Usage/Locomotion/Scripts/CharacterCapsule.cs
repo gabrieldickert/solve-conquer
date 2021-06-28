@@ -205,7 +205,6 @@ public class CharacterCapsule : MonoBehaviour
 	    tris.Add(lastRow);
 	    tris.Add(last - 1);
 
-
         _vertices = verts.ToArray();
 	    _triangles = tris.ToArray();
 
