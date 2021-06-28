@@ -20,11 +20,13 @@ public class EventsManager : MonoBehaviour
 
     public void OnPressurePlateEnable(int instanceId)
     {
+        //UnityEngine.Debug.Log("EventsManager: OnPressurePlateEnable");
         PressurePlateEnable?.Invoke(instanceId);
     }
 
     public void OnPressurePlateDisable(int instanceId)
     {
+        //UnityEngine.Debug.Log("EventsManager: OnPressurePlateDisable");
         PressurePlateDisable?.Invoke(instanceId);
     }
 }

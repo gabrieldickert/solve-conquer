@@ -7,40 +7,62 @@ public class Barrier : MonoBehaviour
     [Range(0.1f, 1.0f)]
     public float fadeSpeed = 1f;    // How fast alpha value decreases.
     public Color fadeColor = new Color(0, 0, 0, 0);
-
+    //briges are basically inverted barriers
+    public bool isBridge = false;
+    public int ActivatedByTriggerId;
+    
+    private Renderer BarrierRenderer;
     private Material m_Material;    // Used to store material reference.
     private Color m_Color;            // Used to store color reference.
 
-    //Invertierte Barriere, zB. Brücke
-    public bool isBridge = false;
-
-    bool barrierStatus = false;
     
-
-    Renderer BarrierRenderer;
-
+    
     // Start is called before the first frame update
     void Start()
     {
-        if(isBridge)
-        {
-            barrierStatus = true;
-        }
+        //UnityEngine.Debug.Log("Barrier: Start");
+
         // Get reference to object's material.
         m_Material = GetComponent<Renderer>().material;
 
         // Get material's starting color value.
         m_Color = m_Material.color;
 
-        // Must use "StartCoroutine()" to execute 
-        // methods with return type of "IEnumerator".
-        //StartCoroutine(ColorFade());
+        //Initialize Barrier (isBridge ? disable collision and fade color out : enable collision and fade color in)
+        ToggleCollision(!isBridge);
+        ToggleFade(isBridge);
+
+        EventsManager.instance.PressurePlateEnable += HandlePressurePlateEnabled;
+        EventsManager.instance.PressurePlateDisable += HandlePressurePlateDisabled;
+
     }
 
     // Update is called once per frame
     void Update()
     {
        
+    }
+
+    private void HandlePressurePlateEnabled(int id)
+    {
+        //UnityEngine.Debug.Log("Barrier: HandlePressurePlateEnabled");
+        if (id == ActivatedByTriggerId)
+        {
+            ToggleCollision(isBridge);
+            ToggleFade(!isBridge);
+        }
+
+    }
+
+    private void HandlePressurePlateDisabled(int id)
+    {
+        //UnityEngine.Debug.Log("Barrier: HandlePressurePlateDisabled");
+        if (id == ActivatedByTriggerId)
+        {
+            ToggleCollision(!isBridge);
+            ToggleFade(isBridge);
+        }
+
     }
 
     // This method fades only the alpha.
@@ -64,7 +86,6 @@ public class Barrier : MonoBehaviour
         }
     }
 
-
     // This method fades from original color to "fadeColor"
     IEnumerator ColorFade()
     {
@@ -82,8 +103,7 @@ public class Barrier : MonoBehaviour
             yield return null;
         }
     }
-
-    
+  
     IEnumerator ColorGrow()
     {
         // Lerp start value.
@@ -101,54 +121,20 @@ public class Barrier : MonoBehaviour
         }
     }
 
-    public void ChangeDoor(bool isOpen)
+    private void ToggleCollision(bool hasCollision)
     {
-        
-        if(!barrierStatus && isOpen || barrierStatus && !isOpen)
-        {
-           if(isBridge)
-            {
-                //Collision deaktivieren
-                this.GetComponent<MeshCollider>().enabled = isOpen;
-                //Transparenz erhöhen
-                changeColor();
-            } else
-            {
-                //Collision deaktivieren
-                this.GetComponent<MeshCollider>().enabled = !isOpen;
-                //Transparenz erhöhen
-                changeColor();
-            }
-            this.barrierStatus = isOpen;
-        }
-        
-        
+        //UnityEngine.Debug.Log("Barrier: ToggleCollision: " + hasCollision);
+        this.GetComponent<MeshCollider>().enabled = hasCollision;
     }
 
-    void changeColor()
+    private void ToggleFade(bool isFadeOut)
     {
-        if (this.isBridge)
-            if (this.barrierStatus)
-            {
-                StartCoroutine(ColorFade());
-            }
-            else
-            {
-                StartCoroutine(ColorGrow());
-            }
-        else
+        if(isFadeOut)
         {
-            if (!barrierStatus)
-            {
-                StartCoroutine(ColorFade());
-            }
-            else
-            {
-                StartCoroutine(ColorGrow());
-            }
-        } 
-        
-
-    } 
-
+            StartCoroutine(ColorFade());
+        } else
+        {
+            StartCoroutine(ColorGrow());
+        }
+    }
 }

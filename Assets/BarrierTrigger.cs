@@ -5,14 +5,12 @@ using UnityEngine;
 
 public class BarrierTrigger : MonoBehaviour
 {
-    public Barrier barrier;
+    bool isOpen = false;
 
-    bool IsOpen = false;
+    int collionsObjCount = 0;
+    public int triggerId;
 
-    int CollionsObjCount = 0;
-    public int TriggerId;
-
-    Renderer PressurePlateRenderer;
+    Renderer pressurePlateRenderer;
     Vector3 initPos;
     float plateOffset;
 
@@ -20,29 +18,23 @@ public class BarrierTrigger : MonoBehaviour
     void Start()
     {
         //Fetch the Renderer component of the GameObject
-        PressurePlateRenderer = GetComponent<Renderer>();
-        PressurePlateRenderer.material.color = Color.red;
+        pressurePlateRenderer = GetComponent<Renderer>();
+        pressurePlateRenderer.material.color = Color.red;
         initPos = gameObject.transform.position;
-        //gameObject.transform.position = Vector3.MoveTowards(initPos, new Vector3(10f, 10f, 10f), 1f);
-        //renderer = GetComponent<MeshRenderer>();
-        plateOffset = 0.5f * PressurePlateRenderer.bounds.size.y;
+        plateOffset = 0.5f * pressurePlateRenderer.bounds.size.y;
     }
     // Update is called once per frame
     void Update()
     {
         {
             float step = 1f * Time.deltaTime; // calculate distance to move
-            if (IsOpen)
+            if (isOpen)
             {
                 gameObject.transform.position = Vector3.MoveTowards(gameObject.transform.position, new Vector3(initPos.x, initPos.y - plateOffset, initPos.z), step);
-                barrier.ChangeDoor(true);
-                EventsManager.instance.OnPressurePlateEnable(TriggerId);
             }
             else
             {
                 gameObject.transform.position = Vector3.MoveTowards(gameObject.transform.position, initPos, step);
-                barrier.ChangeDoor(false);
-                EventsManager.instance.OnPressurePlateDisable(TriggerId);
             }
 
 
@@ -53,19 +45,21 @@ public class BarrierTrigger : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        CollionsObjCount++;
-        IsOpen = true;
-        PressurePlateRenderer.material.color = Color.green;
+        collionsObjCount++;
+        isOpen = true;
+        pressurePlateRenderer.material.color = Color.green;
+        EventsManager.instance.OnPressurePlateEnable(triggerId);
     }
 
     private void OnCollisionExit(Collision collision)
     {
-        CollionsObjCount--;
+        collionsObjCount--;
 
-        if (CollionsObjCount == 0)
+        if (collionsObjCount == 0)
         {
-            IsOpen = false;
-            PressurePlateRenderer.material.color = Color.red;
+            isOpen = false;
+            pressurePlateRenderer.material.color = Color.red;
+            EventsManager.instance.OnPressurePlateDisable(triggerId);
         }
 
 
