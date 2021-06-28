@@ -9,21 +9,23 @@ public class Switch : MonoBehaviour
     private AudioSource source;
     public AudioClip switchSound;
 
-    private bool on = false;
+    private bool isActiveTrigger_2 = false;
     private bool switchHit = false;
 
     private float switchRotation = 100;
 
     private GameObject switchBase;
 
-    public int triggerId;
+    public int triggerId_1;
+    public int triggerId_2;
 
     // Start is called before the first frame update
     void Start()
     {
         source = gameObject.AddComponent<AudioSource>();
         switchBase = transform.GetChild(0).gameObject;
-
+        //EventsManager.instance.OnSwitchEnable(isActiveTrigger_2 ? triggerId_1 : triggerId_2);
+        //EventsManager.instance.OnSwitchDisable(isActiveTrigger_2 ? triggerId_2 : triggerId_1);
 
     }
 
@@ -36,17 +38,16 @@ public class Switch : MonoBehaviour
             source.PlayOneShot(switchSound);
             switchHit = false;
             //if on is true make on false, anf if on is false make on true
-            on = !on;
+            //on = !on;
 
             //rotate
-            if (on == true)
+            if (isActiveTrigger_2)
             {
 
                 transform.rotation = Quaternion.Euler(transform.eulerAngles.x + switchRotation, transform.eulerAngles.y, transform.eulerAngles.z);
             }
             else
             {
-                EventsManager.instance.OnSwitchDisable(triggerId);
                 transform.rotation = Quaternion.Euler(transform.eulerAngles.x - switchRotation, transform.eulerAngles.y, transform.eulerAngles.z);
             }
 
@@ -57,7 +58,9 @@ public class Switch : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            EventsManager.instance.OnSwitchEnable(triggerId);
+            EventsManager.instance.OnSwitchEnable(isActiveTrigger_2 ? triggerId_1 : triggerId_2);
+            EventsManager.instance.OnSwitchDisable(isActiveTrigger_2 ? triggerId_2 : triggerId_1);
+            isActiveTrigger_2 = !isActiveTrigger_2;
             switchHit = true;
         }
     }
