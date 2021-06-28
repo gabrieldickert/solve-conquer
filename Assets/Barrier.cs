@@ -34,6 +34,8 @@ public class Barrier : MonoBehaviour
 
         EventsManager.instance.PressurePlateEnable += HandlePressurePlateEnabled;
         EventsManager.instance.PressurePlateDisable += HandlePressurePlateDisabled;
+        EventsManager.instance.SwitchEnable += HandlePressurePlateEnabled;
+        EventsManager.instance.SwitchDisable += HandlePressurePlateDisabled;
 
     }
 
