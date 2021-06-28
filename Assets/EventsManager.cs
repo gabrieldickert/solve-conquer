@@ -17,6 +17,8 @@ public class EventsManager : MonoBehaviour
 
     public event Action<int> PressurePlateEnable;
     public event Action<int> PressurePlateDisable;
+    public event Action<int> SwitchEnable;
+    public event Action<int> SwitchDisable;
 
     public void OnPressurePlateEnable(int instanceId)
     {
@@ -28,5 +30,17 @@ public class EventsManager : MonoBehaviour
     {
         //UnityEngine.Debug.Log("EventsManager: OnPressurePlateDisable");
         PressurePlateDisable?.Invoke(instanceId);
+    }
+
+    public void OnSwitchEnable(int instanceId)
+    {
+        //UnityEngine.Debug.Log("EventsManager: OnPressurePlateEnable");
+        SwitchEnable?.Invoke(instanceId);
+    }
+
+    public void OnSwitchDisable(int instanceId)
+    {
+        //UnityEngine.Debug.Log("EventsManager: OnPressurePlateDisable");
+        SwitchDisable?.Invoke(instanceId);
     }
 }

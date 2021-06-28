@@ -13,6 +13,8 @@ public class Wire : MonoBehaviour
 
         EventsManager.instance.PressurePlateEnable += ActivateWire;
         EventsManager.instance.PressurePlateDisable += DeactivateWire;
+        EventsManager.instance.SwitchEnable += ActivateWire;
+        EventsManager.instance.SwitchDisable += DeactivateWire;
     }
 
     // Update is called once per frame
