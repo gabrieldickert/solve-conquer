@@ -142,7 +142,7 @@ public class Barrier : MonoBehaviour
     private void ToggleCollision(bool hasCollision)
     {
         //UnityEngine.Debug.Log("Barrier: ToggleCollision: " + hasCollision);
-        this.GetComponent<MeshCollider>().enabled = hasCollision;
+        this.GetComponent<BoxCollider>().enabled = hasCollision;
     }
 
     private void ToggleFade(bool isFadeOut)
