@@ -10,6 +10,7 @@ public class Barrier : MonoBehaviour
     public Color fadeColor = new Color(0, 0, 0, 0);
     //briges are basically inverted barriers
     public bool isBridge = false;
+    public bool isActiveOnStart = false;
     public List<int> activatedByTriggerId = new List<int>();
 
     private Renderer BarrierRenderer;
@@ -30,9 +31,12 @@ public class Barrier : MonoBehaviour
         m_Color = m_Material.color;
 
         //Initialize Barrier (isBridge ? disable collision and fade color out : enable collision and fade color in)
-        ToggleCollision(!isBridge);
-        ToggleFade(isBridge);
-
+        if(!isActiveOnStart)
+        {
+            ToggleCollision(!isBridge);
+            ToggleFade(isBridge);
+        }
+        
         EventsManager.instance.PressurePlateEnable += HandlePressurePlateEnabled;
         EventsManager.instance.PressurePlateDisable += HandlePressurePlateDisabled;
         EventsManager.instance.SwitchEnable += HandlePressurePlateEnabled;
