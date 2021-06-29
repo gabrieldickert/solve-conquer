@@ -5,6 +5,9 @@ using UnityEngine;
 
 public class BarrierTrigger : MonoBehaviour
 {
+    private AudioSource source;
+    public AudioClip sound_plateEnabled;
+    public AudioClip sound_plateDisabled;
     bool isOpen = false;
 
     int collionsObjCount = 0;
@@ -19,6 +22,7 @@ public class BarrierTrigger : MonoBehaviour
     {
         //Fetch the Renderer component of the GameObject
         pressurePlateRenderer = GetComponent<Renderer>();
+        source = gameObject.AddComponent<AudioSource>();
         pressurePlateRenderer.material.color = Color.red;
         initPos = gameObject.transform.position;
         plateOffset = 0.5f * pressurePlateRenderer.bounds.size.y;
@@ -49,6 +53,7 @@ public class BarrierTrigger : MonoBehaviour
         isOpen = true;
         pressurePlateRenderer.material.color = Color.green;
         EventsManager.instance.OnPressurePlateEnable(triggerId);
+        source.PlayOneShot(sound_plateEnabled);
     }
 
     private void OnCollisionExit(Collision collision)
@@ -60,6 +65,7 @@ public class BarrierTrigger : MonoBehaviour
             isOpen = false;
             pressurePlateRenderer.material.color = Color.red;
             EventsManager.instance.OnPressurePlateDisable(triggerId);
+            source.PlayOneShot(sound_plateDisabled);
         }
 
 
