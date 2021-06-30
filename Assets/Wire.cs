@@ -5,11 +5,12 @@ public class Wire : MonoBehaviour
 {
     Renderer WireRenderer;
     public int ActivatedByTriggerId;
+    public bool isActiveOnStart = false;
     // Start is called before the first frame update
     void Start()
     {
         WireRenderer = GetComponent<Renderer>();
-        WireRenderer.material.color = Color.red;
+        WireRenderer.material.color = isActiveOnStart ? Color.green : Color.red;
 
         EventsManager.instance.PressurePlateEnable += ActivateWire;
         EventsManager.instance.PressurePlateDisable += DeactivateWire;

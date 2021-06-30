@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -9,12 +10,13 @@ public class Barrier : MonoBehaviour
     public Color fadeColor = new Color(0, 0, 0, 0);
     //briges are basically inverted barriers
     public bool isBridge = false;
-    public int ActivatedByTriggerId;
-    
+    public bool isActiveOnStart = false;
+    public List<int> activatedByTriggerId = new List<int>();
+
     private Renderer BarrierRenderer;
     private Material m_Material;    // Used to store material reference.
     private Color m_Color;            // Used to store color reference.
-
+    private List<int> activeTriggers = new List<int>();
     
     
     // Start is called before the first frame update
@@ -29,11 +31,16 @@ public class Barrier : MonoBehaviour
         m_Color = m_Material.color;
 
         //Initialize Barrier (isBridge ? disable collision and fade color out : enable collision and fade color in)
-        ToggleCollision(!isBridge);
-        ToggleFade(isBridge);
-
+        if(!isActiveOnStart)
+        {
+            ToggleCollision(!isBridge);
+            ToggleFade(isBridge);
+        }
+        
         EventsManager.instance.PressurePlateEnable += HandlePressurePlateEnabled;
         EventsManager.instance.PressurePlateDisable += HandlePressurePlateDisabled;
+        EventsManager.instance.SwitchEnable += HandlePressurePlateEnabled;
+        EventsManager.instance.SwitchDisable += HandlePressurePlateDisabled;
 
     }
 
@@ -46,10 +53,18 @@ public class Barrier : MonoBehaviour
     private void HandlePressurePlateEnabled(int id)
     {
         //UnityEngine.Debug.Log("Barrier: HandlePressurePlateEnabled");
-        if (id == ActivatedByTriggerId)
+        if (activatedByTriggerId.Contains(id))
         {
-            ToggleCollision(isBridge);
-            ToggleFade(!isBridge);
+            if(activeTriggers.Count == 0)
+            {
+                ToggleCollision(isBridge);
+                ToggleFade(!isBridge);
+            }
+            if(!activeTriggers.Contains(id))
+            {
+                activeTriggers.Add(id);
+            }
+            
         }
 
     }
@@ -57,10 +72,17 @@ public class Barrier : MonoBehaviour
     private void HandlePressurePlateDisabled(int id)
     {
         //UnityEngine.Debug.Log("Barrier: HandlePressurePlateDisabled");
-        if (id == ActivatedByTriggerId)
+        if (activatedByTriggerId.Contains(id))
         {
-            ToggleCollision(!isBridge);
-            ToggleFade(isBridge);
+            if(activeTriggers.Contains(id))
+            {
+                activeTriggers.Remove(id);
+            }
+            if (activeTriggers.Count == 0)
+            {
+                ToggleCollision(!isBridge);
+                ToggleFade(isBridge);
+            }
         }
 
     }
@@ -124,7 +146,7 @@ public class Barrier : MonoBehaviour
     private void ToggleCollision(bool hasCollision)
     {
         //UnityEngine.Debug.Log("Barrier: ToggleCollision: " + hasCollision);
-        this.GetComponent<MeshCollider>().enabled = hasCollision;
+        this.GetComponent<BoxCollider>().enabled = hasCollision;
     }
 
     private void ToggleFade(bool isFadeOut)
