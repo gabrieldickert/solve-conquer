@@ -1,2 +1,2 @@
-# craft-conquer
+# solve-conquer
 VR Game SoSe 2021
