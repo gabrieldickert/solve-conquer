@@ -16,6 +16,9 @@ Entspannte Musik (entspannte Atmosphäre)
 Soundeffekte (Interaktion mit Objekten, etc.)
 Minimalistischer Grafikstil (Steuerung der Aufmerksamkeit auf relevante Objekte & Rätsel)
 
+## Funktionsnachweis
+[![Funktionsnachweis Solve & Conquer](https://img.youtube.com/vi/YRlsOEzoqT8/0.jpg)](https://www.youtube.com/watch?v=YRlsOEzoqT8)
+
 ## Team
 |Name|Email|
 |----|-----|
@@ -23,8 +26,5 @@ Minimalistischer Grafikstil (Steuerung der Aufmerksamkeit auf relevante Objekte 
 |Christian Klüh|christian.klueh@informatik.hs-fulda.de|
 |Julian Schuster|julian.schuster@informatik.hs-fulda.de|
 |Sven Zimny|sven.zimny@informatik.hs-fulda.de|
-
-## Funktionsnachweis
-[![Funktionsnachweis Solve & Conquer](https://img.youtube.com/vi/YRlsOEzoqT8/0.jpg)](https://www.youtube.com/watch?v=YRlsOEzoqT8)
 
 Hochschule Fulda. Virtual Reality and Augmented Reality, SoSe21.
