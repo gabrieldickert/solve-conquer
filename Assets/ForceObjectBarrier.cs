@@ -43,12 +43,12 @@ public class ForceObjectBarrier : MonoBehaviour
         if (targetDirectionLocal.z < 0)
         {
             Debug.Log("ForceObjectBarrier: Target hit left side. Moving target further to the left.");
-            targetGameObject.transform.position = transform.TransformPoint(Vector3.back * 2);
+            targetGameObject.transform.position = transform.TransformPoint(Vector3.back * 10);
         }
         else if (targetDirectionLocal.z > 0)
         {
             Debug.Log("ForceObjectBarrier: Target hit right side. Moving target further to the right.");
-            targetGameObject.transform.position = transform.TransformPoint(Vector3.forward * 2);
+            targetGameObject.transform.position = transform.TransformPoint(Vector3.forward * 10);
 
         }
     }
