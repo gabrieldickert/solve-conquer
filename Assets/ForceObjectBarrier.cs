@@ -23,11 +23,11 @@ public class ForceObjectBarrier : MonoBehaviour
         {
             //UnityEngine.Debug.Log("ForceObjectBarrier: Suitable object found");
             //ResetObjectPosition(other.gameObject.GetInstanceID());
-            Reposition(other.transform.position, other.gameObject);
+            Reposition(other.gameObject);
         }
     }
 
-    void Reposition(Vector3 respectivePos, GameObject targetGameObject)
+    void Reposition(GameObject targetGameObject)
     {
         //UnityEngine.Debug.Log("ForceObjectBarrier: "+gameObject.transform.position.x+","+ gameObject.transform.position.y + ","+ gameObject.transform.position.z);
         //targetGameObject.transform.position = new Vector3(gameObject.transform.position.x, gameObject.transform.position.y, gameObject.transform.position.z + 1);
