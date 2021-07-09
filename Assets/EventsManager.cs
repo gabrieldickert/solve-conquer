@@ -19,6 +19,7 @@ public class EventsManager : MonoBehaviour
     public event Action<int> PressurePlateDisable;
     public event Action<int> SwitchEnable;
     public event Action<int> SwitchDisable;
+    public event Action<int> ResetObject;
 
     public void OnPressurePlateEnable(int instanceId)
     {
@@ -42,5 +43,11 @@ public class EventsManager : MonoBehaviour
     {
         //UnityEngine.Debug.Log("EventsManager: OnPressurePlateDisable");
         SwitchDisable?.Invoke(instanceId);
+    }
+
+    public void OnResetObject(int instanceId)
+    {
+        //UnityEngine.Debug.Log("EventsManager: OnPressurePlateDisable");
+        ResetObject?.Invoke(instanceId);
     }
 }
