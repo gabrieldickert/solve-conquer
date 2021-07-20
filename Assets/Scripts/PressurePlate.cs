@@ -3,7 +3,7 @@ using System.Collections;
 
 using UnityEngine;
 
-public class BarrierTrigger : MonoBehaviour
+public class PressurePlate : MonoBehaviour
 {
     private AudioSource source;
     public AudioClip sound_plateEnabled;
