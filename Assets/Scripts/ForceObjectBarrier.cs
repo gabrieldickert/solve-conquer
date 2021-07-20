@@ -36,16 +36,21 @@ public class ForceObjectBarrier : MonoBehaviour
         if (other.gameObject.tag == "Player")
         {
             //UnityEngine.Debug.Log("ForceObjectBarrier: Player entered TriggerZone");
+            
             if (this.LeftHandGrabber.grabbedObject != null)
             {
-                this.LeftHandGrabber.ForceRelease(this.LeftHandGrabber.grabbedObject);
+                OVRGrabbable grabbedLeft = this.LeftHandGrabber.grabbedObject;
+                this.LeftHandGrabber.ForceRelease(grabbedLeft);
+                Reposition(grabbedLeft.gameObject);
             }
             if (this.RightHandGrabber.grabbedObject != null)
             {
-                this.RightHandGrabber.ForceRelease(this.RightHandGrabber.grabbedObject);
+                OVRGrabbable grabbedRight = this.RightHandGrabber.grabbedObject;
+                this.RightHandGrabber.ForceRelease(grabbedRight);
+                Reposition(grabbedRight.gameObject);
             }
         }
-        if (other.gameObject.tag == "GrabbableObject")
+        else if (other.gameObject.tag == "GrabbableObject")
         {
             if (this.LeftHandGrabber.grabbedObject == null && this.RightHandGrabber.grabbedObject == null)
             {
@@ -63,17 +68,29 @@ public class ForceObjectBarrier : MonoBehaviour
 
     void Reposition(GameObject targetGameObject)
     {
+        //Stop previously induced movement
+        Rigidbody rigidBody = targetGameObject.GetComponent<Rigidbody>();
+        rigidBody.velocity = Vector3.zero;
+        rigidBody.angularVelocity = Vector3.zero;
+        
         Vector3 targetDirectionLocal = gameObject.transform.InverseTransformPoint(targetGameObject.transform.position);
-
+        float thrust = 0.5f;
+        //float velocity = 0.3f;
         if (targetDirectionLocal.z < 0)
         {
             Debug.Log("ForceObjectBarrier: Target hit left side. Moving target further to the left.");
-            targetGameObject.transform.position = transform.TransformPoint(Vector3.back * 2);
+            Vector3 forceVector = transform.TransformPoint(Vector3.back * 2) - targetGameObject.transform.position;
+            Debug.Log("ForceObjectBarrier: Applying force vector " + forceVector + ". Current object vector " + targetGameObject.transform.position);
+            //targetGameObject.transform.position = transform.TransformPoint(Vector3.back * 2);
+            targetGameObject.GetComponent<Rigidbody>().AddForce(forceVector * thrust, ForceMode.Impulse);
         }
         else if (targetDirectionLocal.z > 0)
         {
-            Debug.Log("ForceObjectBarrier: Target hit right side. Moving target further to the right.");
-            targetGameObject.transform.position = transform.TransformPoint(Vector3.forward * 2);
+            Debug.Log("ForceObjectBarrier: Target hit left side. Moving target further to the right.");
+            Vector3 forceVector = transform.TransformPoint(Vector3.forward * 2) - targetGameObject.transform.position;
+            Debug.Log("ForceObjectBarrier: Applying force vector " + forceVector + ". Current object vector " + targetGameObject.transform.position);
+            //targetGameObject.transform.position = transform.TransformPoint(Vector3.forward * 2);
+            targetGameObject.GetComponent<Rigidbody>().AddForce(forceVector * thrust, ForceMode.Impulse);
         }
     }
 
