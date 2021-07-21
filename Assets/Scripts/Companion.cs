@@ -16,6 +16,9 @@ public class Companion : MonoBehaviour
     void Start()
     {
         EventsManager.instance.CompanionWaitAt += HandleCompanionWaitAt;
+        EventsManager.instance.CompanionPickUpObject += HandleCompanionPickUpObject;
+        EventsManager.instance.CompanionHackObject += HandleCompanionHackObject;
+        EventsManager.instance.CompanionFollow += HandleCompanionFollow;
         agent = GetComponent<NavMeshAgent>();
         stoppingDistance = agent.stoppingDistance;
         companionRenderer = transform.GetChild(0).GetComponent<MeshRenderer>();
@@ -27,29 +30,14 @@ public class Companion : MonoBehaviour
     void Update()
     {
         
-        if (OVRInput.GetDown(OVRInput.Button.One))
-        {
-            //this.isFollowing = !this.isFollowing;
-            //companionRenderer.material.color = isFollowing ? Color.green : Color.red;
-            this.isFollowing = true;
-            agent.stoppingDistance = stoppingDistance;
-        }
-        /*
-        if (OVRInput.GetDown(OVRInput.Button.Two))
-        {
-            companionRenderer.material.color = Color.yellow;
-            
-        }
-        */
+        
+        
 
         if (this.isFollowing)
         {
             //Follow the player
             agent.destination = transformToFollow.position;
-            if(companionRenderer.material.color != Color.green)
-            {
-                companionRenderer.material.color = Color.green;
-            }
+            
         } 
     }
 
@@ -59,5 +47,28 @@ public class Companion : MonoBehaviour
         companionRenderer.material.color = Color.red;
         agent.destination = waitingPosition;
         agent.stoppingDistance = 0f;
+    }
+
+    void HandleCompanionPickUpObject(GameObject targetObject)
+    {
+        this.isFollowing = false;
+        companionRenderer.material.color = Color.blue;
+        agent.destination = targetObject.transform.position;
+        agent.stoppingDistance = 1f;
+    }
+
+    void HandleCompanionHackObject(GameObject targetObject)
+    {
+        this.isFollowing = false;
+        companionRenderer.material.color = Color.yellow;
+        agent.destination = targetObject.transform.position;
+        agent.stoppingDistance = 1f;
+    }
+
+    void HandleCompanionFollow()
+    {
+        this.isFollowing = true;
+        agent.stoppingDistance = stoppingDistance;
+        companionRenderer.material.color = Color.green;
     }
 }
