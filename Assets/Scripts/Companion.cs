@@ -38,7 +38,7 @@ public class Companion : MonoBehaviour
             //Follow the player
             agent.destination = transformToFollow.position;
             
-        } 
+        }
     }
 
     void HandleCompanionWaitAt(Vector3 waitingPosition)
@@ -54,7 +54,7 @@ public class Companion : MonoBehaviour
         this.isFollowing = false;
         companionRenderer.material.color = Color.blue;
         agent.destination = targetObject.transform.position;
-        agent.stoppingDistance = 1f;
+        agent.stoppingDistance = 0f;
     }
 
     void HandleCompanionHackObject(GameObject targetObject)
@@ -62,7 +62,7 @@ public class Companion : MonoBehaviour
         this.isFollowing = false;
         companionRenderer.material.color = Color.yellow;
         agent.destination = targetObject.transform.position;
-        agent.stoppingDistance = 1f;
+        agent.stoppingDistance = 0f;
     }
 
     void HandleCompanionFollow()
@@ -70,5 +70,17 @@ public class Companion : MonoBehaviour
         this.isFollowing = true;
         agent.stoppingDistance = stoppingDistance;
         companionRenderer.material.color = Color.green;
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        
+        if(collision.gameObject.tag == "Player" || collision.gameObject.tag == "GrabbableObject" || collision.gameObject.tag == "HackableObject")
+        {
+            Debug.Log("Companion collided with an object with tag " + collision.gameObject.tag);
+            this.isFollowing = false;
+            agent.destination = agent.transform.position;
+            companionRenderer.material.color = Color.red;
+        }
     }
 }
