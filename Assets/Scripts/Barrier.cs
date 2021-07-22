@@ -41,6 +41,8 @@ public class Barrier : MonoBehaviour
         EventsManager.instance.PressurePlateDisable += HandlePressurePlateDisabled;
         EventsManager.instance.SwitchEnable += HandlePressurePlateEnabled;
         EventsManager.instance.SwitchDisable += HandlePressurePlateDisabled;
+        EventsManager.instance.HackableEnable += HandlePressurePlateEnabled;
+        EventsManager.instance.HackableDisable += HandlePressurePlateDisabled;
 
     }
 
@@ -84,6 +86,11 @@ public class Barrier : MonoBehaviour
                 ToggleFade(isBridge);
             }
         }
+
+    }
+
+    private void HandleHacked()
+    {
 
     }
 

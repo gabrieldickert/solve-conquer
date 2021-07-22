@@ -24,6 +24,8 @@ public class EventsManager : MonoBehaviour
     public event Action<GameObject> CompanionPickUpObject;
     public event Action<GameObject> CompanionHackObject;
     public event Action CompanionFollow;
+    public event Action<int> HackableEnable;
+    public event Action<int> HackableDisable;
 
     public void OnPressurePlateEnable(int instanceId)
     {
@@ -77,5 +79,17 @@ public class EventsManager : MonoBehaviour
     {
         //UnityEngine.Debug.Log("EventsManager: OnCompanionFollow");
         CompanionFollow?.Invoke();
+    }
+
+    public void OnHackableEnable(int instanceId)
+    {
+        //UnityEngine.Debug.Log("EventsManager: OnHackableEnable");
+        HackableEnable?.Invoke(instanceId);
+    }
+
+    public void OnHackableDisable(int instanceId)
+    {
+        //UnityEngine.Debug.Log("EventsManager: OnHackableDisable");
+        HackableDisable?.Invoke(instanceId);
     }
 }
