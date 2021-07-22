@@ -123,8 +123,11 @@ public class TelekinesisHand : MonoBehaviour
 
             
         } 
-        telekinesisLine.SetPosition(0, targetPosition);
-        telekinesisLine.SetPosition(1, endPosition);
+        //telekinesisLine.SetPosition(0, targetPosition);
+        //telekinesisLine.SetPosition(1, endPosition);
+        telekinesisLine.SetPosition(0, gameObject.transform.InverseTransformPoint(targetPosition));
+        telekinesisLine.SetPosition(1, gameObject.transform.InverseTransformPoint(endPosition));
+        
     }
 
 
