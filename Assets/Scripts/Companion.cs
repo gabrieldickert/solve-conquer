@@ -1,6 +1,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Numerics;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -8,6 +9,9 @@ public class Companion : MonoBehaviour
 {
     //Transform that NPC has to follow
     public GameObject gameObjectToFollow;
+    public float throwForce = 1f;
+    private float maxDistanceFromDestination = 2f;
+
     //NavMesh Agent variable
     NavMeshAgent agent;
 
@@ -17,7 +21,8 @@ public class Companion : MonoBehaviour
     private Process process = new Process();
 
     private GameObject targetObject;
-    private Vector3 targetPosition;
+    private UnityEngine.Vector3 targetPosition;
+    private GameObject carriedObject = null;
 
     //bool to check if state changed last update
     //used to avoid continuous agent parameter updating while state remains the same
@@ -41,25 +46,28 @@ public class Companion : MonoBehaviour
     void Update()
     {
         Debug.Log("CompanionState: " + process.CurrentState);
+        
         agent.SetDestination(targetPosition);
         switch (process.CurrentState)
         {
             case ProcessState.Following:
-                if(this.didChangeStateLastUpdate)
-                {
+                //if(this.didChangeStateLastUpdate)
+                //{
                     Debug.Log("CompanionState changed to Following");
                     agent.stoppingDistance = this.stoppingDistance;
                     agent.isStopped = false;
                     companionRenderer.material.color = Color.green;
                     this.targetObject = this.gameObjectToFollow;
                     this.didChangeStateLastUpdate = false;
-                }
+                //}
                 this.targetPosition = this.gameObjectToFollow.transform.position;
                 break;
             case ProcessState.WaitingAt:
+                agent.isStopped = false;
                 break;
             case ProcessState.Fetching:
-                if (agent.remainingDistance < 2f)
+                agent.isStopped = false;
+                if (UnityEngine.Vector3.Distance(agent.transform.position, targetPosition) < this.maxDistanceFromDestination)
                 {
                     agent.isStopped = true;
                     PickUp(targetObject);
@@ -68,19 +76,26 @@ public class Companion : MonoBehaviour
                 break;
             case ProcessState.PickedUp:
                 agent.isStopped = false;
+                Drop(this.carriedObject);
+                PickUp(this.targetObject);
                 process.MoveNext(Command.Follow);
                 break;
             case ProcessState.Hacking:
-                if (agent.remainingDistance < 2f)
+                Drop(this.carriedObject);
+                agent.isStopped = false;
+                if (UnityEngine.Vector3.Distance(agent.transform.position, targetPosition) < this.maxDistanceFromDestination)
                 {
-                    agent.isStopped = true;
-                    Hack(targetObject);
+                    //agent.isStopped = true;
                     process.MoveNext(Command.CompleteHack);
                 }
                 break;
             case ProcessState.HackCompleted:
-                agent.isStopped = false;
-                process.MoveNext(Command.Follow);
+                //if(this.didChangeStateLastUpdate)
+                //{
+                    //this.didChangeStateLastUpdate = false;
+                    //hack
+                    Hack(targetObject);
+                //}
                 break;
             case ProcessState.AbortingHack:
                 agent.isStopped = false;
@@ -99,7 +114,7 @@ public class Companion : MonoBehaviour
         agent.stoppingDistance = 0f;
     }*/
 
-    void HandleCompanionWaitAt(Vector3 waitingPosition)
+    void HandleCompanionWaitAt(UnityEngine.Vector3 waitingPosition)
     {
         process.MoveNext(Command.WaitAt);
         if(process.CurrentState == ProcessState.WaitingAt)
@@ -180,14 +195,35 @@ public class Companion : MonoBehaviour
 
     void PickUp(GameObject targetObject)
     {
-        //aufheben
+        if(this.carriedObject == null)
+        {
+            //aufheben
+            companionRenderer.material.color = Color.white;
+            this.carriedObject = targetObject;
+            targetObject.GetComponent<Rigidbody>().isKinematic = true;
+            targetObject.transform.parent = gameObject.transform;
+            targetObject.transform.position = gameObject.transform.position + new UnityEngine.Vector3(0f, 2f, 0f);
+        }
+    }
+
+    void Drop(GameObject targetObject)
+    {
+        if(this.carriedObject != null)
+        {
+            //fallen lassen
+            this.carriedObject = null;
+            targetObject.GetComponent<Rigidbody>().isKinematic = false;
+            targetObject.transform.parent = null;
+            targetObject.GetComponent<Rigidbody>().AddForce(gameObject.transform.forward * this.throwForce);
+        }
     }
 
     void Hack(GameObject targetObject)
     {
         //hacken
+        companionRenderer.material.color = Color.black;
     }
-    
+    /*
     private void OnCollisionEnter(Collision collision)
     {
         
@@ -199,7 +235,7 @@ public class Companion : MonoBehaviour
             agent.destination = agent.transform.position;
             companionRenderer.material.color = Color.red;
         } 
-    }
+    }*/
 
     
 }
@@ -265,10 +301,22 @@ public class Process
                 { new StateTransition(ProcessState.Fetching, Command.Follow), ProcessState.Following },
                 { new StateTransition(ProcessState.PickedUp, Command.Follow), ProcessState.Following },
                 { new StateTransition(ProcessState.Following, Command.Hack), ProcessState.Hacking },
-                { new StateTransition(ProcessState.HackCompleted, Command.CompleteHack), ProcessState.HackCompleted },
+                { new StateTransition(ProcessState.Hacking, Command.CompleteHack), ProcessState.HackCompleted },
                 { new StateTransition(ProcessState.Hacking, Command.Follow), ProcessState.Following },
                 { new StateTransition(ProcessState.HackCompleted, Command.Follow), ProcessState.AbortingHack },
-                { new StateTransition(ProcessState.AbortingHack, Command.Follow), ProcessState.Following }
+                { new StateTransition(ProcessState.AbortingHack, Command.Follow), ProcessState.Following },
+                { new StateTransition(ProcessState.Fetching, Command.WaitAt), ProcessState.WaitingAt },
+                { new StateTransition(ProcessState.Hacking, Command.WaitAt), ProcessState.WaitingAt },
+                { new StateTransition(ProcessState.HackCompleted, Command.WaitAt), ProcessState.WaitingAt },
+                { new StateTransition(ProcessState.WaitingAt, Command.Fetch), ProcessState.Fetching },
+                { new StateTransition(ProcessState.Hacking, Command.Fetch), ProcessState.Fetching },
+                { new StateTransition(ProcessState.HackCompleted, Command.Fetch), ProcessState.Fetching },
+                { new StateTransition(ProcessState.WaitingAt, Command.Hack), ProcessState.Hacking },
+                { new StateTransition(ProcessState.Fetching, Command.Hack), ProcessState.Hacking },
+                { new StateTransition(ProcessState.HackCompleted, Command.Hack), ProcessState.Hacking },
+                { new StateTransition(ProcessState.WaitingAt, Command.WaitAt), ProcessState.WaitingAt },
+                { new StateTransition(ProcessState.Fetching, Command.Fetch), ProcessState.Fetching },
+                { new StateTransition(ProcessState.Hacking, Command.Hack), ProcessState.Hacking }
             };
     }
 
