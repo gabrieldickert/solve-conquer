@@ -26,7 +26,9 @@ public class EventsManager : MonoBehaviour
     public event Action CompanionFollow;
     public event Action<int> HackableEnable;
     public event Action<int> HackableDisable;
-    public event Action ReBake;
+    public event Action ForceObjectBarrierEnableObstacle;
+    public event Action ForceObjectBarrierDisableObstacle;
+    public event Action CompanionDropObject;
 
     public void OnPressurePlateEnable(int instanceId)
     {
@@ -94,8 +96,18 @@ public class EventsManager : MonoBehaviour
         HackableDisable?.Invoke(instanceId);
     }
 
-    public void OnRebake()
+    public void OnForceObjectBarrierEnableObstacle()
     {
-        ReBake?.Invoke();
+        ForceObjectBarrierEnableObstacle?.Invoke();
+    }
+
+    public void OnForceObjectBarrierDisableObstacle()
+    {
+        ForceObjectBarrierDisableObstacle?.Invoke();
+    }
+
+    public void OnCompanionDropObject()
+    {
+        CompanionDropObject?.Invoke();
     }
 }

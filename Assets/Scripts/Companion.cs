@@ -27,7 +27,7 @@ public class Companion : MonoBehaviour
     //bool to check if state changed last update
     //used to avoid continuous agent parameter updating while state remains the same
     //(only useful in states that can linger)
-    private bool didChangeStateLastUpdate = true;
+    //private bool didChangeStateLastUpdate = true;
 
     // Start is called before the first frame update
     void Start()
@@ -36,6 +36,7 @@ public class Companion : MonoBehaviour
         EventsManager.instance.CompanionPickUpObject += HandleCompanionPickUpObject;
         EventsManager.instance.CompanionHackObject += HandleCompanionHackObject;
         EventsManager.instance.CompanionFollow += HandleCompanionFollow;
+        EventsManager.instance.CompanionDropObject += HandleCompanionDropObject;
         agent = GetComponent<NavMeshAgent>();
         stoppingDistance = agent.stoppingDistance;
         companionRenderer = transform.GetChild(0).GetComponent<MeshRenderer>();
@@ -58,7 +59,7 @@ public class Companion : MonoBehaviour
                     agent.isStopped = false;
                     companionRenderer.material.color = Color.green;
                     this.targetObject = this.gameObjectToFollow;
-                    this.didChangeStateLastUpdate = false;
+                    //this.didChangeStateLastUpdate = false;
                 //}
                 this.targetPosition = this.gameObjectToFollow.transform.position;
                 break;
@@ -119,7 +120,7 @@ public class Companion : MonoBehaviour
         process.MoveNext(Command.WaitAt);
         if(process.CurrentState == ProcessState.WaitingAt)
         {
-            this.didChangeStateLastUpdate = true;
+            //this.didChangeStateLastUpdate = true;
             companionRenderer.material.color = Color.red;
             this.targetObject = null;
             this.targetPosition = waitingPosition;
@@ -132,7 +133,7 @@ public class Companion : MonoBehaviour
         process.MoveNext(Command.Fetch);
         if (process.CurrentState == ProcessState.Fetching)
         {
-            this.didChangeStateLastUpdate = true;
+            //this.didChangeStateLastUpdate = true;
             companionRenderer.material.color = Color.blue;
             this.targetObject = targetObject;
             this.targetPosition = targetObject.transform.position;
@@ -140,12 +141,17 @@ public class Companion : MonoBehaviour
         }
     }
 
+    void HandleCompanionDropObject()
+    {
+        Drop(this.carriedObject);
+    }
+
     void HandleCompanionHackObject(GameObject targetObject)
     {
         process.MoveNext(Command.Hack);
         if (process.CurrentState == ProcessState.Hacking)
         {
-            this.didChangeStateLastUpdate = true;
+            //this.didChangeStateLastUpdate = true;
             companionRenderer.material.color = Color.yellow;
             this.targetObject = targetObject;
             this.targetPosition = targetObject.transform.position;
@@ -159,7 +165,7 @@ public class Companion : MonoBehaviour
         process.MoveNext(Command.Follow);
         if(process.CurrentState == ProcessState.Following)
         {
-            this.didChangeStateLastUpdate = true;
+            //this.didChangeStateLastUpdate = true;
         }
         /*if (process.CurrentState == ProcessState.Fetching)
         {
@@ -200,6 +206,7 @@ public class Companion : MonoBehaviour
             //aufheben
             companionRenderer.material.color = Color.white;
             this.carriedObject = targetObject;
+            EventsManager.instance.OnForceObjectBarrierEnableObstacle();
             targetObject.GetComponent<Rigidbody>().isKinematic = true;
             targetObject.transform.parent = gameObject.transform;
             targetObject.transform.position = gameObject.transform.position + new UnityEngine.Vector3(0f, 2f, 0f);
@@ -212,6 +219,7 @@ public class Companion : MonoBehaviour
         {
             //fallen lassen
             this.carriedObject = null;
+            EventsManager.instance.OnForceObjectBarrierDisableObstacle();
             targetObject.GetComponent<Rigidbody>().isKinematic = false;
             targetObject.transform.parent = null;
             targetObject.GetComponent<Rigidbody>().AddForce(gameObject.transform.forward * this.throwForce);

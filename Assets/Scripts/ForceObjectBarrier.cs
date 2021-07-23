@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using OculusSampleFramework;
+using UnityEngine.AI;
 
 public class ForceObjectBarrier : MonoBehaviour
 {
@@ -20,6 +21,8 @@ public class ForceObjectBarrier : MonoBehaviour
         this.LeftHandGrabber = this.LeftHand.GetComponent<DistanceGrabber>();
         this.RightHandGrabber = this.RightHand.GetComponent<DistanceGrabber>();
         this.source = gameObject.AddComponent<AudioSource>();
+        EventsManager.instance.ForceObjectBarrierEnableObstacle += HandleForceObjectBarrierEnableObstacle;
+        EventsManager.instance.ForceObjectBarrierDisableObstacle += HandleForceObjectBarrierDisableObstacle;
     }
 
     // Update is called once per frame
@@ -102,5 +105,15 @@ public class ForceObjectBarrier : MonoBehaviour
         //Event feuern
         //UnityEngine.Debug.Log("ForceObjectBarrier: Reset instance " + instanceId);
         EventsManager.instance.OnResetObject(instanceId);
+    }
+
+    void HandleForceObjectBarrierEnableObstacle()
+    {
+        gameObject.transform.parent.GetComponent<NavMeshObstacle>().enabled = true;
+    }
+
+    void HandleForceObjectBarrierDisableObstacle()
+    {
+        gameObject.transform.parent.GetComponent<NavMeshObstacle>().enabled = false;
     }
 }

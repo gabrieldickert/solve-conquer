@@ -24,6 +24,7 @@ public class TelekinesisHand : MonoBehaviour
     private bool leftIndexTriggerDown = false;
     private bool leftIndexTriggerUp = false;
     private bool buttonYDown = false;
+    private bool buttonXDown = false;
     private Vector3 companionWaitingPosition;
 
     //bool to determine if we hit an enemy with the raycast
@@ -55,10 +56,16 @@ public class TelekinesisHand : MonoBehaviour
         leftIndexTriggerDown = OVRInput.GetDown(OVRInput.RawButton.LIndexTrigger);
         leftIndexTriggerUp = OVRInput.GetUp(OVRInput.RawButton.LIndexTrigger);
         buttonYDown = OVRInput.GetDown(OVRInput.RawButton.Y);
+        buttonXDown = OVRInput.GetDown(OVRInput.RawButton.X);
 
-        if(buttonYDown)
+        if (buttonYDown)
         {
             EventsManager.instance.OnCompanionFollow();
+        }
+
+        if (buttonXDown)
+        {
+            EventsManager.instance.OnCompanionDropObject();
         }
         
         //turn on/off the line renderer if trigger is pulled in
