@@ -1,3 +1,4 @@
+using UnityEditorInternal;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -23,22 +24,31 @@ public class Companion : MonoBehaviour
         stoppingDistance = agent.stoppingDistance;
         companionRenderer = transform.GetChild(0).GetComponent<MeshRenderer>();
         companionRenderer.material.color = isFollowing ? Color.green : Color.red;
-        //Debug.Log(transform.GetChild(0).GetComponent<MeshRenderer>());
     }
 
     // Update is called once per frame
     void Update()
     {
-        
-        
+        if (gameObject.GetComponent<NavMeshAgent>().enabled)
+        {
+            Debug.Log("pathstatus = " + agent.pathStatus);
+            if (agent.pathStatus.Equals(NavMeshPathStatus.PathInvalid))
+            {
+                Debug.Log("Companion: Agent seems to be floating in the air. Disabling agent.");
+                gameObject.GetComponent<NavMeshAgent>().enabled = false;
+            }
+            if (this.isFollowing && gameObject.GetComponent<NavMeshAgent>().enabled)
+            {
+                //Follow the player
+                agent.destination = transformToFollow.position;
+            }
+        } else
+        {
+            Debug.Log("Companion: agent disabled");
+        }
         
 
-        if (this.isFollowing)
-        {
-            //Follow the player
-            agent.destination = transformToFollow.position;
-            
-        }
+       
     }
 
     void HandleCompanionWaitAt(Vector3 waitingPosition)
@@ -71,16 +81,19 @@ public class Companion : MonoBehaviour
         agent.stoppingDistance = stoppingDistance;
         companionRenderer.material.color = Color.green;
     }
-
+    
     private void OnCollisionEnter(Collision collision)
     {
         
-        if(collision.gameObject.tag == "Player" || collision.gameObject.tag == "GrabbableObject" || collision.gameObject.tag == "HackableObject")
+        //this.hasCollision = true;
+        if (collision.gameObject.tag == "Player" || collision.gameObject.tag == "GrabbableObject" || collision.gameObject.tag == "HackableObject")
         {
             Debug.Log("Companion collided with an object with tag " + collision.gameObject.tag);
             this.isFollowing = false;
             agent.destination = agent.transform.position;
             companionRenderer.material.color = Color.red;
-        }
+        } 
     }
+
+    
 }

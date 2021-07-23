@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 using UnityEngine.SceneManagement;
 
 public class RespawnManager : MonoBehaviour
@@ -12,6 +13,8 @@ public class RespawnManager : MonoBehaviour
     private List<GameObject> respawningObjectsList = new List<GameObject>();
 
     private Dictionary<int, GameObjectInit> initialPositions = new Dictionary<int, GameObjectInit>();
+
+    
 
     // Start is called before the first frame update
     void Start()
@@ -46,6 +49,7 @@ public class RespawnManager : MonoBehaviour
         {
             //UnityEngine.Debug.Log("RespawnManager: Added object id " + go.GetInstanceID() + " to dictionary");
             this.initialPositions.Add(go.GetInstanceID(), new GameObjectInit(go));
+            
         }
     }
 
@@ -62,9 +66,19 @@ public class RespawnManager : MonoBehaviour
         
         if (this.initialPositions.ContainsKey(instanceId))
         {
-            //Debug.Log("RespawnManager: Respawning Object " + instanceId);
-            this.initialPositions[instanceId].gameObject.transform.position = this.initialPositions[instanceId].initialPosition;
+            if(other.gameObject.tag != "Companion")
+            {
+                //Debug.Log("RespawnManager: Respawning Object " + instanceId);
+                this.initialPositions[instanceId].gameObject.transform.position = this.initialPositions[instanceId].initialPosition;
+            } else
+            {
+                other.gameObject.transform.parent.GetComponent<NavMeshAgent>().transform.position = this.initialPositions[instanceId].initialPosition;
+                other.gameObject.transform.parent.GetComponent<NavMeshAgent>().enabled = false;
+                other.gameObject.transform.parent.GetComponent<NavMeshAgent>().enabled = true;
+                Debug.Log("RespawnManager: companion respawned, agent.enabled = " + other.gameObject.transform.parent.GetComponent<NavMeshAgent>().enabled);
+            }
             this.source.PlayOneShot(sound_objectRespawned);
+
         }
         else if (other.gameObject.tag == "Player")
         {

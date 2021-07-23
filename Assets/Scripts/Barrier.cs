@@ -1,3 +1,4 @@
+using OVR;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -7,7 +8,7 @@ public class Barrier : MonoBehaviour
 {
     [Range(0.1f, 1.0f)]
     public float fadeSpeed = 1f;    // How fast alpha value decreases.
-    public Color fadeColor = new Color(0, 0, 0, 0);
+    public Color fadeColor = new Color(255, 255, 255, 0);
     //briges are basically inverted barriers
     public bool isBridge = false;
     public bool isActiveOnStart = false;
@@ -29,6 +30,7 @@ public class Barrier : MonoBehaviour
 
         // Get material's starting color value.
         m_Color = m_Material.color;
+        
 
         //Initialize Barrier (isBridge ? disable collision and fade color out : enable collision and fade color in)
         if(!isActiveOnStart)
@@ -89,11 +91,6 @@ public class Barrier : MonoBehaviour
 
     }
 
-    private void HandleHacked()
-    {
-
-    }
-
     // This method fades only the alpha.
     IEnumerator AlphaFade()
     {
@@ -131,6 +128,7 @@ public class Barrier : MonoBehaviour
 
             yield return null;
         }
+        ToggleRenderer(false);
     }
   
     IEnumerator ColorGrow()
@@ -138,6 +136,7 @@ public class Barrier : MonoBehaviour
         // Lerp start value.
         float change = 1.0f;
 
+        ToggleRenderer(true);
         // Loop until lerp value is 1 (fully changed)
         while (change > 0.0f)
         {
@@ -148,12 +147,18 @@ public class Barrier : MonoBehaviour
 
             yield return null;
         }
+        
     }
 
     private void ToggleCollision(bool hasCollision)
     {
         //UnityEngine.Debug.Log("Barrier: ToggleCollision: " + hasCollision);
         this.GetComponent<BoxCollider>().enabled = hasCollision;
+    }
+
+    private void ToggleRenderer(bool enableRenderer)
+    {
+        this.GetComponent<MeshRenderer>().enabled = enableRenderer;
     }
 
     private void ToggleFade(bool isFadeOut)
