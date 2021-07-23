@@ -37,6 +37,7 @@ public class Barrier : MonoBehaviour
         {
             ToggleCollision(!isBridge);
             ToggleFade(isBridge);
+            EventsManager.instance.OnRebake();
         }
         
         EventsManager.instance.PressurePlateEnable += HandlePressurePlateEnabled;
@@ -63,6 +64,7 @@ public class Barrier : MonoBehaviour
             {
                 ToggleCollision(isBridge);
                 ToggleFade(!isBridge);
+                EventsManager.instance.OnRebake();
             }
             if(!activeTriggers.Contains(id))
             {
@@ -86,6 +88,7 @@ public class Barrier : MonoBehaviour
             {
                 ToggleCollision(!isBridge);
                 ToggleFade(isBridge);
+                EventsManager.instance.OnRebake();
             }
         }
 

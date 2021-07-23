@@ -26,6 +26,7 @@ public class EventsManager : MonoBehaviour
     public event Action CompanionFollow;
     public event Action<int> HackableEnable;
     public event Action<int> HackableDisable;
+    public event Action ReBake;
 
     public void OnPressurePlateEnable(int instanceId)
     {
@@ -91,5 +92,10 @@ public class EventsManager : MonoBehaviour
     {
         //UnityEngine.Debug.Log("EventsManager: OnHackableDisable");
         HackableDisable?.Invoke(instanceId);
+    }
+
+    public void OnRebake()
+    {
+        ReBake?.Invoke();
     }
 }

@@ -7,6 +7,7 @@ public class NavigationBaker : MonoBehaviour
 {
     public NavMeshSurface[] surfaces;
 
+    /*
     float TimeInterval;
     int secondsBetweenBakes = 1;
 
@@ -19,12 +20,13 @@ public class NavigationBaker : MonoBehaviour
             TimeInterval = 0;
             Bake();
         }
-    }
+    }*/
 
 
     // Start is called before the first frame update
     void Start()
     {
+        EventsManager.instance.ReBake += Bake;
         Bake();
     }
 
