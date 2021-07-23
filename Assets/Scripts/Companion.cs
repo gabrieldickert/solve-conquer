@@ -19,6 +19,11 @@ public class Companion : MonoBehaviour
     private GameObject targetObject;
     private Vector3 targetPosition;
 
+    //bool to check if state changed last update
+    //used to avoid continuous agent parameter updating while state remains the same
+    //(only useful in states that can linger)
+    private bool didChangeStateLastUpdate = true;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -40,10 +45,15 @@ public class Companion : MonoBehaviour
         switch (process.CurrentState)
         {
             case ProcessState.Following:
-                agent.stoppingDistance = this.stoppingDistance;
-                agent.isStopped = false;
-                companionRenderer.material.color = Color.green;
-                this.targetObject = this.gameObjectToFollow;
+                if(this.didChangeStateLastUpdate)
+                {
+                    Debug.Log("CompanionState changed to Following");
+                    agent.stoppingDistance = this.stoppingDistance;
+                    agent.isStopped = false;
+                    companionRenderer.material.color = Color.green;
+                    this.targetObject = this.gameObjectToFollow;
+                    this.didChangeStateLastUpdate = false;
+                }
                 this.targetPosition = this.gameObjectToFollow.transform.position;
                 break;
             case ProcessState.WaitingAt:
@@ -94,6 +104,7 @@ public class Companion : MonoBehaviour
         process.MoveNext(Command.WaitAt);
         if(process.CurrentState == ProcessState.WaitingAt)
         {
+            this.didChangeStateLastUpdate = true;
             companionRenderer.material.color = Color.red;
             this.targetObject = null;
             this.targetPosition = waitingPosition;
@@ -106,6 +117,7 @@ public class Companion : MonoBehaviour
         process.MoveNext(Command.Fetch);
         if (process.CurrentState == ProcessState.Fetching)
         {
+            this.didChangeStateLastUpdate = true;
             companionRenderer.material.color = Color.blue;
             this.targetObject = targetObject;
             this.targetPosition = targetObject.transform.position;
@@ -118,6 +130,7 @@ public class Companion : MonoBehaviour
         process.MoveNext(Command.Hack);
         if (process.CurrentState == ProcessState.Hacking)
         {
+            this.didChangeStateLastUpdate = true;
             companionRenderer.material.color = Color.yellow;
             this.targetObject = targetObject;
             this.targetPosition = targetObject.transform.position;
@@ -129,6 +142,10 @@ public class Companion : MonoBehaviour
     {
 
         process.MoveNext(Command.Follow);
+        if(process.CurrentState == ProcessState.Following)
+        {
+            this.didChangeStateLastUpdate = true;
+        }
         /*if (process.CurrentState == ProcessState.Fetching)
         {
             companionRenderer.material.color = Color.blue;
