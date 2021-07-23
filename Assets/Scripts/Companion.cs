@@ -29,23 +29,23 @@ public class Companion : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (gameObject.GetComponent<NavMeshAgent>().enabled)
+        /*if (gameObject.GetComponent<NavMeshAgent>().enabled)
         {
             Debug.Log("pathstatus = " + agent.pathStatus);
             if (agent.pathStatus.Equals(NavMeshPathStatus.PathInvalid))
             {
                 Debug.Log("Companion: Agent seems to be floating in the air. Disabling agent.");
                 gameObject.GetComponent<NavMeshAgent>().enabled = false;
-            }
-            if (this.isFollowing && gameObject.GetComponent<NavMeshAgent>().enabled)
+            }*/
+            if (this.isFollowing /*&& gameObject.GetComponent<NavMeshAgent>().enabled*/)
             {
                 //Follow the player
                 agent.destination = transformToFollow.position;
-            }
+            }/*
         } else
         {
             Debug.Log("Companion: agent disabled");
-        }
+        }*/
         
 
        

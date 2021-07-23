@@ -3,6 +3,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class Barrier : MonoBehaviour
 {
@@ -37,9 +38,14 @@ public class Barrier : MonoBehaviour
         {
             ToggleCollision(!isBridge);
             ToggleFade(isBridge);
-            EventsManager.instance.OnRebake();
+            //EventsManager.instance.OnRebake();
+            EnableObstacle(true);
+        } else
+        {
+            EnableObstacle(false);
         }
         
+
         EventsManager.instance.PressurePlateEnable += HandlePressurePlateEnabled;
         EventsManager.instance.PressurePlateDisable += HandlePressurePlateDisabled;
         EventsManager.instance.SwitchEnable += HandlePressurePlateEnabled;
@@ -64,7 +70,8 @@ public class Barrier : MonoBehaviour
             {
                 ToggleCollision(isBridge);
                 ToggleFade(!isBridge);
-                EventsManager.instance.OnRebake();
+                //EventsManager.instance.OnRebake();
+                EnableObstacle(false);
             }
             if(!activeTriggers.Contains(id))
             {
@@ -88,7 +95,8 @@ public class Barrier : MonoBehaviour
             {
                 ToggleCollision(!isBridge);
                 ToggleFade(isBridge);
-                EventsManager.instance.OnRebake();
+                //EventsManager.instance.OnRebake();
+                EnableObstacle(true);
             }
         }
 
@@ -131,7 +139,7 @@ public class Barrier : MonoBehaviour
 
             yield return null;
         }
-        ToggleRenderer(false);
+        //ToggleRenderer(false);
     }
   
     IEnumerator ColorGrow()
@@ -139,7 +147,7 @@ public class Barrier : MonoBehaviour
         // Lerp start value.
         float change = 1.0f;
 
-        ToggleRenderer(true);
+        //ToggleRenderer(true);
         // Loop until lerp value is 1 (fully changed)
         while (change > 0.0f)
         {
@@ -159,9 +167,14 @@ public class Barrier : MonoBehaviour
         this.GetComponent<BoxCollider>().enabled = hasCollision;
     }
 
-    private void ToggleRenderer(bool enableRenderer)
+    /*private void ToggleRenderer(bool enableRenderer)
     {
         this.GetComponent<MeshRenderer>().enabled = enableRenderer;
+    }*/
+
+    private void EnableObstacle(bool enableObstacle)
+    {
+        this.GetComponent<NavMeshObstacle>().enabled = enableObstacle;
     }
 
     private void ToggleFade(bool isFadeOut)
