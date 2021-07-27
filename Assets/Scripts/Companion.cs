@@ -26,6 +26,8 @@ public class Companion : MonoBehaviour
     private GameObject carriedObject = null;
     private GameObject hackedObject = null;
 
+    private UnityEngine.Vector3 carryPosition = UnityEngine.Vector3.zero;
+
     //bool to check if state changed last update
     //used to avoid continuous agent parameter updating while state remains the same
     //(only useful in states that can linger)
@@ -63,16 +65,15 @@ public class Companion : MonoBehaviour
         switch (process.CurrentState)
         {
             case ProcessState.Following:
-                //if(this.didChangeStateLastUpdate)
-                //{
-                    Debug.Log("CompanionState changed to Following");
-                    agent.stoppingDistance = this.stoppingDistance;
-                    agent.isStopped = false;
-                    companionRenderer.material.color = Color.green;
-                    this.targetObject = this.gameObjectToFollow;
-                    //this.didChangeStateLastUpdate = false;
-                //}
+                agent.stoppingDistance = this.stoppingDistance;
+                agent.isStopped = false;
+                companionRenderer.material.color = Color.green;
+                this.targetObject = this.gameObjectToFollow;
                 this.targetPosition = this.gameObjectToFollow.transform.position;
+                if(this.carriedObject != null && this.carriedObject.transform.position != gameObject.transform.position + new UnityEngine.Vector3(0f, 2f, 0f))
+                {
+                    this.Drop(this.carriedObject);
+                }
                 break;
             case ProcessState.WaitingAt:
                 agent.isStopped = false;
@@ -155,13 +156,7 @@ public class Companion : MonoBehaviour
 
     void HandleCompanionFollow()
     {
-
         process.MoveNext(Command.Follow);
-        if(process.CurrentState == ProcessState.Following)
-        {
-           
-        }
-       
     }
 
    
