@@ -47,8 +47,16 @@ public class Companion : MonoBehaviour
     void Update()
     {
         Debug.Log("CompanionState: " + process.CurrentState);
-        
+
+        if (agent.path.status == NavMeshPathStatus.PathInvalid)
+        {
+            Debug.Log("Companion: Path invalid. Respawning.");
+            gameObject.GetComponent<NavMeshAgent>().enabled = false;
+            return;
+        }
+
         agent.SetDestination(targetPosition);
+        
         switch (process.CurrentState)
         {
             case ProcessState.Following:
