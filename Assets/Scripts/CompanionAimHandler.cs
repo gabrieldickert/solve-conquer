@@ -1,76 +1,130 @@
-/************************************************************************************
-
-See SampleFramework license.txt for license terms.  Unless required by applicable law 
-or agreed to in writing, the sample code is provided “AS IS” WITHOUT WARRANTIES OR 
-CONDITIONS OF ANY KIND, either express or implied.  See the license for specific 
-language governing permissions and limitations under the license.
-
-************************************************************************************/
-
-using System;
-using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.UIElements;
+using UnityEngine;
+using UnityEngine.UI;
 
-/// <summary>
-/// This aim handler simulates the parabolic curve that a thrown item would follow, a common style of teleport aiming.
-/// </summary>
-public class CompanionAimHandler : TeleportAimHandler
+public class CompanionAimHandler : MonoBehaviour
 {
-	/// <summary>
-	/// Maximum range for aiming.
-	/// </summary>
-	[Tooltip("Maximum range for aiming.")]
-	public float Range;
 
-	/// <summary>
-	/// The MinimumElevation is relative to the AimPosition.
-	/// </summary>
-	[Tooltip("The MinimumElevation is relative to the AimPosition.")]
-	public float MinimumElevation = -100;
+    public LayerMask AimCollisionLayerMask;
 
-	/// <summary>
-	/// The Gravity is used in conjunction with AimVelocity and the aim direction to simulate a projectile.
-	/// </summary>
-	[Tooltip("The Gravity is used in conjunction with AimVelocity and the aim direction to simulate a projectile.")]
-	public float Gravity = -9.8f;
+    //render our hand pointer raycast
+    public LineRenderer telekinesisLine;
 
-	/// <summary>
-	/// The AimVelocity is the initial speed of the faked projectile.
-	/// </summary>
-	[Tooltip("The AimVelocity is the initial speed of the faked projectile.")]
-	[Range(0.001f, 50.0f)]
-	public float AimVelocity = 1;
+    //information about the line render
+    public float lineWidth = 0.01f;
+    public float lineMaxLength = 1f;
 
-	/// <summary>
-	/// The AimStep is the how much to subdivide the iteration.
-	/// </summary>
-	[Tooltip("The AimStep is the how much to subdivide the iteration.")]
-	[Range(0.001f, 1.0f)]
-	public float AimStep = 1;
+    //bool to determine if the line reder is enabled or disabled
+    public bool toggled = false;
 
-	/// <summary>
-	/// Return the set of points that represent the aiming line.
-	/// </summary>
-	/// <param name="points"></param>
-	public override void GetPoints(List<Vector3> points)
-	{
-		Ray startRay;
+    
+    private bool leftIndexTriggerDown = false;
+    private bool leftIndexTriggerUp = false;
+    private bool buttonYDown = false;
+    private bool buttonXDown = false;
+    private Vector3 companionWaitingPosition;
 
-		LocomotionTeleport.InputHandler.GetAimData(out startRay);
+    
+    
 
-		var aimPosition = startRay.origin;
-		var aimDirection = startRay.direction * AimVelocity;
-		var rangeSquared = Range * Range;
-		do
-		{
-			points.Add(aimPosition);
+    //gameobject to store the enemy
+    private GameObject enemy;
 
-			var aimVector = aimDirection;
-			aimVector.y = aimVector.y + Gravity * 0.0111111111f * AimStep;
-			aimDirection = aimVector;
-			aimPosition += aimVector * AimStep;
+    private GameObject objectHit;
 
-		} while ((aimPosition.y - startRay.origin.y > MinimumElevation) && ((startRay.origin - aimPosition).sqrMagnitude <= rangeSquared));
-	}
+    // Start is called before the first frame update
+    void Start()
+    {
+        //set up our line rederer
+        Vector3[] startLinePositions = new Vector3[2] { Vector3.zero, Vector3.zero };
+        telekinesisLine.SetPositions(startLinePositions);
+        telekinesisLine.enabled = false;
+        telekinesisLine.startWidth = lineWidth;
+        telekinesisLine.endWidth = lineWidth;
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        
+        leftIndexTriggerDown = OVRInput.GetDown(OVRInput.RawButton.LIndexTrigger);
+        leftIndexTriggerUp = OVRInput.GetUp(OVRInput.RawButton.LIndexTrigger);
+        buttonYDown = OVRInput.GetDown(OVRInput.RawButton.Y);
+        buttonXDown = OVRInput.GetDown(OVRInput.RawButton.X);
+
+        if (buttonYDown)
+        {
+            EventsManager.instance.OnCompanionFollow();
+        }
+
+        if (buttonXDown)
+        {
+            EventsManager.instance.OnCompanionDropObject();
+        }
+        
+        
+        if (leftIndexTriggerDown)
+        {
+            toggled = true;
+            telekinesisLine.enabled = true;
+            Debug.Log("TelekinesisHand: leftIndexTriggerUp detected");
+            
+        } else if (leftIndexTriggerUp)
+        {
+            telekinesisLine.enabled = false;
+            toggled = false;
+            
+            
+            if (this.objectHit.tag == "GrabbableObject")
+            {
+                //pick up Grabbable
+                EventsManager.instance.OnCompanionPickUpObject(this.objectHit);
+            }
+            else if (this.objectHit.tag == "HackableObject")
+            {
+                //hack object
+                EventsManager.instance.OnCompanionHackObject(this.objectHit);
+            }
+            else
+            {
+                EventsManager.instance.OnCompanionWaitAt(this.companionWaitingPosition);
+            }
+        }
+
+        if(toggled)
+        {
+            DetermineCompanionCommand(transform.position, transform.forward, lineMaxLength);
+        }
+
+    }
+
+    private void DetermineCompanionCommand(Vector3 targetPosition, Vector3 direction, float length)
+    {
+        //set up raycast hit
+        RaycastHit hit;
+
+        //set up raycast
+        Ray telekinesisOut = new Ray(targetPosition, direction);
+
+        //declares an end position variable for the line renderer
+        Vector3 endPosition = targetPosition + (length * direction);
+        
+
+        //run the raycast
+        if (Physics.Raycast(telekinesisOut, out hit, lineMaxLength, AimCollisionLayerMask))
+        {
+            //update the line render with the new end position
+            endPosition = hit.point;
+            this.companionWaitingPosition = endPosition;
+
+            //set the objectHit game object to the gameobject that the raycast hit
+            objectHit = hit.collider.gameObject;
+
+            
+        } 
+        telekinesisLine.SetPosition(0, gameObject.transform.InverseTransformPoint(targetPosition));
+        telekinesisLine.SetPosition(1, gameObject.transform.InverseTransformPoint(endPosition));
+    }
 }
