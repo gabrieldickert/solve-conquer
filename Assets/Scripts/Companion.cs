@@ -4,13 +4,14 @@ using System.Collections.Generic;
 using System.Numerics;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.UIElements;
 
 public class Companion : MonoBehaviour
 {
     //Transform that NPC has to follow
     public GameObject gameObjectToFollow;
     public float throwForce = 1f;
-    private float maxDistanceFromDestination = 2f;
+    private float maxDistanceFromDestination = 3f;
 
     //NavMesh Agent variable
     NavMeshAgent agent;
@@ -23,6 +24,7 @@ public class Companion : MonoBehaviour
     private GameObject targetObject;
     private UnityEngine.Vector3 targetPosition;
     private GameObject carriedObject = null;
+    private GameObject hackedObject = null;
 
     //bool to check if state changed last update
     //used to avoid continuous agent parameter updating while state remains the same
@@ -37,6 +39,7 @@ public class Companion : MonoBehaviour
         EventsManager.instance.CompanionHackObject += HandleCompanionHackObject;
         EventsManager.instance.CompanionFollow += HandleCompanionFollow;
         EventsManager.instance.CompanionDropObject += HandleCompanionDropObject;
+        
         agent = GetComponent<NavMeshAgent>();
         stoppingDistance = agent.stoppingDistance;
         companionRenderer = transform.GetChild(0).GetComponent<MeshRenderer>();
@@ -94,41 +97,26 @@ public class Companion : MonoBehaviour
                 agent.isStopped = false;
                 if (UnityEngine.Vector3.Distance(agent.transform.position, targetPosition) < this.maxDistanceFromDestination)
                 {
-                    //agent.isStopped = true;
+                    agent.isStopped = true;
                     process.MoveNext(Command.CompleteHack);
                 }
                 break;
             case ProcessState.HackCompleted:
-                //if(this.didChangeStateLastUpdate)
-                //{
-                    //this.didChangeStateLastUpdate = false;
-                    //hack
-                    Hack(targetObject);
-                //}
+                //hack
+                this.Hack(targetObject);
                 break;
             case ProcessState.AbortingHack:
                 agent.isStopped = false;
-                process.MoveNext(Command.Follow);
+                this.StopHack(this.hackedObject);
+                process.MoveNext(process.LastCommand);
                 break;
         }
     }
-
-
-
-    /*void HandleCompanionWaitAt(Vector3 waitingPosition)
-    {
-        this.isFollowing = false;
-        companionRenderer.material.color = Color.red;
-        agent.destination = waitingPosition;
-        agent.stoppingDistance = 0f;
-    }*/
-
     void HandleCompanionWaitAt(UnityEngine.Vector3 waitingPosition)
     {
         process.MoveNext(Command.WaitAt);
-        if(process.CurrentState == ProcessState.WaitingAt)
+        if(process.CurrentState == ProcessState.WaitingAt || process.CurrentState == ProcessState.AbortingHack)
         {
-            //this.didChangeStateLastUpdate = true;
             companionRenderer.material.color = Color.red;
             this.targetObject = null;
             this.targetPosition = waitingPosition;
@@ -139,9 +127,8 @@ public class Companion : MonoBehaviour
     void HandleCompanionPickUpObject(GameObject targetObject)
     {
         process.MoveNext(Command.Fetch);
-        if (process.CurrentState == ProcessState.Fetching)
+        if (process.CurrentState == ProcessState.Fetching || process.CurrentState == ProcessState.AbortingHack)
         {
-            //this.didChangeStateLastUpdate = true;
             companionRenderer.material.color = Color.blue;
             this.targetObject = targetObject;
             this.targetPosition = targetObject.transform.position;
@@ -157,9 +144,8 @@ public class Companion : MonoBehaviour
     void HandleCompanionHackObject(GameObject targetObject)
     {
         process.MoveNext(Command.Hack);
-        if (process.CurrentState == ProcessState.Hacking)
+        if (process.CurrentState == ProcessState.Hacking || process.CurrentState == ProcessState.AbortingHack)
         {
-            //this.didChangeStateLastUpdate = true;
             companionRenderer.material.color = Color.yellow;
             this.targetObject = targetObject;
             this.targetPosition = targetObject.transform.position;
@@ -173,39 +159,12 @@ public class Companion : MonoBehaviour
         process.MoveNext(Command.Follow);
         if(process.CurrentState == ProcessState.Following)
         {
-            //this.didChangeStateLastUpdate = true;
+           
         }
-        /*if (process.CurrentState == ProcessState.Fetching)
-        {
-            companionRenderer.material.color = Color.blue;
-            agent.stoppingDistance = this.stoppingDistance;
-            this.targetObject = this.gameObjectToFollow;
-            this.targetPosition = this.gameObjectToFollow.transform.position;
-        }*/
+       
     }
 
-    /*void HandleCompanionPickUpObject(GameObject targetObject)
-    {
-        this.isFollowing = false;
-        companionRenderer.material.color = Color.blue;
-        agent.destination = targetObject.transform.position;
-        agent.stoppingDistance = 0f;
-    }
-
-    void HandleCompanionHackObject(GameObject targetObject)
-    {
-        this.isFollowing = false;
-        companionRenderer.material.color = Color.yellow;
-        agent.destination = targetObject.transform.position;
-        agent.stoppingDistance = 0f;
-    }
-
-    void HandleCompanionFollow()
-    {
-        this.isFollowing = true;
-        agent.stoppingDistance = stoppingDistance;
-        companionRenderer.material.color = Color.green;
-    }*/
+   
 
     void PickUp(GameObject targetObject)
     {
@@ -234,26 +193,20 @@ public class Companion : MonoBehaviour
         }
     }
 
-    void Hack(GameObject targetObject)
+    void Hack(GameObject targetGameObject)
     {
         //hacken
         companionRenderer.material.color = Color.black;
+        this.hackedObject = targetGameObject;
+        EventsManager.instance.OnCompanionHackEnable(this.hackedObject.GetInstanceID());
     }
-    /*
-    private void OnCollisionEnter(Collision collision)
-    {
-        
-        //this.hasCollision = true;
-        if (collision.gameObject.tag == "Player" || collision.gameObject.tag == "GrabbableObject" || collision.gameObject.tag == "HackableObject")
-        {
-            Debug.Log("Companion collided with an object with tag " + collision.gameObject.tag);
-            this.isFollowing = false;
-            agent.destination = agent.transform.position;
-            companionRenderer.material.color = Color.red;
-        } 
-    }*/
 
-    
+    void StopHack(GameObject targetGameObject)
+    {
+        EventsManager.instance.OnCompanionHackDisable(targetGameObject.GetInstanceID());
+        this.hackedObject = null;
+    }
+   
 }
 
 public enum ProcessState
@@ -304,10 +257,12 @@ public class Process
 
     Dictionary<StateTransition, ProcessState> transitions;
     public ProcessState CurrentState { get; private set; }
+    public Command LastCommand { get; set; }
 
     public Process()
     {
         CurrentState = ProcessState.Following;
+        LastCommand = Command.Follow;
         transitions = new Dictionary<StateTransition, ProcessState>
             {
                 { new StateTransition(ProcessState.Following, Command.WaitAt), ProcessState.WaitingAt },
@@ -321,15 +276,18 @@ public class Process
                 { new StateTransition(ProcessState.Hacking, Command.Follow), ProcessState.Following },
                 { new StateTransition(ProcessState.HackCompleted, Command.Follow), ProcessState.AbortingHack },
                 { new StateTransition(ProcessState.AbortingHack, Command.Follow), ProcessState.Following },
+                { new StateTransition(ProcessState.AbortingHack, Command.Hack), ProcessState.Hacking },
+                { new StateTransition(ProcessState.AbortingHack, Command.WaitAt), ProcessState.WaitingAt },
+                { new StateTransition(ProcessState.AbortingHack, Command.Fetch), ProcessState.Fetching },
                 { new StateTransition(ProcessState.Fetching, Command.WaitAt), ProcessState.WaitingAt },
                 { new StateTransition(ProcessState.Hacking, Command.WaitAt), ProcessState.WaitingAt },
-                { new StateTransition(ProcessState.HackCompleted, Command.WaitAt), ProcessState.WaitingAt },
+                { new StateTransition(ProcessState.HackCompleted, Command.WaitAt), ProcessState.AbortingHack },
                 { new StateTransition(ProcessState.WaitingAt, Command.Fetch), ProcessState.Fetching },
                 { new StateTransition(ProcessState.Hacking, Command.Fetch), ProcessState.Fetching },
-                { new StateTransition(ProcessState.HackCompleted, Command.Fetch), ProcessState.Fetching },
+                { new StateTransition(ProcessState.HackCompleted, Command.Fetch), ProcessState.AbortingHack },
                 { new StateTransition(ProcessState.WaitingAt, Command.Hack), ProcessState.Hacking },
                 { new StateTransition(ProcessState.Fetching, Command.Hack), ProcessState.Hacking },
-                { new StateTransition(ProcessState.HackCompleted, Command.Hack), ProcessState.Hacking },
+                { new StateTransition(ProcessState.HackCompleted, Command.Hack), ProcessState.AbortingHack },
                 { new StateTransition(ProcessState.WaitingAt, Command.WaitAt), ProcessState.WaitingAt },
                 { new StateTransition(ProcessState.Fetching, Command.Fetch), ProcessState.Fetching },
                 { new StateTransition(ProcessState.Hacking, Command.Hack), ProcessState.Hacking }
@@ -341,8 +299,13 @@ public class Process
         StateTransition transition = new StateTransition(CurrentState, command);
         ProcessState nextState;
         if (!transitions.TryGetValue(transition, out nextState))
+        {
             throw new Exception("Invalid transition: " + CurrentState + " -> " + command);
-        return nextState;
+        } else
+        {
+            LastCommand = command;
+            return nextState;
+        }
     }
 
     public ProcessState MoveNext(Command command)

@@ -19,6 +19,7 @@ public class Barrier : MonoBehaviour
     private Material m_Material;    // Used to store material reference.
     private Color m_Color;            // Used to store color reference.
     private List<int> activeTriggers = new List<int>();
+    private bool isHacked = false;
     
     
     // Start is called before the first frame update
@@ -50,9 +51,8 @@ public class Barrier : MonoBehaviour
         EventsManager.instance.PressurePlateDisable += HandlePressurePlateDisabled;
         EventsManager.instance.SwitchEnable += HandlePressurePlateEnabled;
         EventsManager.instance.SwitchDisable += HandlePressurePlateDisabled;
-        EventsManager.instance.HackableEnable += HandlePressurePlateEnabled;
-        EventsManager.instance.HackableDisable += HandlePressurePlateDisabled;
-
+        EventsManager.instance.CompanionHackEnable += HandleHackEnabled;
+        EventsManager.instance.CompanionHackDisable += HandleHackDisabled;
     }
 
     // Update is called once per frame
@@ -61,17 +61,28 @@ public class Barrier : MonoBehaviour
        
     }
 
+    private void AllowPlayerPassing()
+    {
+        ToggleCollision(isBridge);
+        ToggleFade(!isBridge);
+        EnableObstacle(false);
+    }
+
+    private void HinderPlayerPassing()
+    {
+        ToggleCollision(!isBridge);
+        ToggleFade(isBridge);
+        EnableObstacle(true);
+    }
+
     private void HandlePressurePlateEnabled(int id)
     {
         //UnityEngine.Debug.Log("Barrier: HandlePressurePlateEnabled");
         if (activatedByTriggerId.Contains(id))
         {
-            if(activeTriggers.Count == 0)
+            if(activeTriggers.Count == 0 && !this.isHacked)
             {
-                ToggleCollision(isBridge);
-                ToggleFade(!isBridge);
-                //EventsManager.instance.OnRebake();
-                EnableObstacle(false);
+                this.AllowPlayerPassing();
             }
             if(!activeTriggers.Contains(id))
             {
@@ -91,12 +102,36 @@ public class Barrier : MonoBehaviour
             {
                 activeTriggers.Remove(id);
             }
+            if (activeTriggers.Count == 0 && !this.isHacked)
+            {
+                this.HinderPlayerPassing();
+            }
+        }
+
+    }
+
+    private void HandleHackEnabled(int instanceId)
+    {
+        if (gameObject.GetInstanceID() == instanceId)
+        {
+            if(activeTriggers.Count == 0)
+            {
+                this.AllowPlayerPassing();
+            }
+            this.isHacked = true;
+            
+        }
+
+    }
+
+    private void HandleHackDisabled(int instanceId)
+    {
+        if (gameObject.GetInstanceID() == instanceId)
+        {
+            this.isHacked = false;
             if (activeTriggers.Count == 0)
             {
-                ToggleCollision(!isBridge);
-                ToggleFade(isBridge);
-                //EventsManager.instance.OnRebake();
-                EnableObstacle(true);
+                this.HinderPlayerPassing();
             }
         }
 
@@ -123,6 +158,26 @@ public class Barrier : MonoBehaviour
         }
     }
 
+    IEnumerator AlphaGrow()
+    {
+        // Alpha start value.
+        float alpha = 0.0f;
+
+        // Loop until aplha is below zero (completely invisalbe)
+        while (alpha < 1.0f)
+        {
+            // Reduce alpha by fadeSpeed amount.
+            alpha += fadeSpeed * Time.deltaTime;
+
+            // Create a new color using original color RGB values combined
+            // with new alpha value. We have to do this because we can't 
+            // change the alpha value of the original color directly.
+            m_Material.color = new Color(m_Color.r, m_Color.g, m_Color.b, alpha);
+
+            yield return null;
+        }
+    }
+
     // This method fades from original color to "fadeColor"
     IEnumerator ColorFade()
     {
@@ -139,7 +194,7 @@ public class Barrier : MonoBehaviour
 
             yield return null;
         }
-        //ToggleRenderer(false);
+        
     }
   
     IEnumerator ColorGrow()
@@ -147,7 +202,7 @@ public class Barrier : MonoBehaviour
         // Lerp start value.
         float change = 1.0f;
 
-        //ToggleRenderer(true);
+        
         // Loop until lerp value is 1 (fully changed)
         while (change > 0.0f)
         {
@@ -167,11 +222,7 @@ public class Barrier : MonoBehaviour
         this.GetComponent<BoxCollider>().enabled = hasCollision;
     }
 
-    /*private void ToggleRenderer(bool enableRenderer)
-    {
-        this.GetComponent<MeshRenderer>().enabled = enableRenderer;
-    }*/
-
+    
     private void EnableObstacle(bool enableObstacle)
     {
         this.GetComponent<NavMeshObstacle>().enabled = enableObstacle;
