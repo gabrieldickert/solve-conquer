@@ -69,8 +69,6 @@ public class CompanionAimHandler : MonoBehaviour
         {
             toggled = true;
             telekinesisLine.enabled = true;
-            Debug.Log("TelekinesisHand: leftIndexTriggerUp detected");
-            
         } else if (leftIndexTriggerUp)
         {
             telekinesisLine.enabled = false;

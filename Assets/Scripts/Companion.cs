@@ -1,39 +1,26 @@
 
 using System;
 using System.Collections.Generic;
-using System.Numerics;
 using UnityEngine;
 using UnityEngine.AI;
-using UnityEngine.UIElements;
 
 public class Companion : MonoBehaviour
 {
     //Transform that NPC has to follow
     public GameObject gameObjectToFollow;
     public float throwForce = 1f;
+
     private float maxDistanceFromDestination = 3f;
-
-    //NavMesh Agent variable
-    NavMeshAgent agent;
-
+    private NavMeshAgent agent;
     private Renderer companionRenderer;
     private bool isFollowing = true;
     private float stoppingDistance = 0f;
     private Process process = new Process();
-
     private GameObject targetObject;
     private UnityEngine.Vector3 targetPosition;
     private GameObject carriedObject = null;
     private GameObject hackedObject = null;
 
-    private UnityEngine.Vector3 carryPosition = UnityEngine.Vector3.zero;
-
-    //bool to check if state changed last update
-    //used to avoid continuous agent parameter updating while state remains the same
-    //(only useful in states that can linger)
-    //private bool didChangeStateLastUpdate = true;
-
-    // Start is called before the first frame update
     void Start()
     {
         EventsManager.instance.CompanionWaitAt += HandleCompanionWaitAt;
@@ -48,14 +35,10 @@ public class Companion : MonoBehaviour
         companionRenderer.material.color = isFollowing ? Color.green : Color.red;
     }
 
-    // Update is called once per frame
     void Update()
     {
-        Debug.Log("CompanionState: " + process.CurrentState);
-
         if (agent.path.status == NavMeshPathStatus.PathInvalid)
         {
-            Debug.Log("Companion: Path invalid. Respawning.");
             gameObject.GetComponent<NavMeshAgent>().enabled = false;
             return;
         }
@@ -70,7 +53,7 @@ public class Companion : MonoBehaviour
                 companionRenderer.material.color = Color.green;
                 this.targetObject = this.gameObjectToFollow;
                 this.targetPosition = this.gameObjectToFollow.transform.position;
-                if(this.carriedObject != null && this.carriedObject.transform.position != gameObject.transform.position + new UnityEngine.Vector3(0f, 2f, 0f))
+                if(this.carriedObject != null && this.carriedObject.transform.position != gameObject.transform.position + new Vector3(0f, 2f, 0f))
                 {
                     this.Drop(this.carriedObject);
                 }
@@ -80,7 +63,7 @@ public class Companion : MonoBehaviour
                 break;
             case ProcessState.Fetching:
                 agent.isStopped = false;
-                if (UnityEngine.Vector3.Distance(agent.transform.position, targetPosition) < this.maxDistanceFromDestination)
+                if (Vector3.Distance(agent.transform.position, targetPosition) < this.maxDistanceFromDestination)
                 {
                     agent.isStopped = true;
                     PickUp(targetObject);
@@ -96,14 +79,13 @@ public class Companion : MonoBehaviour
             case ProcessState.Hacking:
                 Drop(this.carriedObject);
                 agent.isStopped = false;
-                if (UnityEngine.Vector3.Distance(agent.transform.position, targetPosition) < this.maxDistanceFromDestination)
+                if (Vector3.Distance(agent.transform.position, targetPosition) < this.maxDistanceFromDestination)
                 {
                     agent.isStopped = true;
                     process.MoveNext(Command.CompleteHack);
                 }
                 break;
             case ProcessState.HackCompleted:
-                //hack
                 this.Hack(targetObject);
                 break;
             case ProcessState.AbortingHack:
@@ -165,7 +147,6 @@ public class Companion : MonoBehaviour
     {
         if(this.carriedObject == null)
         {
-            //aufheben
             companionRenderer.material.color = Color.white;
             this.carriedObject = targetObject;
             EventsManager.instance.OnForceObjectBarrierEnableObstacle();
@@ -179,7 +160,6 @@ public class Companion : MonoBehaviour
     {
         if(this.carriedObject != null)
         {
-            //fallen lassen
             this.carriedObject = null;
             EventsManager.instance.OnForceObjectBarrierDisableObstacle();
             targetObject.GetComponent<Rigidbody>().isKinematic = false;
@@ -190,7 +170,6 @@ public class Companion : MonoBehaviour
 
     void Hack(GameObject targetGameObject)
     {
-        //hacken
         companionRenderer.material.color = Color.black;
         this.hackedObject = targetGameObject;
         EventsManager.instance.OnCompanionHackEnable(this.hackedObject.GetInstanceID());
@@ -201,7 +180,6 @@ public class Companion : MonoBehaviour
         EventsManager.instance.OnCompanionHackDisable(targetGameObject.GetInstanceID());
         this.hackedObject = null;
     }
-   
 }
 
 public enum ProcessState

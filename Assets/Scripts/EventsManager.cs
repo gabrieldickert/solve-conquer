@@ -32,28 +32,28 @@ public class EventsManager : MonoBehaviour
 
     private int companionId { get; set; }
 
-    public void OnPressurePlateEnable(int instanceId)
+    public void OnPressurePlateEnable(int triggerId)
     {
         //UnityEngine.Debug.Log("EventsManager: OnPressurePlateEnable");
-        PressurePlateEnable?.Invoke(instanceId);
+        PressurePlateEnable?.Invoke(triggerId);
     }
 
-    public void OnPressurePlateDisable(int instanceId)
+    public void OnPressurePlateDisable(int triggerId)
     {
         //UnityEngine.Debug.Log("EventsManager: OnPressurePlateDisable");
-        PressurePlateDisable?.Invoke(instanceId);
+        PressurePlateDisable?.Invoke(triggerId);
     }
 
-    public void OnSwitchEnable(int instanceId)
+    public void OnSwitchEnable(int triggerId)
     {
         //UnityEngine.Debug.Log("EventsManager: OnPressurePlateEnable");
-        SwitchEnable?.Invoke(instanceId);
+        SwitchEnable?.Invoke(triggerId);
     }
 
-    public void OnSwitchDisable(int instanceId)
+    public void OnSwitchDisable(int triggerId)
     {
         //UnityEngine.Debug.Log("EventsManager: OnPressurePlateDisable");
-        SwitchDisable?.Invoke(instanceId);
+        SwitchDisable?.Invoke(triggerId);
     }
 
     public void OnResetObject(int instanceId)
