@@ -34,13 +34,11 @@ public class Barrier : MonoBehaviour
         m_Color = m_Material.color;
         
 
+
         //Initialize Barrier (isBridge ? disable collision and fade color out : enable collision and fade color in)
-        if(!isActiveOnStart)
+        if (!isActiveOnStart)
         {
-            ToggleCollision(!isBridge);
-            ToggleFade(isBridge);
-            //EventsManager.instance.OnRebake();
-            EnableObstacle(true);
+            this.HinderPlayerPassing();
         } else
         {
             EnableObstacle(false);
@@ -141,10 +139,10 @@ public class Barrier : MonoBehaviour
     IEnumerator AlphaFade()
     {
         // Alpha start value.
-        float alpha = 1.0f;
+        float alpha = m_Color.a;
 
         // Loop until aplha is below zero (completely invisalbe)
-        while (alpha > 0.0f)
+        while (alpha > 0.2f)
         {
             // Reduce alpha by fadeSpeed amount.
             alpha -= fadeSpeed * Time.deltaTime;
@@ -161,10 +159,10 @@ public class Barrier : MonoBehaviour
     IEnumerator AlphaGrow()
     {
         // Alpha start value.
-        float alpha = 0.0f;
+        float alpha = 0.2f;
 
         // Loop until aplha is below zero (completely invisalbe)
-        while (alpha < 1.0f)
+        while (alpha < m_Color.a)
         {
             // Reduce alpha by fadeSpeed amount.
             alpha += fadeSpeed * Time.deltaTime;
@@ -232,10 +230,10 @@ public class Barrier : MonoBehaviour
     {
         if(isFadeOut)
         {
-            StartCoroutine(ColorFade());
+            StartCoroutine(AlphaFade());
         } else
         {
-            StartCoroutine(ColorGrow());
+            StartCoroutine(AlphaGrow());
         }
     }
 }
