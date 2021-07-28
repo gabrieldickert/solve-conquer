@@ -7,18 +7,26 @@ public class SpaceShipHandler : MonoBehaviour
 
     public GameObject LandingPlatform;
 
+    public GameObject SpaceshipWindow;
+
+    public float windowYOffset;
+
     private Vector3 FirstLandingPoint;
 
     private Vector3 SecondLandingPoint;
 
+
     private int YOffset = 5;
+
+    private float FirstLandingPntDistance;
 
     private bool HasFirstLandingPos = false;
 
     private bool HasLanded = false;
 
-
     private bool IsRotating = false;
+
+    
 
     // Start is called before the first frame update
     void Start()
@@ -27,6 +35,13 @@ public class SpaceShipHandler : MonoBehaviour
 
         this.FirstLandingPoint = new Vector3(this.LandingPlatform.transform.position.x, this.gameObject.transform.position.y, this.LandingPlatform.transform.position.z);
         this.SecondLandingPoint = new Vector3(this.LandingPlatform.transform.position.x, this.LandingPlatform.transform.position.y+YOffset, this.LandingPlatform.transform.position.z);
+
+
+
+        this.FirstLandingPntDistance = Vector3.Distance(this.gameObject.transform.position, this.FirstLandingPoint);
+
+      
+        //this.SpaceshipWindow.transform.position = this.WindowTargetPnt;
     }
 
 
@@ -72,6 +87,15 @@ public class SpaceShipHandler : MonoBehaviour
             {
 
                 HasFirstLandingPos = true;
+
+            }
+     
+
+            else if(Vector3.Distance(this.gameObject.transform.position, this.FirstLandingPoint) < this.FirstLandingPntDistance/2)
+            {
+                Debug.Log("Jetzt window nach oben");
+
+               this.SpaceshipWindow.transform.position = Vector3.MoveTowards(this.SpaceshipWindow.transform.position, new Vector3(this.SpaceshipWindow.transform.position.x, this.SpaceshipWindow.transform.position.y+this.windowYOffset, this.SpaceshipWindow.transform.position.z), step);
 
             }
         }
