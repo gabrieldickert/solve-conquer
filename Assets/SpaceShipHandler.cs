@@ -11,12 +11,14 @@ public class SpaceShipHandler : MonoBehaviour
 
     public float windowYOffset;
 
-    private Vector3 FirstLandingPoint;
+    public List<Vector3> FlyPathList;
 
-    private Vector3 SecondLandingPoint;
+    public float speed =50f;
+    public float landingspeed = 10f;
 
+    private int current;
 
-    private int YOffset = 5;
+    public int  LandingPointYOffset = 5;
 
     private float FirstLandingPntDistance;
 
@@ -26,6 +28,8 @@ public class SpaceShipHandler : MonoBehaviour
 
     private bool IsRotating = false;
 
+    private Vector3 spaceshipStartPos;
+
     
 
     // Start is called before the first frame update
@@ -33,15 +37,19 @@ public class SpaceShipHandler : MonoBehaviour
     {
 
 
-        this.FirstLandingPoint = new Vector3(this.LandingPlatform.transform.position.x, this.gameObject.transform.position.y, this.LandingPlatform.transform.position.z);
-        this.SecondLandingPoint = new Vector3(this.LandingPlatform.transform.position.x, this.LandingPlatform.transform.position.y+YOffset, this.LandingPlatform.transform.position.z);
+        //    this.FirstLandingPoint = new Vector3(this.LandingPlatform.transform.position.x, this.gameObject.transform.position.y, this.LandingPlatform.transform.position.z);
+        //this.SecondLandingPoint = new Vector3(this.LandingPlatform.transform.position.x, this.LandingPlatform.transform.position.y+YOffset, this.LandingPlatform.transform.position.z);
 
 
+        //if Spaceship gets a Landing Plattform assigned an additional point gets added
+        if(this.LandingPlatform != null) {
 
-        this.FirstLandingPntDistance = Vector3.Distance(this.gameObject.transform.position, this.FirstLandingPoint);
+            FlyPathList.Add(new Vector3(this.LandingPlatform.transform.position.x, this.gameObject.transform.position.y, this.LandingPlatform.transform.position.z));
+            FlyPathList.Add(new Vector3(this.LandingPlatform.transform.position.x, this.LandingPlatform.transform.position.y + LandingPointYOffset, this.LandingPlatform.transform.position.z));
+        }
 
-      
-        //this.SpaceshipWindow.transform.position = this.WindowTargetPnt;
+
+        this.spaceshipStartPos = this.gameObject.transform.position;
     }
 
 
@@ -54,15 +62,51 @@ public class SpaceShipHandler : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
+        float selectedspeed = (current < FlyPathList.Count - 1) ? this.speed : this.landingspeed;
         // Move our position a step closer to the target.
-        float step = 10f * Time.deltaTime; // calculate distance to move
+        float step = selectedspeed * Time.deltaTime; // calculate distance to move
                                            // SpaceShipRotating();
-        float rotationsPerMinute = 10.0f;
+        float rotationsPerMinute = 22.0f;
         //this.gameObject.transform.Rotate(Vector3.up * 4 * Time.deltaTime);
 
-        Debug.Log(this.gameObject.transform.eulerAngles);
+        if(this.gameObject.transform.position != FlyPathList[current])
+        {
+            float AngleAmount = (Mathf.Cos(Time.time * 3) * 180) / Mathf.PI * 0.5f;
+            Debug.Log("Rotation " + AngleAmount);
+            AngleAmount = Mathf.Clamp(AngleAmount, -60,60);
+
+            this.gameObject.transform.rotation = Quaternion.Euler(0, AngleAmount, 0);
+            // material.transform.localRotation = Quaternion.Euler(0, 0, AngleAmount);
+
+            // this.gameObject.transform.Rotate(0, 10.0f * rotationsPerMinute * Time.deltaTime * 2, 0);
+            this.gameObject.transform.position = Vector3.MoveTowards(this.gameObject.transform.position, FlyPathList[current], step);
+
+        }
 
 
+        else
+        {
+
+            //Only incrementing when current is smaller then size of pointlist
+            if(current < FlyPathList.Count-1)
+            {
+                current++;
+            }
+      
+        }
+
+
+
+
+
+
+        //  Debug.Log(this.gameObject.transform.eulerAngles);
+
+
+
+
+        /*
         if(this.gameObject.transform.eulerAngles.y < 180)
         {
            // this.gameObject.transform.Rotate(0, 10.0f * rotationsPerMinute * Time.deltaTime * 2, 0);
@@ -112,8 +156,8 @@ public class SpaceShipHandler : MonoBehaviour
                 HasLanded = true;
 
             }
-        }
-  
+        }*/
+
 
     }
 }
