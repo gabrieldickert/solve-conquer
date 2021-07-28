@@ -1,7 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using OculusSampleFramework;
+using UnityEngine.AI;
 
 public class ForceObjectBarrier : MonoBehaviour
 {
@@ -13,19 +12,13 @@ public class ForceObjectBarrier : MonoBehaviour
     private OVRGrabber LeftHandGrabber;
     private OVRGrabber RightHandGrabber;
 
-    // Start is called before the first frame update
     void Start()
     {
-        //UnityEngine.Debug.Log("ForceObjectBarrier: Start");
         this.LeftHandGrabber = this.LeftHand.GetComponent<DistanceGrabber>();
         this.RightHandGrabber = this.RightHand.GetComponent<DistanceGrabber>();
         this.source = gameObject.AddComponent<AudioSource>();
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
+        EventsManager.instance.ForceObjectBarrierEnableObstacle += HandleForceObjectBarrierEnableObstacle;
+        EventsManager.instance.ForceObjectBarrierDisableObstacle += HandleForceObjectBarrierDisableObstacle;
     }
 
     private void OnTriggerEnter(Collider other)
@@ -39,7 +32,6 @@ public class ForceObjectBarrier : MonoBehaviour
     {
         if (other.gameObject.tag == "Player")
         {
-            //UnityEngine.Debug.Log("ForceObjectBarrier: Player entered TriggerZone");
             
             if (this.LeftHandGrabber.grabbedObject != null)
             {
@@ -58,14 +50,9 @@ public class ForceObjectBarrier : MonoBehaviour
         {
             if (this.LeftHandGrabber.grabbedObject == null && this.RightHandGrabber.grabbedObject == null)
             {
-                //UnityEngine.Debug.Log("ForceObjectBarrier: GrabbableObject entered TriggerZone");
-                //ResetObjectPosition(other.gameObject.GetInstanceID());
                 Reposition(other.gameObject);
-                //Ensure dropping items when player passes barrier
             }
         }
-        
-
     }
 
    
@@ -85,22 +72,23 @@ public class ForceObjectBarrier : MonoBehaviour
         {
             Vector3 forceVector = transform.TransformPoint(localBack) - targetGameObject.transform.position;
             //Debug.Log("ForceObjectBarrier: Target hit left side. Moving target further to the left.");
-            //Debug.Log("ForceObjectBarrier: Applying force vector " + forceVector + ". Current object vector " + targetGameObject.transform.position);
             targetGameObject.GetComponent<Rigidbody>().AddForce(forceVector, ForceMode.Impulse);
         }
         else if (targetDirectionLocal.z > 0)
         {
             Vector3 forceVector = transform.TransformPoint(localForward) - targetGameObject.transform.position;
             //Debug.Log("ForceObjectBarrier: Target hit right side. Moving target further to the right.");
-            //Debug.Log("ForceObjectBarrier: Applying force vector " + forceVector + ". Current object vector " + targetGameObject.transform.position);
             targetGameObject.GetComponent<Rigidbody>().AddForce(forceVector, ForceMode.Impulse);
         }
     }
 
-    void ResetObjectPosition(int instanceId)
+    void HandleForceObjectBarrierEnableObstacle()
     {
-        //Event feuern
-        //UnityEngine.Debug.Log("ForceObjectBarrier: Reset instance " + instanceId);
-        EventsManager.instance.OnResetObject(instanceId);
+        gameObject.transform.parent.GetComponent<NavMeshObstacle>().enabled = true;
+    }
+
+    void HandleForceObjectBarrierDisableObstacle()
+    {
+        gameObject.transform.parent.GetComponent<NavMeshObstacle>().enabled = false;
     }
 }
