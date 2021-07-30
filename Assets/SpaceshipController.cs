@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.Playables;
 public class SpaceshipController : MonoBehaviour
 { 
 
@@ -9,6 +9,8 @@ public class SpaceshipController : MonoBehaviour
     private const string ShieldTag = "SpaceshipShield";
     private const string Bridgename = "Bridge";
     public const float SHIELD_Y_OFFSET = 2f;
+    private PlayableDirector director;
+    private SphereCollider SpaceshipCollider;
     enum SpaceshipStates {
         FLYING_NORMAL, FYLING_DANGER,LANDING,LANDED
 
@@ -18,6 +20,11 @@ public class SpaceshipController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+  
+        director  = this.GetComponent<PlayableDirector>();
+
+        this.SpaceshipCollider = this.GetComponent<SphereCollider>();
+
 
         Transform bridge = this.gameObject.transform.Find(Bridgename);
         foreach (Transform child in bridge)
@@ -33,11 +40,28 @@ public class SpaceshipController : MonoBehaviour
     }
 
 
+    private void CheckingLanding()
+    {
+
+
+        for (int i = 0; i < this.director.playableGraph.GetOutputCount(); i++)
+        {
+            Playable playable = this.director.playableGraph.GetOutput(i).GetSourcePlayable();
+        }
+    }
+
 
 
     // Update is called once per frame
     void Update()
     {
-        
+   
+
+
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        Debug.Log("GELANDET");
     }
 }
