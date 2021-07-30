@@ -9,6 +9,12 @@ public class SpaceshipController : MonoBehaviour
     private const string ShieldTag = "SpaceshipShield";
     private const string Bridgename = "Bridge";
     public const float SHIELD_Y_OFFSET = 2f;
+    enum SpaceshipStates {
+        FLYING_NORMAL, FYLING_DANGER,LANDING,LANDED
+
+    }
+
+    private int SpaceshipState = (int) SpaceshipStates.FLYING_NORMAL;
     // Start is called before the first frame update
     void Start()
     {
