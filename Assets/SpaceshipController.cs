@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Playables;
 public class SpaceshipController : MonoBehaviour
-{ 
+{
 
+    public GameObject door;
+    private Animator doorAnimator;
     private List<GameObject> ShieldList = new List<GameObject>();
     private const string ShieldTag = "SpaceshipShield";
     private const string Bridgename = "Bridge";
@@ -17,11 +19,13 @@ public class SpaceshipController : MonoBehaviour
     }
 
     private int SpaceshipState = (int) SpaceshipStates.FLYING_NORMAL;
+    private bool HasDoorOpened = false;
     // Start is called before the first frame update
     void Start()
     {
-  
-        director  = this.GetComponent<PlayableDirector>();
+
+        this.doorAnimator = this.door.GetComponent<Animator>();
+      //  director  = this.GetComponent<PlayableDirector>();
 
         this.SpaceshipCollider = this.GetComponent<SphereCollider>();
 
@@ -50,18 +54,56 @@ public class SpaceshipController : MonoBehaviour
         }
     }
 
+    private void OpenDoorsAfterLanding()
+    {
+
+        if(!HasDoorOpened)
+        {
+
+            this.doorAnimator.SetBool("character_nearby", true);
+
+            HasDoorOpened = true;
+
+        }
+
+    }
+
 
 
     // Update is called once per frame
     void Update()
     {
    
+     switch((int) SpaceshipState) {
+
+
+            case (int)SpaceshipStates.LANDED:
+                OpenDoorsAfterLanding();
+                break;
+
+
+            default:
+                break;
+        
+        }
+
+       
+
 
 
     }
 
     private void OnCollisionEnter(Collision collision)
     {
-        Debug.Log("GELANDET");
+
+        //Spaceship collided with Landing Plat
+     if(collision.gameObject.name.Equals("UpperPart"))
+        {
+            this.SpaceshipState = (int)SpaceshipStates.LANDED;
+            this.gameObject.GetComponent<Rigidbody>().isKinematic = true;
+
+            Destroy(this.gameObject.GetComponent<Rigidbody>());
+
+        }
     }
 }
