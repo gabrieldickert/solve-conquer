@@ -1187,7 +1187,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6799725723956706677}
   - component: {fileID: 2954890737056552104}
-  - component: {fileID: 2954890737056552103}
+  - component: {fileID: 5720271340536161572}
   m_Layer: 10
   m_Name: LeftHandAnchor
   m_TagString: Untagged
@@ -1308,7 +1308,7 @@ LineRenderer:
     generateLightingData: 0
   m_UseWorldSpace: 0
   m_Loop: 0
---- !u!114 &2954890737056552103
+--- !u!114 &5720271340536161572
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1317,7 +1317,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 6799725723956706682}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5d17e69b743a3d4489dc1dd63a60adba, type: 3}
+  m_Script: {fileID: 11500000, guid: b3b8e27dc256eb042948dcfa7bbc0194, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   AimCollisionLayerMask:
@@ -1327,7 +1327,6 @@ MonoBehaviour:
   lineWidth: 0.01
   lineMaxLength: 10
   toggled: 0
-  enemyHitLeft: 0
 --- !u!1001 &6799725722646480458
 PrefabInstance:
   m_ObjectHideFlags: 0
