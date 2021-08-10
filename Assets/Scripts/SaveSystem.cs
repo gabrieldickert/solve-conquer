@@ -21,7 +21,6 @@ public static class SaveSystem {
         string path = Application.persistentDataPath + "/player.save";
         if (File.Exists(path))
         {
-            Debug.Log("FILE EXIST");
             BinaryFormatter formatter = new BinaryFormatter();
             FileStream stream = new FileStream(path, FileMode.Open);
 
