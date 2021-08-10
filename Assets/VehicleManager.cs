@@ -12,6 +12,7 @@ public class VehicleManager : MonoBehaviour
     public  float SHIELD_Y_OFFSET = 2f;
     public float ShieldOpeningWaitime = 5; 
     private SphereCollider SpaceshipCollider;
+    private GameObject PlayerController;
 
     enum SpaceshipStates
     {
@@ -29,6 +30,19 @@ public class VehicleManager : MonoBehaviour
         //  director  = this.GetComponent<PlayableDirector>();
 
         this.SpaceshipCollider = this.GetComponent<SphereCollider>();
+        Transform bridge = this.gameObject.transform.Find(Bridgename);
+        foreach(Transform child in  bridge)
+        {
+
+            if(child.tag == "Player")
+            {
+
+                this.PlayerController = child.gameObject;
+                break;
+            }
+
+        }
+
 
 
         StartCoroutine(waiter());
@@ -50,13 +64,15 @@ public class VehicleManager : MonoBehaviour
     }
     private void OpenDoorsAfterLanding()
     {
-        Debug.Log("DOOR OPENING");
+
         if (!HasDoorOpened)
         {
 
             this.doorAnimator.SetBool("character_nearby", true);
 
             HasDoorOpened = true;
+
+            //this.PlayerController.transform.SetParent(null);
 
         }
 
