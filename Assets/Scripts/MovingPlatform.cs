@@ -16,7 +16,10 @@ public class MovingPlatform : MonoBehaviour
     private float delay_start;
     public bool automatic;
 
-    public Vector3 eulers;
+    public Vector3[] eulers;
+    public int euler_number = 0;
+    private Vector3 current_euler;
+    public float rotation_speed;
 
     // Start is called before the first frame update
     void Start()
@@ -25,7 +28,10 @@ public class MovingPlatform : MonoBehaviour
             current_target = points[0];
         }
         tolerance = speed * Time.deltaTime;
-        //transform.Rotate(eulers);
+        
+        if(eulers.Length > 0){
+            current_euler = eulers[0];
+        }
     }
 
     // Update is called once per frame
@@ -46,7 +52,7 @@ public class MovingPlatform : MonoBehaviour
             transform.localPosition = current_target;
             delay_start = Time.time;
         }
-        transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.Euler(eulers), Time.deltaTime);
+        transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.Euler(current_euler), Time.deltaTime * rotation_speed);
     }
 
     void UpdateTarget(){
@@ -63,6 +69,12 @@ public class MovingPlatform : MonoBehaviour
             point_number = 0;
         }
         current_target = points[point_number];
+
+        euler_number++;
+        if(euler_number >= eulers.Length){
+            euler_number = 0;
+        }
+        current_euler = eulers[euler_number];
     }
 
     private void OnTriggerEnter(Collider other){

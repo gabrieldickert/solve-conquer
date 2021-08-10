@@ -231,7 +231,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 516453780438986308, guid: cf06e2ecdbb950f4abb7de732f77aa4a, type: 3}
       propertyPath: eulers.Array.size
-      value: 2
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 516453780438986308, guid: cf06e2ecdbb950f4abb7de732f77aa4a, type: 3}
       propertyPath: points.Array.size
@@ -242,12 +242,20 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 516453780438986308, guid: cf06e2ecdbb950f4abb7de732f77aa4a, type: 3}
+      propertyPath: eulers.Array.data[0].y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 516453780438986308, guid: cf06e2ecdbb950f4abb7de732f77aa4a, type: 3}
       propertyPath: eulers.Array.data[1].y
-      value: 45
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 516453780438986308, guid: cf06e2ecdbb950f4abb7de732f77aa4a, type: 3}
+      propertyPath: points.Array.data[1].x
+      value: -20
       objectReference: {fileID: 0}
     - target: {fileID: 516453780438986308, guid: cf06e2ecdbb950f4abb7de732f77aa4a, type: 3}
       propertyPath: points.Array.data[1].y
-      value: 5
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 516453780438986308, guid: cf06e2ecdbb950f4abb7de732f77aa4a, type: 3}
       propertyPath: rotate.Array.data[0].y
@@ -2417,8 +2425,20 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 516453780438986308, guid: cf06e2ecdbb950f4abb7de732f77aa4a, type: 3}
+      propertyPath: rotation_speed
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 516453780438986308, guid: cf06e2ecdbb950f4abb7de732f77aa4a, type: 3}
+      propertyPath: eulers.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 516453780438986308, guid: cf06e2ecdbb950f4abb7de732f77aa4a, type: 3}
       propertyPath: points.Array.size
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 516453780438986308, guid: cf06e2ecdbb950f4abb7de732f77aa4a, type: 3}
+      propertyPath: eulers.Array.data[1].y
+      value: 45
       objectReference: {fileID: 0}
     - target: {fileID: 516453780438986308, guid: cf06e2ecdbb950f4abb7de732f77aa4a, type: 3}
       propertyPath: points.Array.data[0].x
@@ -2434,7 +2454,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 516453780438986308, guid: cf06e2ecdbb950f4abb7de732f77aa4a, type: 3}
       propertyPath: points.Array.data[1].x
-      value: 2
+      value: -15
       objectReference: {fileID: 0}
     - target: {fileID: 516453780438986308, guid: cf06e2ecdbb950f4abb7de732f77aa4a, type: 3}
       propertyPath: points.Array.data[1].y
@@ -2442,7 +2462,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 516453780438986308, guid: cf06e2ecdbb950f4abb7de732f77aa4a, type: 3}
       propertyPath: points.Array.data[1].z
-      value: -20
+      value: -27
       objectReference: {fileID: 0}
     - target: {fileID: 516453781266348406, guid: cf06e2ecdbb950f4abb7de732f77aa4a, type: 3}
       propertyPath: m_RootOrder
