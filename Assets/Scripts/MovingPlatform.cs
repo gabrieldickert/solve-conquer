@@ -16,13 +16,16 @@ public class MovingPlatform : MonoBehaviour
     private float delay_start;
     public bool automatic;
 
+    public Vector3 eulers;
+
     // Start is called before the first frame update
     void Start()
     {
         if(points.Length > 0){
             current_target = points[0];
         }
-        tolerance = speed * Time.deltaTime;     
+        tolerance = speed * Time.deltaTime;
+        //transform.Rotate(eulers);
     }
 
     // Update is called once per frame
@@ -43,6 +46,7 @@ public class MovingPlatform : MonoBehaviour
             transform.localPosition = current_target;
             delay_start = Time.time;
         }
+        transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.Euler(eulers), Time.deltaTime);
     }
 
     void UpdateTarget(){
@@ -63,9 +67,15 @@ public class MovingPlatform : MonoBehaviour
 
     private void OnTriggerEnter(Collider other){
         other.transform.parent = transform;
+        /*if(other.gameObject.tag == "Player"){
+            other.transform.parent = transform;
+        }*/
     }
 
     private void OnTriggerExit(Collider other){
         other.transform.parent = null;
+        /*if(other.gameObject.tag == "Player"){
+            other.transform.parent = null;
+        }*/
     }
 }
