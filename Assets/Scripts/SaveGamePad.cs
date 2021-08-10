@@ -5,6 +5,7 @@ using UnityEngine;
 public class SaveGamePad : MonoBehaviour
 {
     public Player player;
+    public Companion companion;
     private bool isActive = false;
      
      private void OnTriggerExit(Collider other)
@@ -16,7 +17,7 @@ public class SaveGamePad : MonoBehaviour
     {
 
         if (!isActive){
-            SaveSystem.SavePlayer(player);
+            SaveSystem.SaveGame(player, companion);
         }
 
         isActive = true;
