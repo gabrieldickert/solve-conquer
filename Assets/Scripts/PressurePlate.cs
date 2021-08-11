@@ -1,6 +1,3 @@
-
-using System.Collections;
-
 using UnityEngine;
 
 public class PressurePlate : MonoBehaviour
@@ -8,17 +5,17 @@ public class PressurePlate : MonoBehaviour
     private AudioSource source;
     public AudioClip sound_plateEnabled;
     public AudioClip sound_plateDisabled;
-    bool isOpen = false;
+    private bool isOpen = false;
 
-    int collionsObjCount = 0;
+    private int collionsObjCount = 0;
     public int triggerId;
 
-    Renderer pressurePlateRenderer;
-    Vector3 initPos;
-    float plateOffset;
+    private Renderer pressurePlateRenderer;
+    private Vector3 initPos;
+    private float plateOffset;
 
     // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
         //Fetch the Renderer component of the GameObject
         pressurePlateRenderer = GetComponent<Renderer>();
@@ -27,8 +24,9 @@ public class PressurePlate : MonoBehaviour
         initPos = gameObject.transform.position;
         plateOffset = 0.5f * pressurePlateRenderer.bounds.size.y;
     }
+
     // Update is called once per frame
-    void Update()
+    private void Update()
     {
         {
             float step = 1f * Time.deltaTime; // calculate distance to move
@@ -40,12 +38,8 @@ public class PressurePlate : MonoBehaviour
             {
                 gameObject.transform.position = Vector3.MoveTowards(gameObject.transform.position, initPos, step);
             }
-
-
         }
-
     }
-
 
     private void OnCollisionEnter(Collision collision)
     {
@@ -67,8 +61,5 @@ public class PressurePlate : MonoBehaviour
             EventsManager.instance.OnPressurePlateDisable(triggerId);
             source.PlayOneShot(sound_plateDisabled);
         }
-
-
     }
-
 }
