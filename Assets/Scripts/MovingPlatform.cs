@@ -63,7 +63,7 @@ public class MovingPlatform : MonoBehaviour
         }
     }
 
-    void NextPlatform(){
+    public void NextPlatform(){
         point_number++;
         if(point_number >= points.Length){
             point_number = 0;
@@ -79,15 +79,9 @@ public class MovingPlatform : MonoBehaviour
 
     private void OnTriggerEnter(Collider other){
         other.transform.parent = transform;
-        /*if(other.gameObject.tag == "Player"){
-            other.transform.parent = transform;
-        }*/
     }
 
     private void OnTriggerExit(Collider other){
         other.transform.parent = null;
-        /*if(other.gameObject.tag == "Player"){
-            other.transform.parent = null;
-        }*/
     }
 }
