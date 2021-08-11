@@ -4,14 +4,10 @@ using UnityEngine;
 
 public class PlatformTrigger : MonoBehaviour
 {
-    /*public MovingPlatform platform;
-    private void OnTriggerEnter(Collider other){
-        platform.NextPlatform();
-    }*/
-
     public MovingPlatform platform;
+    public string triggerTag;
     private void OnTriggerEnter(Collider other){
-        if(other.gameObject.tag == "Companion"){
+        if(other.gameObject.tag == triggerTag){
             platform.NextPlatform();
         }
     }
