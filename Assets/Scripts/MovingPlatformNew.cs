@@ -42,9 +42,19 @@ public class MovingPlatformNew : MonoBehaviour
             Debug.LogError("MovingPlatformNew: The arrays points and rotations have to have the same length.");
         }
         UpdateTarget();
-        if(mode == 0)
+        switch(mode)
         {
-            this.hasRequiredPassengers = true;
+            case 0:
+                this.hasRequiredPassengers = true;
+                VisualTrigger1.SetActive(false);
+                VisualTrigger2.SetActive(false);
+                break;
+            case 1:
+                VisualTrigger2.SetActive(false);
+                break;
+            default:
+                break;
+
         }
     }
 
@@ -70,7 +80,6 @@ public class MovingPlatformNew : MonoBehaviour
     {
         if(this.companion != null)
         {
-            this.companion.GetComponent<Rigidbody>().isKinematic = true;
             this.companion.GetComponent<NavMeshAgent>().enabled = false;
         }
         transform.localPosition = Vector3.MoveTowards(transform.localPosition, current_target, speed * Time.deltaTime);
@@ -101,7 +110,6 @@ public class MovingPlatformNew : MonoBehaviour
             if (this.companion != null)
             {
                 this.companion.GetComponent<NavMeshAgent>().enabled = true;
-                this.companion.GetComponent<Rigidbody>().isKinematic = false;
             }
             isReturning = !isReturning;
             if (waitOnlyAtStartAndFinish)

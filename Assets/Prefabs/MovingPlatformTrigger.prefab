@@ -26,8 +26,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 706848279409315340}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.839, y: 0.24749985, z: 0}
-  m_LocalScale: {x: 1.5, y: 0.1, z: 1.5}
+  m_LocalPosition: {x: 0.839, y: 0.65, z: 0}
+  m_LocalScale: {x: 1.5, y: 0.5, z: 1.5}
   m_Children: []
   m_Father: {fileID: 6958334331855951696}
   m_RootOrder: 1
@@ -59,7 +59,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: aa04906756ed20348a67d95e198b2e79, type: 2}
+  - {fileID: 2100000, guid: 1bcb49de5fc9e0b458ed2d49c55b0f27, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -107,8 +107,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1643940466303924320}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.808, y: 0.24749985, z: 0}
-  m_LocalScale: {x: 1.5, y: 0.1, z: 1.5}
+  m_LocalPosition: {x: -0.808, y: 0.65, z: 0}
+  m_LocalScale: {x: 1.5, y: 0.5, z: 1.5}
   m_Children: []
   m_Father: {fileID: 6958334331855951696}
   m_RootOrder: 0
@@ -140,7 +140,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: aa04906756ed20348a67d95e198b2e79, type: 2}
+  - {fileID: 2100000, guid: 1bcb49de5fc9e0b458ed2d49c55b0f27, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -175,7 +175,7 @@ GameObject:
   - component: {fileID: 6958334331853536112}
   - component: {fileID: 6958334331857688700}
   - component: {fileID: 6958334332618227809}
-  - component: {fileID: 6958334332618227810}
+  - component: {fileID: 7979011603370593683}
   m_Layer: 11
   m_Name: MovingPlatformTrigger
   m_TagString: Untagged
@@ -276,7 +276,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 4.000002, y: 0.363491, z: 4}
   m_Center: {x: -0.00000011920929, y: 0.1817452, z: 0.00000047683716}
---- !u!114 &6958334332618227810
+--- !u!114 &7979011603370593683
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -285,19 +285,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 6958334331855764402}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bab62caff79cb5e41a090b4cb99c6f32, type: 3}
+  m_Script: {fileID: 11500000, guid: 4c97df96d229faa4eaad45c8f88fd710, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   points: []
-  point_number: 0
-  tolerance: 0
-  speed: 3
-  delay_time: 3
-  automatic: 0
-  eulers:
-  - {x: 0, y: 0, z: 0}
-  euler_number: 0
+  rotations: []
+  speed: 1
   rotation_speed: 1
+  delay_time: 0
+  point_number: 0
+  movesBidirectionally: 0
+  waitOnlyAtStartAndFinish: 0
   mode: 0
   VisualTrigger1: {fileID: 1643940466303924320}
   VisualTrigger2: {fileID: 706848279409315340}
