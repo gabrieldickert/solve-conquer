@@ -5,27 +5,37 @@ using UnityEngine;
 public class IngameMenu : MonoBehaviour
 {
     public bool showMenu = false;
+    public GameObject ingameMenu;
 
-    // Start is called before the first frame update
     void Start()
     {
-        gameObject.SetActive(false);
+        ingameMenu.SetActive(false);
     }
-
-    // Update is called once per frame
     void Update()
     {
-        if (OVRInput.GetDown(OVRInput.Button.Start))
+        
+        OVRInput.Update();
+
+        // Debug in Unity
+        if (!showMenu && Input.GetKeyDown(KeyCode.M))
         {
-            gameObject.SetActive(true);
+            ingameMenu.SetActive(true);
             showMenu = true;
+        } else if (showMenu && Input.GetKeyDown(KeyCode.M))
+        {
+            ingameMenu.SetActive(false);
+            showMenu = false;
         }
 
-        if(showMenu && OVRInput.GetDown(OVRInput.Button.Start))
+        // Für VR
+        if (!showMenu && OVRInput.GetDown(OVRInput.Button.Start))
         {
-            gameObject.SetActive(false);
+            ingameMenu.SetActive(true);
+            showMenu = true;
+        } else if(showMenu && OVRInput.GetDown(OVRInput.Button.Start))
+        {
+            ingameMenu.SetActive(false);
             showMenu = false;
         }
     }
-
 }
