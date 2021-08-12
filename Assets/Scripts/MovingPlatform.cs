@@ -65,7 +65,7 @@ public class MovingPlatform : MonoBehaviour
                 if (this.companion != null)
                 {
                     this.companion.GetComponent<NavMeshAgent>().enabled = false;
-                    this.companion.GetComponent<Rigidbody>().isKinematic = true;
+                    //this.companion.GetComponent<Rigidbody>().isKinematic = true;
                 }
             }
         }
@@ -85,11 +85,11 @@ public class MovingPlatform : MonoBehaviour
     }
 
     void UpdateTarget(){
-        if (this.companion != null)
+        /*if (this.companion != null)
         {
             this.companion.GetComponent<NavMeshAgent>().enabled = true;
             this.companion.GetComponent<Rigidbody>().isKinematic = false;
-        }
+        }*/
         if (automatic){
             if(Time.time - delay_start > delay_time){
                 NextPlatform();
