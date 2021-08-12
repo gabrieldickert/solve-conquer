@@ -29,6 +29,8 @@ public class EventsManager : MonoBehaviour
     public event Action ForceObjectBarrierEnableObstacle;
     public event Action ForceObjectBarrierDisableObstacle;
     public event Action CompanionDropObject;
+    public event Action<int> LogicGateEnable;
+    public event Action<int> LogicGateDisable;
 
     private int companionId { get; set; }
 
@@ -111,5 +113,17 @@ public class EventsManager : MonoBehaviour
     public void OnCompanionDropObject()
     {
         CompanionDropObject?.Invoke();
+    }
+
+    public void OnLogicGateEnable(int triggerId)
+    {
+        //UnityEngine.Debug.Log("EventsManager: OnLogicGateEnable");
+        LogicGateEnable?.Invoke(triggerId);
+    }
+
+    public void OnLogicGateDisable(int triggerId)
+    {
+        //UnityEngine.Debug.Log("EventsManager: OnLogicGateDisable");
+        LogicGateDisable?.Invoke(triggerId);
     }
 }
