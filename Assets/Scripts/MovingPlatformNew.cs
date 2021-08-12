@@ -84,7 +84,7 @@ public class MovingPlatformNew : MonoBehaviour
         }
         transform.localPosition = Vector3.MoveTowards(transform.localPosition, current_target, speed * Time.deltaTime);
         transform.localRotation = Quaternion.Slerp(transform.localRotation, current_rotation, rotation_speed * Time.deltaTime);
-        if (Vector3.Distance(transform.position, current_target) == 0 && transform.localRotation == current_rotation)
+        if (Vector3.Distance(transform.localPosition, current_target) == 0f && transform.localRotation == current_rotation)
         {
             UpdateTarget();
         }
@@ -98,27 +98,34 @@ public class MovingPlatformNew : MonoBehaviour
         if(!waitOnlyAtStartAndFinish)
         {
             delay_start = Time.time;
+            //Debug.Log("MovingPlatformNew: Delay from now");
         }
         if(!isReturning && point_number + 1 < points.Length)
         {
             point_number++;
+            //Debug.Log("MovingPlatformNew: Going to next point");
         } else if(isReturning && point_number - 1 >= 0)
         {
             point_number--;
+            //Debug.Log("MovingPlatformNew: Going to previous point");
         } else if(movesBidirectionally)
         {
+            //Debug.Log("MovingPlatformNew: Starting to backtrace");
             if (this.companion != null)
             {
                 this.companion.GetComponent<NavMeshAgent>().enabled = true;
             }
+            point_number = isReturning ? point_number + 1 : point_number - 1;
             isReturning = !isReturning;
             if (waitOnlyAtStartAndFinish)
             {
                 delay_start = Time.time;
+                //Debug.Log("MovingPlatformNew: Delay from now, waitOnlyAtStartAndFinish is true");
             }
         }
         current_target = points[point_number];
         current_rotation = Quaternion.Euler(rotations[point_number]);
+        //Debug.Log("MovingPlatformNew: Current target is " + current_target + " [" + point_number + "/" + points.Length + "]");
     }
 
     private void UpdatePassengerStatus()
