@@ -3,7 +3,6 @@ using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 
 public static class SaveSystem {
-
     public static void SaveGame(Player player, Companion companion)
     {
         BinaryFormatter formatter = new BinaryFormatter();
@@ -34,5 +33,4 @@ public static class SaveSystem {
             return null;
         }
     }
-
 }
