@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class MovingPlatform : MonoBehaviour
 {
@@ -21,6 +22,14 @@ public class MovingPlatform : MonoBehaviour
     private Vector3 current_euler;
     public float rotation_speed;
 
+    public int mode = 0;
+    public GameObject VisualTrigger1;
+    public GameObject VisualTrigger2;
+    private bool playerOnPlatform = false;
+    private bool companionOnPlatform = false;
+
+    private Transform companion = null;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -32,6 +41,17 @@ public class MovingPlatform : MonoBehaviour
         if(eulers.Length > 0){
             current_euler = eulers[0];
         }
+
+        switch (mode)
+        {
+            case 0:
+                VisualTrigger1.GetComponent<MeshRenderer>().enabled = false;
+                VisualTrigger2.GetComponent<MeshRenderer>().enabled = false;
+                break;
+            case 1:
+                VisualTrigger2.GetComponent<MeshRenderer>().enabled = false;
+                break;
+        }
     }
 
     // Update is called once per frame
@@ -40,6 +60,13 @@ public class MovingPlatform : MonoBehaviour
         if (transform.localPosition != current_target){
             if(Time.time - delay_start > delay_time){
                 MovePlatform();
+            } else
+            {
+                if (this.companion != null)
+                {
+                    this.companion.GetComponent<NavMeshAgent>().enabled = false;
+                    this.companion.GetComponent<Rigidbody>().isKinematic = true;
+                }
             }
         }
         else{
@@ -58,7 +85,12 @@ public class MovingPlatform : MonoBehaviour
     }
 
     void UpdateTarget(){
-        if(automatic){
+        if (this.companion != null)
+        {
+            this.companion.GetComponent<NavMeshAgent>().enabled = true;
+            this.companion.GetComponent<Rigidbody>().isKinematic = false;
+        }
+        if (automatic){
             if(Time.time - delay_start > delay_time){
                 NextPlatform();
             }
@@ -66,6 +98,7 @@ public class MovingPlatform : MonoBehaviour
     }
 
     public void NextPlatform(){
+        
         point_number++;
         if(point_number >= points.Length){
             point_number = 0;
@@ -76,15 +109,52 @@ public class MovingPlatform : MonoBehaviour
         if(euler_number >= eulers.Length){
             euler_number = 0;
         }
-        Debug.Log("sven " + eulers.Length);
+        
         current_euler = eulers[euler_number];
     }
 
     private void OnTriggerEnter(Collider other){
-        other.transform.parent = transform;
+        
+
+        if (other.gameObject.tag == "Companion")
+        {
+            companionOnPlatform = true;
+            this.companion = other.transform.parent;
+            this.companion.SetParent(gameObject.transform);
+        }
+        else if (other.gameObject.tag == "Player")
+        {
+            playerOnPlatform = true;
+            other.transform.SetParent(gameObject.transform);
+        }
+        switch (mode)
+        {
+            case 0:
+                NextPlatform();
+                break;
+            case 1:
+                if (playerOnPlatform)
+                {
+                    NextPlatform();
+                }
+                break;
+            case 2:
+                if (playerOnPlatform && companionOnPlatform)
+                {
+                    NextPlatform();
+                }
+                break;
+        }
     }
 
     private void OnTriggerExit(Collider other){
-        other.transform.parent = null;
+        if (other.tag == "Companion")
+        {
+            other.transform.parent.SetParent(null);
+        }
+        else if (other.tag == "Player")
+        {
+            other.transform.SetParent(null);
+        }
     }
 }
