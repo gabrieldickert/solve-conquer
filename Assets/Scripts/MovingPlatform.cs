@@ -38,7 +38,9 @@ public class MovingPlatform : MonoBehaviour
     void Update()
     {
         if (transform.localPosition != current_target){
-            MovePlatform();
+            if(Time.time - delay_start > delay_time){
+                MovePlatform();
+            }
         }
         else{
             UpdateTarget();
@@ -74,6 +76,7 @@ public class MovingPlatform : MonoBehaviour
         if(euler_number >= eulers.Length){
             euler_number = 0;
         }
+        Debug.Log("sven " + eulers.Length);
         current_euler = eulers[euler_number];
     }
 
