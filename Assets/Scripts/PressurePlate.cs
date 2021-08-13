@@ -11,7 +11,8 @@ public class PressurePlate : MonoBehaviour
     bool isOpen = false;
 
     int collionsObjCount = 0;
-    public int triggerId;
+    public int triggerId1 = 0;
+    public int triggerId2 = 0;
 
     Renderer pressurePlateRenderer;
     Vector3 initPos;
@@ -52,7 +53,8 @@ public class PressurePlate : MonoBehaviour
         collionsObjCount++;
         isOpen = true;
         pressurePlateRenderer.material.color = Color.green;
-        EventsManager.instance.OnPressurePlateEnable(triggerId);
+        EventsManager.instance.OnPressurePlateEnable(triggerId1);
+        EventsManager.instance.OnPressurePlateEnable(triggerId2);
         source.PlayOneShot(sound_plateEnabled);
     }
 
@@ -64,7 +66,8 @@ public class PressurePlate : MonoBehaviour
         {
             isOpen = false;
             pressurePlateRenderer.material.color = Color.red;
-            EventsManager.instance.OnPressurePlateDisable(triggerId);
+            EventsManager.instance.OnPressurePlateDisable(triggerId1);
+            EventsManager.instance.OnPressurePlateDisable(triggerId2);
             source.PlayOneShot(sound_plateDisabled);
         }
 
