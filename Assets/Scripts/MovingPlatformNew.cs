@@ -104,19 +104,22 @@ public class MovingPlatformNew : MonoBehaviour
         {
             point_number--;
             //Debug.Log("MovingPlatformNew: Going to previous point");
-        } else if(movesBidirectionally)
+        } else
         {
             //Debug.Log("MovingPlatformNew: Starting to backtrace");
             if (this.companion != null)
             {
                 this.companion.GetComponent<NavMeshAgent>().enabled = true;
             }
-            point_number = isReturning ? point_number + 1 : point_number - 1;
-            isReturning = !isReturning;
-            if (waitOnlyAtStartAndFinish)
+            if(movesBidirectionally)
             {
-                delay_start = Time.time;
-                //Debug.Log("MovingPlatformNew: Delay from now, waitOnlyAtStartAndFinish is true");
+                point_number = isReturning ? point_number + 1 : point_number - 1;
+                isReturning = !isReturning;
+                if (waitOnlyAtStartAndFinish)
+                {
+                    delay_start = Time.time;
+                    //Debug.Log("MovingPlatformNew: Delay from now, waitOnlyAtStartAndFinish is true");
+                }
             }
         }
         current_target = points[point_number];
