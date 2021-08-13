@@ -1,6 +1,4 @@
 
-using System.Collections;
-
 using UnityEngine;
 
 public class PressurePlate : MonoBehaviour
@@ -47,8 +45,7 @@ public class PressurePlate : MonoBehaviour
 
     }
 
-
-    private void OnCollisionEnter(Collision collision)
+    private void ActivatePlate()
     {
         collionsObjCount++;
         isOpen = true;
@@ -58,7 +55,7 @@ public class PressurePlate : MonoBehaviour
         source.PlayOneShot(sound_plateEnabled);
     }
 
-    private void OnCollisionExit(Collision collision)
+    private void DeactivatePlate()
     {
         collionsObjCount--;
 
@@ -70,8 +67,39 @@ public class PressurePlate : MonoBehaviour
             EventsManager.instance.OnPressurePlateDisable(triggerId2);
             source.PlayOneShot(sound_plateDisabled);
         }
+    }
 
 
+    private void OnCollisionEnter(Collision collision)
+    {
+        if(collision.gameObject.tag == "GrabbableObject")
+        {
+            ActivatePlate();
+        }
+    }
+
+    private void OnCollisionExit(Collision collision)
+    {
+        if(collision.gameObject.tag == "GrabbableObject")
+        {
+            DeactivatePlate();
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if(other.tag == "Player" || other.tag == "Companion")
+        {
+            ActivatePlate();
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.tag == "Player" || other.tag == "Companion")
+        {
+            DeactivatePlate();
+        }
     }
 
 }

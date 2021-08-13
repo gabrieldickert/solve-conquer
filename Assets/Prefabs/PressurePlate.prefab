@@ -140,6 +140,7 @@ GameObject:
   - component: {fileID: 1847276810333389951}
   - component: {fileID: 262376698991454538}
   - component: {fileID: 2166749755459719645}
+  - component: {fileID: 3049502625336018366}
   m_Layer: 8
   m_Name: Plate
   m_TagString: Untagged
@@ -239,3 +240,16 @@ MonoBehaviour:
   sound_plateDisabled: {fileID: 8300000, guid: 523f822c1c7b699489c49fea2353c2de, type: 3}
   triggerId1: 0
   triggerId2: 0
+--- !u!65 &3049502625336018366
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8919781006081677472}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 3, z: 1}
+  m_Center: {x: 0, y: 1, z: 0}
