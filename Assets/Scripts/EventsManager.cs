@@ -31,6 +31,7 @@ public class EventsManager : MonoBehaviour
     public event Action CompanionDropObject;
     public event Action<int> LogicGateEnable;
     public event Action<int> LogicGateDisable;
+    public event Action<int> PlayerEnteredTrigger;
 
     private int companionId { get; set; }
 
@@ -125,5 +126,11 @@ public class EventsManager : MonoBehaviour
     {
         //UnityEngine.Debug.Log("EventsManager: OnLogicGateDisable");
         LogicGateDisable?.Invoke(triggerId);
+    }
+
+    public void OnPlayerEnteredTrigger(int triggerId)
+    {
+        //UnityEngine.Debug.Log("EventsManager: OnPlayerEnteredTrigger");
+        PlayerEnteredTrigger?.Invoke(triggerId);
     }
 }
