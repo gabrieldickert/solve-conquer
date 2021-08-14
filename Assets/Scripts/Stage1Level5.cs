@@ -1,3 +1,4 @@
+using OculusSampleFramework;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -21,9 +22,9 @@ public class Stage1Level5 : MonoBehaviour
     public GameObject companion = null;
     public PlayableDirector director = null;
     public PrefabSpawner trashSpawner = null;
-    public GameObject cubeFloor2 = null;
-    public GameObject cubeFloor3_a = null;
-    public GameObject cubeFloor3_b = null;
+    public GameObject cubeFloor2_a = null;
+    public GameObject cubeFloor2_b = null;
+    public GameObject cubeFloor3 = null;
     public GameObject cubeFloor4 = null;
 
     private int currentFloor = 0;
@@ -70,7 +71,9 @@ public class Stage1Level5 : MonoBehaviour
     private void DropCube(GameObject cube)
     {
         cube.GetComponent<MeshRenderer>().enabled = true;
+        cube.GetComponent<BoxCollider>().enabled = true;
         cube.GetComponent<Rigidbody>().isKinematic = false;
+        cube.GetComponent<DistanceGrabbable>().enabled = true;
         //Debug.Log("CubeStatus: " + cube.GetComponent<Rigidbody>().isKinematic);
     }
 
@@ -83,14 +86,14 @@ public class Stage1Level5 : MonoBehaviour
             currentFloor = 2;
             EventsManager.instance.OnPressurePlateDisable(bridgeFloor1_a);
             EventsManager.instance.OnPressurePlateDisable(bridgeFloor1_b);
-            DropCube(cubeFloor2);
+            DropCube(cubeFloor2_a);
+            DropCube(cubeFloor2_b);
         } else if(triggerId == triggerFloor3 && currentFloor != 3)
         {
             Debug.Log("Stage1Level5: Player entered floor 3");
             currentFloor = 3;
             EventsManager.instance.OnPressurePlateDisable(bridgeFloor2);
-            DropCube(cubeFloor3_a);
-            DropCube(cubeFloor3_b);
+            DropCube(cubeFloor3);
         }
         else if (triggerId == triggerFloor4 && currentFloor != 4)
         {
