@@ -60,6 +60,7 @@ public class RespawnManager : MonoBehaviour
             if(other.gameObject.tag != "Companion")
             {
                 this.initialPositions[instanceId].gameObject.transform.position = this.initialPositions[instanceId].initialPosition;
+                this.initialPositions[instanceId].gameObject.GetComponent<Rigidbody>().velocity = Vector3.zero;
             } else
             {
                 other.gameObject.transform.parent.GetComponent<NavMeshAgent>().transform.position = this.initialPositions[instanceId].initialPosition;
