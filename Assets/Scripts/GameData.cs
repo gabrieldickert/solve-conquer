@@ -5,9 +5,9 @@ using UnityEngine;
 [System.Serializable]
 public class GameData {
 
-    public float[] positionPlayer, positionCompanion;
+    public float[] positionPlayer, positionCompanion, positionPad;
 
-    public GameData (Player player, Companion companion)
+    public GameData (Player player, Companion companion, SaveGamePad pad)
     {
         positionPlayer = new float[3];
         positionPlayer[0] = player.transform.position.x;
@@ -18,6 +18,11 @@ public class GameData {
         positionCompanion[0] = companion.transform.position.x;
         positionCompanion[1] = companion.transform.position.y;
         positionCompanion[2] = companion.transform.position.z;
+
+        positionPad = new float[3];
+        positionPad[0] = pad.transform.position.x;
+        positionPad[1] = pad.transform.position.y;
+        positionPad[2] = pad.transform.position.z;
     }
 
 }

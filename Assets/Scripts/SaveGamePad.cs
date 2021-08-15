@@ -17,7 +17,7 @@ public class SaveGamePad : MonoBehaviour
             //Verhindert das spammen der Speichern Funktion und der zugehörigen Nachricht
             if(centerEyeAnchor.Find("FloatingText(Clone)") == null)
             {
-                SaveSystem.SaveGame(player, companion);
+                SaveSystem.SaveGame(player, companion, this);
                 ShowFloatingText();
             }
          

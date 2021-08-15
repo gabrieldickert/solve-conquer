@@ -3,13 +3,13 @@ using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 
 public static class SaveSystem {
-    public static void SaveGame(Player player, Companion companion)
+    public static void SaveGame(Player player, Companion companion, SaveGamePad pad)
     {
         BinaryFormatter formatter = new BinaryFormatter();
         string path = Application.persistentDataPath + "/savegame.dat";
         FileStream stream = new FileStream(path, FileMode.Create);
 
-        GameData data = new GameData(player, companion);
+        GameData data = new GameData(player, companion, pad);
 
         formatter.Serialize(stream, data);
         stream.Close();
