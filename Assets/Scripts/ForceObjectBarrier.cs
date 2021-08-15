@@ -12,8 +12,13 @@ public class ForceObjectBarrier : MonoBehaviour
     private OVRGrabber LeftHandGrabber;
     private OVRGrabber RightHandGrabber;
 
+    
+
     void Start()
     {
+        GameObject target = GameObject.FindWithTag("Player");
+        this.LeftHand = target.transform.Find("OVRCameraRig/TrackingSpace/LeftHandAnchor/LeftControllerAnchor/DistanceGrabHandLeft").gameObject;
+        this.RightHand = target.transform.Find("OVRCameraRig/TrackingSpace/RightHandAnchor/RightControllerAnchor/DistanceGrabHandRight").gameObject;
         this.LeftHandGrabber = this.LeftHand.GetComponent<DistanceGrabber>();
         this.RightHandGrabber = this.RightHand.GetComponent<DistanceGrabber>();
         this.source = gameObject.AddComponent<AudioSource>();
