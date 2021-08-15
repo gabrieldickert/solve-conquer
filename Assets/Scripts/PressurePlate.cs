@@ -1,6 +1,4 @@
 
-using System.Collections;
-
 using UnityEngine;
 
 public class PressurePlate : MonoBehaviour
@@ -11,7 +9,8 @@ public class PressurePlate : MonoBehaviour
     bool isOpen = false;
 
     int collionsObjCount = 0;
-    public int triggerId;
+    public int triggerId1 = 0;
+    public int triggerId2 = 0;
 
     Renderer pressurePlateRenderer;
     Vector3 initPos;
@@ -46,17 +45,17 @@ public class PressurePlate : MonoBehaviour
 
     }
 
-
-    private void OnCollisionEnter(Collision collision)
+    private void ActivatePlate()
     {
         collionsObjCount++;
         isOpen = true;
         pressurePlateRenderer.material.color = Color.green;
-        EventsManager.instance.OnPressurePlateEnable(triggerId);
+        EventsManager.instance.OnPressurePlateEnable(triggerId1);
+        EventsManager.instance.OnPressurePlateEnable(triggerId2);
         source.PlayOneShot(sound_plateEnabled);
     }
 
-    private void OnCollisionExit(Collision collision)
+    private void DeactivatePlate()
     {
         collionsObjCount--;
 
@@ -64,11 +63,43 @@ public class PressurePlate : MonoBehaviour
         {
             isOpen = false;
             pressurePlateRenderer.material.color = Color.red;
-            EventsManager.instance.OnPressurePlateDisable(triggerId);
+            EventsManager.instance.OnPressurePlateDisable(triggerId1);
+            EventsManager.instance.OnPressurePlateDisable(triggerId2);
             source.PlayOneShot(sound_plateDisabled);
         }
+    }
 
 
+    private void OnCollisionEnter(Collision collision)
+    {
+        if(collision.gameObject.tag == "GrabbableObject")
+        {
+            ActivatePlate();
+        }
+    }
+
+    private void OnCollisionExit(Collision collision)
+    {
+        if(collision.gameObject.tag == "GrabbableObject")
+        {
+            DeactivatePlate();
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if(other.tag == "Player" || other.tag == "Companion")
+        {
+            ActivatePlate();
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.tag == "Player" || other.tag == "Companion")
+        {
+            DeactivatePlate();
+        }
     }
 
 }

@@ -5,7 +5,8 @@ public class AndGate : MonoBehaviour
 {
     public List<int> activatedByTriggerId = new List<int>();
     public bool isActiveOnStart = true;
-    public int triggerId = 0;
+    public int triggerId1 = 0;
+    public int triggerId2 = 0;
     private List<int> activeTriggers = new List<int>();
     private Renderer gateRenderer;
 
@@ -31,7 +32,8 @@ public class AndGate : MonoBehaviour
             if (activeTriggers.Count == activatedByTriggerId.Count)
             {
                 //open barrier/ bridge
-                EventsManager.instance.OnLogicGateEnable(this.triggerId);
+                EventsManager.instance.OnLogicGateEnable(this.triggerId1);
+                EventsManager.instance.OnLogicGateEnable(this.triggerId2);
                 gateRenderer.material.color = Color.green;
             }
         }
@@ -49,7 +51,8 @@ public class AndGate : MonoBehaviour
             if ((activeTriggers.Count != activatedByTriggerId.Count))
             {
                 //close barrier/ bridge
-                EventsManager.instance.OnLogicGateDisable(this.triggerId);
+                EventsManager.instance.OnLogicGateDisable(this.triggerId1);
+                EventsManager.instance.OnLogicGateDisable(this.triggerId2);
                 gateRenderer.material.color = Color.red;
             }
         }
