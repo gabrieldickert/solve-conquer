@@ -1,49 +1,46 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class RespawnListener : MonoBehaviour
 {
+    public bool enablePlayerCollision;
+    public bool enableCompanionCollision;
+    public bool enableObjectCollision;
+
     // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
-        
     }
 
     // Update is called once per frame
-    void Update()
+    private void Update()
     {
-        
     }
-
 
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log("Runtergefallen"+other.gameObject.tag);
-
-        if(other.gameObject.name.Equals("GrabManager"))
+        
+        switch (other.gameObject.tag)
         {
-
-            EventsManager.instance.OnResetPlayer();
-        }
-        /*
-        switch(other.tag)
-        {
-
             case "Player":
-                EventsManager.instance.OnResetPlayer();
+                if (enablePlayerCollision)
+                {
+                    EventsManager.instance.OnResetPlayer();
+                }
                 break;
 
             case "Companion":
-                EventsManager.instance.OnResetCompanion();
+                if (enableCompanionCollision)
+                {
+                    EventsManager.instance.OnResetCompanion();
+                }
+
                 break;
-
-            default:
-                EventsManager.instance.OnResetObject(other.GetInstanceID());
+            case "GrabbableObject":
+                if(enableObjectCollision)
+                {
+                    EventsManager.instance.OnResetObject(other.gameObject.GetInstanceID());
+                }
                 break;
-
-
-        }*/
-
+        }
     }
 }
