@@ -19,7 +19,7 @@ public class RespawnListener : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log("Runtergefallen"+other.gameObject.name);
+        Debug.Log("Runtergefallen"+other.gameObject.tag);
 
         if(other.gameObject.name.Equals("GrabManager"))
         {

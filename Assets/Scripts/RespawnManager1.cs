@@ -49,6 +49,7 @@ public class RespawnManager1 : MonoBehaviour
                 go.AddComponent<BoxCollider>().size = respawncollidersize;
                 //Includes Y-Offset
                 go.GetComponent<BoxCollider>().center = new Vector3(0, (b.max.y - b.min.y) * -1 - 5, 0);
+                go.GetComponent<BoxCollider>().isTrigger = true;
                 //Adding Respawnlistener to listen on Collision
                 go.AddComponent<RespawnListener>();
             }
@@ -58,7 +59,7 @@ public class RespawnManager1 : MonoBehaviour
     private void Instance_ResetPlayer()
     {
         //Reset Player Position and Companion Pos (should be last save point)
-        Debug.Log("Reset Player");
+        //Debug.Log("Reset Player");
     }
 
     private void Instance_ResetCompanion()
