@@ -4,18 +4,18 @@ using UnityEngine;
 
 public class IngameMenu : MonoBehaviour
 {
-    public bool showMenu = false;
     public GameObject ingameMenu;
 
+    private bool showMenu = false;
+   
     void Start()
     {
         ingameMenu.SetActive(false);
     }
+
     void Update()
     {
         
-        OVRInput.Update();
-
         // Debug in Unity
         if (!showMenu && Input.GetKeyDown(KeyCode.M))
         {
@@ -28,11 +28,11 @@ public class IngameMenu : MonoBehaviour
         }
 
         // Für VR
-        if (!showMenu && OVRInput.GetDown(OVRInput.Button.Start))
+        if (!showMenu && OVRInput.GetDown(OVRInput.RawButton.Start))
         {
             ingameMenu.SetActive(true);
             showMenu = true;
-        } else if(showMenu && OVRInput.GetDown(OVRInput.Button.Start))
+        } else if(showMenu && OVRInput.GetDown(OVRInput.RawButton.Start))
         {
             ingameMenu.SetActive(false);
             showMenu = false;
