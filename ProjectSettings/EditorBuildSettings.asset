@@ -5,15 +5,18 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
+  - enabled: 0
+    path: Assets/Scenes/Pathfinding.unity
+    guid: 5fe90631f1f64334db60a742e6d42bdd
   - enabled: 1
-    path: Assets/Scenes/DebugScene.unity
-    guid: fccc6ff87e97b0f45bb520933c566b9a
-  - enabled: 1
+    path: Assets/Scenes/PlanetScene.unity
+    guid: a5cc1fcfceae896458a0397b306a8651
+  - enabled: 0
+    path: Assets/Scenes/PlanetaryApproach.unity
+    guid: 08ac474c37fc5ee4ca851d48eaa1ec97
+  - enabled: 0
     path: Assets/Scenes/TutorialScene.unity
     guid: cef14cbe8f5083d4497d69a023757996
-  - enabled: 1
-    path: Assets/Scenes/Scene01.unity
-    guid: a5cc1fcfceae896458a0397b306a8651
   m_configObjects:
     Unity.XR.Oculus.Settings: {fileID: 11400000, guid: 88b3c8b1aa1c7d940b3313f9e6af3881, type: 2}
     com.unity.xr.management.loader_settings: {fileID: 11400000, guid: 4a1a80fa7ec98f34fa75fc285a99b693, type: 2}
