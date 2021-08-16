@@ -7,7 +7,6 @@ public class Player : MonoBehaviour
 {
     public Companion companion;
     public GameObject menu;
-    private IngameMenu ingameMenu;
 
     public void LoadGame()
     {
