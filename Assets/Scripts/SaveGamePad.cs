@@ -6,17 +6,21 @@ public class SaveGamePad : MonoBehaviour
 {
     public Player player;
     public Companion companion;
-    public GameObject FloatingTextPrefab;
+    public GameObject canvas;
     public Transform centerEyeAnchor;
+
+    void Start()
+    {
+        canvas.SetActive(false);
+    }
 
     private void OnTriggerEnter(Collider collider)
     {
-        //Speichert erst wenn kein FloatingText(Clone) gefunden wird, d.h. alle 3 sec ist es möglich neu zu speichern (Zeit ist einstellbar im FloatingTexts script)
-        //Verhindert das spammen der Speichern Funktion und der zugehörigen Nachricht
-        if (collider.gameObject.tag == "Player" && centerEyeAnchor.Find("FloatingText(Clone)") == null && SaveSystem.gameLoaded == false)
+        if (collider.gameObject.tag == "Player" && SaveSystem.gameLoaded == false)
         {
-                SaveSystem.SaveGame(player, companion, this);
-                ShowFloatingText();
+            SaveSystem.SaveGame(player, companion, this);
+            canvas.SetActive(true);
+            StartCoroutine("WaitForSec");
         }
     }
 
@@ -25,10 +29,10 @@ public class SaveGamePad : MonoBehaviour
         SaveSystem.gameLoaded = false;
     }
 
-    public void ShowFloatingText()
+    IEnumerator WaitForSec()
     {
-        //Instantiate(FloatingTextPrefab, new Vector3(companion.transform.position.x, companion.transform.position.y + 2.5f, companion.transform.position.z) , Quaternion.identity, companion.transform);
-        Instantiate(FloatingTextPrefab, new Vector3(centerEyeAnchor.transform.position.x, centerEyeAnchor.transform.position.y, centerEyeAnchor.transform.position.z + 5), Quaternion.identity, centerEyeAnchor.transform);
+        yield return new WaitForSeconds(5);
+        canvas.SetActive(false);
     }
 
 }
