@@ -6,7 +6,7 @@ public class IngameMenu : MonoBehaviour
 {
     public GameObject ingameMenu;
 
-    private bool showMenu = false;
+    public static bool showMenu = false;
    
     void Start()
     {

@@ -6,6 +6,8 @@ using UnityEngine.AI;
 public class Player : MonoBehaviour
 {
     public Companion companion;
+    public GameObject menu;
+    private IngameMenu ingameMenu;
 
     public void LoadGame()
     {
@@ -32,5 +34,7 @@ public class Player : MonoBehaviour
         companion.GetComponent<NavMeshAgent>().enabled = false;
         companion.transform.position = positionPad + new Vector3(1.5f,0,0);
         companion.GetComponent<NavMeshAgent>().enabled = true;
+        menu.SetActive(false);
+        IngameMenu.showMenu = false;
     }
 }
