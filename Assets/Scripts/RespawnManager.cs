@@ -45,7 +45,9 @@ public class RespawnManager : MonoBehaviour
 
         LevelInstance currentLvl = this.RespawnStageLevels[gd.stage].Find(g => g.levelobj.name.Equals(gd.lvl));
 
-       
+
+        Debug.Log("Level aus datei "+gd.lvl);
+        Debug.Log("level instanz:" + currentLvl.levelobj.name);
         foreach(RespawnObject o in currentLvl.respawnObjList)
         {
 
