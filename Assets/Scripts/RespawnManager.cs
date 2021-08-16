@@ -1,92 +1,97 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.AI;
-using UnityEngine.SceneManagement;
 
 public class RespawnManager : MonoBehaviour
 {
-    public GameObject respawnablesParentObject;
-    public AudioClip sound_objectRespawned;
-    
-    private AudioSource source;
-    private List<GameObject> respawningObjectsList = new List<GameObject>();
+    public Dictionary<string, List<LevelInstance>> RespawnStageLevels = new Dictionary<string, List<LevelInstance>>();
+    public GameObject PlayerController;
+    public GameObject Companion;
 
-    private Dictionary<int, GameObjectInit> initialPositions = new Dictionary<int, GameObjectInit>();
 
-    void Start()
+    // Start is called before the first frame update
+    private void Start()
     {
-        EventsManager.instance.ResetObject += HandleResetObject;
-        this.source = gameObject.AddComponent<AudioSource>();
-        FillList();
-        SaveInitialPositions();
-    }
-
-    void Update()
-    {
-        
-    }
-
-    void FillList()
-    {
-        Transform[] allChildren = respawnablesParentObject.GetComponentsInChildren<Transform>();
-        foreach (Transform child in allChildren)
+        EventsManager.instance.ResetCompanion += Instance_ResetCompanion;
+        EventsManager.instance.ResetPlayer += Instance_ResetPlayer;
+        //Loop through every Stage, find every level and create a List containg the Levelobjects
+        foreach (GameObject stageobj in GameObject.FindGameObjectsWithTag("Stage"))
         {
-            this.respawningObjectsList.Add(child.gameObject);
-        }
+            List<GameObject> levelobjs = new List<GameObject>(GameObject.FindGameObjectsWithTag("Level")).FindAll(g => g.transform.IsChildOf(stageobj.transform));
+            this.RespawnStageLevels.Add(stageobj.name, new List<LevelInstance>());
 
-    }
-
-    void SaveInitialPositions()
-    {
-        foreach (GameObject go in respawningObjectsList)
-        {
-            this.initialPositions.Add(go.GetInstanceID(), new GameObjectInit(go));
-            
-        }
-    }
-
-    void HandleResetObject(int instanceId)
-    {
-        this.initialPositions[instanceId].gameObject.transform.position = this.initialPositions[instanceId].initialPosition;
-    }
-    
-    private void OnTriggerEnter(Collider other)
-    {
-        
-        int instanceId = other.gameObject.GetInstanceID();
-        
-        if (this.initialPositions.ContainsKey(instanceId))
-        {
-            if(other.gameObject.tag != "Companion")
+            for (int i = 0; i < levelobjs.Count; i++)
             {
-                this.initialPositions[instanceId].gameObject.transform.position = this.initialPositions[instanceId].initialPosition;
-                this.initialPositions[instanceId].gameObject.GetComponent<Rigidbody>().velocity = Vector3.zero;
-            } else
-            {
-                other.gameObject.transform.parent.GetComponent<NavMeshAgent>().transform.position = this.initialPositions[instanceId].initialPosition;
-                other.gameObject.transform.parent.GetComponent<NavMeshAgent>().enabled = false;
-                other.gameObject.transform.parent.GetComponent<NavMeshAgent>().enabled = true;
+                this.RespawnStageLevels[stageobj.name].Add(new LevelInstance(stageobj.name, levelobjs[i]));
             }
-            this.source.PlayOneShot(sound_objectRespawned);
-
         }
-        else if (other.gameObject.tag == "Player")
+
+    }
+
+    private void Instance_ResetPlayer()
+    {
+        //Reset Player Position and Companion Pos (should be last save point)
+        Debug.Log("Reset Player");
+    }
+
+    private void Instance_ResetCompanion()
+    {
+        //Reset Player Position and Companion Pos (should be last save point)
+        Debug.Log("Reset Companion");
+    }
+
+    // Update is called once per frame
+    private void Update()
+    {
+    }
+
+}
+public class LevelInstance
+{
+    public string stage { get; set; }
+    public GameObject levelobj { get; set; }
+    public BoxCollider RespawnTrigger { get; set; }
+    public List<RespawnObject> respawnObjList { get; set; }
+    public LevelInstance(string stage, GameObject lvl)
+    {
+        this.stage = stage;
+        this.levelobj = lvl;
+        this.respawnObjList = new List<RespawnObject>();
+        this.FindRespawnObjectsInLevel();
+    }
+
+    private void FindRespawnObjectsInLevel()
+    {
+        if (this.levelobj.transform.Find("Respawn") != null)
         {
-            // reset scene
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-            this.source.PlayOneShot(sound_objectRespawned);
+            for (int i = 0; i < this.levelobj.transform.Find("Respawn").transform.Find("Respawnables").childCount; i++)
+            {
+                GameObject o = this.levelobj.transform.Find("Respawn").transform.Find("Respawnables").GetChild(i).gameObject;
+
+                respawnObjList.Add(new RespawnObject(o));
+            }
         }
     }
 }
 
-public class GameObjectInit
+public class RespawnObject
 {
     public GameObject gameObject { get; set; }
     public Vector3 initialPosition { get; set; }
 
-    public GameObjectInit(GameObject gameObject)
+    public RespawnObject(GameObject gameObject)
     {
         this.gameObject = gameObject;
         this.initialPosition = this.gameObject.transform.position;
+        EventsManager.instance.ResetObject += HandleResetObject;
+    }
+
+    public void HandleResetObject(int instanceid)
+    {
+        if (this.gameObject.GetInstanceID() == instanceid)
+        {
+            this.gameObject.transform.position = initialPosition;
+            this.gameObject.GetComponent<Rigidbody>().velocity = new Vector3(0, 0, 0);
+        }
     }
 }
