@@ -43,6 +43,18 @@ public class RespawnManager : MonoBehaviour
         this.Companion.transform.position = spawnPos;
         this.Companion.transform.GetComponent<NavMeshAgent>().enabled = true;
 
+        LevelInstance currentLvl = this.RespawnStageLevels[gd.stage].Find(g => g.levelobj.name.Equals(gd.lvl));
+
+       
+        foreach(RespawnObject o in currentLvl.respawnObjList)
+        {
+
+            o.gameObject.transform.position = o.initialPosition;
+
+        }
+
+
+
     }
 
     private void Instance_ResetCompanion()
