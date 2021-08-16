@@ -14,7 +14,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!4 &4767751279933870263
 Transform:
@@ -49,7 +49,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!4 &6812641995053383953
 Transform:
@@ -140,12 +140,13 @@ GameObject:
   - component: {fileID: 1847276810333389951}
   - component: {fileID: 262376698991454538}
   - component: {fileID: 2166749755459719645}
+  - component: {fileID: 3049502625336018366}
   m_Layer: 8
   m_Name: Plate
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!4 &5097605807663632571
 Transform:
@@ -237,4 +238,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sound_plateEnabled: {fileID: 8300000, guid: 98e759dfda69aa7468d95f5a2c88e366, type: 3}
   sound_plateDisabled: {fileID: 8300000, guid: 523f822c1c7b699489c49fea2353c2de, type: 3}
-  triggerId: 0
+  triggerId1: 0
+  triggerId2: 0
+--- !u!65 &3049502625336018366
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8919781006081677472}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 3, z: 1}
+  m_Center: {x: 0, y: 1, z: 0}

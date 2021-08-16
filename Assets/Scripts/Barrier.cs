@@ -41,7 +41,7 @@ public class Barrier : MonoBehaviour
             this.HinderPlayerPassing();
         } else
         {
-            EnableObstacle(false);
+            this.AllowPlayerPassing();
         }
         
 
@@ -49,6 +49,8 @@ public class Barrier : MonoBehaviour
         EventsManager.instance.PressurePlateDisable += HandlePressurePlateDisabled;
         EventsManager.instance.SwitchEnable += HandlePressurePlateEnabled;
         EventsManager.instance.SwitchDisable += HandlePressurePlateDisabled;
+        EventsManager.instance.LogicGateEnable += HandlePressurePlateEnabled;
+        EventsManager.instance.LogicGateDisable += HandlePressurePlateDisabled;
         EventsManager.instance.CompanionHackEnable += HandleHackEnabled;
         EventsManager.instance.CompanionHackDisable += HandleHackDisabled;
     }
