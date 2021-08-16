@@ -12,6 +12,7 @@ public class RespawnManager : MonoBehaviour
     // Start is called before the first frame update
     private void Start()
     {
+        Debug.Log("ok");
         EventsManager.instance.ResetCompanion += Instance_ResetCompanion;
         EventsManager.instance.ResetPlayer += Instance_ResetPlayer;
         //Loop through every Stage, find every level and create a List containg the Levelobjects

@@ -20,7 +20,6 @@ public class RespawnListener : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-
         switch (other.gameObject.tag)
         {
             case "Player":
