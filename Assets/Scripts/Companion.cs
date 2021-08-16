@@ -57,7 +57,6 @@ public class Companion : MonoBehaviour
                 companionRenderer.material.color = Color.green;
                 this.targetObject = this.gameObjectToFollow;
                 this.targetPosition = this.gameObjectToFollow.transform.position;
-                //animator.Play("Walk");
                 if(agent.velocity == Vector3.zero){
                     animator.Play("Idle");
                 } else {
@@ -87,9 +86,10 @@ public class Companion : MonoBehaviour
             case ProcessState.PickedUp:
                 agent.isStopped = false;
                 Drop(this.carriedObject);
-                animator.Play("Pickup");
                 PickUp(this.targetObject);
-                process.MoveNext(Command.Follow);
+                if(animator.GetCurrentAnimatorStateInfo(0).normalizedTime > 1){
+                    process.MoveNext(Command.Follow);
+                }
                 break;
             case ProcessState.Hacking:
                 Drop(this.carriedObject);
@@ -166,6 +166,7 @@ public class Companion : MonoBehaviour
     {
         if(this.carriedObject == null)
         {
+            //StartCoroutine(PickingUp());
             companionRenderer.material.color = Color.white;
             this.carriedObject = targetObject;
             EventsManager.instance.OnForceObjectBarrierEnableObstacle();
@@ -200,6 +201,17 @@ public class Companion : MonoBehaviour
         EventsManager.instance.OnCompanionHackDisable(targetGameObject.GetInstanceID());
         this.hackedObject = null;
     }
+
+    /*private IEnumerator<void> PickingUp()
+    {
+        animator.SetTrigger("triggerPickup");
+
+        while (!animator.IsInTransition(0))
+        {
+            yield return null;
+        } 
+
+    }*/
 }
 
 public enum ProcessState

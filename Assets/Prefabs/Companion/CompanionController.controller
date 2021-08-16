@@ -62,10 +62,10 @@ AnimatorStateTransition:
   m_Name: 
   m_Conditions:
   - m_ConditionMode: 1
-    m_ConditionEvent: holdingIdle
+    m_ConditionEvent: isIdlingPickup
     m_EventTreshold: 0
   - m_ConditionMode: 2
-    m_ConditionEvent: holdingWalk
+    m_ConditionEvent: isMovingPickup
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -105327556855845215}
@@ -90,7 +90,7 @@ AnimatorStateTransition:
   m_Name: 
   m_Conditions:
   - m_ConditionMode: 1
-    m_ConditionEvent: pickingUpItem
+    m_ConditionEvent: isPickingUp
     m_EventTreshold: 0
   - m_ConditionMode: 2
     m_ConditionEvent: isIdling
@@ -200,10 +200,10 @@ AnimatorStateTransition:
   m_Name: 
   m_Conditions:
   - m_ConditionMode: 1
-    m_ConditionEvent: droppingItem
+    m_ConditionEvent: isDropping
     m_EventTreshold: 0
   - m_ConditionMode: 2
-    m_ConditionEvent: holdingIdle
+    m_ConditionEvent: isIdlingPickup
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -303255758848370700}
@@ -283,25 +283,25 @@ AnimatorController:
   m_Name: CompanionController
   serializedVersion: 5
   m_AnimatorParameters:
-  - m_Name: pickingUpItem
+  - m_Name: isPickingUp
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
     m_Controller: {fileID: 0}
-  - m_Name: holdingIdle
+  - m_Name: isIdlingPickup
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
     m_Controller: {fileID: 0}
-  - m_Name: holdingWalk
+  - m_Name: isMovingPickup
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
     m_Controller: {fileID: 0}
-  - m_Name: droppingItem
+  - m_Name: isDropping
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
@@ -369,10 +369,10 @@ AnimatorStateTransition:
   m_Name: 
   m_Conditions:
   - m_ConditionMode: 1
-    m_ConditionEvent: holdingWalk
+    m_ConditionEvent: isMovingPickup
     m_EventTreshold: 0
   - m_ConditionMode: 2
-    m_ConditionEvent: holdingIdle
+    m_ConditionEvent: isIdlingPickup
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 5075057320452143511}
@@ -424,7 +424,7 @@ AnimatorStateTransition:
   m_Name: 
   m_Conditions:
   - m_ConditionMode: 1
-    m_ConditionEvent: holdingIdle
+    m_ConditionEvent: isIdlingPickup
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -105327556855845215}
