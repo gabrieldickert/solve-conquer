@@ -7,7 +7,6 @@ public class SaveGamePad : MonoBehaviour
     public Player player;
     public Companion companion;
     public GameObject canvas;
-    public Transform centerEyeAnchor;
 
     void Start()
     {
