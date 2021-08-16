@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class RespawnManager : MonoBehaviour
 {
@@ -35,11 +36,12 @@ public class RespawnManager : MonoBehaviour
         Debug.Log("Reset Player");
 
         GameData gd = SaveSystem.LoadGame();
-
         Vector3 spawnPos = new Vector3(gd.positionPad[0],gd.positionPad[1],gd.positionPad[2]);
         this.PlayerController.transform.position = spawnPos;
+        this.Companion.transform.GetComponent<NavMeshAgent>().enabled = false;
         spawnPos.x += 1.5f;
         this.Companion.transform.position = spawnPos;
+        this.Companion.transform.GetComponent<NavMeshAgent>().enabled = true;
 
     }
 
