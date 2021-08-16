@@ -57,20 +57,26 @@ public class Companion : MonoBehaviour
                 companionRenderer.material.color = Color.green;
                 this.targetObject = this.gameObjectToFollow;
                 this.targetPosition = this.gameObjectToFollow.transform.position;
-                
-                animator.SetBool("isMoving", true);
+                //animator.Play("Walk");
+                if(agent.velocity == Vector3.zero){
+                    animator.Play("Idle");
+                } else {
+                    animator.Play("Walk");
+                }
 
                 if(this.carriedObject != null && this.carriedObject.transform.position != gameObject.transform.position + new Vector3(0f, 2f, 0f))
                 {
                     this.Drop(this.carriedObject);
                 }
+
                 break;
             case ProcessState.WaitingAt:
                 agent.isStopped = false;
-                animator.SetBool("isMoving", false);
+                animator.Play("Idle");
                 break;
             case ProcessState.Fetching:
                 agent.isStopped = false;
+                animator.Play("Walk");
                 if (Vector3.Distance(agent.transform.position, targetPosition) < this.maxDistanceFromDestination)
                 {
                     agent.isStopped = true;
@@ -81,11 +87,13 @@ public class Companion : MonoBehaviour
             case ProcessState.PickedUp:
                 agent.isStopped = false;
                 Drop(this.carriedObject);
+                animator.Play("Pickup");
                 PickUp(this.targetObject);
                 process.MoveNext(Command.Follow);
                 break;
             case ProcessState.Hacking:
                 Drop(this.carriedObject);
+                animator.Play("Walk");
                 agent.isStopped = false;
                 if (Vector3.Distance(agent.transform.position, targetPosition) < this.maxDistanceFromDestination)
                 {
@@ -94,10 +102,12 @@ public class Companion : MonoBehaviour
                 }
                 break;
             case ProcessState.HackCompleted:
+                animator.Play("Pickup");
                 this.Hack(targetObject);
                 break;
             case ProcessState.AbortingHack:
                 agent.isStopped = false;
+                animator.Play("Drop");
                 this.StopHack(this.hackedObject);
                 process.MoveNext(process.LastCommand);
                 break;
@@ -147,7 +157,7 @@ public class Companion : MonoBehaviour
     void HandleCompanionFollow()
     {
         process.MoveNext(Command.Follow);
-        animator.SetBool("isMoving", true);
+        //animator.SetBool("isMoving", true);
     }
 
    
@@ -169,6 +179,7 @@ public class Companion : MonoBehaviour
     {
         if(this.carriedObject != null)
         {
+            animator.Play("Drop");
             this.carriedObject = null;
             EventsManager.instance.OnForceObjectBarrierDisableObstacle();
             targetObject.GetComponent<Rigidbody>().isKinematic = false;
