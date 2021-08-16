@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class Player : MonoBehaviour
 {
@@ -28,7 +29,8 @@ public class Player : MonoBehaviour
         positionPad.z = data.positionPad[2];
 
         this.transform.position = positionPad;
+        companion.GetComponent<NavMeshAgent>().enabled = false;
         companion.transform.position = positionPad + new Vector3(1.5f,0,0);
-
+        companion.GetComponent<NavMeshAgent>().enabled = true;
     }
 }

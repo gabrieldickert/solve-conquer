@@ -11,17 +11,18 @@ public class SaveGamePad : MonoBehaviour
 
     private void OnTriggerEnter(Collider collider)
     {
-        if(collider.gameObject.tag == "Player")
+        //Speichert erst wenn kein FloatingText(Clone) gefunden wird, d.h. alle 3 sec ist es möglich neu zu speichern (Zeit ist einstellbar im FloatingTexts script)
+        //Verhindert das spammen der Speichern Funktion und der zugehörigen Nachricht
+        if (collider.gameObject.tag == "Player" && centerEyeAnchor.Find("FloatingText(Clone)") == null && SaveSystem.gameLoaded == false)
         {
-            //Speichert erst wenn kein FloatingText(Clone) gefunden wird, d.h. alle 3 sec ist es möglich neu zu speichern (Zeit ist einstellbar im FloatingTexts script)
-            //Verhindert das spammen der Speichern Funktion und der zugehörigen Nachricht
-            if(centerEyeAnchor.Find("FloatingText(Clone)") == null)
-            {
                 SaveSystem.SaveGame(player, companion, this);
                 ShowFloatingText();
-            }
-         
         }
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        SaveSystem.gameLoaded = false;
     }
 
     public void ShowFloatingText()

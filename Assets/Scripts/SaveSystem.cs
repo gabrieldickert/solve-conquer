@@ -3,6 +3,9 @@ using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 
 public static class SaveSystem {
+
+    public static bool gameLoaded = false;
+
     public static void SaveGame(Player player, Companion companion, SaveGamePad pad)
     {
         BinaryFormatter formatter = new BinaryFormatter();
@@ -20,6 +23,7 @@ public static class SaveSystem {
         string path = Application.persistentDataPath + "/savegame.dat";
         if (File.Exists(path))
         {
+            gameLoaded = true;
             BinaryFormatter formatter = new BinaryFormatter();
             FileStream stream = new FileStream(path, FileMode.Open);
 
