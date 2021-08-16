@@ -21,6 +21,8 @@ public class Companion : MonoBehaviour
     private GameObject carriedObject = null;
     private GameObject hackedObject = null;
 
+    Animator animator;
+
     void Start()
     {
         EventsManager.instance.CompanionWaitAt += HandleCompanionWaitAt;
@@ -33,6 +35,8 @@ public class Companion : MonoBehaviour
         stoppingDistance = agent.stoppingDistance;
         companionRenderer = transform.GetChild(0).GetComponent<MeshRenderer>();
         companionRenderer.material.color = isFollowing ? Color.green : Color.red;
+
+        animator = GetComponent<Animator>();
     }
 
     void Update()
@@ -53,6 +57,9 @@ public class Companion : MonoBehaviour
                 companionRenderer.material.color = Color.green;
                 this.targetObject = this.gameObjectToFollow;
                 this.targetPosition = this.gameObjectToFollow.transform.position;
+                
+                animator.SetBool("isMoving", true);
+
                 if(this.carriedObject != null && this.carriedObject.transform.position != gameObject.transform.position + new Vector3(0f, 2f, 0f))
                 {
                     this.Drop(this.carriedObject);
@@ -60,6 +67,7 @@ public class Companion : MonoBehaviour
                 break;
             case ProcessState.WaitingAt:
                 agent.isStopped = false;
+                animator.SetBool("isMoving", false);
                 break;
             case ProcessState.Fetching:
                 agent.isStopped = false;
@@ -139,6 +147,7 @@ public class Companion : MonoBehaviour
     void HandleCompanionFollow()
     {
         process.MoveNext(Command.Follow);
+        animator.SetBool("isMoving", true);
     }
 
    
