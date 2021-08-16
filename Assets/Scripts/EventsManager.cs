@@ -20,6 +20,8 @@ public class EventsManager : MonoBehaviour
     public event Action<int> SwitchEnable;
     public event Action<int> SwitchDisable;
     public event Action<int> ResetObject;
+    public event Action ResetPlayer;
+    public event Action ResetCompanion;
     public event Action<Vector3> CompanionWaitAt;
     public event Action<GameObject> CompanionPickUpObject;
     public event Action<GameObject> CompanionHackObject;
@@ -63,6 +65,16 @@ public class EventsManager : MonoBehaviour
     {
         //UnityEngine.Debug.Log("EventsManager: OnPressurePlateDisable");
         ResetObject?.Invoke(instanceId);
+    }
+    public void OnResetPlayer()
+    {
+
+        ResetPlayer?.Invoke();
+    }
+
+    public void OnResetCompanion()
+    {
+        ResetCompanion?.Invoke();
     }
 
     public void OnCompanionWaitAt(Vector3 waitingPosition)

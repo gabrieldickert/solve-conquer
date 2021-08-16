@@ -6,8 +6,10 @@ using UnityEngine;
 public class GameData {
 
     public float[] positionPlayer, positionCompanion, positionPad;
+    public string stage;
+    public string lvl;
 
-    public GameData (Player player, Companion companion, SaveGamePad pad)
+    public GameData (Player player, Companion companion, SaveGamePad pad,string stage,string lvl)
     {
         positionPlayer = new float[3];
         positionPlayer[0] = player.transform.position.x;
@@ -23,6 +25,9 @@ public class GameData {
         positionPad[0] = pad.transform.position.x;
         positionPad[1] = pad.transform.position.y;
         positionPad[2] = pad.transform.position.z;
+
+        this.stage = stage;
+        this.lvl = lvl;
     }
 
 }
