@@ -17,6 +17,10 @@ public class SaveGamePad : MonoBehaviour
     {
         if (collider.gameObject.tag == "Player" && SaveSystem.gameLoaded == false)
         {
+            string stage = this.transform.parent.parent.parent.gameObject.name;
+            string lvl = this.transform.parent.parent.gameObject.name;
+
+            Debug.Log("Stage" + stage + "Lvl" + lvl);
             SaveSystem.SaveGame(player, companion, this);
             canvas.SetActive(true);
             StartCoroutine("WaitForSec");
