@@ -62,10 +62,10 @@ AnimatorStateTransition:
   m_Name: 
   m_Conditions:
   - m_ConditionMode: 1
-    m_ConditionEvent: holdingIdle
+    m_ConditionEvent: isIdlingPickup
     m_EventTreshold: 0
   - m_ConditionMode: 2
-    m_ConditionEvent: holdingWalk
+    m_ConditionEvent: isMovingPickup
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -105327556855845215}
@@ -90,7 +90,7 @@ AnimatorStateTransition:
   m_Name: 
   m_Conditions:
   - m_ConditionMode: 1
-    m_ConditionEvent: pickingUpItem
+    m_ConditionEvent: isPickingUp
     m_EventTreshold: 0
   - m_ConditionMode: 2
     m_ConditionEvent: isIdling
@@ -117,7 +117,7 @@ AnimatorState:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Walk
-  m_Speed: 1
+  m_Speed: 5
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: -3794422815870597570}
@@ -200,10 +200,10 @@ AnimatorStateTransition:
   m_Name: 
   m_Conditions:
   - m_ConditionMode: 1
-    m_ConditionEvent: droppingItem
+    m_ConditionEvent: isDropping
     m_EventTreshold: 0
   - m_ConditionMode: 2
-    m_ConditionEvent: holdingIdle
+    m_ConditionEvent: isIdlingPickup
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -303255758848370700}
@@ -283,42 +283,42 @@ AnimatorController:
   m_Name: CompanionController
   serializedVersion: 5
   m_AnimatorParameters:
-  - m_Name: pickingUpItem
+  - m_Name: isPickingUp
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
-  - m_Name: holdingIdle
+    m_Controller: {fileID: 9100000}
+  - m_Name: isIdlingPickup
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
-  - m_Name: holdingWalk
+    m_Controller: {fileID: 9100000}
+  - m_Name: isMovingPickup
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
-  - m_Name: droppingItem
+    m_Controller: {fileID: 9100000}
+  - m_Name: isDropping
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: isMoving
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: isIdling
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   m_AnimatorLayers:
   - serializedVersion: 5
     m_Name: Base Layer
@@ -369,10 +369,10 @@ AnimatorStateTransition:
   m_Name: 
   m_Conditions:
   - m_ConditionMode: 1
-    m_ConditionEvent: holdingWalk
+    m_ConditionEvent: isMovingPickup
     m_EventTreshold: 0
   - m_ConditionMode: 2
-    m_ConditionEvent: holdingIdle
+    m_ConditionEvent: isIdlingPickup
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 5075057320452143511}
@@ -396,7 +396,7 @@ AnimatorState:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Pickup Walk
-  m_Speed: 1
+  m_Speed: 5
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: -7342877956703867154}
@@ -424,7 +424,7 @@ AnimatorStateTransition:
   m_Name: 
   m_Conditions:
   - m_ConditionMode: 1
-    m_ConditionEvent: holdingIdle
+    m_ConditionEvent: isIdlingPickup
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -105327556855845215}
