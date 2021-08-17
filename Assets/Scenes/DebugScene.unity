@@ -329,6 +329,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gameObjectToFollow: {fileID: 2021161493}
   throwForce: 1
+  pickUpSpeed: 5
+  rotationSpeed: 50
 --- !u!195 &298407153
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -2676,6 +2678,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gameObjectToFollow: {fileID: 2045392529}
   throwForce: 1
+  pickUpSpeed: 5
+  rotationSpeed: 50
 --- !u!195 &1610453432
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -2689,13 +2693,13 @@ NavMeshAgent:
   m_Speed: 3.5
   m_Acceleration: 8
   avoidancePriority: 50
-  m_AngularSpeed: 120
+  m_AngularSpeed: 200
   m_StoppingDistance: 3
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
   m_AutoRepath: 1
   m_Height: 2
-  m_BaseOffset: 0
+  m_BaseOffset: 0.12
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
 --- !u!95 &1610453433
@@ -2717,19 +2721,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!65 &1610453434
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1610453429}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1.2, y: 0.5, z: 0.7}
-  m_Center: {x: 0, y: 0.1, z: 0.7}
 --- !u!1001 &1630498851
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3268,6 +3259,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gameObjectToFollow: {fileID: 0}
   throwForce: 1
+  pickUpSpeed: 5
+  rotationSpeed: 50
 --- !u!1001 &2069818591
 PrefabInstance:
   m_ObjectHideFlags: 0
