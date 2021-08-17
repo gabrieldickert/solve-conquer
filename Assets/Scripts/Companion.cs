@@ -1,4 +1,5 @@
 
+using OculusSampleFramework;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,9 +9,9 @@ public class Companion : MonoBehaviour
 {
     //Transform that NPC has to follow
     public GameObject gameObjectToFollow;
-    public float throwForce = 1f;
+    public float throwForce = 10f;
 
-    private float maxDistanceFromDestination = 3f;
+    private float maxDistanceFromDestination = 2f;
     private NavMeshAgent agent;
     private Renderer companionRenderer;
     private bool isFollowing = true;
@@ -20,8 +21,14 @@ public class Companion : MonoBehaviour
     private UnityEngine.Vector3 targetPosition;
     private GameObject carriedObject = null;
     private GameObject hackedObject = null;
+    private bool hasReachedTargetObject = false;
 
     Animator animator;
+    private bool hasCurrentAnimationFinished = false;
+    private string currentAnimation = "Idle";
+
+    private Vector3 localCarryPosition = new Vector3(0f, 0.57f, 0.55f);
+    private Quaternion localCarryRotation = Quaternion.identity;
 
     void Start()
     {
@@ -33,7 +40,7 @@ public class Companion : MonoBehaviour
         
         agent = GetComponent<NavMeshAgent>();
         stoppingDistance = agent.stoppingDistance;
-        companionRenderer = transform.GetChild(0).GetComponent<MeshRenderer>();
+        companionRenderer = transform.GetChild(1).GetComponent<SkinnedMeshRenderer>();
         companionRenderer.material.color = isFollowing ? Color.green : Color.red;
 
         animator = GetComponent<Animator>();
@@ -41,6 +48,14 @@ public class Companion : MonoBehaviour
 
     void Update()
     {
+        this.hasReachedTargetObject = Vector3.Distance(agent.transform.position, targetPosition) < this.maxDistanceFromDestination;
+        Debug.Log("Companion: Distance to target = " + Vector3.Distance(agent.transform.position, targetPosition));
+            if (animator.GetCurrentAnimatorStateInfo(0).normalizedTime > 1 && !this.hasCurrentAnimationFinished)
+        {
+            this.hasCurrentAnimationFinished = true;
+            Debug.Log("Companion: Current Animation has finished");
+        }
+        
         if (agent.path.status == NavMeshPathStatus.PathInvalid)
         {
             gameObject.GetComponent<NavMeshAgent>().enabled = false;
@@ -58,61 +73,112 @@ public class Companion : MonoBehaviour
                 this.targetObject = this.gameObjectToFollow;
                 this.targetPosition = this.gameObjectToFollow.transform.position;
                 if(agent.velocity == Vector3.zero){
-                    animator.Play("Idle");
+                    animator.Play(this.carriedObject == null ? "Idle" : "Pickup Idle");
                 } else {
-                    animator.Play("Walk");
+                    animator.Play(this.carriedObject == null ? "Walk" : "Pickup Walk");
                 }
 
-                if(this.carriedObject != null && this.carriedObject.transform.position != gameObject.transform.position + new Vector3(0f, 2f, 0f))
+                /*if(this.carriedObject != null && this.carriedObject.transform.position != gameObject.transform.position + new Vector3(0f, 2f, 0f))
                 {
                     this.Drop(this.carriedObject);
-                }
+                }*/
 
                 break;
             case ProcessState.WaitingAt:
                 agent.isStopped = false;
-                animator.Play("Idle");
+                if (agent.velocity == Vector3.zero)
+                {
+                    animator.Play(this.carriedObject == null ? "Idle" : "Pickup Idle");
+                }
+                else
+                {
+                    animator.Play(this.carriedObject == null ? "Walk" : "Pickup Walk");
+                }
                 break;
             case ProcessState.Fetching:
                 agent.isStopped = false;
-                animator.Play("Walk");
-                if (Vector3.Distance(agent.transform.position, targetPosition) < this.maxDistanceFromDestination)
+                SetAnimation(this.carriedObject == null ? "Walk" : "Pickup Walk");
+                //if (Vector3.Distance(agent.transform.position, targetPosition) < this.maxDistanceFromDestination)
+                if (this.hasReachedTargetObject)
                 {
                     agent.isStopped = true;
-                    PickUp(targetObject);
-                    process.MoveNext(Command.PickUp);
+                    //PickUp(targetObject);
+                    SetAnimation("Drop");
+                    //if (this.hasCurrentAnimationFinished)
+                    //{
+                        Drop(this.carriedObject);
+                        process.MoveNext(Command.PickUp);
+                    //}
                 }
                 break;
             case ProcessState.PickedUp:
                 agent.isStopped = false;
-                Drop(this.carriedObject);
-                PickUp(this.targetObject);
-                if(animator.GetCurrentAnimatorStateInfo(0).normalizedTime > 1){
+                this.hasReachedTargetObject = false;
+                //Drop(this.carriedObject);
+                SetAnimation("Pickup");
+                if (this.hasCurrentAnimationFinished){
+                    PickUp(this.targetObject);
                     process.MoveNext(Command.Follow);
                 }
                 break;
             case ProcessState.Hacking:
-                Drop(this.carriedObject);
-                animator.Play("Walk");
+                //Drop(this.carriedObject);
+                SetAnimation(this.carriedObject == null ? "Walk" : "Pickup Walk");
                 agent.isStopped = false;
-                if (Vector3.Distance(agent.transform.position, targetPosition) < this.maxDistanceFromDestination)
+                //if (Vector3.Distance(agent.transform.position, targetPosition) < this.maxDistanceFromDestination)
+                if(this.hasReachedTargetObject)
                 {
                     agent.isStopped = true;
-                    process.MoveNext(Command.CompleteHack);
+                    SetAnimation("Drop");
+                    //if (this.hasCurrentAnimationFinished)
+                    //{
+                        Drop(this.carriedObject);
+                        process.MoveNext(Command.CompleteHack);
+                    //}
                 }
                 break;
             case ProcessState.HackCompleted:
-                animator.Play("Pickup");
-                this.Hack(targetObject);
+                this.hasReachedTargetObject = false;
+                SetAnimation("Pickup");
+                //if (this.hasCurrentAnimationFinished)
+                //{
+                    this.Hack(targetObject);
+                //}
                 break;
             case ProcessState.AbortingHack:
                 agent.isStopped = false;
-                animator.Play("Drop");
-                this.StopHack(this.hackedObject);
-                process.MoveNext(process.LastCommand);
+                SetAnimation("Drop");
+                //if (this.hasCurrentAnimationFinished)
+                //{
+                    this.StopHack(this.hackedObject);
+                    process.MoveNext(process.LastCommand);
+                //}
                 break;
         }
     }
+
+    private void SetAnimation(string animation)
+    {
+        if(this.currentAnimation != animation && this.hasCurrentAnimationFinished)
+        {
+            animator.Play(animation);
+            this.currentAnimation = animation;
+            this.hasCurrentAnimationFinished = false;
+        }
+        
+    }
+    
+    /*private void OnTriggerStay(Collider other)
+    {
+        Debug.Log("Companion: collision with " + other.gameObject);
+        if(process.CurrentState == ProcessState.Fetching || process.CurrentState == ProcessState.Hacking)
+        {
+            if(other.gameObject == this.targetObject)
+            {
+                this.hasReachedTargetObject = true;
+            }
+        }
+    }*/
     void HandleCompanionWaitAt(UnityEngine.Vector3 waitingPosition)
     {
         process.MoveNext(Command.WaitAt);
@@ -171,8 +237,12 @@ public class Companion : MonoBehaviour
             this.carriedObject = targetObject;
             EventsManager.instance.OnForceObjectBarrierEnableObstacle();
             targetObject.GetComponent<Rigidbody>().isKinematic = true;
+            targetObject.GetComponent<NavMeshObstacle>().enabled = false;
+            targetObject.GetComponent<DistanceGrabbable>().enabled = false;
             targetObject.transform.parent = gameObject.transform;
-            targetObject.transform.position = gameObject.transform.position + new UnityEngine.Vector3(0f, 2f, 0f);
+            //targetObject.transform.localPosition = Vector3.MoveTowards(targetObject.transform.position, new Vector3(0f, 0.57f, 0.55f), Time.deltaTime);
+            targetObject.transform.localPosition = this.localCarryPosition;
+            targetObject.transform.localRotation = this.localCarryRotation;
         }
     }
 
@@ -180,12 +250,15 @@ public class Companion : MonoBehaviour
     {
         if(this.carriedObject != null)
         {
-            animator.Play("Drop");
+            //animator.Play("Drop");
             this.carriedObject = null;
             EventsManager.instance.OnForceObjectBarrierDisableObstacle();
+            
             targetObject.GetComponent<Rigidbody>().isKinematic = false;
             targetObject.transform.parent = null;
             targetObject.GetComponent<Rigidbody>().AddForce(gameObject.transform.forward * this.throwForce);
+            targetObject.GetComponent<NavMeshObstacle>().enabled = true;
+            targetObject.GetComponent<DistanceGrabbable>().enabled = true;
         }
     }
 
