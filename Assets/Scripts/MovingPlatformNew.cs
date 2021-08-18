@@ -142,12 +142,10 @@ public class MovingPlatformNew : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-
-
         if (other.gameObject.tag == "Companion")
         {
             companionOnPlatform = true;
-            this.companion = other.transform.parent;
+            this.companion = other.transform;
             this.companion.SetParent(gameObject.transform);
         }
         else if (other.gameObject.tag == "Player")
