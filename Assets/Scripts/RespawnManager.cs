@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
@@ -8,7 +7,6 @@ public class RespawnManager : MonoBehaviour
     public Dictionary<string, List<LevelInstance>> RespawnStageLevels = new Dictionary<string, List<LevelInstance>>();
     public GameObject PlayerController;
     public GameObject Companion;
-
 
     // Start is called before the first frame update
     private void Start()
@@ -27,7 +25,6 @@ public class RespawnManager : MonoBehaviour
                 this.RespawnStageLevels[stageobj.name].Add(new LevelInstance(stageobj.name, levelobjs[i]));
             }
         }
-
     }
 
     private void Instance_ResetPlayer()
@@ -36,7 +33,7 @@ public class RespawnManager : MonoBehaviour
         Debug.Log("Reset Player");
 
         GameData gd = SaveSystem.LoadGame();
-        Vector3 spawnPos = new Vector3(gd.positionPad[0],gd.positionPad[1],gd.positionPad[2]);
+        Vector3 spawnPos = new Vector3(gd.positionPad[0], gd.positionPad[1], gd.positionPad[2]);
         this.PlayerController.transform.position = spawnPos;
         this.Companion.transform.GetComponent<NavMeshAgent>().enabled = false;
         spawnPos.x += 1.5f;
@@ -45,18 +42,12 @@ public class RespawnManager : MonoBehaviour
 
         LevelInstance currentLvl = this.RespawnStageLevels[gd.stage].Find(g => g.levelobj.name.Equals(gd.lvl));
 
-
-        Debug.Log("Level aus datei "+gd.lvl);
+        Debug.Log("Level aus datei " + gd.lvl);
         Debug.Log("level instanz:" + currentLvl.levelobj.name);
-        foreach(RespawnObject o in currentLvl.respawnObjList)
+        foreach (RespawnObject o in currentLvl.respawnObjList)
         {
-
             o.gameObject.transform.position = o.initialPosition;
-
         }
-
-
-
     }
 
     private void Instance_ResetCompanion()
@@ -69,14 +60,15 @@ public class RespawnManager : MonoBehaviour
     private void Update()
     {
     }
-
 }
+
 public class LevelInstance
 {
     public string stage { get; set; }
     public GameObject levelobj { get; set; }
     public BoxCollider RespawnTrigger { get; set; }
     public List<RespawnObject> respawnObjList { get; set; }
+
     public LevelInstance(string stage, GameObject lvl)
     {
         this.stage = stage;
@@ -87,15 +79,19 @@ public class LevelInstance
 
     private void FindRespawnObjectsInLevel()
     {
-        if (this.levelobj.transform.Find("Respawn") != null)
+        List<GameObject> floorList = new List<GameObject>(GameObject.FindGameObjectsWithTag("Floor")).FindAll(g => g.transform.IsChildOf(this.levelobj.transform));
+
+        foreach (GameObject floor in floorList)
         {
-            for (int i = 0; i < this.levelobj.transform.Find("Respawn").transform.Find("Respawnables").childCount; i++)
+ 
+            for (int i = 0; i < floor.transform.Find("Respawn").transform.Find("Respawnables").childCount; i++)
             {
-                GameObject o = this.levelobj.transform.Find("Respawn").transform.Find("Respawnables").GetChild(i).gameObject;
+                GameObject o = floor.transform.Find("Respawn").transform.Find("Respawnables").GetChild(i).gameObject;
 
                 respawnObjList.Add(new RespawnObject(o));
             }
         }
+
     }
 }
 
