@@ -4,12 +4,17 @@ using UnityEngine;
 
 public class SaveGamePad : MonoBehaviour
 {
-    public Player player;
-    public Companion companion;
-    public GameObject canvas;
+    private Player player;
+    private Companion companion;
+    private GameObject canvas;
+    public bool saveCompanionPosition = false;
 
     void Start()
     {
+        GameObject target = GameObject.FindWithTag("Player");
+        this.player = GameObject.FindWithTag("Player").GetComponent<Player>();
+        this.canvas = target.transform.Find("OVRCameraRig/TrackingSpace/CenterEyeAnchor/IngameMessageCanvas").gameObject;
+        this.companion = GameObject.FindWithTag("Companion").GetComponent<Companion>();
         canvas.SetActive(false);
     }
 
@@ -20,7 +25,14 @@ public class SaveGamePad : MonoBehaviour
             string stage = this.transform.parent.parent.parent.gameObject.name;
             string lvl = this.transform.parent.parent.gameObject.name;
 
-            SaveSystem.SaveGame(player, companion,this,stage,lvl);
+            if(saveCompanionPosition)
+            {
+                SaveSystem.SaveGame(player, companion, this, stage, lvl, saveCompanionPosition);
+            } else
+            {
+                SaveSystem.SaveGame(player, companion,this, stage, lvl, false);
+            }
+            
             canvas.SetActive(true);
             StartCoroutine("WaitForSec");
         }

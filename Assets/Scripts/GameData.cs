@@ -8,8 +8,9 @@ public class GameData {
     public float[] positionPlayer, positionCompanion, positionPad;
     public string stage;
     public string lvl;
+    public bool saveCompanionPosition;
 
-    public GameData (Player player, Companion companion, SaveGamePad pad,string stage,string lvl)
+    public GameData (Player player, Companion companion, SaveGamePad pad,string stage,string lvl, bool saveCompanionPosition)
     {
         positionPlayer = new float[3];
         positionPlayer[0] = player.transform.position.x;
@@ -28,6 +29,7 @@ public class GameData {
 
         this.stage = stage;
         this.lvl = lvl;
+        this.saveCompanionPosition = saveCompanionPosition;
     }
 
 }
