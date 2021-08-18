@@ -82,6 +82,8 @@ public class LevelInstance
     {
         List<GameObject> floorList = new List<GameObject>(GameObject.FindGameObjectsWithTag("Floor")).FindAll(g => g.transform.IsChildOf(this.levelobj.transform));
 
+
+   
         foreach (GameObject floor in floorList)
         {
  
