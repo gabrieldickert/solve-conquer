@@ -35,15 +35,16 @@ public class RespawnManager : MonoBehaviour
         GameData gd = SaveSystem.LoadGame();
         Vector3 spawnPos = new Vector3(gd.positionPad[0], gd.positionPad[1], gd.positionPad[2]);
         this.PlayerController.transform.position = spawnPos;
-        this.Companion.transform.GetComponent<NavMeshAgent>().enabled = false;
-        spawnPos.x += 1.5f;
-        this.Companion.transform.position = spawnPos;
-        this.Companion.transform.GetComponent<NavMeshAgent>().enabled = true;
-
+        if (gd.saveCompanionPosition)
+        {
+            this.Companion.transform.GetComponent<NavMeshAgent>().enabled = false;
+            spawnPos.x += 1.5f;
+            this.Companion.transform.position = spawnPos;
+            this.Companion.transform.GetComponent<NavMeshAgent>().enabled = true;
+        }
+      
         LevelInstance currentLvl = this.RespawnStageLevels[gd.stage].Find(g => g.levelobj.name.Equals(gd.lvl));
 
-        Debug.Log("Level aus datei " + gd.lvl);
-        Debug.Log("level instanz:" + currentLvl.levelobj.name);
         foreach (RespawnObject o in currentLvl.respawnObjList)
         {
             o.gameObject.transform.position = o.initialPosition;
