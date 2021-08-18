@@ -7,6 +7,7 @@ public class SaveGamePad : MonoBehaviour
     public Player player;
     public Companion companion;
     public GameObject canvas;
+    public bool saveCompanionPosition = false;
 
     void Start()
     {
@@ -20,7 +21,14 @@ public class SaveGamePad : MonoBehaviour
             string stage = this.transform.parent.parent.parent.gameObject.name;
             string lvl = this.transform.parent.parent.gameObject.name;
 
-            SaveSystem.SaveGame(player, companion,this,stage,lvl);
+            if(saveCompanionPosition)
+            {
+                SaveSystem.SaveGame(player, companion, this, stage, lvl, saveCompanionPosition);
+            } else
+            {
+                SaveSystem.SaveGame(player, companion,this, stage, lvl, false);
+            }
+            
             canvas.SetActive(true);
             StartCoroutine("WaitForSec");
         }
