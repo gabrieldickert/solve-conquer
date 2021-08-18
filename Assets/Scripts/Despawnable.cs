@@ -24,7 +24,7 @@ public class Despawnable : MonoBehaviour
         {
             if(timePassed > despawnAfterSeconds)
             {
-                Debug.Log("Despawnable: Despawning object");
+                //Debug.Log("Despawnable: Despawning object");
                 Destroy(gameObject);
             }
                 
@@ -39,7 +39,7 @@ public class Despawnable : MonoBehaviour
             {
                 hasCollided = true;
                 startTime = Time.time;
-                Debug.Log("Despawnable: Object collided, despawning in " + despawnAfterSeconds + " seconds");
+                //Debug.Log("Despawnable: Object collided, despawning in " + despawnAfterSeconds + " seconds");
             }
         }
         
