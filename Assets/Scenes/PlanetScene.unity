@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.372272, g: 0.6416999, b: 0.8780576, a: 1}
+  m_IndirectSpecularColor: {r: 0.34609836, g: 0.6321287, b: 0.86864096, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -18736,6 +18736,62 @@ Transform:
   - {fileID: 613389484}
   m_Father: {fileID: 2084470389}
   m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &888401224
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 888401226}
+  - component: {fileID: 888401225}
+  m_Layer: 0
+  m_Name: AudioManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &888401225
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 888401224}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6e1e95901f185f84ba6eb3b2713cfcbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sounds:
+  - name: PlayerDeath
+    clip: {fileID: 8300000, guid: 757a823cef34def46b55418e7b43e6fc, type: 3}
+    volume: 0.103
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: Theme
+    clip: {fileID: 8300000, guid: 660094dcbccac2e4ea2c9128edea1d8f, type: 3}
+    volume: 0.025
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+--- !u!4 &888401226
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 888401224}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 16
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &890246235
 PrefabInstance:
@@ -44510,18 +44566,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d17e69b743a3d4489dc1dd63a60adba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  AimCollisionLayerMask:
-    serializedVersion: 2
-    m_Bits: 257
-  telekinesisLine: {fileID: 2104965008}
-  lineWidth: 0.01
-  lineMaxLength: 10
-  toggled: 0
---- !u!120 &2104965008 stripped
-LineRenderer:
-  m_CorrespondingSourceObject: {fileID: 2954890737056552104, guid: 0b66d14eb401bbd429c488babe4cfeb0, type: 3}
-  m_PrefabInstance: {fileID: 1777705084}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &2107234359
 PrefabInstance:
   m_ObjectHideFlags: 0
