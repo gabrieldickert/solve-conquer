@@ -1,7 +1,6 @@
-using UnityEngine.Audio;
 using System;
-using UnityEngine;
 using System.Collections;
+using UnityEngine;
 
 public class AudioManager : MonoBehaviour
 {
@@ -10,7 +9,7 @@ public class AudioManager : MonoBehaviour
     public static int currentTheme;
     public static bool currentThemePaused;
 
-    void Awake()
+    private void Awake()
     {
         foreach (Sound s in sounds)
         {
@@ -23,15 +22,14 @@ public class AudioManager : MonoBehaviour
             s.source.spatialBlend = s.spatialBlend;
         }
     }
-    
-    void Start()
+
+    private void Start()
     {
         // 0 ist default clip
-     //   currentTheme = 0;
-       Play("Theme", 0);
-       Play("GlobalAmbient", 1);
+        //   currentTheme = 0;
+        Play("Theme", 0);
+        Play("GlobalAmbient", 1);
         //currentThemePaused = false;
-     
     }
 
     public void ChangeToClip(string name, int clip)
@@ -42,7 +40,7 @@ public class AudioManager : MonoBehaviour
         //s.source.Play();
     }
 
-    public void Play (string name, int clip)
+    public void Play(string name, int clip)
     {
         Sound s = Array.Find(sounds, sound => sound.name == name && sound.clipList[clip]);
         s.source.clip = s.clipList[clip];
@@ -52,18 +50,14 @@ public class AudioManager : MonoBehaviour
             return;
         }
 
-        if(name.Equals("GlobalAmbient"))
+        if (name.Equals("GlobalAmbient"))
         {
-
             AmbientsoundManager.StartPlayingAmbient(s);
-
         }
-
         else
         {
             s.source.Play();
         }
-  
     }
 
     public void Pause(string name, int clip)
@@ -76,6 +70,7 @@ public class AudioManager : MonoBehaviour
         }
         s.source.Pause();
     }
+
     public void Stop(string name, int clip)
     {
         Sound s = Array.Find(sounds, sound => sound.name == name && sound.source.clip == sound.clipList[clip]);
@@ -90,14 +85,14 @@ public class AudioManager : MonoBehaviour
     public bool Playing(string name, int clip)
     {
         Sound s = Array.Find(sounds, sound => sound.name == name && sound.source.clip == sound.clipList[clip]);
-        if(s == null)
+        if (s == null)
         {
             return false;
-        } else
+        }
+        else
         {
             return true;
         }
-        
     }
 
     public IEnumerator FadeOut(string name, int clip, float FadeTime)
@@ -134,6 +129,4 @@ public class AudioManager : MonoBehaviour
 
         s.source.volume = startVolume;
     }
-
-
 }
