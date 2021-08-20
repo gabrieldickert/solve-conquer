@@ -36,7 +36,7 @@ public class RespawnManager : MonoBehaviour
         Vector3 spawnPos = new Vector3(gd.positionPad[0], gd.positionPad[1], gd.positionPad[2]);
         this.PlayerController.transform.position = spawnPos;
 
-        FindObjectOfType<AudioManager>().Play("PlayerDeath");
+        FindObjectOfType<AudioManager>().Play("PlayerDeath", 0);
 
         if (gd.saveCompanionPosition)
         {

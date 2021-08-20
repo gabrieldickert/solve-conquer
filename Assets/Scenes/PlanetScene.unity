@@ -18768,7 +18768,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sounds:
   - name: PlayerDeath
-    clip: {fileID: 8300000, guid: 757a823cef34def46b55418e7b43e6fc, type: 3}
+    clipList:
+    - {fileID: 8300000, guid: 757a823cef34def46b55418e7b43e6fc, type: 3}
+    - {fileID: 8300000, guid: 4e2d6611706989f41a9e514296278c13, type: 3}
     attachTo: {fileID: 1740702312}
     volume: 0.103
     pitch: 1
@@ -18776,15 +18778,9 @@ MonoBehaviour:
     loop: 0
     source: {fileID: 0}
   - name: Theme
-    clip: {fileID: 8300000, guid: 660094dcbccac2e4ea2c9128edea1d8f, type: 3}
-    attachTo: {fileID: 1740702312}
-    volume: 0.025
-    pitch: 1
-    spatialBlend: 1
-    loop: 1
-    source: {fileID: 0}
-  - name: Theme2
-    clip: {fileID: 8300000, guid: 696766921597e704a9ef119b37d1fef2, type: 3}
+    clipList:
+    - {fileID: 8300000, guid: 660094dcbccac2e4ea2c9128edea1d8f, type: 3}
+    - {fileID: 8300000, guid: 696766921597e704a9ef119b37d1fef2, type: 3}
     attachTo: {fileID: 1740702312}
     volume: 0.025
     pitch: 1
@@ -28400,6 +28396,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 199868581879243061, guid: e92392491980b2b4fb1eb470fd1e8086, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7766915589361426296, guid: e92392491980b2b4fb1eb470fd1e8086, type: 3}
       propertyPath: ingameMenu
       value: 

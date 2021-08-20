@@ -46,36 +46,45 @@ public class Player : MonoBehaviour
 
     public void PauseTheme()
     {
-        if (FindObjectOfType<AudioManager>().Playing(AudioManager.currentTheme))
+        Debug.Log(AudioManager.currentTheme);
+        if (FindObjectOfType<AudioManager>().Playing("Theme", AudioManager.currentTheme) && !AudioManager.currentThemePaused)
         {
-            FindObjectOfType<AudioManager>().Pause(AudioManager.currentTheme);
+            FindObjectOfType<AudioManager>().Pause("Theme", AudioManager.currentTheme);
             AudioManager.currentThemePaused = true;
-        } else
+        } else 
         {
             AudioManager.currentThemePaused = false;
-            FindObjectOfType<AudioManager>().Play(AudioManager.currentTheme);
+            FindObjectOfType<AudioManager>().Play("Theme", AudioManager.currentTheme);
         }
-    }
 
+    }
     /*
     private void OnCollisionEnter(Collision collision)
     {
-        if(collision.transform.parent.parent.name == "Floor1" && !FindObjectOfType<AudioManager>().Playing("Theme"))
+        if(collision.transform.parent.parent.name == "Floor1" && !FindObjectOfType<AudioManager>().Playing("Theme", 0))
         {
-            AudioManager.currentTheme = "Theme";
-            FindObjectOfType<AudioManager>().Stop("Theme2");
-            if (!AudioManager.currentThemePaused)
+            if (AudioManager.currentThemePaused)
             {
-                StartCoroutine(FindObjectOfType<AudioManager>().FadeIn("Theme", 2));
+                AudioManager.currentTheme = 0;
+                FindObjectOfType<AudioManager>().ChangeToClip("Theme", AudioManager.currentTheme);
+            } else
+            {
+                AudioManager.currentTheme = 0;
+                FindObjectOfType<AudioManager>().ChangeToClip("Theme", AudioManager.currentTheme);
+                StartCoroutine(FindObjectOfType<AudioManager>().FadeIn("Theme", AudioManager.currentTheme, 3));
             }
-           
-        } else if(collision.transform.parent.parent.name == "Floor2" && !FindObjectOfType<AudioManager>().Playing("Theme2"))
+        } else if(collision.transform.parent.parent.name == "Floor2" && !FindObjectOfType<AudioManager>().Playing("Theme", 1))
         {
-            AudioManager.currentTheme = "Theme2";
-            FindObjectOfType<AudioManager>().Stop("Theme");
-            if (!AudioManager.currentThemePaused)
+            if (AudioManager.currentThemePaused)
             {
-                StartCoroutine(FindObjectOfType<AudioManager>().FadeIn("Theme2", 2));
+                AudioManager.currentTheme = 1;
+                FindObjectOfType<AudioManager>().ChangeToClip("Theme", AudioManager.currentTheme);
+            }
+            else
+            {
+                AudioManager.currentTheme = 1;
+                FindObjectOfType<AudioManager>().ChangeToClip("Theme", AudioManager.currentTheme);
+                StartCoroutine(FindObjectOfType<AudioManager>().FadeIn("Theme", AudioManager.currentTheme, 3));
             }
         }
     }

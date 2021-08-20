@@ -6,7 +6,7 @@ using System.Collections;
 public class AudioManager : MonoBehaviour
 {
     public Sound[] sounds;
-    public static string currentTheme;
+    public static int currentTheme;
     public static bool currentThemePaused;
 
     void Awake()
@@ -14,7 +14,8 @@ public class AudioManager : MonoBehaviour
         foreach (Sound s in sounds)
         {
             s.source = s.attachTo.AddComponent<AudioSource>();
-            s.source.clip = s.clip;
+            //per default immer erste clip aus der clipList
+            s.source.clip = s.clipList[0];
             s.source.volume = s.volume;
             s.source.pitch = s.pitch;
             s.source.loop = s.loop;
@@ -24,14 +25,24 @@ public class AudioManager : MonoBehaviour
     
     void Start()
     {
-        Play("Theme");
-        currentTheme = "Theme";
+        // 0 ist default clip
+        currentTheme = 0;
+        Play("Theme", currentTheme);
         currentThemePaused = false;
     }
 
-    public void Play (string name)
+    public void ChangeToClip(string name, int clip)
     {
         Sound s = Array.Find(sounds, sound => sound.name == name);
+        s.source.Stop();
+        s.source.clip = s.clipList[clip];
+        //s.source.Play();
+    }
+
+    public void Play (string name, int clip)
+    {
+        Sound s = Array.Find(sounds, sound => sound.name == name && sound.clipList[clip]);
+        s.source.clip = s.clipList[clip];
         if (s == null)
         {
             Debug.LogWarning("Sound:" + name + " not found");
@@ -41,26 +52,43 @@ public class AudioManager : MonoBehaviour
         s.source.Play();
     }
 
-    public void Pause(string name)
+    public void Pause(string name, int clip)
     {
-        Sound s = Array.Find(sounds, sound => sound.name == name);
+        Sound s = Array.Find(sounds, sound => sound.name == name && sound.source.clip == sound.clipList[clip]);
+        if (s == null)
+        {
+            Debug.LogWarning("Sound:" + name + " not found");
+            return;
+        }
         s.source.Pause();
     }
-    public void Stop(string name)
+    public void Stop(string name, int clip)
     {
-        Sound s = Array.Find(sounds, sound => sound.name == name);
+        Sound s = Array.Find(sounds, sound => sound.name == name && sound.source.clip == sound.clipList[clip]);
+        if (s == null)
+        {
+            Debug.LogWarning("Sound:" + name + " not found");
+            return;
+        }
         s.source.Stop();
     }
 
-    public bool Playing(string name)
+    public bool Playing(string name, int clip)
     {
-        Sound s = Array.Find(sounds, sound => sound.name == name);
-        return s.source.isPlaying;
+        Sound s = Array.Find(sounds, sound => sound.name == name && sound.source.clip == sound.clipList[clip]);
+        if(s == null)
+        {
+            return false;
+        } else
+        {
+            return true;
+        }
+        
     }
 
-    public IEnumerator FadeOut(string name, float FadeTime)
+    public IEnumerator FadeOut(string name, int clip, float FadeTime)
     {
-        Sound s = Array.Find(sounds, sound => sound.name == name);
+        Sound s = Array.Find(sounds, sound => sound.name == name && sound.source.clip == sound.clipList[clip]);
         float startVolume = s.source.volume;
 
         while (s.source.volume > 0)
@@ -74,9 +102,10 @@ public class AudioManager : MonoBehaviour
         s.source.volume = startVolume;
     }
 
-    public IEnumerator FadeIn(string name, float FadeTime)
+    public IEnumerator FadeIn(string name, int clip, float FadeTime)
     {
-        Sound s = Array.Find(sounds, sound => sound.name == name);
+        Sound s = Array.Find(sounds, sound => sound.name == name && sound.source.clip == sound.clipList[clip]);
+        s.source.clip = s.clipList[clip];
         float startVolume = s.source.volume;
 
         s.source.volume = 0;
@@ -91,4 +120,5 @@ public class AudioManager : MonoBehaviour
 
         s.source.volume = startVolume;
     }
+
 }
