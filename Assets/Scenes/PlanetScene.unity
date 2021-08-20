@@ -18790,13 +18790,13 @@ MonoBehaviour:
     source: {fileID: 0}
   - name: GlobalAmbient
     clipList:
-    - {fileID: 8300000, guid: 06861dc2a2291b34a8275cd4704ecc43, type: 3}
+    - {fileID: 8300000, guid: 757a823cef34def46b55418e7b43e6fc, type: 3}
     - {fileID: 8300000, guid: 354c37cd61ec24bbcbbc7921d0a71bc1, type: 3}
     attachTo: {fileID: 1740702312}
-    volume: 0.025
+    volume: 0.33
     pitch: 1
     spatialBlend: 1
-    loop: 1
+    loop: 0
     source: {fileID: 0}
 --- !u!4 &888401226
 Transform:
@@ -18827,9 +18827,12 @@ MonoBehaviour:
   playAmbientSound: 1
   randomVolMin: 0
   randomVolMax: 1
-  allowToSkip: 0
+  allowToSkip: 1
   pitchMin: 0
   pitchMax: 0
+  panMin: 0
+  panMax: 0
+  skipWaitTime: 2
 --- !u!1001 &890246235
 PrefabInstance:
   m_ObjectHideFlags: 0

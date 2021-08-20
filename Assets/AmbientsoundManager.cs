@@ -12,6 +12,8 @@ public class AmbientsoundManager : MonoBehaviour
     private bool skipTrack = false;
     public float pitchMin;
     public float pitchMax;
+    public float panMin;
+    public float panMax;
     public int skipWaitTime = 5;
     public static bool isActive = false;
 
@@ -46,25 +48,26 @@ public class AmbientsoundManager : MonoBehaviour
 
     public static void SelectedNewAmbientClip()
     {
-        int randomIndex = Random.Range(0, ambientSound.clipList.Length+3);
+        int randomIndex = Random.Range(0, ambientSound.clipList.Length+1);
 
-        if(randomIndex > ambientSound.clipList.Length)
-        {
-            AmbientsoundManager.instance.skipTrack = true;
-        }
+       /*  if(randomIndex > ambientSound.clipList.Length)
+          {
+              AmbientsoundManager.instance.skipTrack = true;
+            Debug.Log("SKIP");
+          }
 
-        if(!AmbientsoundManager.instance.skipTrack)
-        {
-            instance.StartCoroutine(AmbientsoundManager.instance.FadeIn(randomIndex, 1f));
+          if(!AmbientsoundManager.instance.skipTrack)
+          {
+              instance.StartCoroutine(AmbientsoundManager.instance.FadeIn(randomIndex, 1f));
 
-           
-        }
-        else
-        {
 
-            AmbientsoundManager.instance.StartCoroutine(AmbientsoundManager.instance.SkipWaiter());
-        }
-        
+          }
+          else
+          {
+
+              AmbientsoundManager.instance.StartCoroutine(AmbientsoundManager.instance.SkipWaiter());
+          }*/
+        instance.StartCoroutine(AmbientsoundManager.instance.FadeIn(randomIndex, 1f));
         Debug.Log("RANDOM" + randomIndex);
        /* ambientSound.source.clip = ambientSound.clipList[randomIndex];
         ambientSound.source.volume = Random.Range(instance.randomVolMin, instance.randomVolMax);
@@ -89,7 +92,7 @@ public class AmbientsoundManager : MonoBehaviour
         isActive = true;
 
     }
-
+    /*
     public IEnumerator FadeOut(int clip, float FadeTime)
     {
         Sound s = AmbientsoundManager.ambientSound;
@@ -106,15 +109,21 @@ public class AmbientsoundManager : MonoBehaviour
 
         s.source.Pause();
         s.source.volume = startVolume;
-    }
+    }*/
 
     public IEnumerator FadeIn( int clip, float FadeTime)
     {
+        AmbientsoundManager.instance.skipTrack = false;
         Sound s = AmbientsoundManager.ambientSound;
         s.source.clip = s.clipList[clip];
+        s.source.panStereo = Random.Range(AmbientsoundManager.instance.panMin, AmbientsoundManager.instance.panMax);
+        s.source.pitch = Random.Range(AmbientsoundManager.instance.pitchMin, AmbientsoundManager.instance.pitchMax);
+
         float startVolume = s.source.volume;
         s.source.loop = false;
         s.source.volume = 0;
+
+
         s.source.Play();
 
         while (s.source.volume < startVolume)
