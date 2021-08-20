@@ -28,7 +28,8 @@ public class AudioManager : MonoBehaviour
     {
         // 0 ist default clip
      //   currentTheme = 0;
-        Play("GlobalAmbient", 0);
+       Play("Theme", 0);
+       Play("GlobalAmbient", 0);
         //currentThemePaused = false;
      
     }
@@ -50,8 +51,20 @@ public class AudioManager : MonoBehaviour
             Debug.LogWarning("Sound:" + name + " not found");
             return;
         }
-            
-        s.source.Play();
+
+        Debug.Log(name);
+        if(name.Equals("GlobalAmbient"))
+        {
+
+            AmbientsoundManager.StartPlayingAmbient(s);
+
+        }
+
+        else
+        {
+            s.source.Play();
+        }
+  
     }
 
     public void Pause(string name, int clip)
