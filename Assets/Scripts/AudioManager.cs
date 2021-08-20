@@ -29,7 +29,7 @@ public class AudioManager : MonoBehaviour
         // 0 ist default clip
      //   currentTheme = 0;
        Play("Theme", 0);
-       Play("GlobalAmbient", 0);
+       Play("GlobalAmbient", 1);
         //currentThemePaused = false;
      
     }
@@ -52,7 +52,6 @@ public class AudioManager : MonoBehaviour
             return;
         }
 
-        Debug.Log(name);
         if(name.Equals("GlobalAmbient"))
         {
 

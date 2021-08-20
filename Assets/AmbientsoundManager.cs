@@ -12,6 +12,7 @@ public class AmbientsoundManager : MonoBehaviour
     public  bool allowToSkip;
     public  float pitchMin;
     public  float pitchMax;
+    public static bool isActive = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -23,20 +24,34 @@ public class AmbientsoundManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
+
+        if(isActive)
+        {
+            if (ambientSound.source.isPlaying)
+            {
+
+                Debug.Log("abspielen");
+            }
+
+            else { Debug.Log("vorbei");
+                AmbientsoundManager.SelectedNewAmbientClip();
+                ambientSound.source.Play();
+            }
+        }
+ 
+
+
+
     }
 
     public static IEnumerator PlayAmbientSound()
     {
     
-        while(instance.playAmbientSound)
-        {
+            
             ambientSound.source.Play();
             yield return new WaitForSeconds(ambientSound.source.clip.length);
             AmbientsoundManager.SelectedNewAmbientClip();
-            ambientSound.source.Play();
-
-        }
 
 
     }
@@ -46,8 +61,11 @@ public class AmbientsoundManager : MonoBehaviour
 
         int randomIndex = Random.Range(0, ambientSound.clipList.Length);
 
+        Debug.Log("RANDOM"+randomIndex);
+
         ambientSound.source.clip = ambientSound.clipList[randomIndex];
         ambientSound.source.volume = Random.Range(instance.randomVolMin,instance.randomVolMax);
+        ambientSound.source.loop = false;
 
     }
     public static void StartPlayingAmbient(Sound s)
@@ -59,9 +77,12 @@ public class AmbientsoundManager : MonoBehaviour
             ambientSound = s;
         }
 
-        AmbientsoundManager.PlayAmbientSound();
-      //  ambientSound.source.Play();
-      //  ambientSound.source.PLA
+        ambientSound.source.loop = false;
+        isActive = true;
+       // ambientSound.source.Play();
+
+  
+
 
 
     }
