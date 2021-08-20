@@ -46,12 +46,36 @@ public class Player : MonoBehaviour
 
     public void PauseTheme()
     {
-        if (FindObjectOfType<AudioManager>().Playing("Theme"))
+        if (FindObjectOfType<AudioManager>().Playing(AudioManager.currentTheme))
         {
-            FindObjectOfType<AudioManager>().Pause("Theme");
+            FindObjectOfType<AudioManager>().Pause(AudioManager.currentTheme);
+            AudioManager.currentThemePaused = true;
         } else
         {
-            FindObjectOfType<AudioManager>().Play("Theme");
+            AudioManager.currentThemePaused = false;
+            FindObjectOfType<AudioManager>().Play(AudioManager.currentTheme);
+        }
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if(collision.transform.parent.parent.name == "Floor1" && !FindObjectOfType<AudioManager>().Playing("Theme"))
+        {
+            AudioManager.currentTheme = "Theme";
+            FindObjectOfType<AudioManager>().Stop("Theme2");
+            if (!AudioManager.currentThemePaused)
+            {
+                StartCoroutine(FindObjectOfType<AudioManager>().FadeIn("Theme", 2));
+            }
+           
+        } else if(collision.transform.parent.parent.name == "Floor2" && !FindObjectOfType<AudioManager>().Playing("Theme2"))
+        {
+            AudioManager.currentTheme = "Theme2";
+            FindObjectOfType<AudioManager>().Stop("Theme");
+            if (!AudioManager.currentThemePaused)
+            {
+                StartCoroutine(FindObjectOfType<AudioManager>().FadeIn("Theme2", 2));
+            }
         }
     }
 }

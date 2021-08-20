@@ -18769,17 +18769,27 @@ MonoBehaviour:
   sounds:
   - name: PlayerDeath
     clip: {fileID: 8300000, guid: 757a823cef34def46b55418e7b43e6fc, type: 3}
+    attachTo: {fileID: 1740702312}
     volume: 0.103
     pitch: 1
+    spatialBlend: 1
     loop: 0
-    mute: 0
     source: {fileID: 0}
   - name: Theme
     clip: {fileID: 8300000, guid: 660094dcbccac2e4ea2c9128edea1d8f, type: 3}
+    attachTo: {fileID: 1740702312}
     volume: 0.025
     pitch: 1
+    spatialBlend: 1
     loop: 1
-    mute: 0
+    source: {fileID: 0}
+  - name: Theme2
+    clip: {fileID: 8300000, guid: 696766921597e704a9ef119b37d1fef2, type: 3}
+    attachTo: {fileID: 1740702312}
+    volume: 0.025
+    pitch: 1
+    spatialBlend: 1
+    loop: 1
     source: {fileID: 0}
 --- !u!4 &888401226
 Transform:
@@ -36710,6 +36720,10 @@ PrefabInstance:
     - target: {fileID: 6464472646808694137, guid: 0b66d14eb401bbd429c488babe4cfeb0, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
       value: Player, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 6464472646808694137, guid: 0b66d14eb401bbd429c488babe4cfeb0, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgument
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 6464472646808694137, guid: 0b66d14eb401bbd429c488babe4cfeb0, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
