@@ -6,6 +6,7 @@ using System.Collections;
 public class AudioManager : MonoBehaviour
 {
     public Sound[] sounds;
+
     public static int currentTheme;
     public static bool currentThemePaused;
 
@@ -26,9 +27,10 @@ public class AudioManager : MonoBehaviour
     void Start()
     {
         // 0 ist default clip
-        currentTheme = 0;
-        Play("Theme", currentTheme);
-        currentThemePaused = false;
+     //   currentTheme = 0;
+        Play("GlobalAmbient", 0);
+        //currentThemePaused = false;
+     
     }
 
     public void ChangeToClip(string name, int clip)
