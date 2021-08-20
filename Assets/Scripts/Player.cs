@@ -43,4 +43,15 @@ public class Player : MonoBehaviour
         menu.SetActive(false);
         IngameMenu.showMenu = false;
     }
+
+    public void PauseTheme()
+    {
+        if (FindObjectOfType<AudioManager>().Playing("Theme"))
+        {
+            FindObjectOfType<AudioManager>().Pause("Theme");
+        } else
+        {
+            FindObjectOfType<AudioManager>().Play("Theme");
+        }
+    }
 }

@@ -18772,12 +18772,14 @@ MonoBehaviour:
     volume: 0.103
     pitch: 1
     loop: 0
+    mute: 0
     source: {fileID: 0}
   - name: Theme
     clip: {fileID: 8300000, guid: 660094dcbccac2e4ea2c9128edea1d8f, type: 3}
     volume: 0.025
     pitch: 1
-    loop: 0
+    loop: 1
+    mute: 0
     source: {fileID: 0}
 --- !u!4 &888401226
 Transform:
@@ -36680,6 +36682,42 @@ PrefabInstance:
     - target: {fileID: 6464472646378311679, guid: 0b66d14eb401bbd429c488babe4cfeb0, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: LoadGame
+      objectReference: {fileID: 0}
+    - target: {fileID: 6464472646382427140, guid: 0b66d14eb401bbd429c488babe4cfeb0, type: 3}
+      propertyPath: m_Text
+      value: Toggle music
+      objectReference: {fileID: 0}
+    - target: {fileID: 6464472646808694137, guid: 0b66d14eb401bbd429c488babe4cfeb0, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6464472646808694137, guid: 0b66d14eb401bbd429c488babe4cfeb0, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6464472646808694137, guid: 0b66d14eb401bbd429c488babe4cfeb0, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1740702316}
+    - target: {fileID: 6464472646808694137, guid: 0b66d14eb401bbd429c488babe4cfeb0, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6464472646808694137, guid: 0b66d14eb401bbd429c488babe4cfeb0, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: PauseTheme
+      objectReference: {fileID: 0}
+    - target: {fileID: 6464472646808694137, guid: 0b66d14eb401bbd429c488babe4cfeb0, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: Player, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 6464472646808694137, guid: 0b66d14eb401bbd429c488babe4cfeb0, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 6464472646808694143, guid: 0b66d14eb401bbd429c488babe4cfeb0, type: 3}
+      propertyPath: m_Name
+      value: ToggleTheme
       objectReference: {fileID: 0}
     - target: {fileID: 6794858772393419634, guid: 0b66d14eb401bbd429c488babe4cfeb0, type: 3}
       propertyPath: m_LocalRotation.w
