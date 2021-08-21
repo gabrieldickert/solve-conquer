@@ -43,4 +43,50 @@ public class Player : MonoBehaviour
         menu.SetActive(false);
         IngameMenu.showMenu = false;
     }
+
+    public void PauseTheme()
+    {
+        Debug.Log(AudioManager.currentTheme);
+        if (FindObjectOfType<AudioManager>().Playing("Theme", AudioManager.currentTheme) && !AudioManager.currentThemePaused)
+        {
+            FindObjectOfType<AudioManager>().Pause("Theme", AudioManager.currentTheme);
+            AudioManager.currentThemePaused = true;
+        } else 
+        {
+            AudioManager.currentThemePaused = false;
+            FindObjectOfType<AudioManager>().Play("Theme", AudioManager.currentTheme);
+        }
+
+    }
+    /*
+    private void OnCollisionEnter(Collision collision)
+    {
+        if(collision.transform.parent.parent.name == "Floor1" && !FindObjectOfType<AudioManager>().Playing("Theme", 0))
+        {
+            if (AudioManager.currentThemePaused)
+            {
+                AudioManager.currentTheme = 0;
+                FindObjectOfType<AudioManager>().ChangeToClip("Theme", AudioManager.currentTheme);
+            } else
+            {
+                AudioManager.currentTheme = 0;
+                FindObjectOfType<AudioManager>().ChangeToClip("Theme", AudioManager.currentTheme);
+                StartCoroutine(FindObjectOfType<AudioManager>().FadeIn("Theme", AudioManager.currentTheme, 3));
+            }
+        } else if(collision.transform.parent.parent.name == "Floor2" && !FindObjectOfType<AudioManager>().Playing("Theme", 1))
+        {
+            if (AudioManager.currentThemePaused)
+            {
+                AudioManager.currentTheme = 1;
+                FindObjectOfType<AudioManager>().ChangeToClip("Theme", AudioManager.currentTheme);
+            }
+            else
+            {
+                AudioManager.currentTheme = 1;
+                FindObjectOfType<AudioManager>().ChangeToClip("Theme", AudioManager.currentTheme);
+                StartCoroutine(FindObjectOfType<AudioManager>().FadeIn("Theme", AudioManager.currentTheme, 3));
+            }
+        }
+    }
+    */
 }
