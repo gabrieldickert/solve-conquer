@@ -95,6 +95,8 @@ public class LevelInstance
                 GameObject o = floor.transform.Find("Respawn").transform.Find("Respawnables").GetChild(i).gameObject;
 
                 respawnObjList.Add(new RespawnObject(o));
+                //resort all respawnables to avoid bugs with grabbable objects
+                o.transform.parent = null;
             }
         }
 
