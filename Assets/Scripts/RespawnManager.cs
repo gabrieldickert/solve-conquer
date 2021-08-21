@@ -89,17 +89,24 @@ public class LevelInstance
    
         foreach (GameObject floor in floorList)
         {
- 
             for (int i = 0; i < floor.transform.Find("Respawn").transform.Find("Respawnables").childCount; i++)
             {
                 GameObject o = floor.transform.Find("Respawn").transform.Find("Respawnables").GetChild(i).gameObject;
 
                 respawnObjList.Add(new RespawnObject(o));
-                //resort all respawnables to avoid bugs with grabbable objects
-                o.transform.parent = null;
             }
         }
+        //resort all respawnables to avoid bugs with grabbable objects
+        ReorderRespawnablesInSceneTree();
 
+    }
+
+    private void ReorderRespawnablesInSceneTree()
+    {
+        foreach(RespawnObject o in respawnObjList)
+        {
+            o.gameObject.transform.parent = null;
+        }
     }
 }
 
