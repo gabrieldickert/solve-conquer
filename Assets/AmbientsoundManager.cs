@@ -6,7 +6,7 @@ public class AmbientsoundManager : MonoBehaviour
     public static Sound ambientSound;
     public static AmbientsoundManager instance;
     public bool playAmbientSound;
-    public float maxSecondsBetweenNewAmbientsound;
+    public float SecondsBetweenNewAmbientsound;
     public float randomVolMin;
     public float randomVolMax;
     public bool allowToSkip;
@@ -34,11 +34,15 @@ public class AmbientsoundManager : MonoBehaviour
     private void Update()
     {
 
-      
         if (isActive)
         {
             if (ambientSound.source.isPlaying)
             {
+
+                if ((ambientSound.source.time / ambientSound.source.clip.length  *100) > 80 )
+                {
+                    AmbientsoundManager.instance.StartCoroutine(FadeOut(1f));
+                }
             }
             else
             {
@@ -79,7 +83,7 @@ public class AmbientsoundManager : MonoBehaviour
     }
     IEnumerator StartNewSong()
     { 
-        yield return new WaitForSeconds(AmbientsoundManager.instance.maxSecondsBetweenNewAmbientsound);
+        yield return new WaitForSeconds(AmbientsoundManager.instance.SecondsBetweenNewAmbientsound);
 
         if(allowToSkip)
         {
@@ -109,8 +113,8 @@ public class AmbientsoundManager : MonoBehaviour
         isActive = true;
 
     }
-    /*
-    public IEnumerator FadeOut(int clip, float FadeTime)
+   
+    public IEnumerator FadeOut(float FadeTime)
     {
         Sound s = AmbientsoundManager.ambientSound;
         float startVolume = s.source.volume;
@@ -126,7 +130,7 @@ public class AmbientsoundManager : MonoBehaviour
 
         s.source.Pause();
         s.source.volume = startVolume;
-    }*/
+    }
 
     public IEnumerator FadeIn( int clip, float FadeTime)
     {
