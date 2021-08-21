@@ -6,6 +6,7 @@ public class AmbientsoundManager : MonoBehaviour
     public static Sound ambientSound;
     public static AmbientsoundManager instance;
     public bool playAmbientSound;
+    public float maxSecondsBetweenNewAmbientsound;
     public float randomVolMin;
     public float randomVolMax;
     public bool allowToSkip;
@@ -14,7 +15,7 @@ public class AmbientsoundManager : MonoBehaviour
     public float pitchMax;
     public float panMin;
     public float panMax;
-    public int skipWaitTime = 5;
+
     public static bool isActive = false;
 
 
@@ -41,14 +42,15 @@ public class AmbientsoundManager : MonoBehaviour
             }
             else
             {
-                AmbientsoundManager.SelectedNewAmbientClip();
+                AmbientsoundManager.instance.StartCoroutine(StartNewSong());
+         
             }
         }
     }
 
     public static void SelectedNewAmbientClip()
     {
-        int randomIndex = Random.Range(0, ambientSound.clipList.Length+1);
+        int randomIndex = Random.Range(0, ambientSound.clipList.Length);
 
        /*  if(randomIndex > ambientSound.clipList.Length)
           {
@@ -75,9 +77,24 @@ public class AmbientsoundManager : MonoBehaviour
 
 
     }
-    IEnumerator SkipWaiter()
+    IEnumerator StartNewSong()
     { 
-        yield return new WaitForSeconds(AmbientsoundManager.instance.skipWaitTime);
+        yield return new WaitForSeconds(AmbientsoundManager.instance.maxSecondsBetweenNewAmbientsound);
+
+        if(allowToSkip)
+        {
+            bool skipSong = System.Convert.ToBoolean(Random.Range(0, 1));
+
+            if (!skipSong)
+            {
+                AmbientsoundManager.SelectedNewAmbientClip();
+            }
+        }
+        else
+        {
+            AmbientsoundManager.SelectedNewAmbientClip();
+        }
+
 
     }
 
@@ -119,7 +136,8 @@ public class AmbientsoundManager : MonoBehaviour
         s.source.panStereo = Random.Range(AmbientsoundManager.instance.panMin, AmbientsoundManager.instance.panMax);
         s.source.pitch = Random.Range(AmbientsoundManager.instance.pitchMin, AmbientsoundManager.instance.pitchMax);
 
-        float startVolume = s.source.volume;
+        // float startVolume = s.source.volume;
+        float startVolume = Random.Range(AmbientsoundManager.instance.randomVolMin, AmbientsoundManager.instance.randomVolMax);
         s.source.loop = false;
         s.source.volume = 0;
 
