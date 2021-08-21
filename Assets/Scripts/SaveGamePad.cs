@@ -22,8 +22,8 @@ public class SaveGamePad : MonoBehaviour
     {
         if (collider.gameObject.tag == "Player" && SaveSystem.gameLoaded == false)
         {
-            string stage = this.transform.parent.parent.parent.gameObject.name;
-            string lvl = this.transform.parent.parent.gameObject.name;
+            string stage = this.transform.parent.parent.parent.parent.gameObject.name;
+            string lvl = this.transform.parent.parent.parent.gameObject.name;
 
             if(saveCompanionPosition)
             {
