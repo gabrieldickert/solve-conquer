@@ -940,6 +940,76 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 405966, guid: c7bcf19bbfa57ed4ea9147dff66d5542, type: 3}
   m_PrefabInstance: {fileID: 41440054}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &42408455
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 803711660}
+    m_Modifications:
+    - target: {fileID: 1316355954648088219, guid: 10990b400c5e5b842864bacfc6aa3cdb, type: 3}
+      propertyPath: m_RootOrder
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 1316355954648088219, guid: 10990b400c5e5b842864bacfc6aa3cdb, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 29.380892
+      objectReference: {fileID: 0}
+    - target: {fileID: 1316355954648088219, guid: 10990b400c5e5b842864bacfc6aa3cdb, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 58.61128
+      objectReference: {fileID: 0}
+    - target: {fileID: 1316355954648088219, guid: 10990b400c5e5b842864bacfc6aa3cdb, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -151.17
+      objectReference: {fileID: 0}
+    - target: {fileID: 1316355954648088219, guid: 10990b400c5e5b842864bacfc6aa3cdb, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 48.77
+      objectReference: {fileID: 0}
+    - target: {fileID: 1316355954648088219, guid: 10990b400c5e5b842864bacfc6aa3cdb, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -141.37
+      objectReference: {fileID: 0}
+    - target: {fileID: 1316355954648088219, guid: 10990b400c5e5b842864bacfc6aa3cdb, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7964796
+      objectReference: {fileID: 0}
+    - target: {fileID: 1316355954648088219, guid: 10990b400c5e5b842864bacfc6aa3cdb, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1316355954648088219, guid: 10990b400c5e5b842864bacfc6aa3cdb, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.60466534
+      objectReference: {fileID: 0}
+    - target: {fileID: 1316355954648088219, guid: 10990b400c5e5b842864bacfc6aa3cdb, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1316355954648088219, guid: 10990b400c5e5b842864bacfc6aa3cdb, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1316355954648088219, guid: 10990b400c5e5b842864bacfc6aa3cdb, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: -74.41
+      objectReference: {fileID: 0}
+    - target: {fileID: 1316355954648088219, guid: 10990b400c5e5b842864bacfc6aa3cdb, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1316355954648088223, guid: 10990b400c5e5b842864bacfc6aa3cdb, type: 3}
+      propertyPath: m_Name
+      value: TeleportWall (9)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 10990b400c5e5b842864bacfc6aa3cdb, type: 3}
+--- !u!4 &42408456 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1316355954648088219, guid: 10990b400c5e5b842864bacfc6aa3cdb, type: 3}
+  m_PrefabInstance: {fileID: 42408455}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &45350917
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6652,7 +6722,7 @@ GameObject:
   - component: {fileID: 249329363}
   - component: {fileID: 249329362}
   - component: {fileID: 249329361}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: TeleportWall (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11998,7 +12068,7 @@ GameObject:
   - component: {fileID: 478305280}
   - component: {fileID: 478305279}
   - component: {fileID: 478305278}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: TeleportWall (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -16092,12 +16162,16 @@ PrefabInstance:
       value: 13.908527
       objectReference: {fileID: 0}
     - target: {fileID: 1316355954648088219, guid: 10990b400c5e5b842864bacfc6aa3cdb, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 17.569
+      objectReference: {fileID: 0}
+    - target: {fileID: 1316355954648088219, guid: 10990b400c5e5b842864bacfc6aa3cdb, type: 3}
       propertyPath: m_LocalPosition.x
       value: -127.75
       objectReference: {fileID: 0}
     - target: {fileID: 1316355954648088219, guid: 10990b400c5e5b842864bacfc6aa3cdb, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.12
+      value: 6.13
       objectReference: {fileID: 0}
     - target: {fileID: 1316355954648088219, guid: 10990b400c5e5b842864bacfc6aa3cdb, type: 3}
       propertyPath: m_LocalPosition.z
@@ -18507,7 +18581,7 @@ GameObject:
   - component: {fileID: 727140692}
   - component: {fileID: 727140691}
   - component: {fileID: 727140690}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: TeleportWall (5)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -18602,7 +18676,7 @@ GameObject:
   - component: {fileID: 728822446}
   - component: {fileID: 728822445}
   - component: {fileID: 728822444}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: TeleportWall (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -20628,6 +20702,7 @@ Transform:
   - {fileID: 1848103484}
   - {fileID: 838103770}
   - {fileID: 23159576}
+  - {fileID: 42408456}
   m_Father: {fileID: 1725642754}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -27533,7 +27608,7 @@ GameObject:
   - component: {fileID: 1038190777}
   - component: {fileID: 1038190776}
   - component: {fileID: 1038190775}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: TeleportWall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -28244,7 +28319,7 @@ GameObject:
   - component: {fileID: 1080343029}
   - component: {fileID: 1080343028}
   - component: {fileID: 1080343027}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: TeleportWall (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -32362,12 +32437,16 @@ PrefabInstance:
       value: 44.790028
       objectReference: {fileID: 0}
     - target: {fileID: 1316355954648088219, guid: 10990b400c5e5b842864bacfc6aa3cdb, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 13.436001
+      objectReference: {fileID: 0}
+    - target: {fileID: 1316355954648088219, guid: 10990b400c5e5b842864bacfc6aa3cdb, type: 3}
       propertyPath: m_LocalPosition.x
       value: -58.1
       objectReference: {fileID: 0}
     - target: {fileID: 1316355954648088219, guid: 10990b400c5e5b842864bacfc6aa3cdb, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -7.95
+      value: -3.71
       objectReference: {fileID: 0}
     - target: {fileID: 1316355954648088219, guid: 10990b400c5e5b842864bacfc6aa3cdb, type: 3}
       propertyPath: m_LocalPosition.z
@@ -38719,7 +38798,7 @@ GameObject:
   - component: {fileID: 1552915949}
   - component: {fileID: 1552915948}
   - component: {fileID: 1552915947}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: TeleportWall (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -39210,7 +39289,7 @@ GameObject:
   - component: {fileID: 1582610499}
   - component: {fileID: 1582610498}
   - component: {fileID: 1582610497}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: TeleportWall (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -43253,7 +43332,7 @@ GameObject:
   - component: {fileID: 1736708032}
   - component: {fileID: 1736708031}
   - component: {fileID: 1736708030}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: TeleportWall (6)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -44935,15 +45014,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6799725721996934311, guid: 0b66d14eb401bbd429c488babe4cfeb0, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 359.4
+      value: 306.2
       objectReference: {fileID: 0}
     - target: {fileID: 6799725721996934311, guid: 0b66d14eb401bbd429c488babe4cfeb0, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 162
+      value: 52.7
       objectReference: {fileID: 0}
     - target: {fileID: 6799725721996934311, guid: 0b66d14eb401bbd429c488babe4cfeb0, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 480.6
+      value: 622.8
       objectReference: {fileID: 0}
     - target: {fileID: 6799725721996934311, guid: 0b66d14eb401bbd429c488babe4cfeb0, type: 3}
       propertyPath: m_LocalRotation.w
@@ -46338,7 +46417,7 @@ GameObject:
   - component: {fileID: 1810313648}
   - component: {fileID: 1810313647}
   - component: {fileID: 1810313646}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: TeleportWall (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
