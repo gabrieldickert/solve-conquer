@@ -16,6 +16,8 @@ public class AmbientEntityScript : MonoBehaviour
     public float panMax;
     public float fadeoutPercentage;
 
+    private float startTime = 0f;
+
     void Start()
     {
 
@@ -29,6 +31,7 @@ public class AmbientEntityScript : MonoBehaviour
         songObj.source.pitch = songObj.pitch;
         songObj.source.loop = songObj.loop;
         songObj.source.spatialBlend = songObj.spatialBlend;
+        this.startTime = Time.time;
 
         //Checking a Track can be skipped
         if (allowToSkip)
@@ -45,38 +48,38 @@ public class AmbientEntityScript : MonoBehaviour
 
         if (songObj.source.isPlaying)
         {
-
             if ((songObj.source.time / songObj.source.clip.length * 100) > fadeoutPercentage)
             {
                 StartCoroutine(FadeOut(1f));
             }
         }
+        else if(Time.time > this.startTime + this.SecondsBetweenNewAmbientsound)
+        {
+          StartNewSong();
+        }
+
+        
+    }
+
+    void StartNewSong()
+    {
+        //yield return new WaitForSeconds(SecondsBetweenNewAmbientsound);
+        this.startTime = Time.time;
+        if (allowToSkip)
+        {
+            bool skipSong = System.Convert.ToBoolean(Random.Range(0, 1));
+
+            if (!skipSong)
+            {
+                SelectedNewAmbientClip();
+            }
+        }
         else
         {
-          StartCoroutine(StartNewSong());
-
+            SelectedNewAmbientClip();
         }
 
-        IEnumerator StartNewSong()
-        {
-            yield return new WaitForSeconds(SecondsBetweenNewAmbientsound);
 
-            if (allowToSkip)
-            {
-                bool skipSong = System.Convert.ToBoolean(Random.Range(0, 1));
-
-                if (!skipSong)
-                {
-                    SelectedNewAmbientClip();
-                }
-            }
-            else
-            {
-               SelectedNewAmbientClip();
-            }
-
-
-        }
     }
     public void SelectedNewAmbientClip()
     {

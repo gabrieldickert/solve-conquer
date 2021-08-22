@@ -12225,7 +12225,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6570342158503782557, guid: 8bad56a253018384182b59a213b3eb4b, type: 3}
       propertyPath: m_RootOrder
-      value: 7
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 6570342158503782557, guid: 8bad56a253018384182b59a213b3eb4b, type: 3}
       propertyPath: m_LocalScale.x
@@ -17365,7 +17365,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6570342158503782557, guid: 8bad56a253018384182b59a213b3eb4b, type: 3}
       propertyPath: m_RootOrder
-      value: 6
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 6570342158503782557, guid: 8bad56a253018384182b59a213b3eb4b, type: 3}
       propertyPath: m_LocalScale.x
@@ -25885,7 +25885,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6570342158503782557, guid: 8bad56a253018384182b59a213b3eb4b, type: 3}
       propertyPath: m_RootOrder
-      value: 5
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 6570342158503782557, guid: 8bad56a253018384182b59a213b3eb4b, type: 3}
       propertyPath: m_LocalScale.x
@@ -29597,6 +29597,69 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1080343025}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &1081254607
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1081254608}
+  - component: {fileID: 1081254609}
+  m_Layer: 0
+  m_Name: AmbientSoundSource1
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1081254608
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1081254607}
+  m_LocalRotation: {x: -0, y: -0.2351082, z: -0, w: 0.97196925}
+  m_LocalPosition: {x: 10.77, y: 4, z: 23.43}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 2141956987}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1081254609
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1081254607}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 37a8925e0459e874bbcbd23d5623128f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  songObj:
+    name: 
+    clipList:
+    - {fileID: 8300000, guid: 494bd1721199a40c5a79fa3011793556, type: 3}
+    - {fileID: 8300000, guid: 5ac6fe579e904064b92a0c15d2cc1222, type: 3}
+    attachTo: {fileID: 1081254607}
+    volume: 1
+    pitch: 1
+    spatialBlend: 1
+    loop: 0
+    source: {fileID: 0}
+  SecondsBetweenNewAmbientsound: 5
+  randomVolMin: 0.5
+  randomVolMax: 1
+  allowToSkip: 1
+  pitchMin: 1
+  pitchMax: 1.5
+  panMin: 0
+  panMax: 0
+  fadeoutPercentage: 80
 --- !u!1001 &1086590294
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -32948,7 +33011,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6570342158503782557, guid: 8bad56a253018384182b59a213b3eb4b, type: 3}
       propertyPath: m_RootOrder
-      value: 9
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 6570342158503782557, guid: 8bad56a253018384182b59a213b3eb4b, type: 3}
       propertyPath: m_LocalScale.x
@@ -35862,7 +35925,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4067028680491184804, guid: beb8a33603ecbb545b64f91bea680647, type: 3}
       propertyPath: m_RootOrder
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4067028680491184804, guid: beb8a33603ecbb545b64f91bea680647, type: 3}
       propertyPath: m_LocalScale.x
@@ -50954,7 +51017,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4067028680491184804, guid: beb8a33603ecbb545b64f91bea680647, type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4067028680491184804, guid: beb8a33603ecbb545b64f91bea680647, type: 3}
       propertyPath: m_LocalScale.x
@@ -53003,7 +53066,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4067028680491184804, guid: beb8a33603ecbb545b64f91bea680647, type: 3}
       propertyPath: m_RootOrder
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 4067028680491184804, guid: beb8a33603ecbb545b64f91bea680647, type: 3}
       propertyPath: m_LocalScale.x
@@ -55918,7 +55981,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6570342158503782557, guid: 8bad56a253018384182b59a213b3eb4b, type: 3}
       propertyPath: m_RootOrder
-      value: 8
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 6570342158503782557, guid: 8bad56a253018384182b59a213b3eb4b, type: 3}
       propertyPath: m_LocalScale.x
@@ -57019,7 +57082,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4067028680491184804, guid: beb8a33603ecbb545b64f91bea680647, type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 4067028680491184804, guid: beb8a33603ecbb545b64f91bea680647, type: 3}
       propertyPath: m_LocalScale.x
@@ -57093,7 +57156,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6570342158503782557, guid: 8bad56a253018384182b59a213b3eb4b, type: 3}
       propertyPath: m_RootOrder
-      value: 4
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 6570342158503782557, guid: 8bad56a253018384182b59a213b3eb4b, type: 3}
       propertyPath: m_LocalScale.x
@@ -58098,6 +58161,7 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
+  - {fileID: 1081254608}
   - {fileID: 1332449952}
   - {fileID: 1910242519}
   - {fileID: 2105200262}
