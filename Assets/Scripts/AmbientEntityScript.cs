@@ -40,22 +40,75 @@ public class AmbientEntityScript : MonoBehaviour
     void Update()
     {
 
-            if (songObj.source.isPlaying)
-            {
+        if (songObj.source.isPlaying)
+        {
 
-                if ((songObj.source.time / songObj.source.clip.length * 100) > fadeoutPercentage)
+            if ((songObj.source.time / songObj.source.clip.length * 100) > fadeoutPercentage)
+            {
+                StartCoroutine(FadeOut(1f));
+            }
+        }
+        else
+        {
+            StartCoroutine(StartNewSong());
+
+        }
+
+        IEnumerator StartNewSong()
+        {
+            yield return new WaitForSeconds(SecondsBetweenNewAmbientsound);
+
+            if (allowToSkip)
+            {
+                bool skipSong = System.Convert.ToBoolean(Random.Range(0, 1));
+
+                if (!skipSong)
                 {
-                   StartCoroutine(FadeOut(1f));
+                    SelectedNewAmbientClip();
                 }
             }
             else
             {
-                StartCoroutine(StartNewSong());
-
+               SelectedNewAmbientClip();
             }
-        
-    }
 
+
+        }
+    }
+    public void SelectedNewAmbientClip()
+    {
+        int randomIndex = Random.Range(0, songObj.clipList.Length);
+
+    StartCoroutine(FadeIn(randomIndex, 1f));
+
+
+    }
+    public IEnumerator FadeIn(int clip, float FadeTime)
+    {
+        skipTrack = false;
+        Sound s = songObj;
+        s.source.clip = s.clipList[clip];
+        s.source.panStereo = Random.Range(panMin, panMax);
+        s.source.pitch = Random.Range(pitchMin,pitchMax);
+
+        float startVolume = Random.Range(randomVolMin,.randomVolMax);
+        s.source.loop = false;
+        s.source.volume = 0;
+
+
+        s.source.Play();
+
+        while (s.source.volume < startVolume)
+        {
+            s.source.volume += startVolume * Time.deltaTime / FadeTime;
+
+            yield return null;
+        }
+
+        s.source.volume = startVolume;
+
+
+    }
     public IEnumerator FadeOut(float FadeTime)
     {
         float startVolume = songObj.source.volume;
