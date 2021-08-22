@@ -18748,7 +18748,6 @@ GameObject:
   - component: {fileID: 888401226}
   - component: {fileID: 888401225}
   - component: {fileID: 888401227}
-  - component: {fileID: 888401228}
   m_Layer: 0
   m_Name: AudioManager
   m_TagString: Untagged
@@ -18836,36 +18835,6 @@ MonoBehaviour:
   pitchMax: 1.5
   panMin: -1
   panMax: 1
---- !u!114 &888401228
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 888401224}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 37a8925e0459e874bbcbd23d5623128f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  songObj:
-    name: 
-    clipList: []
-    attachTo: {fileID: 0}
-    volume: 0
-    pitch: 0
-    spatialBlend: 0
-    loop: 0
-    source: {fileID: 0}
-  SecondsBetweenNewAmbientsound: 0
-  randomVolMin: 0
-  randomVolMax: 0
-  allowToSkip: 0
-  pitchMin: 0
-  pitchMax: 0
-  panMin: 0
-  panMax: 0
-  fadeoutPercentage: 0
 --- !u!1001 &890246235
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -23004,7 +22973,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7849282530126799287, guid: b87f5dc762a5ff04d89d0ec8e9be475f, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 97.3
+      value: 97.88
       objectReference: {fileID: 0}
     - target: {fileID: 7849282530126799287, guid: b87f5dc762a5ff04d89d0ec8e9be475f, type: 3}
       propertyPath: m_LocalPosition.z
@@ -34449,13 +34418,14 @@ MonoBehaviour:
     clipList:
     - {fileID: 8300000, guid: 030b05d531d5d71408660bc0bd5330ee, type: 3}
     - {fileID: 8300000, guid: 3a4baf251c1814716b9458d036384a76, type: 3}
-    attachTo: {fileID: 0}
+    - {fileID: 8300000, guid: 06861dc2a2291b34a8275cd4704ecc43, type: 3}
+    attachTo: {fileID: 1667691001}
     volume: 0.491
     pitch: 1.66
     spatialBlend: 1
     loop: 1
     source: {fileID: 0}
-  SecondsBetweenNewAmbientsound: 3
+  SecondsBetweenNewAmbientsound: 1
   randomVolMin: 0.6
   randomVolMax: 1
   allowToSkip: 0
