@@ -29,9 +29,10 @@ public class MovingPlatformNew : MonoBehaviour
     public int mode = 0;
     public GameObject VisualTrigger1;
     public GameObject VisualTrigger2;
-    private bool playerOnPlatform = false;
-    private bool companionOnPlatform = false;
+    private bool playerOnPlatformTrigger = false;
+    private bool companionOnPlatformTrigger = false;
     private bool hasRequiredPassengers;
+    private bool hasUnwantedPassengers;
     private bool isReturning = false;
 
     private Transform companion = null;
@@ -73,7 +74,7 @@ public class MovingPlatformNew : MonoBehaviour
     void Update()
     {
         this.UpdateVisualTriggerTransparency();
-        if (hasRequiredPassengers)
+        if (hasRequiredPassengers && !hasUnwantedPassengers)
         {
             if (Time.time - delay_start > delay_time)
             {
@@ -125,7 +126,10 @@ public class MovingPlatformNew : MonoBehaviour
             //Debug.Log("MovingPlatformNew: Starting to backtrace");
             if (this.companion != null)
             {
-                EventsManager.instance.OnCompanionFollow();
+                if(mode == 2 || mode == 3)
+                {
+                    EventsManager.instance.OnCompanionFollow();
+                }
                 this.companion.GetComponent<NavMeshAgent>().enabled = true;
             }
             if(movesBidirectionally)
@@ -149,13 +153,13 @@ public class MovingPlatformNew : MonoBehaviour
         switch (mode)
         {
             case 1:
-                this.hasRequiredPassengers = this.playerOnPlatform && !this.companionOnPlatform;
+                this.hasRequiredPassengers = this.playerOnPlatformTrigger && !this.companionOnPlatformTrigger;
                 break;
             case 2:
-                this.hasRequiredPassengers = this.companionOnPlatform && !this.playerOnPlatform;
+                this.hasRequiredPassengers = this.companionOnPlatformTrigger && !this.playerOnPlatformTrigger;
                 break;
             case 3:
-                this.hasRequiredPassengers = this.playerOnPlatform && this.companionOnPlatform;
+                this.hasRequiredPassengers = this.playerOnPlatformTrigger && this.companionOnPlatformTrigger;
                 break;
         }
     }
@@ -165,24 +169,106 @@ public class MovingPlatformNew : MonoBehaviour
         Material playerTriggerMaterial = VisualTrigger1.GetComponent<MeshRenderer>().material;
         Material companionTriggerMaterial = VisualTrigger2.GetComponent<MeshRenderer>().material;
         
-        if (this.playerOnPlatform && playerTriggerMaterial.color.a != this.triggerActiveAlpha)
+        if (this.playerOnPlatformTrigger && playerTriggerMaterial.color.a != this.triggerActiveAlpha)
         {
             playerTriggerMaterial.color = new Color(playerTriggerMaterial.color.r, playerTriggerMaterial.color.g, playerTriggerMaterial.color.b, this.triggerActiveAlpha);
-        } else if(!this.playerOnPlatform && playerTriggerMaterial.color.a != playerTriggerColorInitial.a)
+        } else if(!this.playerOnPlatformTrigger && playerTriggerMaterial.color.a != playerTriggerColorInitial.a)
         {
             playerTriggerMaterial.color = playerTriggerColorInitial;
         }
         
-        if(this.companionOnPlatform && companionTriggerMaterial.color.a != this.triggerActiveAlpha)
+        if(this.companionOnPlatformTrigger && companionTriggerMaterial.color.a != this.triggerActiveAlpha)
         {
             companionTriggerMaterial.color = new Color(companionTriggerMaterial.color.r, companionTriggerMaterial.color.g, companionTriggerMaterial.color.b, this.triggerActiveAlpha);
-        } else if (!this.companionOnPlatform && companionTriggerMaterial.color.a != companionTriggerColorInitial.a)
+        } else if (!this.companionOnPlatformTrigger && companionTriggerMaterial.color.a != companionTriggerColorInitial.a)
         {
             companionTriggerMaterial.color = companionTriggerColorInitial;
         }
     }
 
+    public void OnPlayerEnteredTrigger(Collider other)
+    {
+        playerOnPlatformTrigger = true;
+        //other.transform.SetParent(gameObject.transform);
+        UpdatePassengerStatus();
+    }
+
+    public void OnCompanionEnteredTrigger(Collider other)
+    {
+        companionOnPlatformTrigger = true;
+        //this.companion = other.transform;
+        //this.companion.SetParent(gameObject.transform);
+        UpdatePassengerStatus();
+    }
+
+    public void OnPlayerLeftTrigger(Collider other)
+    {
+        //other.transform.SetParent(null);
+        this.playerOnPlatformTrigger = false;
+        UpdatePassengerStatus();
+    }
+
+    public void OnCompanionLeftTrigger(Collider other)
+    {
+        //other.transform.parent.SetParent(null);
+        this.companionOnPlatformTrigger = false;
+        UpdatePassengerStatus();
+    }
+
     private void OnTriggerEnter(Collider other)
+    {
+        if(other.gameObject.tag == "Companion")
+        {
+            if (mode == 2 || mode == 3)
+            {
+                EventsManager.instance.OnCompanionWaitAt(VisualTrigger2.GetComponent<MeshRenderer>().bounds.center);
+            } else if(mode == 1)
+            {
+                this.hasUnwantedPassengers = true;
+            }
+            this.companion = other.transform;
+            other.transform.SetParent(gameObject.transform);
+        }
+        if(other.gameObject.tag == "Player")
+        {
+            if(mode == 2)
+            {
+                this.hasUnwantedPassengers = true;
+            }
+            other.transform.SetParent(gameObject.transform);
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject.tag == "Companion")
+        {
+           if (mode == 1)
+           {
+                this.hasUnwantedPassengers = false;
+           }
+            this.companion = null;
+            other.transform.SetParent(null);
+        }
+        if (other.gameObject.tag == "Player")
+        {
+            if (mode == 2)
+            {
+                this.hasUnwantedPassengers = false;
+            }
+            other.transform.SetParent(null);
+        }
+    }
+
+    /*private void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject.tag == "Companion")
+        {
+
+        }
+    }*/
+
+    /*private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.tag == "Companion")
         {
@@ -212,5 +298,5 @@ public class MovingPlatformNew : MonoBehaviour
             this.playerOnPlatform = false;
         }
         UpdatePassengerStatus();
-    }
+    }*/
 }

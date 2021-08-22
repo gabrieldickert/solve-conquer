@@ -348,7 +348,8 @@ public class Process
         ProcessState nextState;
         if (!transitions.TryGetValue(transition, out nextState))
         {
-            throw new Exception("Invalid transition: " + CurrentState + " -> " + command);
+            //throw new Exception("Invalid transition: " + CurrentState + " -> " + command);
+            return CurrentState;
         } else
         {
             LastCommand = command;
