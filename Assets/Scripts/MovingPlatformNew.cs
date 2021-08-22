@@ -19,7 +19,13 @@ public class MovingPlatformNew : MonoBehaviour
     public bool movesBidirectionally = false;
     public bool waitOnlyAtStartAndFinish = false;
 
-    
+    /*
+    MovingPlatform modes
+    0: no passengers required to start moving
+    1: player required required to start moving, companion must not be passenger
+    2: companion required to start moving, player must not be passenger
+    3: player and companion required to start moving
+    */
     public int mode = 0;
     public GameObject VisualTrigger1;
     public GameObject VisualTrigger2;
@@ -46,6 +52,9 @@ public class MovingPlatformNew : MonoBehaviour
                 VisualTrigger2.SetActive(false);
                 break;
             case 1:
+                VisualTrigger1.SetActive(false);
+                break;
+            case 2:
                 VisualTrigger2.SetActive(false);
                 break;
             default:
@@ -132,9 +141,12 @@ public class MovingPlatformNew : MonoBehaviour
         switch (mode)
         {
             case 1:
-                this.hasRequiredPassengers = this.playerOnPlatform;
+                this.hasRequiredPassengers = this.playerOnPlatform && !this.companionOnPlatform;
                 break;
             case 2:
+                this.hasRequiredPassengers = this.companionOnPlatform && !this.playerOnPlatform;
+                break;
+            case 3:
                 this.hasRequiredPassengers = this.playerOnPlatform && this.companionOnPlatform;
                 break;
         }
