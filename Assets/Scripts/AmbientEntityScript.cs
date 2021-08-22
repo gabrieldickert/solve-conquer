@@ -17,22 +17,38 @@ public class AmbientEntityScript : MonoBehaviour
     public float fadeoutPercentage;
 
 
+    private void Awake()
+    {
+     
+    }
     void Start()
     {
+        Debug.Log("HALLO START");
+        Debug.Log("LISTLENGTH:" + songObj.clipList.Length);
+
+
+        //     songObj.source = songObj.attachTo.AddComponent<AudioSource>();
+        //
+        this.gameObject.AddComponent<AudioSource>();
+        songObj.attachTo = this.gameObject;
+        songObj.source = this.gameObject.GetComponent<AudioSource>();
+
+        //songObj.source = songObj.attachTo = this.gameObject.AddComponent<AudioSource>();
         //Setting DefaultSettings
-        songObj.source.clip = songObj.clipList[Random.Range(0, songObj.clipList.Length)];
+        songObj.source.clip = songObj.clipList[0];
         songObj.source.volume = songObj.volume;
         songObj.source.pitch = songObj.pitch;
         songObj.source.loop = songObj.loop;
         songObj.source.spatialBlend = songObj.spatialBlend;
         //Attaching Song to the Object containg the Entity script
-        songObj.attachTo = this.gameObject;
+        //this.gameObject;
 
         //Checking a Track can be skipped
         if (allowToSkip)
         {
             skipTrack = true;
         }
+
 
     }
 
@@ -50,7 +66,7 @@ public class AmbientEntityScript : MonoBehaviour
         }
         else
         {
-            StartCoroutine(StartNewSong());
+          StartCoroutine(StartNewSong());
 
         }
 
@@ -90,8 +106,8 @@ public class AmbientEntityScript : MonoBehaviour
         s.source.clip = s.clipList[clip];
         s.source.panStereo = Random.Range(panMin, panMax);
         s.source.pitch = Random.Range(pitchMin,pitchMax);
-
-        float startVolume = Random.Range(randomVolMin,.randomVolMax);
+        s.source.spatialBlend = s.spatialBlend;
+        float startVolume = Random.Range(randomVolMin,randomVolMax);
         s.source.loop = false;
         s.source.volume = 0;
 
