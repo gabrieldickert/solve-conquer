@@ -36,6 +36,10 @@ public class MovingPlatformNew : MonoBehaviour
 
     private Transform companion = null;
 
+    private Color companionTriggerColorInitial;
+    private Color playerTriggerColorInitial;
+    private float triggerActiveAlpha = 60f;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -43,6 +47,8 @@ public class MovingPlatformNew : MonoBehaviour
         {
             Debug.LogError("MovingPlatformNew: The arrays points and rotations have to have the same length.");
         }
+        companionTriggerColorInitial = VisualTrigger2.GetComponent<MeshRenderer>().material.color;
+        playerTriggerColorInitial = VisualTrigger1.GetComponent<MeshRenderer>().material.color;
         UpdateTarget();
         switch(mode)
         {
@@ -52,10 +58,10 @@ public class MovingPlatformNew : MonoBehaviour
                 VisualTrigger2.SetActive(false);
                 break;
             case 1:
-                VisualTrigger1.SetActive(false);
+                VisualTrigger2.SetActive(false);
                 break;
             case 2:
-                VisualTrigger2.SetActive(false);
+                VisualTrigger1.SetActive(false);
                 break;
             default:
                 break;
@@ -66,6 +72,7 @@ public class MovingPlatformNew : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        this.UpdateVisualTriggerTransparency();
         if (hasRequiredPassengers)
         {
             if (Time.time - delay_start > delay_time)
@@ -118,6 +125,7 @@ public class MovingPlatformNew : MonoBehaviour
             //Debug.Log("MovingPlatformNew: Starting to backtrace");
             if (this.companion != null)
             {
+                EventsManager.instance.OnCompanionFollow();
                 this.companion.GetComponent<NavMeshAgent>().enabled = true;
             }
             if(movesBidirectionally)
@@ -152,6 +160,28 @@ public class MovingPlatformNew : MonoBehaviour
         }
     }
 
+    private void UpdateVisualTriggerTransparency()
+    {
+        Material playerTriggerMaterial = VisualTrigger1.GetComponent<MeshRenderer>().material;
+        Material companionTriggerMaterial = VisualTrigger2.GetComponent<MeshRenderer>().material;
+        
+        if (this.playerOnPlatform && playerTriggerMaterial.color.a != this.triggerActiveAlpha)
+        {
+            playerTriggerMaterial.color = new Color(playerTriggerMaterial.color.r, playerTriggerMaterial.color.g, playerTriggerMaterial.color.b, this.triggerActiveAlpha);
+        } else if(!this.playerOnPlatform && playerTriggerMaterial.color.a != playerTriggerColorInitial.a)
+        {
+            playerTriggerMaterial.color = playerTriggerColorInitial;
+        }
+        
+        if(this.companionOnPlatform && companionTriggerMaterial.color.a != this.triggerActiveAlpha)
+        {
+            companionTriggerMaterial.color = new Color(companionTriggerMaterial.color.r, companionTriggerMaterial.color.g, companionTriggerMaterial.color.b, this.triggerActiveAlpha);
+        } else if (!this.companionOnPlatform && companionTriggerMaterial.color.a != companionTriggerColorInitial.a)
+        {
+            companionTriggerMaterial.color = companionTriggerColorInitial;
+        }
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.tag == "Companion")
@@ -159,6 +189,7 @@ public class MovingPlatformNew : MonoBehaviour
             companionOnPlatform = true;
             this.companion = other.transform;
             this.companion.SetParent(gameObject.transform);
+            EventsManager.instance.OnCompanionWaitAt(VisualTrigger2.GetComponent<MeshRenderer>().bounds.center);
         }
         else if (other.gameObject.tag == "Player")
         {
