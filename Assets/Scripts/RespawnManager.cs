@@ -11,7 +11,6 @@ public class RespawnManager : MonoBehaviour
     // Start is called before the first frame update
     private void Start()
     {
-        Debug.Log("ok");
         EventsManager.instance.ResetCompanion += Instance_ResetCompanion;
         EventsManager.instance.ResetPlayer += Instance_ResetPlayer;
         //Loop through every Stage, find every level and create a List containg the Levelobjects
@@ -30,13 +29,13 @@ public class RespawnManager : MonoBehaviour
     private void Instance_ResetPlayer()
     {
         //Reset Player Position and Companion Pos (should be last save point)
-        Debug.Log("Reset Player");
+        //Debug.Log("Reset Player");
 
         GameData gd = SaveSystem.LoadGame();
         Vector3 spawnPos = new Vector3(gd.positionPad[0], gd.positionPad[1], gd.positionPad[2]);
         this.PlayerController.transform.position = spawnPos;
 
-        FindObjectOfType<AudioManager>().Play("PlayerDeath", 0);
+        //FindObjectOfType<AudioManager>().Play("PlayerDeath", 0);
 
         if (gd.saveCompanionPosition)
         {
@@ -45,7 +44,7 @@ public class RespawnManager : MonoBehaviour
             this.Companion.transform.position = spawnPos;
             this.Companion.transform.GetComponent<NavMeshAgent>().enabled = true;
         }
-      
+
         LevelInstance currentLvl = this.RespawnStageLevels[gd.stage].Find(g => g.levelobj.name.Equals(gd.lvl));
 
         foreach (RespawnObject o in currentLvl.respawnObjList)
@@ -57,7 +56,7 @@ public class RespawnManager : MonoBehaviour
     private void Instance_ResetCompanion()
     {
         //Reset Player Position and Companion Pos (should be last save point)
-        Debug.Log("Reset Companion");
+        //Debug.Log("Reset Companion");
     }
 
     // Update is called once per frame
@@ -89,7 +88,6 @@ public class LevelInstance
    
         foreach (GameObject floor in floorList)
         {
- 
             for (int i = 0; i < floor.transform.Find("Respawn").transform.Find("Respawnables").childCount; i++)
             {
                 GameObject o = floor.transform.Find("Respawn").transform.Find("Respawnables").GetChild(i).gameObject;
@@ -97,7 +95,17 @@ public class LevelInstance
                 respawnObjList.Add(new RespawnObject(o));
             }
         }
+        //resort all respawnables to avoid bugs with grabbable objects
+        ReorderRespawnablesInSceneTree();
 
+    }
+
+    private void ReorderRespawnablesInSceneTree()
+    {
+        foreach(RespawnObject o in respawnObjList)
+        {
+            o.gameObject.transform.parent = null;
+        }
     }
 }
 
