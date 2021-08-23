@@ -9,7 +9,7 @@ public class AmbientEntityScript : MonoBehaviour
     public float randomVolMin;
     public float randomVolMax;
     public bool allowToSkip;
-    private bool skipTrack = false;
+    //private bool skipTrack = false;
     public float pitchMin;
     public float pitchMax;
     public float panMin;
@@ -34,10 +34,10 @@ public class AmbientEntityScript : MonoBehaviour
         this.startTime = Time.time;
 
         //Checking a Track can be skipped
-        if (allowToSkip)
+        /*if (allowToSkip)
         {
             skipTrack = true;
-        }
+        }*/
 
 
     }
@@ -91,7 +91,7 @@ public class AmbientEntityScript : MonoBehaviour
     }
     public IEnumerator FadeIn(int clip, float FadeTime)
     {
-        skipTrack = false;
+        //skipTrack = false;
         Sound s = songObj;
         s.source.clip = s.clipList[clip];
         s.source.panStereo = Random.Range(panMin, panMax);

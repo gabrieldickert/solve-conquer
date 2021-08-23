@@ -33,7 +33,10 @@ public class Barrier : MonoBehaviour
         // Get material's starting color value.
         m_Color = m_Material.color;
         
-
+        if(gameObject.tag == "HackableObject")
+        {
+            m_Color = new Color(m_Color.r, 1f, 1f, m_Color.a);
+        }
 
         //Initialize Barrier (isBridge ? disable collision and fade color out : enable collision and fade color in)
         if (!isActiveOnStart)

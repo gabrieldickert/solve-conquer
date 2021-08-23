@@ -10,7 +10,7 @@ public class AmbientsoundManager : MonoBehaviour
     public float randomVolMin;
     public float randomVolMax;
     public bool allowToSkip;
-    private bool skipTrack = false;
+    //private bool skipTrack = false;
     public float pitchMin;
     public float pitchMax;
     public float panMin;
@@ -24,10 +24,10 @@ public class AmbientsoundManager : MonoBehaviour
     {
         AmbientsoundManager.instance = this;
 
-        if(allowToSkip)
+       /*if(allowToSkip)
         {
             skipTrack = true;
-        }
+        }*/
     }
 
     // Update is called once per frame
@@ -134,7 +134,7 @@ public class AmbientsoundManager : MonoBehaviour
 
     public IEnumerator FadeIn( int clip, float FadeTime)
     {
-        AmbientsoundManager.instance.skipTrack = false;
+        //AmbientsoundManager.instance.skipTrack = false;
         Sound s = AmbientsoundManager.ambientSound;
         s.source.clip = s.clipList[clip];
         s.source.panStereo = Random.Range(AmbientsoundManager.instance.panMin, AmbientsoundManager.instance.panMax);
