@@ -35,10 +35,6 @@ public class Barrier : MonoBehaviour
         
         if(gameObject.tag == "HackableObject")
         {
-            Debug.Log(m_Color.r);
-            Debug.Log(m_Color.g);
-            Debug.Log(m_Color.b);
-            Debug.Log(m_Color.a);
             m_Color = new Color(m_Color.r, 1f, 1f, m_Color.a);
         }
 
