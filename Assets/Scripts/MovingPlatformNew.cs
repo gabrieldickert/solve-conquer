@@ -41,6 +41,8 @@ public class MovingPlatformNew : MonoBehaviour
     private Color playerTriggerColorInitial;
     private float triggerActiveAlpha = 60f;
 
+    private bool hasStopped = false;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -85,8 +87,7 @@ public class MovingPlatformNew : MonoBehaviour
         } else
         {
             this.delay_start = Time.time;
-        }
-        
+        }        
     }
 
     void MovePlatform()
@@ -132,6 +133,7 @@ public class MovingPlatformNew : MonoBehaviour
                 }
                 this.companion.GetComponent<NavMeshAgent>().enabled = true;
             }
+
             if(movesBidirectionally)
             {
                 point_number = isReturning ? point_number + 1 : point_number - 1;
@@ -141,6 +143,9 @@ public class MovingPlatformNew : MonoBehaviour
                     delay_start = Time.time;
                     //Debug.Log("MovingPlatformNew: Delay from now, waitOnlyAtStartAndFinish is true");
                 }
+            } else
+            {
+                this.hasStopped = true;
             }
         }
         current_target = points[point_number];
@@ -219,7 +224,7 @@ public class MovingPlatformNew : MonoBehaviour
     {
         if(other.gameObject.tag == "Companion")
         {
-            if (mode == 2 || mode == 3)
+            if ((mode == 2 || mode == 3) && !this.hasStopped)
             {
                 EventsManager.instance.OnCompanionWaitAt(VisualTrigger2.GetComponent<MeshRenderer>().bounds.center);
             } else if(mode == 1)
