@@ -33399,6 +33399,8 @@ MonoBehaviour:
   songObj:
     name: 
     clipList:
+    - {fileID: 8300000, guid: 494bd1721199a40c5a79fa3011793556, type: 3}
+    - {fileID: 8300000, guid: 5ac6fe579e904064b92a0c15d2cc1222, type: 3}
     - {fileID: 8300000, guid: 06861dc2a2291b34a8275cd4704ecc43, type: 3}
     attachTo: {fileID: 1081254607}
     volume: 1
@@ -33409,12 +33411,13 @@ MonoBehaviour:
   SecondsBetweenNewAmbientsound: 5
   randomVolMin: 0.5
   randomVolMax: 1
-  allowToSkip: 1
+  allowToSkip: 0
   pitchMin: 1
   pitchMax: 1.5
   panMin: 0
   panMax: 0
-  fadeoutPercentage: 80
+  fadeoutPercentage: 90
+  fadeDuration: 0.1
 --- !u!1001 &1086590294
 PrefabInstance:
   m_ObjectHideFlags: 0
