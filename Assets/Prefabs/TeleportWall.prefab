@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 1316355954648088216}
   - component: {fileID: 1316355954648088217}
   - component: {fileID: 1316355954648088222}
+  - component: {fileID: 5472005710393927677}
   m_Layer: 14
   m_Name: TeleportWall
   m_TagString: Untagged
@@ -95,3 +96,16 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &5472005710393927677
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1316355954648088223}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 479e91e54666a8a4db5dfcc48a677eb6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isFloor: 0
