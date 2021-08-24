@@ -11,26 +11,31 @@ public class TeleportWall : MonoBehaviour
     private float playerHeightOffset = 2f;
     private void Start()
     {
-        player = GameObject.FindWithTag("Player");
-        boxCollider = gameObject.GetComponent<BoxCollider>();
+        //the script functionality is only needed, when a TeleportWall is used as floor,
+        //hence the script disables itself otherwise to save performance
+        if(isFloor)
+        {
+            player = GameObject.FindWithTag("Player");
+            boxCollider = gameObject.GetComponent<BoxCollider>();
+        } else
+        {
+            gameObject.GetComponent<TeleportWall>().enabled = false;
+        }
     }
     void Update()
     {
-        if(isFloor)
+        if (player.transform.position.y + playerHeightOffset >= gameObject.transform.position.y)
         {
-            if (player.transform.position.y + playerHeightOffset >= gameObject.transform.position.y)
+            if(!isColliderDisabled)
             {
-                if(!isColliderDisabled)
-                {
-                    boxCollider.enabled = false;
-                    isColliderDisabled = true;
-                }
+                boxCollider.enabled = false;
+                isColliderDisabled = true;
             }
-            else if (isColliderDisabled)
-            {
-                boxCollider.enabled = true;
-                isColliderDisabled = false;
-          }
+        }
+        else if (isColliderDisabled)
+        {
+            boxCollider.enabled = true;
+            isColliderDisabled = false;
         }
     }
 }
