@@ -5,6 +5,8 @@ using UnityEngine;
 public class ThrowTargetListener : MonoBehaviour
 {
 
+    public ThrowContainer ThrowContainer;
+    public bool isActive = false;
    
     // Start is called before the first frame update
     void Start()
@@ -21,7 +23,13 @@ public class ThrowTargetListener : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        gameObject.GetComponent<Renderer>().material.color = new Color(0, 255, 0, 1f);
+        if(!isActive)
+        {
+            gameObject.GetComponent<Renderer>().material.color = new Color(0, 255, 0, 1f);
+            isActive = true;
+            ThrowContainer.AllowRespawn = false;
+        }
+        
 
     }
 }

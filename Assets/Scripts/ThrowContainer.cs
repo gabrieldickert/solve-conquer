@@ -6,6 +6,7 @@ public class ThrowContainer : MonoBehaviour
 {
 
     private Dictionary<GameObject,Vector3> ThrowablesDic;
+    public bool AllowRespawn = true;
     // Start is called before the first frame update
     void Start()
     {
@@ -34,16 +35,20 @@ public class ThrowContainer : MonoBehaviour
 
     void ResetThrowableObject(int instanceID) {
 
-    foreach(GameObject o in this.ThrowablesDic.Keys)
+    if(AllowRespawn)
         {
-            if (o.GetInstanceID() == instanceID)
+            foreach (GameObject o in this.ThrowablesDic.Keys)
             {
-                o.GetComponent<Rigidbody>().velocity = new Vector3(0, 0, 0);
+                if (o.GetInstanceID() == instanceID)
+                {
+                    o.GetComponent<Rigidbody>().velocity = new Vector3(0, 0, 0);
 
-                o.transform.position = this.ThrowablesDic[o];
-         
+                    o.transform.position = this.ThrowablesDic[o];
+
+                }
             }
         }
+
     
     }
 }
