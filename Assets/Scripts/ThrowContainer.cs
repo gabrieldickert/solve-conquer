@@ -9,6 +9,7 @@ public class ThrowContainer : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        EventsManager.instance.ResetThrowable += ResetThrowableObject;
         //Check for all Throwables and get initpos
         this.ThrowablesDic = new Dictionary<GameObject, Vector3>();
 
@@ -29,5 +30,20 @@ public class ThrowContainer : MonoBehaviour
     void Update()
     {
         
+    }
+
+    void ResetThrowableObject(int instanceID) {
+
+    foreach(GameObject o in this.ThrowablesDic.Keys)
+        {
+            if (o.GetInstanceID() == instanceID)
+            {
+                o.GetComponent<Rigidbody>().velocity = new Vector3(0, 0, 0);
+
+                o.transform.position = this.ThrowablesDic[o];
+         
+            }
+        }
+    
     }
 }
