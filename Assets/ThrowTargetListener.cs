@@ -7,7 +7,7 @@ public class ThrowTargetListener : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        gameObject.GetComponent<Renderer>().material.color = new Color(255, 0, 0, 1f);
     }
 
     // Update is called once per frame
@@ -17,10 +17,9 @@ public class ThrowTargetListener : MonoBehaviour
     }
 
 
-    private void OnTriggerEnter(Collider other)
+    private void OnCollisionEnter(Collision collision)
     {
+        gameObject.GetComponent<Renderer>().material.color = new Color(0, 255, 0, 1f);
 
-
-        Debug.Log("Ball drauf");
     }
 }
