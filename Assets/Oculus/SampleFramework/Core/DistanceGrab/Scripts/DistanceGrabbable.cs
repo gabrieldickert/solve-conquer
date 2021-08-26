@@ -24,7 +24,6 @@ namespace OculusSampleFramework
         Renderer m_renderer;
         MaterialPropertyBlock m_mpb;
 
-
         public bool InRange
         {
             get { return m_inRange; }
