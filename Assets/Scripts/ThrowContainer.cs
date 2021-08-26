@@ -27,12 +27,6 @@ public class ThrowContainer : MonoBehaviour
 
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     void ResetThrowableObject(int instanceID) {
 
             foreach (GameObject o in this.ThrowablesDic.Keys)

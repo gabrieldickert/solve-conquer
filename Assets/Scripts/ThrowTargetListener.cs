@@ -5,7 +5,6 @@ using UnityEngine;
 public class ThrowTargetListener : MonoBehaviour
 {
 
-    public ThrowContainer ThrowContainer;
     public bool isActive = false;
     public int trigger1 = 0;
     public int trigger2 = 0;
@@ -15,13 +14,6 @@ public class ThrowTargetListener : MonoBehaviour
     {
         gameObject.GetComponent<Renderer>().material.color = new Color(255, 0, 0, 1f);
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
 
     private void OnCollisionEnter(Collision collision)
     {
