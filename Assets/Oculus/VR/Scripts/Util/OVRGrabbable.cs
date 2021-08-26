@@ -119,6 +119,7 @@ public class OVRGrabbable : MonoBehaviour
 	/// </summary>
 	virtual public void GrabEnd(Vector3 linearVelocity, Vector3 angularVelocity)
     {
+        /*
         if(m_grabbedBy.grabbedObject.gameObject.tag.Equals("Throwable"))
         {
             linearVelocity *= 2.5f;
@@ -129,7 +130,7 @@ public class OVRGrabbable : MonoBehaviour
         rb.velocity = linearVelocity;
         rb.angularVelocity = angularVelocity;
         m_grabbedBy = null;
-        m_grabbedCollider = null;
+        m_grabbedCollider = null;*/
     }
 
     void Awake()

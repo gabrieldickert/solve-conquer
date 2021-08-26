@@ -24,6 +24,9 @@ namespace OculusSampleFramework
         Renderer m_renderer;
         MaterialPropertyBlock m_mpb;
 
+        public bool IsThrowable = false;
+        public float ThrowGain = 1 ;
+
         public bool InRange
         {
             get { return m_inRange; }
@@ -62,7 +65,8 @@ namespace OculusSampleFramework
 
             if (m_grabbedBy.grabbedObject.gameObject.tag.Equals("Throwable"))
             {
-                linearVelocity *= 2.5f;
+                linearVelocity *= ThrowGain;
+               // linearVelocity =  new Vector3(0, 0, 0);
             }
             
             Rigidbody rb = gameObject.GetComponent<Rigidbody>();
