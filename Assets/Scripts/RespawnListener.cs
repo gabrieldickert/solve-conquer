@@ -7,6 +7,7 @@ public class RespawnListener : MonoBehaviour
     public bool enablePlayerCollision;
     public bool enableCompanionCollision;
     public bool enableObjectCollision;
+    public bool enableThrowableCollision;
 
     // Start is called before the first frame update
     private void Start()
@@ -40,6 +41,13 @@ public class RespawnListener : MonoBehaviour
                 if (enableObjectCollision)
                 {
                     EventsManager.instance.OnResetObject(other.gameObject.GetInstanceID());
+                }
+                break;
+
+            case "Throwable": 
+                if(enableThrowableCollision)
+                {
+                    EventsManager.instance.OnResetThrowable(other.gameObject.GetInstanceID());
                 }
                 break;
         }

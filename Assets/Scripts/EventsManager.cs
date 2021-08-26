@@ -20,6 +20,7 @@ public class EventsManager : MonoBehaviour
     public event Action<int> SwitchEnable;
     public event Action<int> SwitchDisable;
     public event Action<int> ResetObject;
+    public event Action<int> ResetThrowable;
     public event Action ResetPlayer;
     public event Action ResetCompanion;
     public event Action<Vector3> CompanionWaitAt;
@@ -34,6 +35,8 @@ public class EventsManager : MonoBehaviour
     public event Action<int> LogicGateEnable;
     public event Action<int> LogicGateDisable;
     public event Action<int> PlayerEnteredTrigger;
+    public event Action<int> ThrowableTargetEnable;
+    public event Action<int> ThrowableTargetDisable;
 
     private int companionId { get; set; }
 
@@ -65,6 +68,10 @@ public class EventsManager : MonoBehaviour
     {
         //UnityEngine.Debug.Log("EventsManager: OnPressurePlateDisable");
         ResetObject?.Invoke(instanceId);
+    }
+    public void OnResetThrowable(int instanceId)
+    {
+        ResetThrowable?.Invoke(instanceId);
     }
     public void OnResetPlayer()
     {
@@ -144,5 +151,16 @@ public class EventsManager : MonoBehaviour
     {
         //UnityEngine.Debug.Log("EventsManager: OnPlayerEnteredTrigger");
         PlayerEnteredTrigger?.Invoke(triggerId);
+    }
+
+    public void OnThrowableTargetEnable(int triggerId)
+    {
+        ThrowableTargetEnable?.Invoke(triggerId);
+
+    } 
+
+    public void OnThrowableTargetDisable(int triggerId)
+    {
+        ThrowableTargetDisable?.Invoke(triggerId);
     }
 }

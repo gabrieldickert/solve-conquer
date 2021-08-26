@@ -12,7 +12,7 @@ public class ForceObjectBarrier : MonoBehaviour
     private OVRGrabber LeftHandGrabber;
     private OVRGrabber RightHandGrabber;
 
-    
+   
 
     void Start()
     {
