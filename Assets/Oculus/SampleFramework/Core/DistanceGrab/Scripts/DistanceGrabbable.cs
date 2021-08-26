@@ -18,7 +18,7 @@ namespace OculusSampleFramework
     public class DistanceGrabbable : OVRGrabbable
     {
         public string m_materialColorField;
-
+        
         GrabbableCrosshair m_crosshair;
         GrabManager m_crosshairManager;
         Renderer m_renderer;
@@ -56,7 +56,22 @@ namespace OculusSampleFramework
             RefreshCrosshair();
             m_renderer.SetPropertyBlock(m_mpb);
         }
+       public override void GrabEnd(Vector3 linearVelocity, Vector3 angularVelocity
+)
+        {
 
+            if (m_grabbedBy.grabbedObject.gameObject.tag.Equals("Throwable"))
+            {
+                linearVelocity *= 2.5f;
+            }
+            
+            Rigidbody rb = gameObject.GetComponent<Rigidbody>();
+            rb.isKinematic = m_grabbedKinematic;
+            rb.velocity = linearVelocity;
+            rb.angularVelocity = angularVelocity;
+            m_grabbedBy = null;
+            m_grabbedCollider = null;
+        }
         void RefreshCrosshair()
         {
             if (m_crosshair)
