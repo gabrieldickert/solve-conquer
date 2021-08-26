@@ -63,7 +63,7 @@ namespace OculusSampleFramework
 )
         {
 
-            if (m_grabbedBy.grabbedObject.gameObject.tag.Equals("Throwable"))
+            if (m_grabbedBy.grabbedObject.gameObject.tag.Equals("Throwable") && IsThrowable)
             {
                 linearVelocity *= ThrowGain;
                // linearVelocity =  new Vector3(0, 0, 0);
