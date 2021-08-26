@@ -35,6 +35,8 @@ public class EventsManager : MonoBehaviour
     public event Action<int> LogicGateEnable;
     public event Action<int> LogicGateDisable;
     public event Action<int> PlayerEnteredTrigger;
+    public event Action<int> ThrowableTargetEnable;
+    public event Action<int> ThrowableTargetDisable;
 
     private int companionId { get; set; }
 
@@ -149,5 +151,16 @@ public class EventsManager : MonoBehaviour
     {
         //UnityEngine.Debug.Log("EventsManager: OnPlayerEnteredTrigger");
         PlayerEnteredTrigger?.Invoke(triggerId);
+    }
+
+    public void OnThrowableTargetEnable(int triggerId)
+    {
+        ThrowableTargetEnable?.Invoke(triggerId);
+
+    } 
+
+    public void OnThrowableTargetDisable(int triggerId)
+    {
+        ThrowableTargetDisable?.Invoke(triggerId);
     }
 }
