@@ -47,7 +47,7 @@ public class RespawnListener : MonoBehaviour
             case "Throwable": 
                 if(enableThrowableCollision)
                 {
-                    EventsManager.instance.OnResetThrowable(other.gameObject.GetInstanceID());
+                    EventsManager.instance.OnResetObject(other.gameObject.GetInstanceID());
                 }
                 break;
         }
