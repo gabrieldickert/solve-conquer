@@ -14,6 +14,19 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 3357736530001707188, guid: 032bb81729bc820448ba81fed584beb2, type: 3}
+--- !u!65 &1973094170810481541
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3190005968048813029}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.03, y: 0.01, z: 0.03}
+  m_Center: {x: 0, y: -0.04, z: 0.029999994}
 --- !u!64 &8882073121859263942
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -28,19 +41,6 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 3357736530001707188, guid: 032bb81729bc820448ba81fed584beb2, type: 3}
---- !u!65 &1973094170810481541
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3190005968048813029}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.03, y: 0.01, z: 0.03}
-  m_Center: {x: 0, y: -0.04, z: 0.029999994}
 --- !u!1 &3770677798287728658
 GameObject:
   m_ObjectHideFlags: 0
@@ -50,12 +50,12 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 517789221992069977}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: DispenserPipe
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!4 &517789221992069977
 Transform:
@@ -185,6 +185,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: SmallPlatePipeForwardAccelerator
       objectReference: {fileID: 0}
+    - target: {fileID: 2236996119556036996, guid: 8fd3a9a28a70b454285658fc70d76609, type: 3}
+      propertyPath: m_Layer
+      value: 16
+      objectReference: {fileID: 0}
+    - target: {fileID: 2236996119556036996, guid: 8fd3a9a28a70b454285658fc70d76609, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 8
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8fd3a9a28a70b454285658fc70d76609, type: 3}
 --- !u!1 &6597854450101536763 stripped
@@ -207,6 +215,14 @@ PrefabInstance:
     - target: {fileID: 1191218178867781797, guid: 90e28013104f97740b5ba28ec7fe35ef, type: 3}
       propertyPath: m_Name
       value: SmallPlatePipeUp
+      objectReference: {fileID: 0}
+    - target: {fileID: 1191218178867781797, guid: 90e28013104f97740b5ba28ec7fe35ef, type: 3}
+      propertyPath: m_Layer
+      value: 16
+      objectReference: {fileID: 0}
+    - target: {fileID: 1191218178867781797, guid: 90e28013104f97740b5ba28ec7fe35ef, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 7027363970281626596, guid: 90e28013104f97740b5ba28ec7fe35ef, type: 3}
       propertyPath: m_RootOrder
@@ -343,6 +359,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: SmallPlatePipeAngle
       objectReference: {fileID: 0}
+    - target: {fileID: 5000742718543379231, guid: 10045c00e77e0e645a7afac9ec1d1dfe, type: 3}
+      propertyPath: m_Layer
+      value: 16
+      objectReference: {fileID: 0}
+    - target: {fileID: 5000742718543379231, guid: 10045c00e77e0e645a7afac9ec1d1dfe, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 8
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 10045c00e77e0e645a7afac9ec1d1dfe, type: 3}
 --- !u!1 &2046417548816034360 stripped
@@ -422,6 +446,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: SmallPlatePipeAngle (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 5000742718543379231, guid: 10045c00e77e0e645a7afac9ec1d1dfe, type: 3}
+      propertyPath: m_Layer
+      value: 16
+      objectReference: {fileID: 0}
+    - target: {fileID: 5000742718543379231, guid: 10045c00e77e0e645a7afac9ec1d1dfe, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 8
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 10045c00e77e0e645a7afac9ec1d1dfe, type: 3}
 --- !u!1 &3190005968048813029 stripped
@@ -500,6 +532,14 @@ PrefabInstance:
     - target: {fileID: 5000742718543379231, guid: 10045c00e77e0e645a7afac9ec1d1dfe, type: 3}
       propertyPath: m_Name
       value: SmallPlatePipeAngle (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5000742718543379231, guid: 10045c00e77e0e645a7afac9ec1d1dfe, type: 3}
+      propertyPath: m_Layer
+      value: 16
+      objectReference: {fileID: 0}
+    - target: {fileID: 5000742718543379231, guid: 10045c00e77e0e645a7afac9ec1d1dfe, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 10045c00e77e0e645a7afac9ec1d1dfe, type: 3}
