@@ -14,6 +14,9 @@ public class NotGate : MonoBehaviour
         EventsManager.instance.PressurePlateDisable += HandleActivatorDisable;
         EventsManager.instance.SwitchEnable += HandleActivatorEnable;
         EventsManager.instance.SwitchDisable += HandleActivatorDisable;
+        EventsManager.instance.ThrowableTargetEnable += HandleActivatorEnable;
+        EventsManager.instance.ThrowableTargetDisable += HandleActivatorDisable;
+
         gateRenderer = GetComponent<Renderer>();
         gateRenderer.material.color = isActiveOnStart ? Color.green : Color.red;
     }

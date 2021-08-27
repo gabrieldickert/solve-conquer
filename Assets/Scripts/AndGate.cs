@@ -18,7 +18,9 @@ public class AndGate : MonoBehaviour
         EventsManager.instance.SwitchDisable += HandleActivatorDisable;
         EventsManager.instance.LogicGateEnable += HandleActivatorEnable;
         EventsManager.instance.LogicGateDisable += HandleActivatorDisable;
-        
+        EventsManager.instance.ThrowableTargetEnable += HandleActivatorEnable;
+        EventsManager.instance.ThrowableTargetDisable += HandleActivatorDisable;
+
         gateRenderer = GetComponent<Renderer>();
         gateRenderer.material.color = isActiveOnStart ? Color.green : Color.red;
     }

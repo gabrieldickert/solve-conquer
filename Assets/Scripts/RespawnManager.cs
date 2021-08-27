@@ -13,6 +13,7 @@ public class RespawnManager : MonoBehaviour
     {
         EventsManager.instance.ResetCompanion += Instance_ResetCompanion;
         EventsManager.instance.ResetPlayer += Instance_ResetPlayer;
+        
         //Loop through every Stage, find every level and create a List containg the Levelobjects
         foreach (GameObject stageobj in GameObject.FindGameObjectsWithTag("Stage"))
         {
@@ -59,10 +60,7 @@ public class RespawnManager : MonoBehaviour
         //Debug.Log("Reset Companion");
     }
 
-    // Update is called once per frame
-    private void Update()
-    {
-    }
+    
 }
 
 public class LevelInstance
@@ -96,7 +94,7 @@ public class LevelInstance
             }
         }
         //resort all respawnables to avoid bugs with grabbable objects
-        ReorderRespawnablesInSceneTree();
+        //ReorderRespawnablesInSceneTree();
 
     }
 
