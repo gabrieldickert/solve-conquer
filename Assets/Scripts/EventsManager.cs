@@ -37,6 +37,8 @@ public class EventsManager : MonoBehaviour
     public event Action<int> PlayerEnteredTrigger;
     public event Action<int> ThrowableTargetEnable;
     public event Action<int> ThrowableTargetDisable;
+    public event Action<int> AntennaEnable;
+    public event Action<int> AntennaDisable;
 
     private int companionId { get; set; }
 
@@ -162,5 +164,16 @@ public class EventsManager : MonoBehaviour
     public void OnThrowableTargetDisable(int triggerId)
     {
         ThrowableTargetDisable?.Invoke(triggerId);
+    }
+
+    public void OnAntennaEnable(int triggerId)
+    {
+        AntennaEnable?.Invoke(triggerId);
+
+    }
+
+    public void OnAntennaDisable(int triggerId)
+    {
+        AntennaDisable?.Invoke(triggerId);
     }
 }
