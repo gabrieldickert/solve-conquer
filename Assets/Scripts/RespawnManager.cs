@@ -33,6 +33,11 @@ public class RespawnManager : MonoBehaviour
         //Debug.Log("Reset Player");
 
         GameData gd = SaveSystem.LoadGame();
+
+        MovingPlatform plat = GameObject.Find(gd.MovingPlatformName).GetComponent<MovingPlatform>();
+
+        
+        /*
         Vector3 spawnPos = new Vector3(gd.positionPad[0], gd.positionPad[1], gd.positionPad[2]);
         this.PlayerController.transform.position = spawnPos;
 
@@ -45,7 +50,7 @@ public class RespawnManager : MonoBehaviour
             this.Companion.transform.position = spawnPos;
             this.Companion.transform.GetComponent<NavMeshAgent>().enabled = true;
         }
-
+        */
         LevelInstance currentLvl = this.RespawnStageLevels[gd.stage].Find(g => g.levelobj.name.Equals(gd.lvl));
 
         foreach (RespawnObject o in currentLvl.respawnObjList)
@@ -58,6 +63,7 @@ public class RespawnManager : MonoBehaviour
     {
         //Reset Player Position and Companion Pos (should be last save point)
         //Debug.Log("Reset Companion");
+        this.Instance_ResetPlayer();
     }
 
     
