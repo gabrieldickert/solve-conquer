@@ -28,14 +28,18 @@ public class MovingPlatformSaveEntity : MonoBehaviour
     {
        
         GameData gd =   SaveSystem.LoadGame();
-
-        if(!gd.MovingPlatformName.Equals(this.name))
+            
+        if(gd == null || !this.name.Equals(gd.MovingPlatformName))
         {
             Debug.Log(this.GetComponent<MovingPlatformNew>());
             SaveSystem.SaveGame(this.GetComponent<MovingPlatformNew>(), this.Stage, this.Lvl, this.Companion.activeInHierarchy ? true : false);
             this.Canvas.SetActive(true);
             StartCoroutine("WaitForSec");
         }
+      /*  if(!gd.MovingPlatformName.Equals(this.name))
+        {*/
+    
+      //  }
       
 
 

@@ -34,14 +34,20 @@ public class RespawnManager : MonoBehaviour
 
         GameData gd = SaveSystem.LoadGame();
 
+        Debug.Log(gd.MovingPlatformName);
+
         MovingPlatformNew plat = GameObject.Find(gd.MovingPlatformName).GetComponent<MovingPlatformNew>();
 
-        GameObject.FindWithTag("Player").transform.position = plat.VisualTrigger1.GetComponent<MeshRenderer>().bounds.center;
+        GameObject player = GameObject.FindWithTag("Player");
+
+        player.transform.parent = plat.VisualTrigger1.transform;
+        player.transform.position = plat.VisualTrigger1.GetComponent<MeshRenderer>().bounds.center;
 
         if(gd.saveCompanionPosition)
         {
-
-            GameObject.FindWithTag("Companion").transform.position = plat.VisualTrigger2.GetComponent<MeshRenderer>().bounds.center;
+            GameObject companion = GameObject.FindWithTag("Companion");
+            companion.transform.parent = plat.VisualTrigger2.transform;
+            companion.transform.position = plat.VisualTrigger2.GetComponent<MeshRenderer>().bounds.center;
         }
         
         /*
