@@ -6,7 +6,7 @@ public static class SaveSystem {
 
     public static bool gameLoaded = false;
 
-    public static void SaveGame(MovingPlatform plat,string stage,string lvl, bool saveCompanionPosition)
+    public static void SaveGame(MovingPlatformNew plat,string stage,string lvl, bool saveCompanionPosition)
     {
         BinaryFormatter formatter = new BinaryFormatter();
         string path = Application.persistentDataPath + "/savegame.dat";

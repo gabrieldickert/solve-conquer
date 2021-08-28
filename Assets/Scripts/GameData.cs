@@ -11,7 +11,7 @@ public class GameData {
     public string MovingPlatformName;
     public bool saveCompanionPosition;
 
-    public GameData (MovingPlatform plat,string stage,string lvl, bool saveCompanionPosition)
+    public GameData (MovingPlatformNew plat,string stage,string lvl, bool saveCompanionPosition)
     {
         /*
         positionPlayer = new float[3];

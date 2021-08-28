@@ -34,7 +34,7 @@ public class RespawnManager : MonoBehaviour
 
         GameData gd = SaveSystem.LoadGame();
 
-        MovingPlatform plat = GameObject.Find(gd.MovingPlatformName).GetComponent<MovingPlatform>();
+        MovingPlatformNew plat = GameObject.Find(gd.MovingPlatformName).GetComponent<MovingPlatformNew>();
 
         GameObject.FindWithTag("Player").transform.position = plat.VisualTrigger1.GetComponent<MeshRenderer>().bounds.center;
 

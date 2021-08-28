@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -25,9 +26,18 @@ public class MovingPlatformSaveEntity : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        SaveSystem.SaveGame(this.GetComponent<MovingPlatform>(), this.Stage, this.Lvl, this.Companion.activeInHierarchy ? true : false);
-        this.Canvas.SetActive(true);
-        StartCoroutine("WaitForSec");
+       
+        GameData gd =   SaveSystem.LoadGame();
+
+        if(!gd.MovingPlatformName.Equals(this.name))
+        {
+            Debug.Log(this.GetComponent<MovingPlatformNew>());
+            SaveSystem.SaveGame(this.GetComponent<MovingPlatformNew>(), this.Stage, this.Lvl, this.Companion.activeInHierarchy ? true : false);
+            this.Canvas.SetActive(true);
+            StartCoroutine("WaitForSec");
+        }
+      
+
 
     }
 
