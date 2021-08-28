@@ -36,6 +36,13 @@ public class RespawnManager : MonoBehaviour
 
         MovingPlatform plat = GameObject.Find(gd.MovingPlatformName).GetComponent<MovingPlatform>();
 
+        GameObject.FindWithTag("Player").transform.position = plat.VisualTrigger1.GetComponent<MeshRenderer>().bounds.center;
+
+        if(gd.saveCompanionPosition)
+        {
+
+            GameObject.FindWithTag("Companion").transform.position = plat.VisualTrigger2.GetComponent<MeshRenderer>().bounds.center;
+        }
         
         /*
         Vector3 spawnPos = new Vector3(gd.positionPad[0], gd.positionPad[1], gd.positionPad[2]);
