@@ -56,6 +56,10 @@ public class Barrier : MonoBehaviour
         EventsManager.instance.LogicGateDisable += HandlePressurePlateDisabled;
         EventsManager.instance.CompanionHackEnable += HandleHackEnabled;
         EventsManager.instance.CompanionHackDisable += HandleHackDisabled;
+        EventsManager.instance.ThrowableTargetEnable += HandlePressurePlateEnabled;
+        EventsManager.instance.ThrowableTargetDisable += HandlePressurePlateDisabled;
+        EventsManager.instance.AntennaEnable += HandlePressurePlateEnabled;
+        EventsManager.instance.AntennaDisable += HandlePressurePlateDisabled;
     }
 
     // Update is called once per frame
