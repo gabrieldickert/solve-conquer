@@ -27,10 +27,10 @@ public class SaveGamePad : MonoBehaviour
 
             if(saveCompanionPosition)
             {
-                SaveSystem.SaveGame(player, companion, this, stage, lvl, saveCompanionPosition);
+               // SaveSystem.SaveGame(player, companion, this, stage, lvl, saveCompanionPosition);
             } else
             {
-                SaveSystem.SaveGame(player, companion,this, stage, lvl, false);
+                //SaveSystem.SaveGame(player, companion,this, stage, lvl, false);
             }
             
             canvas.SetActive(true);

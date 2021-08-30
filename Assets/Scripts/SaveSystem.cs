@@ -6,13 +6,13 @@ public static class SaveSystem {
 
     public static bool gameLoaded = false;
 
-    public static void SaveGame(Player player, Companion companion, SaveGamePad pad,string stage,string lvl, bool saveCompanionPosition)
+    public static void SaveGame(MovingPlatformNew plat,string stage,string lvl, bool saveCompanionPosition)
     {
         BinaryFormatter formatter = new BinaryFormatter();
         string path = Application.persistentDataPath + "/savegame.dat";
         FileStream stream = new FileStream(path, FileMode.Create);
 
-        GameData data = new GameData(player, companion, pad, stage, lvl, saveCompanionPosition);
+        GameData data = new GameData(plat, stage, lvl, saveCompanionPosition);
 
         formatter.Serialize(stream, data);
         stream.Close();

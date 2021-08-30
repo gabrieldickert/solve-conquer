@@ -33,6 +33,24 @@ public class RespawnManager : MonoBehaviour
         //Debug.Log("Reset Player");
 
         GameData gd = SaveSystem.LoadGame();
+
+        Debug.Log(gd.MovingPlatformName);
+
+        MovingPlatformNew plat = GameObject.Find(gd.MovingPlatformName).GetComponent<MovingPlatformNew>();
+
+        GameObject player = GameObject.FindWithTag("Player");
+
+        player.transform.parent = plat.VisualTrigger1.transform;
+        player.transform.position = plat.VisualTrigger1.GetComponent<MeshRenderer>().bounds.center;
+
+        if(gd.saveCompanionPosition)
+        {
+            GameObject companion = GameObject.FindWithTag("Companion");
+            companion.transform.parent = plat.VisualTrigger2.transform;
+            companion.transform.position = plat.VisualTrigger2.GetComponent<MeshRenderer>().bounds.center;
+        }
+        
+        /*
         Vector3 spawnPos = new Vector3(gd.positionPad[0], gd.positionPad[1], gd.positionPad[2]);
         this.PlayerController.transform.position = spawnPos;
 
@@ -45,7 +63,7 @@ public class RespawnManager : MonoBehaviour
             this.Companion.transform.position = spawnPos;
             this.Companion.transform.GetComponent<NavMeshAgent>().enabled = true;
         }
-
+        */
         LevelInstance currentLvl = this.RespawnStageLevels[gd.stage].Find(g => g.levelobj.name.Equals(gd.lvl));
 
         foreach (RespawnObject o in currentLvl.respawnObjList)
@@ -58,6 +76,7 @@ public class RespawnManager : MonoBehaviour
     {
         //Reset Player Position and Companion Pos (should be last save point)
         //Debug.Log("Reset Companion");
+        this.Instance_ResetPlayer();
     }
 
     

@@ -8,10 +8,12 @@ public class GameData {
     public float[] positionPlayer, positionCompanion, positionPad;
     public string stage;
     public string lvl;
+    public string MovingPlatformName;
     public bool saveCompanionPosition;
 
-    public GameData (Player player, Companion companion, SaveGamePad pad,string stage,string lvl, bool saveCompanionPosition)
+    public GameData (MovingPlatformNew plat,string stage,string lvl, bool saveCompanionPosition)
     {
+        /*
         positionPlayer = new float[3];
         positionPlayer[0] = player.transform.position.x;
         positionPlayer[1] = player.transform.position.y;
@@ -26,7 +28,8 @@ public class GameData {
         positionPad[0] = pad.transform.position.x;
         positionPad[1] = pad.transform.position.y;
         positionPad[2] = pad.transform.position.z;
-
+        */
+        this.MovingPlatformName = plat.name;
         this.stage = stage;
         this.lvl = lvl;
         this.saveCompanionPosition = saveCompanionPosition;
