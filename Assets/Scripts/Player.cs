@@ -14,7 +14,7 @@ public class Player : MonoBehaviour
 
     public void LoadGame()
     {
-        GameData data = SaveSystem.LoadGame();
+        //  GameData data = SaveSystem.LoadGame();
 
         //Vector3 positionPlayer;
         //positionPlayer.x = data.positionPlayer[0];
@@ -28,20 +28,42 @@ public class Player : MonoBehaviour
         //positionCompanion.z = data.positionCompanion[2];
         //companion.transform.position = positionCompanion;
 
-        Vector3 positionPad;
-        positionPad.x = data.positionPad[0];
-        positionPad.y = data.positionPad[1];
-        positionPad.z = data.positionPad[2];
+        /*  Vector3 positionPad;
+          positionPad.x = data.positionPad[0];
+          positionPad.y = data.positionPad[1];
+          positionPad.z = data.positionPad[2];
 
-        this.transform.position = positionPad;
-        Debug.Log(data.saveCompanionPosition);
-        if(data.saveCompanionPosition)
+          this.transform.position = positionPad;
+          Debug.Log(data.saveCompanionPosition);
+          if(data.saveCompanionPosition)
+          {
+              companion.GetComponent<NavMeshAgent>().enabled = false;
+              companion.transform.position = positionPad + new Vector3(1.5f, 0, 0);
+              companion.GetComponent<NavMeshAgent>().enabled = true;
+          }*/
+
+
+        GameData gd = SaveSystem.LoadGame();
+
+     if(gd != null)
         {
-            companion.GetComponent<NavMeshAgent>().enabled = false;
-            companion.transform.position = positionPad + new Vector3(1.5f, 0, 0);
-            companion.GetComponent<NavMeshAgent>().enabled = true;
+            MovingPlatformNew plat = GameObject.Find(gd.MovingPlatformName).GetComponent<MovingPlatformNew>();
+
+            GameObject player = GameObject.FindWithTag("Player");
+
+            player.transform.parent = plat.VisualTrigger1.transform;
+            player.transform.position = plat.VisualTrigger1.GetComponent<MeshRenderer>().bounds.center;
+
+            if (gd.saveCompanionPosition)
+            {
+                GameObject companion = GameObject.FindWithTag("Companion");
+                companion.transform.parent = plat.VisualTrigger2.transform;
+                companion.transform.position = plat.VisualTrigger2.GetComponent<MeshRenderer>().bounds.center;
+            }
+
         }
-  
+
+
         menu.SetActive(false);
         IngameMenu.showMenu = false;
     }
@@ -67,7 +89,7 @@ public class Player : MonoBehaviour
     }
     
     
-    public void StarNewGame()
+    public void StartNewGame()
     {
 
         string CurrenPath = Application.persistentDataPath + "/savegame.dat";
