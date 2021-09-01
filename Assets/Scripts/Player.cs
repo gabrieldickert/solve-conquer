@@ -58,7 +58,11 @@ public class Player : MonoBehaviour
         }
 
     }
-    /*
+
+    public void ExitGame() {
+
+        Application.Quit();
+    }   /*
     private void OnCollisionEnter(Collision collision)
     {
         if(collision.transform.parent.parent.name == "Floor1" && !FindObjectOfType<AudioManager>().Playing("Theme", 0))
