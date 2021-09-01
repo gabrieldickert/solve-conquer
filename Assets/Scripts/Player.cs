@@ -1,8 +1,10 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using UnityEngine;
 using UnityEngine.AI;
-
+using UnityEngine.SceneManagement;
 public class Player : MonoBehaviour
 {
     public Companion companion;
@@ -62,7 +64,34 @@ public class Player : MonoBehaviour
     public void ExitGame() {
 
         Application.Quit();
-    }   /*
+    }
+    
+    
+    public void StarNewGame()
+    {
+
+        string CurrenPath = Application.persistentDataPath + "/savegame.dat";
+
+        if(File.Exists(CurrenPath))
+        {
+            try
+            {
+
+                File.Delete(CurrenPath);
+
+               // SceneManager.LoadScene("PlanetaryApproach", LoadSceneMode.Single);
+                
+            }
+
+            catch(Exception e)
+            {
+                Debug.LogException(e);
+
+            }
+        }
+
+    }
+    /*
     private void OnCollisionEnter(Collision collision)
     {
         if(collision.transform.parent.parent.name == "Floor1" && !FindObjectOfType<AudioManager>().Playing("Theme", 0))
