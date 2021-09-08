@@ -37,8 +37,6 @@ public class Antenna : MonoBehaviour
 
         antenna = transform.GetChild(0).GetChild(0).transform;
         sphere = transform.GetChild(0).transform;
-        Debug.Log(sphere);
-        Debug.Log(antenna);
 
         
         offset = new Vector3(90, 0, 0) - antenna.transform.localEulerAngles;
