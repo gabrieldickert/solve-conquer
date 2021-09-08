@@ -26,7 +26,7 @@ RenderSettings:
   m_AmbientIntensity: 1
   m_AmbientMode: 3
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
-  m_SkyboxMaterial: {fileID: 10304, guid: 0000000000000000f000000000000000, type: 0}
+  m_SkyboxMaterial: {fileID: 2100000, guid: 860a66ca4259b384f9ec01b687f71c3c, type: 2}
   m_HaloStrength: 0.5
   m_FlareStrength: 1
   m_FlareFadeSpeed: 3
@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.37311953, g: 0.38074014, b: 0.3587274, a: 1}
+  m_IndirectSpecularColor: {r: 0.04273933, g: 0.040200353, b: 0.044176288, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -148,7 +148,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 121712021}
   m_LocalRotation: {x: -0, y: -0.39462864, z: -0, w: 0.9188407}
-  m_LocalPosition: {x: 20.33, y: -5.95, z: -4.19}
+  m_LocalPosition: {x: -8.14, y: 2.27, z: -3.85}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 202399666}
@@ -293,7 +293,7 @@ Light:
   m_Type: 0
   m_Shape: 0
   m_Color: {r: 0.7735849, g: 0.4189801, b: 0.2238044, a: 1}
-  m_Intensity: 100
+  m_Intensity: 150
   m_Range: 20000
   m_SpotAngle: 30
   m_InnerSpotAngle: 1
@@ -987,7 +987,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1148935822}
   m_LocalRotation: {x: -0, y: -0.39462864, z: -0, w: 0.9188407}
-  m_LocalPosition: {x: -15.79, y: -0.74, z: -4.24}
+  m_LocalPosition: {x: -12.31, y: 2.37, z: -4}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 202399666}
@@ -1621,15 +1621,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 76cf867c90bb4ca48bf071baae9c538a, type: 3}
       propertyPath: m_LocalScale.x
-      value: 10
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 76cf867c90bb4ca48bf071baae9c538a, type: 3}
       propertyPath: m_LocalScale.y
-      value: 10
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 76cf867c90bb4ca48bf071baae9c538a, type: 3}
       propertyPath: m_LocalScale.z
-      value: 10
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 76cf867c90bb4ca48bf071baae9c538a, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1637,7 +1637,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 76cf867c90bb4ca48bf071baae9c538a, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -72
+      value: -87
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 76cf867c90bb4ca48bf071baae9c538a, type: 3}
       propertyPath: m_LocalPosition.z
@@ -1722,7 +1722,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1552430626}
   m_LocalRotation: {x: -0, y: -0.39462864, z: -0, w: 0.9188407}
-  m_LocalPosition: {x: 12.7, y: -0.74, z: -4}
+  m_LocalPosition: {x: -0.69, y: -0.74, z: -4.08}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 202399666}
