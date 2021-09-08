@@ -245,6 +245,11 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!1 &224227495 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6799725721996934313, guid: 0b66d14eb401bbd429c488babe4cfeb0, type: 3}
+  m_PrefabInstance: {fileID: 1323565449}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &273295184
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -769,6 +774,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   timeLine: {fileID: 1064758795}
   previousTimeLine: {fileID: 1325546948}
+  player: {fileID: 224227495}
 --- !u!1001 &1323565449
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1150,15 +1156,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6799725721996934311, guid: 0b66d14eb401bbd429c488babe4cfeb0, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -8.15
+      value: 6.02
       objectReference: {fileID: 0}
     - target: {fileID: 6799725721996934311, guid: 0b66d14eb401bbd429c488babe4cfeb0, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 3.08
+      value: -1.48
       objectReference: {fileID: 0}
     - target: {fileID: 6799725721996934311, guid: 0b66d14eb401bbd429c488babe4cfeb0, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -4.03
+      value: -3.14
       objectReference: {fileID: 0}
     - target: {fileID: 6799725721996934311, guid: 0b66d14eb401bbd429c488babe4cfeb0, type: 3}
       propertyPath: m_LocalRotation.w
@@ -1194,7 +1200,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6799725721996934312, guid: 0b66d14eb401bbd429c488babe4cfeb0, type: 3}
       propertyPath: m_IsKinematic
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6799725721996934312, guid: 0b66d14eb401bbd429c488babe4cfeb0, type: 3}
       propertyPath: m_CollisionDetection

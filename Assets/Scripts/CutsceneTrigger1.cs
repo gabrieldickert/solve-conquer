@@ -5,6 +5,10 @@ public class CutsceneTrigger1 : MonoBehaviour
 {
     public GameObject timeLine;
     public GameObject previousTimeLine;
+    public GameObject player = null;
+    private float playerEnteredTriggerTime = 0;
+    private bool playerEnteredTrigger = false;
+
 
     /*void OnEnable()
     {
@@ -15,6 +19,15 @@ public class CutsceneTrigger1 : MonoBehaviour
     {
         gameObject.GetComponent<BoxCollider>().enabled = false;
         previousTimeLine.GetComponent<PlayableDirector>().stopped += OnPlayableDirectorStopped;
+        player.transform.Find("LocomotionController").GetComponent<LocomotionController>().enabled = false;
+    }
+
+    private void Update()
+    {
+        if(playerEnteredTrigger && Time.time - playerEnteredTriggerTime > 2)
+        {
+            player.GetComponent<Rigidbody>().isKinematic = true;
+        }
     }
 
     void OnPlayableDirectorStopped(PlayableDirector aDirector)
@@ -36,9 +49,11 @@ public class CutsceneTrigger1 : MonoBehaviour
     {
         if(other.gameObject.tag == "Player")
         {
-            other.gameObject.GetComponent<Rigidbody>().isKinematic = true;
+            this.player.GetComponent<Rigidbody>().interpolation = RigidbodyInterpolation.Extrapolate;
             timeLine.GetComponent<PlayableDirector>().Play();
             previousTimeLine.GetComponent<PlayableDirector>().stopped -= OnPlayableDirectorStopped;
+            this.playerEnteredTriggerTime = Time.time;
+            this.playerEnteredTrigger = true;
         }
     }
 }
