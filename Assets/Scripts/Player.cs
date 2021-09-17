@@ -113,6 +113,14 @@ public class Player : MonoBehaviour
         }
 
     }
+
+    public void SkipLevel()
+    {
+
+        Debug.Log("OmegaLEL");
+
+    }
+
     /*
     private void OnCollisionEnter(Collision collision)
     {
