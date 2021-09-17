@@ -120,28 +120,23 @@ public class Player : MonoBehaviour
     {
 
         GameData gd = SaveSystem.LoadGame();
-
- 
-
+       
         if (gd != null)
         {
             MovingPlatformNew nextPlatform = SkipLevelManager.SkipToNextLevel().GetComponent<MovingPlatformNew>();
-
-                GameObject player = GameObject.FindWithTag("Player");
-
-                player.transform.parent = nextPlatform.VisualTrigger1.transform;
-                player.transform.position = nextPlatform.VisualTrigger1.GetComponent<MeshRenderer>().bounds.center;
-
-                if (gd.saveCompanionPosition)
-                {
-                    GameObject companion = GameObject.FindWithTag("Companion");
-                    companion.transform.parent = nextPlatform.VisualTrigger2.transform;
-                    companion.transform.position = nextPlatform.VisualTrigger2.GetComponent<MeshRenderer>().bounds.center;
-                }
             
-       
-        }
+            GameObject player = GameObject.FindWithTag("Player");
 
+            player.transform.parent = nextPlatform.VisualTrigger1.transform;
+            player.transform.position = nextPlatform.VisualTrigger1.GetComponent<MeshRenderer>().bounds.center;
+
+            if (gd.saveCompanionPosition) {
+                GameObject companion = GameObject.FindWithTag("Companion");
+                companion.transform.parent = nextPlatform.VisualTrigger2.transform;
+                companion.transform.position = nextPlatform.VisualTrigger2.GetComponent<MeshRenderer>().bounds.center;
+            }
+
+        }
     }
 
     /*
