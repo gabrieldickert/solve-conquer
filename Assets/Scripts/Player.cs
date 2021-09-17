@@ -11,6 +11,8 @@ public class Player : MonoBehaviour
     public GameObject menu;
 
     private SaveGamePad pad;
+    private int currentStage = 0;
+    private int currentLevel = 0;
 
     public void LoadGame()
     {
@@ -48,7 +50,7 @@ public class Player : MonoBehaviour
      if(gd != null)
         {
             MovingPlatformNew plat = GameObject.Find(gd.MovingPlatformName).GetComponent<MovingPlatformNew>();
-
+            Debug.Log(plat);
             GameObject player = GameObject.FindWithTag("Player");
 
             player.transform.parent = plat.VisualTrigger1.transform;
@@ -117,7 +119,28 @@ public class Player : MonoBehaviour
     public void SkipLevel()
     {
 
-        Debug.Log("OmegaLEL");
+        GameData gd = SaveSystem.LoadGame();
+
+ 
+
+        if (gd != null)
+        {
+            MovingPlatformNew nextPlatform = SkipLevelManager.skipToNextLevel().GetComponent<MovingPlatformNew>();
+
+                GameObject player = GameObject.FindWithTag("Player");
+
+                player.transform.parent = nextPlatform.VisualTrigger1.transform;
+                player.transform.position = nextPlatform.VisualTrigger1.GetComponent<MeshRenderer>().bounds.center;
+
+                if (gd.saveCompanionPosition)
+                {
+                    GameObject companion = GameObject.FindWithTag("Companion");
+                    companion.transform.parent = nextPlatform.VisualTrigger2.transform;
+                    companion.transform.position = nextPlatform.VisualTrigger2.GetComponent<MeshRenderer>().bounds.center;
+                }
+            
+       
+        }
 
     }
 

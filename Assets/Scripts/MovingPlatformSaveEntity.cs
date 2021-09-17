@@ -11,6 +11,9 @@ public class MovingPlatformSaveEntity : MonoBehaviour
     private GameObject Canvas;
     private string Stage;
     private string Lvl;
+
+
+
     // Start is called before the first frame update
     void Start()
     {
