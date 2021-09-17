@@ -125,7 +125,7 @@ public class Player : MonoBehaviour
 
         if (gd != null)
         {
-            MovingPlatformNew nextPlatform = SkipLevelManager.skipToNextLevel().GetComponent<MovingPlatformNew>();
+            MovingPlatformNew nextPlatform = SkipLevelManager.SkipToNextLevel().GetComponent<MovingPlatformNew>();
 
                 GameObject player = GameObject.FindWithTag("Player");
 
