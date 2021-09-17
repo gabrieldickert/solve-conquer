@@ -35,7 +35,7 @@ public class SpaceShipLandingSceneScript : MonoBehaviour
         Player.GetComponent<Rigidbody>().isKinematic = false;
         Player.transform.parent = null;
         this.doorAnimator.SetBool("character_nearby", true);
-        Player.transform.Find("LocomotionController").GetComponent<LocomotionController>().enabled = true;
+        Player.transform.Find("LocomotionController").GetComponent<TeleportInputHandlerTouch>().enabled = true;
         transform.Find("OVRCameraRig/TrackingSpace/LeftHandAnchor").gameObject.GetComponent<LineRenderer>().enabled = true;
         transform.Find("OVRCameraRig/TrackingSpace/LeftHandAnchor").gameObject.GetComponent<CompanionAimHandler>().enabled = true;
         Player.GetComponent<Rigidbody>().interpolation = RigidbodyInterpolation.None;
