@@ -58,9 +58,12 @@ public class Player : MonoBehaviour
 
             if (gd.saveCompanionPosition)
             {
+
                 GameObject companion = GameObject.FindWithTag("Companion");
+                companion.GetComponent<NavMeshAgent>().enabled = false;
                 companion.transform.parent = plat.VisualTrigger2.transform;
                 companion.transform.position = plat.VisualTrigger2.GetComponent<MeshRenderer>().bounds.center;
+                companion.GetComponent<NavMeshAgent>().enabled = true;
             }
 
         }
@@ -132,8 +135,10 @@ public class Player : MonoBehaviour
 
             if (gd.saveCompanionPosition) {
                 GameObject companion = GameObject.FindWithTag("Companion");
+                companion.GetComponent<NavMeshAgent>().enabled = false;
                 companion.transform.parent = nextPlatform.VisualTrigger2.transform;
                 companion.transform.position = nextPlatform.VisualTrigger2.GetComponent<MeshRenderer>().bounds.center;
+                companion.GetComponent<NavMeshAgent>().enabled = true;
             }
 
         }
