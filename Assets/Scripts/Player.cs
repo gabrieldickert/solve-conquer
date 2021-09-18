@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using System.Numerics;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.SceneManagement;
@@ -9,6 +10,7 @@ public class Player : MonoBehaviour
 {
     public Companion companion;
     public GameObject menu;
+    public GameObject vehicle;
 
     private SaveGamePad pad;
     private int currentStage = 0;
@@ -49,8 +51,13 @@ public class Player : MonoBehaviour
 
      if(gd != null)
         {
+            //move spaceship to landing platform
+            this.vehicle.transform.position = new UnityEngine.Vector3(333f, 56f, 644.9f);
+            //rotate spaceship properly
+            this.vehicle.transform.eulerAngles = new UnityEngine.Vector3(360f, 130f, 0f);
+
             MovingPlatformNew plat = GameObject.Find(gd.MovingPlatformName).GetComponent<MovingPlatformNew>();
-            Debug.Log(plat);
+            //Debug.Log(plat);
             GameObject player = GameObject.FindWithTag("Player");
 
             player.transform.parent = plat.VisualTrigger1.transform;

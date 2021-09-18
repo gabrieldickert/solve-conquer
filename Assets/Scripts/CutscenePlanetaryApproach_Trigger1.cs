@@ -30,9 +30,10 @@ public class CutscenePlanetaryApproach_Trigger1 : MonoBehaviour
     {
         if(playerEnteredTrigger && Time.time - playerEnteredTriggerTime > 2)
         {
-            player.GetComponent<Rigidbody>().isKinematic = true;
             if(!nextTimelineStarted)
             {
+                player.transform.Find("LocomotionController").gameObject.SetActive(false);
+                player.GetComponent<Rigidbody>().isKinematic = true;
                 timeLine.GetComponent<PlayableDirector>().Play();
                 this.nextTimelineStarted = true;
             }
@@ -52,7 +53,7 @@ public class CutscenePlanetaryApproach_Trigger1 : MonoBehaviour
 
     void OnLoadPlanetScene(PlayableDirector aDirector)
     {
-        Debug.Log("ALERT: TIMELINE STOPPED: LOAD PLANETSCENE");
+        //Debug.Log("ALERT: TIMELINE STOPPED: LOAD PLANETSCENE");
         StartCoroutine(LoadYourAsyncScene());
     }
 
@@ -82,14 +83,12 @@ public class CutscenePlanetaryApproach_Trigger1 : MonoBehaviour
         if(other.gameObject.tag == "Player")
         {
             this.player.GetComponent<Rigidbody>().interpolation = RigidbodyInterpolation.Extrapolate;
-            //timeLine.GetComponent<PlayableDirector>().Play();
+            
             previousTimeLine.GetComponent<PlayableDirector>().stopped -= OnPlayableDirectorStopped;
             this.playerEnteredTriggerTime = Time.time;
             this.playerEnteredTrigger = true;
-            player.transform.Find("LocomotionController").gameObject.SetActive(false);
+            
             gameObject.GetComponent<MeshRenderer>().enabled = false;
-            //MeshRenderer triggerRenderer = gameObject.GetComponent<MeshRenderer>();
-            //player.transform.position = new Vector3(triggerRenderer.bounds.center.x, player.transform.position.y, triggerRenderer.bounds.center.z);
         }
     }
 }
