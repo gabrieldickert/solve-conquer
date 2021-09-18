@@ -152,7 +152,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 202399666}
-  m_RootOrder: 7
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!82 &121712023
 AudioSource:
@@ -402,7 +402,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2287818738075030748, guid: bba3fd3e9e716a641b261ac2835e55f8, type: 3}
       propertyPath: m_RootOrder
-      value: 6
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 3172941854507457308, guid: bba3fd3e9e716a641b261ac2835e55f8, type: 3}
       propertyPath: m_RootOrder
@@ -430,7 +430,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5594006218964477200, guid: bba3fd3e9e716a641b261ac2835e55f8, type: 3}
       propertyPath: m_RootOrder
-      value: 11
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 5979625656728489839, guid: bba3fd3e9e716a641b261ac2835e55f8, type: 3}
       propertyPath: m_RootOrder
@@ -832,7 +832,7 @@ Transform:
   m_LocalScale: {x: 1.5, y: 0.7, z: 1.5}
   m_Children: []
   m_Father: {fileID: 202399666}
-  m_RootOrder: 8
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &796952371
 MonoBehaviour:
@@ -1019,7 +1019,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 202399666}
-  m_RootOrder: 9
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!82 &1148935824
 AudioSource:
@@ -1661,6 +1661,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 6799725723337403679, guid: 0b66d14eb401bbd429c488babe4cfeb0, type: 3}
+      propertyPath: AimCollisionLayerMask.m_Bits
+      value: 18689
+      objectReference: {fileID: 0}
     - target: {fileID: 6799725723819562614, guid: 0b66d14eb401bbd429c488babe4cfeb0, type: 3}
       propertyPath: m_Depth
       value: 0
@@ -1863,7 +1867,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 202399666}
-  m_RootOrder: 10
+  m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!82 &1552430628
 AudioSource:
