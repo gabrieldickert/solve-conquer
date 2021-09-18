@@ -19,6 +19,11 @@ public class MovingPlatformNew : MonoBehaviour
     public bool movesBidirectionally = false;
     public bool waitOnlyAtStartAndFinish = false;
 
+
+    public int level;
+    public int stage;
+    public bool isActive;
+
     /*
     MovingPlatform modes
     0: no passengers required to start moving

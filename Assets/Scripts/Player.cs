@@ -11,6 +11,8 @@ public class Player : MonoBehaviour
     public GameObject menu;
 
     private SaveGamePad pad;
+    private int currentStage = 0;
+    private int currentLevel = 0;
 
     public void LoadGame()
     {
@@ -48,7 +50,7 @@ public class Player : MonoBehaviour
      if(gd != null)
         {
             MovingPlatformNew plat = GameObject.Find(gd.MovingPlatformName).GetComponent<MovingPlatformNew>();
-
+            Debug.Log(plat);
             GameObject player = GameObject.FindWithTag("Player");
 
             player.transform.parent = plat.VisualTrigger1.transform;
@@ -56,9 +58,12 @@ public class Player : MonoBehaviour
 
             if (gd.saveCompanionPosition)
             {
+
                 GameObject companion = GameObject.FindWithTag("Companion");
+                companion.GetComponent<NavMeshAgent>().enabled = false;
                 companion.transform.parent = plat.VisualTrigger2.transform;
                 companion.transform.position = plat.VisualTrigger2.GetComponent<MeshRenderer>().bounds.center;
+                companion.GetComponent<NavMeshAgent>().enabled = true;
             }
 
         }
@@ -113,6 +118,36 @@ public class Player : MonoBehaviour
         }
 
     }
+
+    public void SkipLevel()
+    {
+
+        GameData gd = SaveSystem.LoadGame();
+       
+        if (gd != null)
+        {
+            MovingPlatformNew nextPlatform = SkipLevelManager.SkipToNextLevel().GetComponent<MovingPlatformNew>();
+            
+            GameObject player = GameObject.FindWithTag("Player");
+
+            player.transform.parent = nextPlatform.VisualTrigger1.transform;
+            player.transform.position = nextPlatform.VisualTrigger1.GetComponent<MeshRenderer>().bounds.center;
+
+            if (gd.saveCompanionPosition) {
+                GameObject companion = GameObject.FindWithTag("Companion");
+                companion.GetComponent<NavMeshAgent>().enabled = false;
+                companion.transform.parent = nextPlatform.VisualTrigger2.transform;
+                companion.transform.position = nextPlatform.VisualTrigger2.GetComponent<MeshRenderer>().bounds.center;
+                companion.GetComponent<NavMeshAgent>().enabled = true;
+            }
+
+        }
+
+        menu.SetActive(false);
+        IngameMenu.showMenu = false;
+
+    }
+
     /*
     private void OnCollisionEnter(Collision collision)
     {

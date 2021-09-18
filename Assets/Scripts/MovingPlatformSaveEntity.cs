@@ -9,8 +9,12 @@ public class MovingPlatformSaveEntity : MonoBehaviour
     private GameObject Player;
     private GameObject Companion;
     private GameObject Canvas;
-    private string Stage;
-    private string Lvl;
+
+    [HideInInspector] public string Stage;
+    [HideInInspector] public string Lvl;
+
+    public int order;
+
     // Start is called before the first frame update
     void Start()
     {
