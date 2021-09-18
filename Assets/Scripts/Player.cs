@@ -5,16 +5,23 @@ using System.IO;
 using System.Numerics;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.Playables;
 using UnityEngine.SceneManagement;
 public class Player : MonoBehaviour
 {
     public Companion companion;
     public GameObject menu;
     public GameObject vehicle;
+    public PlayableDirector landingCutscene;
 
-    private SaveGamePad pad;
+    /*private SaveGamePad pad;
     private int currentStage = 0;
-    private int currentLevel = 0;
+    private int currentLevel = 0;*/
+
+    private void Start()
+    {
+        this.LoadGame();
+    }
 
     public void LoadGame()
     {
@@ -51,6 +58,15 @@ public class Player : MonoBehaviour
 
      if(gd != null)
         {
+            gameObject.GetComponent<Rigidbody>().isKinematic = false;
+            gameObject.transform.parent = null;
+
+            gameObject.transform.Find("LocomotionController").gameObject.SetActive(true);
+            gameObject.transform.Find("OVRCameraRig/TrackingSpace/LeftHandAnchor").gameObject.GetComponent<LineRenderer>().enabled = true;
+            gameObject.transform.Find("OVRCameraRig/TrackingSpace/LeftHandAnchor").gameObject.GetComponent<CompanionAimHandler>().enabled = true;
+            gameObject.transform.rotation = UnityEngine.Quaternion.identity;
+            gameObject.GetComponent<Rigidbody>().interpolation = RigidbodyInterpolation.None;
+
             //move spaceship to landing platform
             this.vehicle.transform.position = new UnityEngine.Vector3(333f, 56f, 644.9f);
             //rotate spaceship properly
@@ -72,7 +88,10 @@ public class Player : MonoBehaviour
                 companion.transform.position = plat.VisualTrigger2.GetComponent<MeshRenderer>().bounds.center;
                 companion.GetComponent<NavMeshAgent>().enabled = true;
             }
-
+        } else
+        {
+            //play landing cutscene, if no savegame exists (= beginning of game)
+            landingCutscene.Play();
         }
 
 
@@ -110,11 +129,8 @@ public class Player : MonoBehaviour
         {
             try
             {
-
-                File.Delete(CurrenPath);
-
-               // SceneManager.LoadScene("PlanetaryApproach", LoadSceneMode.Single);
-                
+               File.Delete(CurrenPath);
+               SceneManager.LoadScene("PlanetaryApproach", LoadSceneMode.Single);   
             }
 
             catch(Exception e)
