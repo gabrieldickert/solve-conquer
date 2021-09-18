@@ -78,10 +78,9 @@ public class Player : MonoBehaviour
 
             player.transform.parent = plat.VisualTrigger1.transform;
             player.transform.position = plat.VisualTrigger1.GetComponent<MeshRenderer>().bounds.center;
-
-            if (gd.saveCompanionPosition)
+           
+            if (gd.stage.ToCharArray()[gd.stage.Length - 1] > '1' || (gd.lvl.ToCharArray()[gd.lvl.Length - 1] == '5' && gd.stage.ToCharArray()[gd.stage.Length - 1] == '1'))
             {
-
                 GameObject companion = GameObject.FindWithTag("Companion");
                 companion.GetComponent<NavMeshAgent>().enabled = false;
                 companion.transform.parent = plat.VisualTrigger2.transform;
@@ -156,7 +155,7 @@ public class Player : MonoBehaviour
             player.transform.parent = nextPlatform.VisualTrigger1.transform;
             player.transform.position = nextPlatform.VisualTrigger1.GetComponent<MeshRenderer>().bounds.center;
 
-            if (gd.saveCompanionPosition) {
+            if (gd.stage.ToCharArray()[gd.stage.Length - 1] > '1' || (gd.lvl.ToCharArray()[gd.lvl.Length - 1] == '4' && gd.stage.ToCharArray()[gd.stage.Length - 1] == '1')) {
                 GameObject companion = GameObject.FindWithTag("Companion");
                 companion.GetComponent<NavMeshAgent>().enabled = false;
                 companion.transform.parent = nextPlatform.VisualTrigger2.transform;
