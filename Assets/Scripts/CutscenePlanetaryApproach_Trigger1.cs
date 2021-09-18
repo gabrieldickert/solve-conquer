@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.Playables;
 
-public class CutsceneTrigger1 : MonoBehaviour
+public class CutscenePlanetaryApproach_Trigger1 : MonoBehaviour
 {
     public GameObject timeLine;
     public GameObject previousTimeLine;
@@ -61,8 +61,9 @@ public class CutsceneTrigger1 : MonoBehaviour
             previousTimeLine.GetComponent<PlayableDirector>().stopped -= OnPlayableDirectorStopped;
             this.playerEnteredTriggerTime = Time.time;
             this.playerEnteredTrigger = true;
-            player.transform.Find("LocomotionController").GetComponent<TeleportInputHandlerTouch>().enabled = false;
-            MeshRenderer triggerRenderer = gameObject.GetComponent<MeshRenderer>();
+            player.transform.Find("LocomotionController").gameObject.SetActive(false);
+            gameObject.GetComponent<MeshRenderer>().enabled = false;
+            //MeshRenderer triggerRenderer = gameObject.GetComponent<MeshRenderer>();
             //player.transform.position = new Vector3(triggerRenderer.bounds.center.x, player.transform.position.y, triggerRenderer.bounds.center.z);
         }
     }
