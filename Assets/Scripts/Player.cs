@@ -137,6 +137,10 @@ public class Player : MonoBehaviour
             }
 
         }
+
+        menu.SetActive(false);
+        IngameMenu.showMenu = false;
+
     }
 
     /*

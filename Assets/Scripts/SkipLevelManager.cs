@@ -10,9 +10,9 @@ public class SkipLevelManager : MonoBehaviour
     public MovingPlatformSaveEntity currentPlatform;
     public MovingPlatformSaveEntity nextSavePlatform;
 
-    public string level;
     public string stage;
-
+    public string level;
+    
     private static int currentIndex = 0;
 
     // Start is called before the first frame update
@@ -20,8 +20,8 @@ public class SkipLevelManager : MonoBehaviour
     {
         GameData gd = SaveSystem.LoadGame();
         currentPlatform = GameObject.Find(gd.MovingPlatformName).GetComponent<MovingPlatformSaveEntity>();
-        this.level = gd.lvl;
         this.stage = gd.stage;
+        this.level = gd.lvl;
         currentIndex = currentPlatform.order;
         this.nextSavePlatform = movingPlatforms[currentIndex + 1];
      
@@ -30,7 +30,9 @@ public class SkipLevelManager : MonoBehaviour
     private void Update()
     {
         currentPlatform = movingPlatforms[currentIndex];
-        
+        stage = movingPlatforms[currentIndex].Stage;
+        level = movingPlatforms[currentIndex].Lvl;
+
         if (currentIndex + 1 < movingPlatforms.Length)
         {
             nextSavePlatform = movingPlatforms[currentIndex + 1];
