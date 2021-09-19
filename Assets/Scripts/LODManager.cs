@@ -4,6 +4,7 @@ public class LODManager : MonoBehaviour
 {
     public GameObject[] stages_LOD0;
     public GameObject[] stages_LOD1;
+    public Vector3[] referencePointsDist;
 
     public float maxDistStage1;
     public float maxDistStage2;
@@ -23,16 +24,16 @@ public class LODManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        UpdateStage(stages_LOD0[0], stages_LOD1[0], maxDistStage1);
-        UpdateStage(stages_LOD0[1], stages_LOD1[1], maxDistStage2);
-        UpdateStage(stages_LOD0[2], stages_LOD1[2], maxDistStage3);
-        UpdateStage(stages_LOD0[3], stages_LOD1[3], maxDistStage4);
+        UpdateStage(stages_LOD0[0], stages_LOD1[0], maxDistStage1, 1);
+        UpdateStage(stages_LOD0[1], stages_LOD1[1], maxDistStage2, 2);
+        UpdateStage(stages_LOD0[2], stages_LOD1[2], maxDistStage3, 3);
+        UpdateStage(stages_LOD0[3], stages_LOD1[3], maxDistStage4, 4);
     }
 
-    void UpdateStage(GameObject lod0, GameObject lod1, float maxDistanceStage)
+    void UpdateStage(GameObject lod0, GameObject lod1, float maxDistanceStage, int stage)
     {
-        float distance = Vector3.Distance(player.transform.position, lod0.transform.position);
-        //Debug.Log("LODManager: distance to stage " + lod0 + " = " + distance);
+        float distance = Vector3.Distance(player.transform.position, referencePointsDist[stage - 1]);
+        Debug.Log("LODManager: distance to stage " + lod0 + " = " + distance);
         if (distance <= maxDistanceStage)
         {
             //enable LOD0
