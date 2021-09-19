@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class MovingPlatformSaveEntity : MonoBehaviour
 {
@@ -36,7 +37,7 @@ public class MovingPlatformSaveEntity : MonoBehaviour
         if(gd == null || !this.name.Equals(gd.MovingPlatformName))
         {
             Debug.Log(this.GetComponent<MovingPlatformNew>());
-            SaveSystem.SaveGame(this.GetComponent<MovingPlatformNew>(), this.Stage, this.Lvl, this.Companion.activeInHierarchy ? true : false);
+            SaveSystem.SaveGame(this.GetComponent<MovingPlatformNew>(), this.Stage, this.Lvl, this.Companion.GetComponent<NavMeshAgent>().enabled ? true : false);
             this.Canvas.SetActive(true);
             StartCoroutine("WaitForSec");
         }

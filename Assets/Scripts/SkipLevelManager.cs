@@ -19,12 +19,23 @@ public class SkipLevelManager : MonoBehaviour
     void Start()
     {
         GameData gd = SaveSystem.LoadGame();
-        currentPlatform = GameObject.Find(gd.MovingPlatformName).GetComponent<MovingPlatformSaveEntity>();
-        this.stage = gd.stage;
-        this.level = gd.lvl;
-        currentIndex = currentPlatform.order;
-        this.nextSavePlatform = movingPlatforms[currentIndex + 1];
-     
+        if(gd != null)
+        {
+            currentPlatform = GameObject.Find(gd.MovingPlatformName).GetComponent<MovingPlatformSaveEntity>();
+            this.stage = gd.stage;
+            this.level = gd.lvl;
+            currentIndex = currentPlatform.order;
+
+            if (currentIndex != movingPlatforms.Length - 1)
+            {
+                this.nextSavePlatform = movingPlatforms[currentIndex + 1];
+            }
+            else
+            {
+                this.nextSavePlatform = movingPlatforms[currentIndex];
+            }
+        }
+        
     }
 
     private void Update()

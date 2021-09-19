@@ -1,5 +1,7 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.Playables;
+using UnityEngine.SceneManagement;
 
 public class CutscenePlanetaryApproach_Trigger1 : MonoBehaviour
 {
@@ -21,15 +23,17 @@ public class CutscenePlanetaryApproach_Trigger1 : MonoBehaviour
         gameObject.GetComponent<CapsuleCollider>().enabled = false;
         gameObject.GetComponent<MeshRenderer>().enabled = false;
         previousTimeLine.GetComponent<PlayableDirector>().stopped += OnPlayableDirectorStopped;
+        timeLine.GetComponent<PlayableDirector>().stopped += OnLoadPlanetScene;
     }
 
     private void Update()
     {
         if(playerEnteredTrigger && Time.time - playerEnteredTriggerTime > 2)
         {
-            player.GetComponent<Rigidbody>().isKinematic = true;
             if(!nextTimelineStarted)
             {
+                player.transform.Find("LocomotionController").gameObject.SetActive(false);
+                player.GetComponent<Rigidbody>().isKinematic = true;
                 timeLine.GetComponent<PlayableDirector>().Play();
                 this.nextTimelineStarted = true;
             }
@@ -47,6 +51,28 @@ public class CutscenePlanetaryApproach_Trigger1 : MonoBehaviour
             
     }
 
+    void OnLoadPlanetScene(PlayableDirector aDirector)
+    {
+        //Debug.Log("ALERT: TIMELINE STOPPED: LOAD PLANETSCENE");
+        StartCoroutine(LoadYourAsyncScene());
+    }
+
+    IEnumerator LoadYourAsyncScene()
+    {
+        // The Application loads the Scene in the background as the current Scene runs.
+        // This is particularly good for creating loading screens.
+        // You could also load the Scene by using sceneBuildIndex. In this case Scene2 has
+        // a sceneBuildIndex of 1 as shown in Build Settings.
+
+        AsyncOperation asyncLoad = SceneManager.LoadSceneAsync("PlanetScene");
+
+        // Wait until the asynchronous scene fully loads
+        while (!asyncLoad.isDone)
+        {
+            yield return null;
+        }
+    }
+
     /*void OnDisable()
     {
         previousTimeLine.GetComponent<PlayableDirector>().stopped -= OnPlayableDirectorStopped;
@@ -57,14 +83,12 @@ public class CutscenePlanetaryApproach_Trigger1 : MonoBehaviour
         if(other.gameObject.tag == "Player")
         {
             this.player.GetComponent<Rigidbody>().interpolation = RigidbodyInterpolation.Extrapolate;
-            //timeLine.GetComponent<PlayableDirector>().Play();
+            
             previousTimeLine.GetComponent<PlayableDirector>().stopped -= OnPlayableDirectorStopped;
             this.playerEnteredTriggerTime = Time.time;
             this.playerEnteredTrigger = true;
-            player.transform.Find("LocomotionController").gameObject.SetActive(false);
+            
             gameObject.GetComponent<MeshRenderer>().enabled = false;
-            //MeshRenderer triggerRenderer = gameObject.GetComponent<MeshRenderer>();
-            //player.transform.position = new Vector3(triggerRenderer.bounds.center.x, player.transform.position.y, triggerRenderer.bounds.center.z);
         }
     }
 }

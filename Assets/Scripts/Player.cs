@@ -2,17 +2,26 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using System.Numerics;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.Playables;
 using UnityEngine.SceneManagement;
 public class Player : MonoBehaviour
 {
     public Companion companion;
     public GameObject menu;
+    public GameObject vehicle;
+    public PlayableDirector landingCutscene;
 
-    private SaveGamePad pad;
+    /*private SaveGamePad pad;
     private int currentStage = 0;
-    private int currentLevel = 0;
+    private int currentLevel = 0;*/
+
+    private void Start()
+    {
+        this.LoadGame();
+    }
 
     public void LoadGame()
     {
@@ -49,23 +58,39 @@ public class Player : MonoBehaviour
 
      if(gd != null)
         {
+            gameObject.GetComponent<Rigidbody>().isKinematic = false;
+            gameObject.transform.parent = null;
+
+            gameObject.transform.Find("LocomotionController").gameObject.SetActive(true);
+            gameObject.transform.Find("OVRCameraRig/TrackingSpace/LeftHandAnchor").gameObject.GetComponent<LineRenderer>().enabled = true;
+            gameObject.transform.Find("OVRCameraRig/TrackingSpace/LeftHandAnchor").gameObject.GetComponent<CompanionAimHandler>().enabled = true;
+            gameObject.transform.rotation = UnityEngine.Quaternion.identity;
+            gameObject.GetComponent<Rigidbody>().interpolation = RigidbodyInterpolation.None;
+
+            //move spaceship to landing platform
+            this.vehicle.transform.position = new UnityEngine.Vector3(333f, 56f, 644.9f);
+            //rotate spaceship properly
+            this.vehicle.transform.eulerAngles = new UnityEngine.Vector3(360f, 130f, 0f);
+
             MovingPlatformNew plat = GameObject.Find(gd.MovingPlatformName).GetComponent<MovingPlatformNew>();
-            Debug.Log(plat);
+            //Debug.Log(plat);
             GameObject player = GameObject.FindWithTag("Player");
 
             player.transform.parent = plat.VisualTrigger1.transform;
             player.transform.position = plat.VisualTrigger1.GetComponent<MeshRenderer>().bounds.center;
-
-            if (gd.saveCompanionPosition)
+           
+            if (gd.stage.ToCharArray()[gd.stage.Length - 1] > '1' || (gd.lvl.ToCharArray()[gd.lvl.Length - 1] == '5' && gd.stage.ToCharArray()[gd.stage.Length - 1] == '1'))
             {
-
                 GameObject companion = GameObject.FindWithTag("Companion");
                 companion.GetComponent<NavMeshAgent>().enabled = false;
                 companion.transform.parent = plat.VisualTrigger2.transform;
                 companion.transform.position = plat.VisualTrigger2.GetComponent<MeshRenderer>().bounds.center;
                 companion.GetComponent<NavMeshAgent>().enabled = true;
             }
-
+        } else
+        {
+            //play landing cutscene, if no savegame exists (= beginning of game)
+            landingCutscene.Play();
         }
 
 
@@ -103,11 +128,8 @@ public class Player : MonoBehaviour
         {
             try
             {
-
-                File.Delete(CurrenPath);
-
-               // SceneManager.LoadScene("PlanetaryApproach", LoadSceneMode.Single);
-                
+               File.Delete(CurrenPath);
+               SceneManager.LoadScene("PlanetaryApproach", LoadSceneMode.Single);   
             }
 
             catch(Exception e)
@@ -133,7 +155,7 @@ public class Player : MonoBehaviour
             player.transform.parent = nextPlatform.VisualTrigger1.transform;
             player.transform.position = nextPlatform.VisualTrigger1.GetComponent<MeshRenderer>().bounds.center;
 
-            if (gd.saveCompanionPosition) {
+            if (gd.stage.ToCharArray()[gd.stage.Length - 1] > '1' || (gd.lvl.ToCharArray()[gd.lvl.Length - 1] == '4' && gd.stage.ToCharArray()[gd.stage.Length - 1] == '1')) {
                 GameObject companion = GameObject.FindWithTag("Companion");
                 companion.GetComponent<NavMeshAgent>().enabled = false;
                 companion.transform.parent = nextPlatform.VisualTrigger2.transform;
