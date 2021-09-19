@@ -390,6 +390,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   companion: {fileID: 0}
   menu: {fileID: 0}
+  vehicle: {fileID: 0}
+  landingCutscene: {fileID: 0}
 --- !u!1 &6799725722453394892
 GameObject:
   m_ObjectHideFlags: 0
@@ -1349,7 +1351,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6799725723956706677}
   - component: {fileID: 2954890737056552104}
-  - component: {fileID: 2298466934388306322}
+  - component: {fileID: 6016164702311685832}
   m_Layer: 10
   m_Name: LeftHandAnchor
   m_TagString: Untagged
@@ -1470,7 +1472,7 @@ LineRenderer:
     generateLightingData: 0
   m_UseWorldSpace: 0
   m_Loop: 0
---- !u!114 &2298466934388306322
+--- !u!114 &6016164702311685832
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1484,7 +1486,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   AimCollisionLayerMask:
     serializedVersion: 2
-    m_Bits: 2305
+    m_Bits: 18689
   telekinesisLine: {fileID: 2954890737056552104}
   lineWidth: 0.01
   lineMaxLength: 10

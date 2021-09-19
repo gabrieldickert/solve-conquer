@@ -1,8 +1,5 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using System.IO;
-using System.Numerics;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.Playables;
@@ -76,8 +73,9 @@ public class Player : MonoBehaviour
             //Debug.Log(plat);
             GameObject player = GameObject.FindWithTag("Player");
 
-            player.transform.parent = plat.VisualTrigger1.transform;
-            player.transform.position = plat.VisualTrigger1.GetComponent<MeshRenderer>().bounds.center;
+            EventsManager.instance.OnLODManagerEnable(Int32.Parse("" + gd.stage.ToCharArray()[gd.stage.Length - 1]));
+
+            //Debug.Log("Player: loaded stage " + Int32.Parse("" + gd.stage.ToCharArray()[gd.stage.Length - 1]));
            
             if (gd.stage.ToCharArray()[gd.stage.Length - 1] > '1' || (gd.lvl.ToCharArray()[gd.lvl.Length - 1] == '5' && gd.stage.ToCharArray()[gd.stage.Length - 1] == '1'))
             {
@@ -87,6 +85,10 @@ public class Player : MonoBehaviour
                 companion.transform.position = plat.VisualTrigger2.GetComponent<MeshRenderer>().bounds.center;
                 companion.GetComponent<NavMeshAgent>().enabled = true;
             }
+            player.transform.parent = null;
+            player.transform.parent = plat.VisualTrigger1.transform;
+            player.transform.position = plat.VisualTrigger1.GetComponent<MeshRenderer>().bounds.center;
+
         } else
         {
             //play landing cutscene, if no savegame exists (= beginning of game)
@@ -152,16 +154,18 @@ public class Player : MonoBehaviour
             
             GameObject player = GameObject.FindWithTag("Player");
 
-            player.transform.parent = nextPlatform.VisualTrigger1.transform;
-            player.transform.position = nextPlatform.VisualTrigger1.GetComponent<MeshRenderer>().bounds.center;
-
-            if (gd.stage.ToCharArray()[gd.stage.Length - 1] > '1' || (gd.lvl.ToCharArray()[gd.lvl.Length - 1] == '4' && gd.stage.ToCharArray()[gd.stage.Length - 1] == '1')) {
+            
+            EventsManager.instance.OnLODManagerEnable(Int32.Parse("" + gd.stage.ToCharArray()[gd.stage.Length - 1]));
+            if (gd.stage.ToCharArray()[gd.stage.Length - 1] > '1' || (gd.lvl.ToCharArray()[gd.lvl.Length - 1] == '4' && gd.stage.ToCharArray()[gd.stage.Length - 1] == '1') || (gd.lvl.ToCharArray()[gd.lvl.Length - 1] == '5' && gd.stage.ToCharArray()[gd.stage.Length - 1] == '1')) {
                 GameObject companion = GameObject.FindWithTag("Companion");
                 companion.GetComponent<NavMeshAgent>().enabled = false;
                 companion.transform.parent = nextPlatform.VisualTrigger2.transform;
                 companion.transform.position = nextPlatform.VisualTrigger2.GetComponent<MeshRenderer>().bounds.center;
                 companion.GetComponent<NavMeshAgent>().enabled = true;
             }
+            player.transform.parent = null;
+            player.transform.parent = nextPlatform.VisualTrigger1.transform;
+            player.transform.position = nextPlatform.VisualTrigger1.GetComponent<MeshRenderer>().bounds.center;
 
         }
 

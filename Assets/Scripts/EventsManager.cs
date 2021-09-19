@@ -39,6 +39,7 @@ public class EventsManager : MonoBehaviour
     public event Action<int> ThrowableTargetDisable;
     public event Action<int> AntennaEnable;
     public event Action<int> AntennaDisable;
+    public event Action<int> LODManagerEnable;
 
     private int companionId { get; set; }
 
@@ -176,4 +177,10 @@ public class EventsManager : MonoBehaviour
     {
         AntennaDisable?.Invoke(triggerId);
     }
+
+    public void OnLODManagerEnable(int stageNum)
+    {
+        LODManagerEnable?.Invoke(stageNum);
+    }
+
 }
