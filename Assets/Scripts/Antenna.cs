@@ -10,6 +10,7 @@ public class Antenna : MonoBehaviour
     public int triggerId1 = 0;
     public int triggerId2 = 0;
     public List<int> activatedByTriggerId = new List<int>();
+    public bool isActiveOnStart = false;
 
     private Transform sphere;
     private Transform antenna;
@@ -47,9 +48,10 @@ public class Antenna : MonoBehaviour
         lineRenderer.startWidth = lineWidth;
         lineRenderer.endWidth = 0.1f * lineWidth;
         lineRenderer.material = new Material(Shader.Find("Sprites/Default"));
-        lineRenderer.startColor = Color.red;
-        lineRenderer.endColor = Color.red;
-        
+        lineRenderer.startColor = isActiveOnStart ? Color.green : Color.red;
+        lineRenderer.endColor = isActiveOnStart ? Color.green : Color.red;
+        this.isEnabled = this.isActiveOnStart;
+
     }
 
     void Update()
