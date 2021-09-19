@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Numerics;
+using UnityEditor.PackageManager;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.Playables;
@@ -76,8 +77,17 @@ public class Player : MonoBehaviour
             //Debug.Log(plat);
             GameObject player = GameObject.FindWithTag("Player");
 
+            EventsManager.instance.OnLODManagerEnable(Int32.Parse("" + gd.stage.ToCharArray()[gd.stage.Length - 1]));
+
             player.transform.parent = plat.VisualTrigger1.transform;
             player.transform.position = plat.VisualTrigger1.GetComponent<MeshRenderer>().bounds.center;
+
+            
+
+
+
+            //Debug.Log("Player: loaded stage " + Int32.Parse("" + gd.stage.ToCharArray()[gd.stage.Length - 1]));
+            
            
             if (gd.stage.ToCharArray()[gd.stage.Length - 1] > '1' || (gd.lvl.ToCharArray()[gd.lvl.Length - 1] == '5' && gd.stage.ToCharArray()[gd.stage.Length - 1] == '1'))
             {

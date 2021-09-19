@@ -5,17 +5,8 @@ using UnityEngine;
 
 public class LODManager : MonoBehaviour
 {
-    public GameObject Stage1_LOD0;
-    public GameObject Stage1_LOD1;
-
-    public GameObject Stage2_LOD0;
-    public GameObject Stage2_LOD1;
-
-    public GameObject Stage3_LOD0;
-    public GameObject Stage3_LOD1;
-
-    public GameObject Stage4_LOD0;
-    public GameObject Stage4_LOD1;
+    public GameObject[] stages_LOD0;
+    public GameObject[] stages_LOD1;
 
     public float maxDistStage1;
     public float maxDistStage2;
@@ -23,39 +14,48 @@ public class LODManager : MonoBehaviour
     public float maxDistStage4;
 
     private GameObject player;
+    //private bool shouldWait = false;
 
     // Start is called before the first frame update
     void Start()
     {
+        EventsManager.instance.LODManagerEnable += OnLODManagerEnable;
         this.player = GameObject.FindGameObjectWithTag("Player");
     }
 
     // Update is called once per frame
     void Update()
     {
-        UpdateStage(Stage1_LOD0, Stage1_LOD1, maxDistStage1);
-        UpdateStage(Stage2_LOD0, Stage2_LOD1, maxDistStage2);
-        UpdateStage(Stage3_LOD0, Stage3_LOD1, maxDistStage3);
-        UpdateStage(Stage4_LOD0, Stage4_LOD1, maxDistStage4);
+        UpdateStage(stages_LOD0[0], stages_LOD1[0], maxDistStage1);
+        UpdateStage(stages_LOD0[1], stages_LOD1[1], maxDistStage2);
+        UpdateStage(stages_LOD0[2], stages_LOD1[2], maxDistStage3);
+        UpdateStage(stages_LOD0[3], stages_LOD1[3], maxDistStage4);
     }
 
     void UpdateStage(GameObject lod0, GameObject lod1, float maxDistanceStage)
     {
         float distance = Vector3.Distance(player.transform.position, lod0.transform.position);
-
-        if (distance < maxDistanceStage)
+        //Debug.Log("LODManager: distance to stage " + lod0 + " = " + distance);
+        if (distance <= maxDistanceStage)
         {
-            //disable LOD0
-            lod0.SetActive(false);
-            //enable LOD1
-            lod1.SetActive(true);
+            //enable LOD0
+            lod0.SetActive(true);
+            //disable LOD1
+            lod1.SetActive(false);
         }
         else
         {
-            //disable LOD1
-            lod1.SetActive(false);
-            //enable LOD0
-            lod0.SetActive(true);
-        }
+            //enable LOD1
+            lod1.SetActive(true);
+            //disable LOD0
+            lod0.SetActive(false);
+        }   
+    }
+
+    void OnLODManagerEnable(int stageNum)
+    {
+        //this.shouldWait = true;
+        stages_LOD1[stageNum].SetActive(false);
+        stages_LOD0[stageNum].SetActive(true);
     }
 }
