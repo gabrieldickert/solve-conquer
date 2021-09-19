@@ -20,11 +20,15 @@ public class Barrier : MonoBehaviour
     private Color m_Color;            // Used to store color reference.
     private List<int> activeTriggers = new List<int>();
     private bool isHacked = false;
-    
+    private AudioClip DefaultSound;
+  
     
     // Start is called before the first frame update
     void Start()
     {
+        //Load Defaultsound for loop
+        DefaultSound = Resources.Load("barrier_sounds/barrier") as AudioClip;
+
         //UnityEngine.Debug.Log("Barrier: Start");
 
         // Get reference to object's material.
@@ -68,18 +72,45 @@ public class Barrier : MonoBehaviour
        
     }
 
+    private void PlaySoundFX(string respath)
+    {
+        AudioSource audiosrc = this.GetComponent<AudioSource>();
+        audiosrc.Stop();
+        audiosrc.loop = false;
+        AudioClip ac = Resources.Load(respath) as AudioClip;
+        audiosrc.PlayOneShot(ac);
+        if(respath.Equals("barrier_sounds/barrier_charge"))
+        {
+            audiosrc.clip = this.DefaultSound;
+            audiosrc.loop = true;
+            audiosrc.Play();
+        }
+ 
+    }
+
     private void AllowPlayerPassing()
     {
+        PlaySoundFX("barrier_sounds/barrier_discharge");
         ToggleCollision(isBridge);
         ToggleFade(!isBridge);
         EnableObstacle(false);
+    
+
+
+
+
     }
 
     private void HinderPlayerPassing()
     {
+        PlaySoundFX("barrier_sounds/barrier_charge");
         ToggleCollision(!isBridge);
         ToggleFade(isBridge);
         EnableObstacle(true);
+
+        // audiosrc.clip = null;
+
+
     }
 
     private void HandlePressurePlateEnabled(int id)
