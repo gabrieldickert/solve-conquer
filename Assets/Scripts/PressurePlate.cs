@@ -22,6 +22,7 @@ public class PressurePlate : MonoBehaviour
         //Fetch the Renderer component of the GameObject
         pressurePlateRenderer = GetComponent<Renderer>();
         source = gameObject.AddComponent<AudioSource>();
+        source.spatialBlend = 1.0f;
         pressurePlateRenderer.material.color = Color.red;
         initPos = gameObject.transform.position;
         plateOffset = 0.5f * pressurePlateRenderer.bounds.size.y;

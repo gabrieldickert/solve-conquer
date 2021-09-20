@@ -24,6 +24,7 @@ public class MovingPlatformNew : MonoBehaviour
     public int stage;
     public bool isActive;
 
+
     /*
     MovingPlatform modes
     0: no passengers required to start moving
@@ -48,9 +49,17 @@ public class MovingPlatformNew : MonoBehaviour
 
     private bool hasStopped = false;
 
+    public Sound sound;
+
+    private AudioSource AudioSrc;
+
     // Start is called before the first frame update
     void Start()
     {
+        //Set up Audio Source
+        this.AudioSrc = this.GetComponent<AudioSource>();
+        this.AudioSrc.spatialBlend = 1.0f;
+
         if(points.Length != rotations.Length)
         {
             Debug.LogError("MovingPlatformNew: The arrays points and rotations have to have the same length.");
@@ -116,15 +125,30 @@ public class MovingPlatformNew : MonoBehaviour
     {
         if(!waitOnlyAtStartAndFinish)
         {
+     
             delay_start = Time.time;
             //Debug.Log("MovingPlatformNew: Delay from now");
         }
         if(!isReturning && point_number + 1 < points.Length)
         {
+            if (!this.AudioSrc.isPlaying)
+            {
+                this.AudioSrc.loop = true;
+                this.AudioSrc.clip = this.sound.clipList[0];
+                this.AudioSrc.Play();
+
+            }
             point_number++;
             //Debug.Log("MovingPlatformNew: Going to next point");
         } else if(isReturning && point_number - 1 >= 0)
         {
+            if (!this.AudioSrc.isPlaying)
+            {
+                this.AudioSrc.loop = true;
+                this.AudioSrc.clip = this.sound.clipList[0];
+                this.AudioSrc.Play();
+
+            }
             point_number--;
             //Debug.Log("MovingPlatformNew: Going to previous point");
         } else
@@ -150,6 +174,14 @@ public class MovingPlatformNew : MonoBehaviour
                 }
             } else
             {
+                if(!this.hasStopped)
+                {
+                    this.AudioSrc.Stop();
+                    this.AudioSrc.loop = false;
+                    this.AudioSrc.clip = this.sound.clipList[1];
+                    this.AudioSrc.Play();
+                }
+ 
                 this.hasStopped = true;
             }
         }
