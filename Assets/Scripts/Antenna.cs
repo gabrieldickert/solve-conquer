@@ -11,6 +11,7 @@ public class Antenna : MonoBehaviour
     public int triggerId2 = 0;
     public List<int> activatedByTriggerId = new List<int>();
     public bool isActiveOnStart = false;
+    public bool hasWireBehaviour = false;
 
     private Transform sphere;
     private Transform antenna;
@@ -81,8 +82,11 @@ public class Antenna : MonoBehaviour
     {
         if(activatedByTriggerId.Contains(triggerId))
         {
-            EventsManager.instance.OnAntennaEnable(this.triggerId1);
-            EventsManager.instance.OnAntennaEnable(this.triggerId2);
+            if(!this.hasWireBehaviour)
+            {
+                EventsManager.instance.OnAntennaEnable(this.triggerId1);
+                EventsManager.instance.OnAntennaEnable(this.triggerId2);
+            }
             this.isEnabled = true;
         }
     }
@@ -91,8 +95,11 @@ public class Antenna : MonoBehaviour
     {
         if (activatedByTriggerId.Contains(triggerId))
         {
-            EventsManager.instance.OnAntennaDisable(this.triggerId1);
-            EventsManager.instance.OnAntennaDisable(this.triggerId2);
+            if (!this.hasWireBehaviour)
+            {
+                EventsManager.instance.OnAntennaDisable(this.triggerId1);
+                EventsManager.instance.OnAntennaDisable(this.triggerId2);
+            }
             this.isEnabled = false;
         }
     }
