@@ -53,7 +53,8 @@ public class LODManager : MonoBehaviour
     void OnLODManagerEnable(int stageNum)
     {
         //this.shouldWait = true;
-        stages_LOD1[stageNum].SetActive(false);
-        stages_LOD0[stageNum].SetActive(true);
+       
+        stages_LOD1[stageNum - 1].SetActive(false);
+        stages_LOD0[stageNum - 1].SetActive(true);
     }
 }
