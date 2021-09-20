@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.IO;
 using UnityEngine;
 using UnityEngine.AI;
@@ -163,9 +164,11 @@ public class Player : MonoBehaviour
                 companion.transform.position = nextPlatform.VisualTrigger2.GetComponent<MeshRenderer>().bounds.center;
                 companion.GetComponent<NavMeshAgent>().enabled = true;
             }
-            player.transform.parent = null;
-            player.transform.parent = nextPlatform.VisualTrigger1.transform;
+
+            player.transform.parent = nextPlatform.transform;
             player.transform.position = nextPlatform.VisualTrigger1.GetComponent<MeshRenderer>().bounds.center;
+
+            StartCoroutine("WaitForSec", nextPlatform);
 
         }
 
@@ -174,6 +177,15 @@ public class Player : MonoBehaviour
 
     }
 
+    IEnumerator WaitForSec(MovingPlatformNew nextPlatform)
+    {
+        yield return new WaitForSeconds(0.1f);
+
+        GameObject player = GameObject.FindWithTag("Player");
+
+        player.transform.parent = nextPlatform.transform;
+        
+    }
     /*
     private void OnCollisionEnter(Collision collision)
     {
