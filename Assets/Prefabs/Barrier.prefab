@@ -115,6 +115,18 @@ MonoBehaviour:
   isBridge: 0
   isActiveOnStart: 0
   activatedByTriggerId: 
+  SoundManager:
+    name: 
+    clipList:
+    - {fileID: 8300000, guid: ba8eca3bfd5207d458c589b4bde26754, type: 3}
+    - {fileID: 8300000, guid: b53ce2ffc795dcd44b80bc6a5900c8e3, type: 3}
+    - {fileID: 8300000, guid: 33cba21aeda588a4da81b8a2e1311208, type: 3}
+    attachTo: {fileID: 0}
+    volume: 0
+    pitch: 0
+    spatialBlend: 0
+    loop: 0
+    source: {fileID: 0}
 --- !u!208 &8877685699502579043
 NavMeshObstacle:
   m_ObjectHideFlags: 0
@@ -141,7 +153,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: ba8eca3bfd5207d458c589b4bde26754, type: 3}
+  m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
   m_Volume: 0.7
   m_Pitch: 1

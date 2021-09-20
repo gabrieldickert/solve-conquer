@@ -20,14 +20,26 @@ public class Barrier : MonoBehaviour
     private Color m_Color;            // Used to store color reference.
     private List<int> activeTriggers = new List<int>();
     private bool isHacked = false;
+
     private AudioClip DefaultSound;
-  
+    public Sound SoundManager;
+ 
     
     // Start is called before the first frame update
     void Start()
     {
-        //Load Defaultsound for loop
-        DefaultSound = Resources.Load("barrier_sounds/barrier") as AudioClip;
+  
+        if (!isActiveOnStart)
+        {
+
+          AudioSource audiosrc = this.GetComponent<AudioSource>();
+            audiosrc.loop = true;
+            audiosrc.spatialBlend = 1.0f;
+            this.DefaultSound = SoundManager.clipList[0]; 
+            audiosrc.clip =  SoundManager.clipList[0];
+            audiosrc.Play();
+
+        }
 
         //UnityEngine.Debug.Log("Barrier: Start");
 
@@ -72,14 +84,14 @@ public class Barrier : MonoBehaviour
        
     }
 
-    private void PlaySoundFX(string respath)
+    private void PlaySoundFX(AudioClip ac)
     {
         AudioSource audiosrc = this.GetComponent<AudioSource>();
         audiosrc.Stop();
         audiosrc.loop = false;
-        AudioClip ac = Resources.Load(respath) as AudioClip;
+
         audiosrc.PlayOneShot(ac);
-        if(respath.Equals("barrier_sounds/barrier_charge"))
+        if(ac.name.Equals("barrier_charge"))
         {
             audiosrc.clip = this.DefaultSound;
             audiosrc.loop = true;
@@ -90,7 +102,7 @@ public class Barrier : MonoBehaviour
 
     private void AllowPlayerPassing()
     {
-        PlaySoundFX("barrier_sounds/barrier_discharge");
+        PlaySoundFX(SoundManager.clipList[2]);
         ToggleCollision(isBridge);
         ToggleFade(!isBridge);
         EnableObstacle(false);
@@ -103,7 +115,7 @@ public class Barrier : MonoBehaviour
 
     private void HinderPlayerPassing()
     {
-        PlaySoundFX("barrier_sounds/barrier_charge");
+        PlaySoundFX(SoundManager.clipList[1]);
         ToggleCollision(!isBridge);
         ToggleFade(isBridge);
         EnableObstacle(true);
