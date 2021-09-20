@@ -33,7 +33,7 @@ public class LODManager : MonoBehaviour
     void UpdateStage(GameObject lod0, GameObject lod1, float maxDistanceStage, int stage)
     {
         float distance = Vector3.Distance(player.transform.position, referencePointsDist[stage - 1]);
-        Debug.Log("LODManager: distance to stage " + lod0 + " = " + distance);
+        //Debug.Log("LODManager: distance to stage " + lod0 + " = " + distance);
         if (distance <= maxDistanceStage)
         {
             //enable LOD0
