@@ -162,13 +162,14 @@ public class Player : MonoBehaviour
                 companion.GetComponent<NavMeshAgent>().enabled = false;
                 companion.transform.parent = nextPlatform.VisualTrigger2.transform;
                 companion.transform.position = nextPlatform.VisualTrigger2.GetComponent<MeshRenderer>().bounds.center;
+                StartCoroutine("WaitForSecCompanion", nextPlatform);
                 companion.GetComponent<NavMeshAgent>().enabled = true;
             }
 
             player.transform.parent = nextPlatform.transform;
             player.transform.position = nextPlatform.VisualTrigger1.GetComponent<MeshRenderer>().bounds.center;
-
-            StartCoroutine("WaitForSec", nextPlatform);
+            
+            StartCoroutine("WaitForSecPlayer", nextPlatform);
 
         }
 
@@ -177,7 +178,7 @@ public class Player : MonoBehaviour
 
     }
 
-    IEnumerator WaitForSec(MovingPlatformNew nextPlatform)
+    IEnumerator WaitForSecPlayer(MovingPlatformNew nextPlatform)
     {
         yield return new WaitForSeconds(0.1f);
 
@@ -185,6 +186,16 @@ public class Player : MonoBehaviour
 
         player.transform.parent = nextPlatform.transform;
         
+    }
+
+    IEnumerator WaitForSecCompanion(MovingPlatformNew nextPlatform)
+    {
+        yield return new WaitForSeconds(0.1f);
+
+        GameObject companion = GameObject.FindWithTag("Companion");
+
+        companion.transform.parent = nextPlatform.VisualTrigger2.transform;
+
     }
     /*
     private void OnCollisionEnter(Collision collision)
