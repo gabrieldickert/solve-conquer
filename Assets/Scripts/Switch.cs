@@ -23,6 +23,7 @@ public class Switch : MonoBehaviour
     void Start()
     {
         source = gameObject.AddComponent<AudioSource>();
+        source.spatialBlend = 1.0f;
         switchBase = transform.GetChild(0).gameObject;
         //EventsManager.instance.OnSwitchEnable(isActiveTrigger_2 ? triggerId_1 : triggerId_2);
         //EventsManager.instance.OnSwitchDisable(isActiveTrigger_2 ? triggerId_2 : triggerId_1);
