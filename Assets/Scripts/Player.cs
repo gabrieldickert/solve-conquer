@@ -12,6 +12,7 @@ public class Player : MonoBehaviour
     public GameObject vehicle;
     public PlayableDirector landingCutscene;
 
+    public bool gameLoadedOnStart = false;
     /*private SaveGamePad pad;
     private int currentStage = 0;
     private int currentLevel = 0;*/
@@ -23,6 +24,7 @@ public class Player : MonoBehaviour
         if( gd != null)
         {
             this.LoadGame();
+            gameLoadedOnStart = true;
         } else
         {
             landingCutscene.Play();
@@ -37,6 +39,11 @@ public class Player : MonoBehaviour
 
      if(gd != null)
         {
+            if (gameLoadedOnStart)
+            {
+                SceneManager.LoadScene("PlanetScene", LoadSceneMode.Single);
+            }
+            
             gameObject.GetComponent<Rigidbody>().isKinematic = false;
             gameObject.transform.parent = null;
 
