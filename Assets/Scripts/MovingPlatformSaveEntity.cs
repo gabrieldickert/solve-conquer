@@ -33,25 +33,39 @@ public class MovingPlatformSaveEntity : MonoBehaviour
     {
        
         GameData gd = SaveSystem.LoadGame();
-        GameObject platform = GameObject.Find(gd.MovingPlatformName);
-        MovingPlatformNew omegalul = platform.GetComponent<MovingPlatformNew>();
+        GameObject platform = null;
+        MovingPlatformNew currentPlatform = null;
 
-        if(other.gameObject.tag == "Player")
+        if (gd != null)
         {
-            omegalul.OnPlayerEnteredTrigger(other.gameObject.GetComponent<CapsuleCollider>());
+           platform = GameObject.Find(gd.MovingPlatformName);
+           currentPlatform = platform.GetComponent<MovingPlatformNew>();
+
+            if (other.gameObject.tag == "Player")
+            {
+                currentPlatform.OnPlayerEnteredTrigger(other.gameObject.GetComponent<CapsuleCollider>());
+            }
+
+            if (other.gameObject.tag == "Companion")
+            {
+                currentPlatform.OnCompanionEnteredTrigger(other.gameObject.GetComponent<BoxCollider>());
+
+            }
+
         }
+     
 
-        if(other.gameObject.tag == "Companion")
+
+
+        if((gd == null || !this.name.Equals(gd.MovingPlatformName)))
         {
-            omegalul.OnCompanionEnteredTrigger(other.gameObject.GetComponent<BoxCollider>());
-
-        }
-
-        if((gd == null || !this.name.Equals(gd.MovingPlatformName)) && omegalul.hasRequiredPassengers)
-        {
+            if ((currentPlatform != null && currentPlatform.hasRequiredPassengers) || gd == null)
+            {
                 SaveSystem.SaveGame(this.GetComponent<MovingPlatformNew>(), this.Stage, this.Lvl, this.Companion.GetComponent<NavMeshAgent>().enabled ? true : false);
                 this.Canvas.SetActive(true);
                 StartCoroutine("WaitForSec");
+            }
+            
         } 
 
     }
