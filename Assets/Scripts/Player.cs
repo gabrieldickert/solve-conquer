@@ -138,8 +138,9 @@ public class Player : MonoBehaviour
                 companion.GetComponent<NavMeshAgent>().enabled = false;
                 companion.transform.parent = nextPlatform.VisualTrigger2.transform;
                 companion.transform.position = nextPlatform.VisualTrigger2.GetComponent<MeshRenderer>().bounds.center;
-                StartCoroutine("WaitForSecCompanion", nextPlatform);
                 companion.GetComponent<NavMeshAgent>().enabled = true;
+                StartCoroutine("WaitForSecCompanion", nextPlatform);
+                
             }
 
             player.transform.parent = nextPlatform.transform;
@@ -171,7 +172,7 @@ public class Player : MonoBehaviour
         GameObject companion = GameObject.FindWithTag("Companion");
 
         companion.transform.parent = nextPlatform.VisualTrigger2.transform;
-
+      
     }
     /*
     private void OnCollisionEnter(Collision collision)

@@ -32,14 +32,27 @@ public class MovingPlatformSaveEntity : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
        
-        GameData gd =   SaveSystem.LoadGame();
-            
-        if(gd == null || !this.name.Equals(gd.MovingPlatformName))
+        GameData gd = SaveSystem.LoadGame();
+        GameObject platform = GameObject.Find(gd.MovingPlatformName);
+        MovingPlatformNew omegalul = platform.GetComponent<MovingPlatformNew>();
+
+        if(other.gameObject.tag == "Player")
         {
-            SaveSystem.SaveGame(this.GetComponent<MovingPlatformNew>(), this.Stage, this.Lvl, this.Companion.GetComponent<NavMeshAgent>().enabled ? true : false);
-            this.Canvas.SetActive(true);
-            StartCoroutine("WaitForSec");
+            omegalul.OnPlayerEnteredTrigger(other.gameObject.GetComponent<CapsuleCollider>());
         }
+
+        if(other.gameObject.tag == "Companion")
+        {
+            omegalul.OnCompanionEnteredTrigger(other.gameObject.GetComponent<BoxCollider>());
+
+        }
+
+        if((gd == null || !this.name.Equals(gd.MovingPlatformName)) && omegalul.hasRequiredPassengers)
+        {
+                SaveSystem.SaveGame(this.GetComponent<MovingPlatformNew>(), this.Stage, this.Lvl, this.Companion.GetComponent<NavMeshAgent>().enabled ? true : false);
+                this.Canvas.SetActive(true);
+                StartCoroutine("WaitForSec");
+        } 
 
     }
 
@@ -50,4 +63,5 @@ public class MovingPlatformSaveEntity : MonoBehaviour
 
 
     }
+
 }

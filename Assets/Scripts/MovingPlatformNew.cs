@@ -36,7 +36,7 @@ public class MovingPlatformNew : MonoBehaviour
     public GameObject VisualTrigger2;
     private bool playerOnPlatformTrigger = false;
     private bool companionOnPlatformTrigger = false;
-    private bool hasRequiredPassengers;
+    [HideInInspector] public bool hasRequiredPassengers;
     private bool hasUnwantedPassengers;
     private bool isReturning = false;
 
@@ -158,7 +158,7 @@ public class MovingPlatformNew : MonoBehaviour
         //Debug.Log("MovingPlatformNew: Current target is " + current_target + " [" + point_number + "/" + points.Length + "]");
     }
 
-    private void UpdatePassengerStatus()
+    public void UpdatePassengerStatus()
     {
         switch (mode)
         {
