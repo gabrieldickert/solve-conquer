@@ -392,6 +392,7 @@ MonoBehaviour:
   menu: {fileID: 0}
   vehicle: {fileID: 0}
   landingCutscene: {fileID: 0}
+  gameLoadedOnStart: 0
 --- !u!1 &6799725722453394892
 GameObject:
   m_ObjectHideFlags: 0
@@ -1486,7 +1487,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   AimCollisionLayerMask:
     serializedVersion: 2
-    m_Bits: 18689
+    m_Bits: 2305
   telekinesisLine: {fileID: 2954890737056552104}
   lineWidth: 0.01
   lineMaxLength: 10
