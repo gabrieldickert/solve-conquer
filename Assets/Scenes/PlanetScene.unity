@@ -3932,6 +3932,7 @@ MonoBehaviour:
     clipList:
     - {fileID: 8300000, guid: 06861dc2a2291b34a8275cd4704ecc43, type: 3}
     - {fileID: 8300000, guid: 556ba09367c17874f87edc7ba2bec656, type: 3}
+    - {fileID: 8300000, guid: c3bd0ec85734f234a83b579ebda742e9, type: 3}
     attachTo: {fileID: 269067324}
     volume: 0
     pitch: 1
@@ -4074,6 +4075,7 @@ MonoBehaviour:
     clipList:
     - {fileID: 8300000, guid: 06861dc2a2291b34a8275cd4704ecc43, type: 3}
     - {fileID: 8300000, guid: 556ba09367c17874f87edc7ba2bec656, type: 3}
+    - {fileID: 8300000, guid: c3bd0ec85734f234a83b579ebda742e9, type: 3}
     attachTo: {fileID: 272333323}
     volume: 0
     pitch: 1
@@ -6154,13 +6156,14 @@ MonoBehaviour:
     clipList:
     - {fileID: 8300000, guid: 06861dc2a2291b34a8275cd4704ecc43, type: 3}
     - {fileID: 8300000, guid: 556ba09367c17874f87edc7ba2bec656, type: 3}
+    - {fileID: 8300000, guid: c3bd0ec85734f234a83b579ebda742e9, type: 3}
     attachTo: {fileID: 409417420}
     volume: 0
     pitch: 1
     spatialBlend: 1
     loop: 0
     source: {fileID: 0}
-  SecondsBetweenNewAmbientsound: 1
+  SecondsBetweenNewAmbientsound: 0
   randomVolMin: 0.1
   randomVolMax: 0.1
   allowToSkip: 0
@@ -15964,6 +15967,7 @@ MonoBehaviour:
     clipList:
     - {fileID: 8300000, guid: 06861dc2a2291b34a8275cd4704ecc43, type: 3}
     - {fileID: 8300000, guid: 556ba09367c17874f87edc7ba2bec656, type: 3}
+    - {fileID: 8300000, guid: c3bd0ec85734f234a83b579ebda742e9, type: 3}
     attachTo: {fileID: 993832534}
     volume: 0
     pitch: 1
@@ -17061,6 +17065,7 @@ MonoBehaviour:
     clipList:
     - {fileID: 8300000, guid: 06861dc2a2291b34a8275cd4704ecc43, type: 3}
     - {fileID: 8300000, guid: 556ba09367c17874f87edc7ba2bec656, type: 3}
+    - {fileID: 8300000, guid: c3bd0ec85734f234a83b579ebda742e9, type: 3}
     attachTo: {fileID: 1070924023}
     volume: 0
     pitch: 1
@@ -23172,6 +23177,7 @@ MonoBehaviour:
     clipList:
     - {fileID: 8300000, guid: 06861dc2a2291b34a8275cd4704ecc43, type: 3}
     - {fileID: 8300000, guid: 556ba09367c17874f87edc7ba2bec656, type: 3}
+    - {fileID: 8300000, guid: c3bd0ec85734f234a83b579ebda742e9, type: 3}
     attachTo: {fileID: 1446436869}
     volume: 0
     pitch: 1
@@ -26222,6 +26228,7 @@ MonoBehaviour:
     clipList:
     - {fileID: 8300000, guid: 06861dc2a2291b34a8275cd4704ecc43, type: 3}
     - {fileID: 8300000, guid: 556ba09367c17874f87edc7ba2bec656, type: 3}
+    - {fileID: 8300000, guid: c3bd0ec85734f234a83b579ebda742e9, type: 3}
     attachTo: {fileID: 1611300451}
     volume: 0
     pitch: 1
@@ -28141,6 +28148,7 @@ MonoBehaviour:
     clipList:
     - {fileID: 8300000, guid: 06861dc2a2291b34a8275cd4704ecc43, type: 3}
     - {fileID: 8300000, guid: 556ba09367c17874f87edc7ba2bec656, type: 3}
+    - {fileID: 8300000, guid: c3bd0ec85734f234a83b579ebda742e9, type: 3}
     attachTo: {fileID: 1697811555}
     volume: 0
     pitch: 1
@@ -30933,13 +30941,14 @@ MonoBehaviour:
     clipList:
     - {fileID: 8300000, guid: 06861dc2a2291b34a8275cd4704ecc43, type: 3}
     - {fileID: 8300000, guid: 556ba09367c17874f87edc7ba2bec656, type: 3}
+    - {fileID: 8300000, guid: c3bd0ec85734f234a83b579ebda742e9, type: 3}
     attachTo: {fileID: 1814976380}
     volume: 0
     pitch: 1
     spatialBlend: 1
     loop: 0
     source: {fileID: 0}
-  SecondsBetweenNewAmbientsound: 1
+  SecondsBetweenNewAmbientsound: 0
   randomVolMin: 0.1
   randomVolMax: 0.1
   allowToSkip: 0
@@ -36239,6 +36248,7 @@ MonoBehaviour:
     clipList:
     - {fileID: 8300000, guid: 06861dc2a2291b34a8275cd4704ecc43, type: 3}
     - {fileID: 8300000, guid: 556ba09367c17874f87edc7ba2bec656, type: 3}
+    - {fileID: 8300000, guid: c3bd0ec85734f234a83b579ebda742e9, type: 3}
     attachTo: {fileID: 2140953042}
     volume: 0
     pitch: 1
@@ -36523,11 +36533,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5526261823138897927, guid: ee2c83ebb18fcbd4e9169f7d44ee25d6, type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5526261824054753446, guid: ee2c83ebb18fcbd4e9169f7d44ee25d6, type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7193588168959250731, guid: ee2c83ebb18fcbd4e9169f7d44ee25d6, type: 3}
       propertyPath: LeftHand
