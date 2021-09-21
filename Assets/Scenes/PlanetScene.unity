@@ -3157,6 +3157,7 @@ Transform:
   - {fileID: 269067325}
   - {fileID: 1697811556}
   - {fileID: 993832535}
+  - {fileID: 530262775}
   m_Father: {fileID: 69301468}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -8188,6 +8189,69 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 470440, guid: 8ed1fa325ca228645ad26dd6eff14768, type: 3}
   m_PrefabInstance: {fileID: 518901516}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &530262774
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 530262775}
+  - component: {fileID: 530262776}
+  m_Layer: 0
+  m_Name: AmbientSoundSteelCable
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &530262775
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 530262774}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 445.09, y: 289.84, z: 476.9}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 228388762}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &530262776
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 530262774}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 37a8925e0459e874bbcbd23d5623128f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  songObj:
+    name: 
+    clipList:
+    - {fileID: 8300000, guid: 7e9591f4c99f9cc478be197791cdca6b, type: 3}
+    attachTo: {fileID: 530262774}
+    volume: 0
+    pitch: 1
+    spatialBlend: 1
+    loop: 0
+    source: {fileID: 0}
+  SecondsBetweenNewAmbientsound: 0
+  randomVolMin: 0.1
+  randomVolMax: 0.1
+  allowToSkip: 0
+  pitchMin: 1
+  pitchMax: 1
+  panMin: 0
+  panMax: 0
+  fadeoutPercentage: 0
+  fadeDuration: 0
 --- !u!1001 &530835436
 PrefabInstance:
   m_ObjectHideFlags: 0
