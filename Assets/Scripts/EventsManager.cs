@@ -40,6 +40,7 @@ public class EventsManager : MonoBehaviour
     public event Action<int> AntennaEnable;
     public event Action<int> AntennaDisable;
     public event Action<int> LODManagerEnable;
+    public event Action<int> PlayThrowSound;
 
     private int companionId { get; set; }
 
@@ -181,6 +182,11 @@ public class EventsManager : MonoBehaviour
     public void OnLODManagerEnable(int stageNum)
     {
         LODManagerEnable?.Invoke(stageNum);
+    }
+
+    public void OnPlayThrowSound(int objectId)
+    {
+        PlayThrowSound?.Invoke(objectId);
     }
 
 }

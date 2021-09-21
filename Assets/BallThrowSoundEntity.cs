@@ -6,9 +6,6 @@ using OculusSampleFramework;
 public class BallThrowSoundEntity : MonoBehaviour
 {
     public Sound SoundSrc;
-    private bool isThrowing = false;
-    private bool HasFirstCol = false;
-    private float refSpeed = 0;
     private AudioSource AudioSrc;
     private Rigidbody Physics;
     private DistanceGrabbable DistanceGrab;
@@ -17,23 +14,10 @@ public class BallThrowSoundEntity : MonoBehaviour
     {
         this.AudioSrc = this.gameObject.GetComponent<AudioSource>();
         this.Physics = this.gameObject.GetComponent<Rigidbody>();
-       
+        EventsManager.instance.PlayThrowSound += HandlePlayThrowSound;
        // this.DistanceGrab = this.gameObject.GetComponent<DistanceGrabbable>();
 
 
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        if(this.Physics.velocity.magnitude > 1) {
-
-        }
-        else
-        {
-
-            HasFirstCol = false;
-        }
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -54,5 +38,13 @@ public class BallThrowSoundEntity : MonoBehaviour
 
 
       
+    }
+
+    private void HandlePlayThrowSound(int gameObjectId)
+    {
+        if(gameObjectId == gameObject.GetInstanceID())
+        {
+            this.AudioSrc.PlayOneShot(this.SoundSrc.clipList[0]);
+        }
     }
 }
