@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.37431502, g: 0.64219147, b: 0.87553376, a: 1}
+  m_IndirectSpecularColor: {r: 0.3745899, g: 0.64169854, b: 0.8758076, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -602,6 +602,40 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 455600, guid: 7710ce4a7ee932b4a86742119e3babae, type: 3}
   m_PrefabInstance: {fileID: 66888962}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &69301467
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 69301468}
+  m_Layer: 0
+  m_Name: AmbientSoundSources
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &69301468
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 69301467}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 833628639}
+  - {fileID: 228388762}
+  - {fileID: 1901940842}
+  - {fileID: 445994524}
+  m_Father: {fileID: 0}
+  m_RootOrder: 23
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &73432917
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3093,6 +3127,39 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 441318, guid: fc05c8bfad7df5a4abe568aca7403b9e, type: 3}
   m_PrefabInstance: {fileID: 222048878}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &228388761
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 228388762}
+  m_Layer: 0
+  m_Name: Sounds_Stage2
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &228388762
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 228388761}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 269067325}
+  - {fileID: 1697811556}
+  - {fileID: 993832535}
+  m_Father: {fileID: 69301468}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &230010805
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3817,6 +3884,69 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 8916922554972418689, guid: 94c2f1b333c4b5d4daf8261d8cf67623, type: 3}
   m_PrefabInstance: {fileID: 268833983}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &269067324
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 269067325}
+  - component: {fileID: 269067326}
+  m_Layer: 0
+  m_Name: AmbientSoundWind2
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &269067325
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 269067324}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 415, y: 205, z: 580.8}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 228388762}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &269067326
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 269067324}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 37a8925e0459e874bbcbd23d5623128f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  songObj:
+    name: 
+    clipList:
+    - {fileID: 8300000, guid: 06861dc2a2291b34a8275cd4704ecc43, type: 3}
+    attachTo: {fileID: 269067324}
+    volume: 1
+    pitch: 1
+    spatialBlend: 1
+    loop: 1
+    source: {fileID: 0}
+  SecondsBetweenNewAmbientsound: 0
+  randomVolMin: 1
+  randomVolMax: 1
+  allowToSkip: 0
+  pitchMin: 1
+  pitchMax: 1
+  panMin: 0
+  panMax: 0
+  fadeoutPercentage: 0
+  fadeDuration: 0
 --- !u!1001 &269738220
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3895,6 +4025,69 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 404742, guid: e13d89ce323009a4a8a53d439b0a74e4, type: 3}
   m_PrefabInstance: {fileID: 269738220}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &272333323
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 272333324}
+  - component: {fileID: 272333325}
+  m_Layer: 0
+  m_Name: AmbientSoundWind3 (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &272333324
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 272333323}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 380.22, y: 325.83, z: 199.1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1901940842}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &272333325
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 272333323}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 37a8925e0459e874bbcbd23d5623128f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  songObj:
+    name: 
+    clipList:
+    - {fileID: 8300000, guid: 06861dc2a2291b34a8275cd4704ecc43, type: 3}
+    attachTo: {fileID: 272333323}
+    volume: 1
+    pitch: 1
+    spatialBlend: 1
+    loop: 1
+    source: {fileID: 0}
+  SecondsBetweenNewAmbientsound: 0
+  randomVolMin: 1
+  randomVolMax: 1
+  allowToSkip: 0
+  pitchMin: 1
+  pitchMax: 1
+  panMin: 0
+  panMax: 0
+  fadeoutPercentage: 0
+  fadeDuration: 0
 --- !u!1001 &272826681
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5925,6 +6118,69 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 407993125}
   m_CullTransparentMesh: 1
+--- !u!1 &409417420
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 409417422}
+  - component: {fileID: 409417421}
+  m_Layer: 0
+  m_Name: AmbientSoundWind
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &409417421
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 409417420}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 37a8925e0459e874bbcbd23d5623128f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  songObj:
+    name: 
+    clipList:
+    - {fileID: 8300000, guid: 06861dc2a2291b34a8275cd4704ecc43, type: 3}
+    attachTo: {fileID: 409417420}
+    volume: 1
+    pitch: 1
+    spatialBlend: 1
+    loop: 1
+    source: {fileID: 0}
+  SecondsBetweenNewAmbientsound: 0
+  randomVolMin: 1
+  randomVolMax: 1
+  allowToSkip: 0
+  pitchMin: 1
+  pitchMax: 1
+  panMin: 0
+  panMax: 0
+  fadeoutPercentage: 0
+  fadeDuration: 0
+--- !u!4 &409417422
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 409417420}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 230, y: 141.03, z: 523.7}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 833628639}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &414579801
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6612,6 +6868,38 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 468142, guid: ace40d2a4a1290f4f96f01a7e4ecd7f7, type: 3}
   m_PrefabInstance: {fileID: 444009201}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &445994523
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 445994524}
+  m_Layer: 0
+  m_Name: Sounds_Stage4
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &445994524
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 445994523}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 2140953043}
+  - {fileID: 1446436870}
+  m_Father: {fileID: 69301468}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &446837846
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -12772,6 +13060,38 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 441318, guid: fc05c8bfad7df5a4abe568aca7403b9e, type: 3}
   m_PrefabInstance: {fileID: 826866953}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &833628638
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 833628639}
+  m_Layer: 0
+  m_Name: Sounds_Stage1
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &833628639
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 833628638}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 409417422}
+  - {fileID: 1814976381}
+  m_Father: {fileID: 69301468}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &838356216
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -15593,6 +15913,69 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 430148, guid: 7505f79cb619cfd4ebb6af0704ad4260, type: 3}
   m_PrefabInstance: {fileID: 991137728}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &993832534
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 993832535}
+  - component: {fileID: 993832536}
+  m_Layer: 0
+  m_Name: AmbientSoundWind2 (2)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &993832535
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 993832534}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 457.59, y: 300.3, z: 369.9}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 228388762}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &993832536
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 993832534}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 37a8925e0459e874bbcbd23d5623128f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  songObj:
+    name: 
+    clipList:
+    - {fileID: 8300000, guid: 06861dc2a2291b34a8275cd4704ecc43, type: 3}
+    attachTo: {fileID: 993832534}
+    volume: 1
+    pitch: 1
+    spatialBlend: 1
+    loop: 1
+    source: {fileID: 0}
+  SecondsBetweenNewAmbientsound: 0
+  randomVolMin: 1
+  randomVolMax: 1
+  allowToSkip: 0
+  pitchMin: 1
+  pitchMax: 1
+  panMin: 0
+  panMax: 0
+  fadeoutPercentage: 0
+  fadeDuration: 0
 --- !u!1001 &995771678
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -16626,6 +17009,69 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 441318, guid: fc05c8bfad7df5a4abe568aca7403b9e, type: 3}
   m_PrefabInstance: {fileID: 1052714210}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1070924023
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1070924024}
+  - component: {fileID: 1070924025}
+  m_Layer: 0
+  m_Name: AmbientSoundWind3
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1070924024
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1070924023}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 481.19, y: 307.2, z: 245.4}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1901940842}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1070924025
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1070924023}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 37a8925e0459e874bbcbd23d5623128f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  songObj:
+    name: 
+    clipList:
+    - {fileID: 8300000, guid: 06861dc2a2291b34a8275cd4704ecc43, type: 3}
+    attachTo: {fileID: 1070924023}
+    volume: 1
+    pitch: 1
+    spatialBlend: 1
+    loop: 1
+    source: {fileID: 0}
+  SecondsBetweenNewAmbientsound: 0
+  randomVolMin: 1
+  randomVolMax: 1
+  allowToSkip: 0
+  pitchMin: 1
+  pitchMax: 1
+  panMin: 0
+  panMax: 0
+  fadeoutPercentage: 0
+  fadeDuration: 0
 --- !u!1001 &1071014774
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -22673,6 +23119,69 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 441318, guid: fc05c8bfad7df5a4abe568aca7403b9e, type: 3}
   m_PrefabInstance: {fileID: 1439826257}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1446436869
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1446436870}
+  - component: {fileID: 1446436871}
+  m_Layer: 0
+  m_Name: AmbientSoundWind4 (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1446436870
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1446436869}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 99.4, y: 315.5, z: 248.3}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 445994524}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1446436871
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1446436869}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 37a8925e0459e874bbcbd23d5623128f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  songObj:
+    name: 
+    clipList:
+    - {fileID: 8300000, guid: 06861dc2a2291b34a8275cd4704ecc43, type: 3}
+    attachTo: {fileID: 1446436869}
+    volume: 1
+    pitch: 1
+    spatialBlend: 1
+    loop: 1
+    source: {fileID: 0}
+  SecondsBetweenNewAmbientsound: 0
+  randomVolMin: 1
+  randomVolMax: 1
+  allowToSkip: 0
+  pitchMin: 1
+  pitchMax: 1
+  panMin: 0
+  panMax: 0
+  fadeoutPercentage: 0
+  fadeDuration: 0
 --- !u!1001 &1448631889
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -25659,6 +26168,69 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 4300000, guid: e4b66841754e4ed438f2b3bc5e615425, type: 3}
+--- !u!1 &1611300451
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1611300452}
+  - component: {fileID: 1611300453}
+  m_Layer: 0
+  m_Name: AmbientSoundWind3 (2)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1611300452
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1611300451}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 320.7, y: 325, z: 273.9}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1901940842}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1611300453
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1611300451}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 37a8925e0459e874bbcbd23d5623128f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  songObj:
+    name: 
+    clipList:
+    - {fileID: 8300000, guid: 06861dc2a2291b34a8275cd4704ecc43, type: 3}
+    attachTo: {fileID: 1611300451}
+    volume: 1
+    pitch: 1
+    spatialBlend: 1
+    loop: 1
+    source: {fileID: 0}
+  SecondsBetweenNewAmbientsound: 0
+  randomVolMin: 1
+  randomVolMax: 1
+  allowToSkip: 0
+  pitchMin: 1
+  pitchMax: 1
+  panMin: 0
+  panMax: 0
+  fadeoutPercentage: 0
+  fadeDuration: 0
 --- !u!1001 &1617972616
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -25869,6 +26441,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b3b8e27dc256eb042948dcfa7bbc0194, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  AimCollisionLayerMask:
+    serializedVersion: 2
+    m_Bits: 0
+  telekinesisLine: {fileID: 0}
+  lineWidth: 0.01
+  lineMaxLength: 1
+  toggled: 0
 --- !u!1001 &1620577394
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -27507,6 +28086,69 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 416522, guid: bee8d047e16101c438fb33382ab66935, type: 3}
   m_PrefabInstance: {fileID: 1692721186}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1697811555
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1697811556}
+  - component: {fileID: 1697811557}
+  m_Layer: 0
+  m_Name: AmbientSoundWind2 (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1697811556
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1697811555}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 462.08, y: 289.84, z: 479.32}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 228388762}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1697811557
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1697811555}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 37a8925e0459e874bbcbd23d5623128f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  songObj:
+    name: 
+    clipList:
+    - {fileID: 8300000, guid: 06861dc2a2291b34a8275cd4704ecc43, type: 3}
+    attachTo: {fileID: 1697811555}
+    volume: 1
+    pitch: 1
+    spatialBlend: 1
+    loop: 1
+    source: {fileID: 0}
+  SecondsBetweenNewAmbientsound: 0
+  randomVolMin: 1
+  randomVolMax: 1
+  allowToSkip: 0
+  pitchMin: 1
+  pitchMax: 1
+  panMin: 0
+  panMax: 0
+  fadeoutPercentage: 0
+  fadeDuration: 0
 --- !u!1001 &1700644826
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -30235,6 +30877,69 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: dc84da53502161e45bb9eefc0991010a, type: 3}
+--- !u!1 &1814976380
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1814976381}
+  - component: {fileID: 1814976382}
+  m_Layer: 0
+  m_Name: AmbientSoundWind (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1814976381
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1814976380}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 323.3, y: 148.2, z: 517.6}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 833628639}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1814976382
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1814976380}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 37a8925e0459e874bbcbd23d5623128f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  songObj:
+    name: 
+    clipList:
+    - {fileID: 8300000, guid: 06861dc2a2291b34a8275cd4704ecc43, type: 3}
+    attachTo: {fileID: 1814976380}
+    volume: 1
+    pitch: 1
+    spatialBlend: 1
+    loop: 1
+    source: {fileID: 0}
+  SecondsBetweenNewAmbientsound: 0
+  randomVolMin: 1
+  randomVolMax: 1
+  allowToSkip: 0
+  pitchMin: 1
+  pitchMax: 1
+  panMin: 0
+  panMax: 0
+  fadeoutPercentage: 0
+  fadeDuration: 0
 --- !u!1001 &1819451211
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -30869,6 +31574,39 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 470440, guid: 8ed1fa325ca228645ad26dd6eff14768, type: 3}
   m_PrefabInstance: {fileID: 1894437862}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1901940841
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1901940842}
+  m_Layer: 0
+  m_Name: Sounds_Stage3
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1901940842
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1901940841}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 1070924024}
+  - {fileID: 272333324}
+  - {fileID: 1611300452}
+  m_Father: {fileID: 69301468}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1906430744
 GameObject:
   m_ObjectHideFlags: 0
@@ -33794,26 +34532,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1275198359}
     m_Modifications:
-    - target: {fileID: 6799725721996934311, guid: 0b66d14eb401bbd429c488babe4cfeb0, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6799725721996934311, guid: 0b66d14eb401bbd429c488babe4cfeb0, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6799725721996934311, guid: 0b66d14eb401bbd429c488babe4cfeb0, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6799725721996934311, guid: 0b66d14eb401bbd429c488babe4cfeb0, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6799725721996934313, guid: 0b66d14eb401bbd429c488babe4cfeb0, type: 3}
-      propertyPath: m_Name
-      value: PlayerController
-      objectReference: {fileID: 0}
     - target: {fileID: 149218, guid: fc05c8bfad7df5a4abe568aca7403b9e, type: 3}
       propertyPath: m_Name
       value: Tree Type1 01 (33)
@@ -33849,6 +34567,26 @@ PrefabInstance:
     - target: {fileID: 441318, guid: fc05c8bfad7df5a4abe568aca7403b9e, type: 3}
       propertyPath: m_LocalRotation.y
       value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6799725721996934311, guid: 0b66d14eb401bbd429c488babe4cfeb0, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6799725721996934311, guid: 0b66d14eb401bbd429c488babe4cfeb0, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6799725721996934311, guid: 0b66d14eb401bbd429c488babe4cfeb0, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6799725721996934311, guid: 0b66d14eb401bbd429c488babe4cfeb0, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6799725721996934313, guid: 0b66d14eb401bbd429c488babe4cfeb0, type: 3}
+      propertyPath: m_Name
+      value: PlayerController
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fc05c8bfad7df5a4abe568aca7403b9e, type: 3}
@@ -35444,6 +36182,69 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 404742, guid: e13d89ce323009a4a8a53d439b0a74e4, type: 3}
   m_PrefabInstance: {fileID: 2134791008}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &2140953042
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2140953043}
+  - component: {fileID: 2140953044}
+  m_Layer: 0
+  m_Name: AmbientSoundWind4
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2140953043
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2140953042}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 230.5, y: 345.61, z: 275.63}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 445994524}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2140953044
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2140953042}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 37a8925e0459e874bbcbd23d5623128f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  songObj:
+    name: 
+    clipList:
+    - {fileID: 8300000, guid: 06861dc2a2291b34a8275cd4704ecc43, type: 3}
+    attachTo: {fileID: 2140953042}
+    volume: 1
+    pitch: 1
+    spatialBlend: 1
+    loop: 1
+    source: {fileID: 0}
+  SecondsBetweenNewAmbientsound: 0
+  randomVolMin: 1
+  randomVolMax: 1
+  allowToSkip: 0
+  pitchMin: 1
+  pitchMax: 1
+  panMin: 0
+  panMax: 0
+  fadeoutPercentage: 0
+  fadeDuration: 0
 --- !u!1001 &2142238204
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -35709,6 +36510,14 @@ PrefabInstance:
     - target: {fileID: 4725754753076144430, guid: ee2c83ebb18fcbd4e9169f7d44ee25d6, type: 3}
       propertyPath: isActiveOnStart
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5526261823138897927, guid: ee2c83ebb18fcbd4e9169f7d44ee25d6, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5526261824054753446, guid: ee2c83ebb18fcbd4e9169f7d44ee25d6, type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7193588168959250731, guid: ee2c83ebb18fcbd4e9169f7d44ee25d6, type: 3}
       propertyPath: LeftHand
