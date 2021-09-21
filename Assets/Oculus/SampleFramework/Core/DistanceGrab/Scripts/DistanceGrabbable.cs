@@ -62,6 +62,12 @@ namespace OculusSampleFramework
        public override void GrabEnd(Vector3 linearVelocity, Vector3 angularVelocity
 )
         {
+            //1 is an experimental value, this should prevent switching from left to right hand and vica versa 
+            if(linearVelocity.magnitude > 1)
+            {
+                this.gameObject.GetComponent<AudioSource>().PlayOneShot(this.gameObject.GetComponent<BallThrowSoundEntity>().SoundSrc.clipList[0]);
+            }
+   
 
             if (m_grabbedBy.grabbedObject.gameObject.tag.Equals("Throwable") && IsThrowable)
             {
@@ -75,6 +81,7 @@ namespace OculusSampleFramework
             rb.angularVelocity = angularVelocity;
             m_grabbedBy = null;
             m_grabbedCollider = null;
+
         }
         void RefreshCrosshair()
         {
