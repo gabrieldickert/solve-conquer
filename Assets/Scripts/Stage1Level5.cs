@@ -12,11 +12,11 @@ public class Stage1Level5 : MonoBehaviour
     public int triggerFloor3 = 0;
     public int triggerFloor4 = 0;
     public int triggerFloor5 = 0;
-    public int bridgeFloor1_a = 0;
-    public int bridgeFloor1_b = 0;
-    public int bridgeFloor2 = 0;
-    public int bridgeFloor3 = 0;
-    public int bridgeFloor4 = 0;
+    public int[] bridgeFloor1;
+    //public int[] bridgeFloor1_b;
+    public int[] bridgeFloor2;
+    public int[] bridgeFloor3;
+    public int[] bridgeFloor4;
     public int bridgeFloor5 = 0;
 
     public GameObject companion = null;
@@ -84,22 +84,34 @@ public class Stage1Level5 : MonoBehaviour
         {
             Debug.Log("Stage1Level5: Player entered floor 2");
             currentFloor = 2;
-            EventsManager.instance.OnPressurePlateDisable(bridgeFloor1_a);
-            EventsManager.instance.OnPressurePlateDisable(bridgeFloor1_b);
+            foreach(int bridgeTrigger in bridgeFloor1)
+            {
+                EventsManager.instance.OnPressurePlateDisable(bridgeTrigger);
+            }
+            /*foreach (int bridgeTrigger in bridgeFloor1_b)
+            {
+                EventsManager.instance.OnPressurePlateDisable(bridgeTrigger);
+            }*/
             DropCube(cubeFloor2_a);
             DropCube(cubeFloor2_b);
         } else if(triggerId == triggerFloor3 && currentFloor != 3)
         {
             Debug.Log("Stage1Level5: Player entered floor 3");
             currentFloor = 3;
-            EventsManager.instance.OnPressurePlateDisable(bridgeFloor2);
+            foreach (int bridgeTrigger in bridgeFloor2)
+            {
+                EventsManager.instance.OnPressurePlateDisable(bridgeTrigger);
+            }
             DropCube(cubeFloor3);
         }
         else if (triggerId == triggerFloor4 && currentFloor != 4)
         {
             Debug.Log("Stage1Level5: Player entered floor 4");
             currentFloor = 4;
-            EventsManager.instance.OnPressurePlateDisable(bridgeFloor3);
+            foreach (int bridgeTrigger in bridgeFloor3)
+            {
+                EventsManager.instance.OnPressurePlateDisable(bridgeTrigger);
+            }
             DropCube(cubeFloor4);
         }
         else if (triggerId == triggerFloor5 && currentFloor != 5)
@@ -107,7 +119,10 @@ public class Stage1Level5 : MonoBehaviour
             Debug.Log("Stage1Level5: Player entered floor 5");
             currentFloor = 5;
             trashSpawner.enabled = false;
-            EventsManager.instance.OnPressurePlateDisable(bridgeFloor4);
+            foreach (int bridgeTrigger in bridgeFloor4)
+            {
+                EventsManager.instance.OnPressurePlateDisable(bridgeTrigger);
+            }
             EventsManager.instance.OnPressurePlateEnable(bridgeFloor5);
         }
     }

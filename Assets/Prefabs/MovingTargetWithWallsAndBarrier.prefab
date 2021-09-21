@@ -159,7 +159,8 @@ MonoBehaviour:
   hasRequiredPassengers: 0
   sound:
     name: 
-    clipList: []
+    clipList:
+    - {fileID: 8300000, guid: 117225ef78381824faecfdead4d8033f, type: 3}
     attachTo: {fileID: 0}
     volume: 0
     pitch: 0
@@ -178,7 +179,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.05
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -222,7 +223,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0
+      value: 1
       inSlope: 0
       outSlope: 0
       tangentMode: 0
