@@ -26,24 +26,53 @@ public class AudioManager : MonoBehaviour
     private void Start()
     {
         // 0 ist default clip
-        //   currentTheme = 0;
-        Play("Theme", 0);
-        Play("GlobalAmbient", 1);
-        //currentThemePaused = false;
+        currentTheme = 0;
+        Play("Themes", currentTheme);
+    }
+
+    private void Update()
+    {
+        
+        if(currentTheme < sounds[0].clipList.Length)
+        {
+            Sound s = Array.Find(sounds, sound => sound.clipList[currentTheme]);
+           
+            if (!s.source.isPlaying)
+            {
+                currentTheme++;
+                if (currentTheme < sounds[0].clipList.Length)
+                {
+                    ChangeToClip("Themes", currentTheme);
+                }
+            }
+        } else
+        {
+            currentTheme = 0;
+            ChangeToClip("Themes", currentTheme);
+        }
+
     }
 
     public void ChangeToClip(string name, int clip)
     {
-        Sound s = Array.Find(sounds, sound => sound.name == name);
+        Sound s = Array.Find(sounds, sound => sound.name == name && sound.clipList[clip]);
+
+        if(s == null)
+        {
+            Debug.LogWarning("Sound:" + name + " not found");
+            return;
+        }
+
         s.source.Stop();
         s.source.clip = s.clipList[clip];
-        //s.source.Play();
+        s.source.Play();
     }
 
     public void Play(string name, int clip)
     {
         Sound s = Array.Find(sounds, sound => sound.name == name && sound.clipList[clip]);
         s.source.clip = s.clipList[clip];
+
         if (s == null)
         {
             Debug.LogWarning("Sound:" + name + " not found");

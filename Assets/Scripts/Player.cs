@@ -21,7 +21,7 @@ public class Player : MonoBehaviour
     {
         GameData gd = SaveSystem.LoadGame();
 
-        if( gd != null)
+        if ( gd != null)
         {
             this.LoadGame();
             gameLoadedOnStart = true;
@@ -31,6 +31,7 @@ public class Player : MonoBehaviour
         }
         
     }
+
 
     public void LoadGame()
     {
