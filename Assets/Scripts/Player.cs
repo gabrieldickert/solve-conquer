@@ -77,7 +77,7 @@ public class Player : MonoBehaviour
             }
             player.transform.parent = null;
             player.transform.parent = plat.VisualTrigger1.transform;
-            player.transform.position = plat.VisualTrigger1.GetComponent<MeshRenderer>().bounds.center;
+            player.transform.position = plat.VisualTrigger1.GetComponent<MeshRenderer>().bounds.center + new Vector3(0f,1f,0f);
 
         } 
 
@@ -152,7 +152,7 @@ public class Player : MonoBehaviour
             }
 
             player.transform.parent = nextPlatform.transform;
-            player.transform.position = nextPlatform.VisualTrigger1.GetComponent<MeshRenderer>().bounds.center;
+            player.transform.position = nextPlatform.VisualTrigger1.GetComponent<MeshRenderer>().bounds.center + new Vector3(0f, 1f, 0f);
             
             StartCoroutine("WaitForSecPlayer", nextPlatform);
 
