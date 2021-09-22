@@ -44,6 +44,8 @@ public class Player : MonoBehaviour
             {
                 SceneManager.LoadScene("PlanetScene", LoadSceneMode.Single);
             }
+
+
             
             gameObject.GetComponent<Rigidbody>().isKinematic = false;
             gameObject.transform.parent = null;
@@ -77,7 +79,7 @@ public class Player : MonoBehaviour
             }
             player.transform.parent = null;
             player.transform.parent = plat.VisualTrigger1.transform;
-            player.transform.position = plat.VisualTrigger1.GetComponent<MeshRenderer>().bounds.center;
+            player.transform.position = plat.VisualTrigger1.GetComponent<MeshRenderer>().bounds.center + new Vector3(0f,1f,0f);
 
         } 
 
@@ -132,7 +134,7 @@ public class Player : MonoBehaviour
     {
 
         GameData gd = SaveSystem.LoadGame();
-       
+        
         if (gd != null)
         {
             MovingPlatformNew nextPlatform = SkipLevelManager.SkipToNextLevel().GetComponent<MovingPlatformNew>();
@@ -152,7 +154,7 @@ public class Player : MonoBehaviour
             }
 
             player.transform.parent = nextPlatform.transform;
-            player.transform.position = nextPlatform.VisualTrigger1.GetComponent<MeshRenderer>().bounds.center;
+            player.transform.position = nextPlatform.VisualTrigger1.GetComponent<MeshRenderer>().bounds.center + new Vector3(0f, 1f, 0f);
             
             StartCoroutine("WaitForSecPlayer", nextPlatform);
 
