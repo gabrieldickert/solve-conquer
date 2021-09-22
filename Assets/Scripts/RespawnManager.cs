@@ -33,7 +33,7 @@ public class RespawnManager : MonoBehaviour
         //Reset Player Position and Companion Pos (should be last save point)
         //Debug.Log("Reset Player");
         SceneManager.LoadScene("PlanetScene", LoadSceneMode.Single);
-
+        
         GameData gd = SaveSystem.LoadGame();
 
         Debug.Log(gd.MovingPlatformName);
