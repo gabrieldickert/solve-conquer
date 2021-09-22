@@ -25,7 +25,7 @@ public class TimelineTrigger : MonoBehaviour
         {
             timeLinePlaying = true;
             myDirector.Play();
-            //Debug.Log("TimelineTrigger: Player entered trigger");
+            Debug.Log("TimelineTrigger: Player entered trigger");
         }
     }
 
@@ -39,6 +39,10 @@ public class TimelineTrigger : MonoBehaviour
             timeLinePlaying = false;
         }
 
-        nextTimelineTrigger.GetComponent<CapsuleCollider>().enabled = true;
+        if(nextTimelineTrigger != null)
+        {
+            nextTimelineTrigger.SetActive(true);
+        }
+            
     }
 }

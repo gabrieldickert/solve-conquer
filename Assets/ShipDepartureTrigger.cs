@@ -16,6 +16,7 @@ public class ShipDepartureTrigger : MonoBehaviour
         myDirector = timeLine.GetComponent<PlayableDirector>();
         myDirector.stopped += OnTimeLineStopped;
         player = GameObject.FindWithTag("Player");
+        Debug.Log("Hello from " + gameObject.GetInstanceID() + ", " + gameObject.GetComponent<ShipDepartureTrigger>().enabled);
     }
 
     private void Update()
@@ -31,9 +32,14 @@ public class ShipDepartureTrigger : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        playerEnteredTriggerTime = Time.time;
-        myDirector.Play();
-        shouldDisablePlayerMovement = true;
+        if(!shouldDisablePlayerMovement)
+        {
+            playerEnteredTriggerTime = Time.time;
+            myDirector.Play();
+            shouldDisablePlayerMovement = true;
+        }
+        
+        
         
         
         //close door
