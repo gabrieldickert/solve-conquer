@@ -40030,7 +40030,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4671250621345544403, guid: 3e4ac03e7d0c94a47a456aff411b40c6, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3e4ac03e7d0c94a47a456aff411b40c6, type: 3}
@@ -50634,6 +50634,18 @@ PrefabInstance:
       propertyPath: m_SceneBindings.Array.data[2].value
       value: 
       objectReference: {fileID: 1777705085}
+    - target: {fileID: 2358654673258360481, guid: d712d099a1ad7dc478c6982d23817140, type: 3}
+      propertyPath: enableObjectCollision
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2358654673258360481, guid: d712d099a1ad7dc478c6982d23817140, type: 3}
+      propertyPath: enablePlayerCollision
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2358654673258360481, guid: d712d099a1ad7dc478c6982d23817140, type: 3}
+      propertyPath: enableCompanionCollision
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2358654674265903842, guid: d712d099a1ad7dc478c6982d23817140, type: 3}
       propertyPath: m_RootOrder
       value: 14
