@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Playables;
 
-public class TimelineTrigger : MonoBehaviour
+public class HackableConsole : MonoBehaviour
 {
     public bool playOnlyOnce = true;
     public GameObject timeLine = null;
@@ -14,29 +14,33 @@ public class TimelineTrigger : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        EventsManager.instance.CompanionHackEnable += HandleHacked;
         myDirector = timeLine.GetComponent<PlayableDirector>();
         myDirector.stopped += OnTimeLineStopped;
     }
 
-    private void OnTriggerEnter(Collider other)
+    private void HandleHacked(int instanceId)
     {
-        if(!timeLinePlaying && other.tag == "Player")
+        if(gameObject.GetInstanceID() == instanceId)
         {
-            timeLinePlaying = true;
-            myDirector.Play();
-            //Debug.Log("TimelineTrigger: Player entered trigger");
+            if (!timeLinePlaying)
+            {
+                timeLinePlaying = true;
+                myDirector.Play();
+            }
+
+            if (playOnlyOnce)
+            {
+                gameObject.GetComponent<HackableConsole>().enabled = false;
+            }
         }
     }
 
     void OnTimeLineStopped(PlayableDirector aDirector)
     {
-        if (playOnlyOnce && aDirector == myDirector)
-        {
-            gameObject.GetComponent<TimelineTrigger>().enabled = false;
-        } else
+        if(!playOnlyOnce)
         {
             timeLinePlaying = false;
         }
-
     }
 }
