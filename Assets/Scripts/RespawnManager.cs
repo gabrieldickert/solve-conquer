@@ -40,7 +40,15 @@ public class RespawnManager : MonoBehaviour
 
         MovingPlatformNew plat = GameObject.Find(gd.MovingPlatformName).GetComponent<MovingPlatformNew>();
 
+        //Create Playable State for Player Component
         GameObject player = GameObject.FindWithTag("Player");
+        player.GetComponent<Rigidbody>().isKinematic = false;
+        player.transform.parent = null;
+        player.transform.Find("LocomotionController").gameObject.SetActive(true);
+        player.transform.Find("OVRCameraRig/TrackingSpace/LeftHandAnchor").gameObject.GetComponent<LineRenderer>().enabled = true;
+        player.transform.Find("OVRCameraRig/TrackingSpace/LeftHandAnchor").gameObject.GetComponent<CompanionAimHandler>().enabled = true;
+        player.transform.rotation = UnityEngine.Quaternion.identity;
+        player.GetComponent<Rigidbody>().interpolation = RigidbodyInterpolation.None;
 
         player.transform.parent = plat.VisualTrigger1.transform;
         player.transform.position = plat.VisualTrigger1.GetComponent<MeshRenderer>().bounds.center;
@@ -48,8 +56,10 @@ public class RespawnManager : MonoBehaviour
         if(gd.saveCompanionPosition)
         {
             GameObject companion = GameObject.FindWithTag("Companion");
+            companion.GetComponent<NavMeshAgent>().enabled = false;
             companion.transform.parent = plat.VisualTrigger2.transform;
             companion.transform.position = plat.VisualTrigger2.GetComponent<MeshRenderer>().bounds.center;
+            companion.GetComponent<NavMeshAgent>().enabled = true;
         }
         
         /*
