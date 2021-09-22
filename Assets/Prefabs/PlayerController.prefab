@@ -1352,7 +1352,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6799725723956706677}
   - component: {fileID: 2954890737056552104}
-  - component: {fileID: 6016164702311685832}
+  - component: {fileID: 1383369393324867452}
   m_Layer: 10
   m_Name: LeftHandAnchor
   m_TagString: Untagged
@@ -1473,7 +1473,7 @@ LineRenderer:
     generateLightingData: 0
   m_UseWorldSpace: 0
   m_Loop: 0
---- !u!114 &6016164702311685832
+--- !u!114 &1383369393324867452
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1482,15 +1482,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 6799725723956706682}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5d17e69b743a3d4489dc1dd63a60adba, type: 3}
+  m_Script: {fileID: 11500000, guid: b3b8e27dc256eb042948dcfa7bbc0194, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   AimCollisionLayerMask:
     serializedVersion: 2
     m_Bits: 2305
   telekinesisLine: {fileID: 2954890737056552104}
-  lineWidth: 0.01
-  lineMaxLength: 10
+  lineWidth: 10
+  lineMaxLength: 1
   toggled: 0
 --- !u!1001 &2173024215292247517
 PrefabInstance:

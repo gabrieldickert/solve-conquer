@@ -10,6 +10,7 @@ public class TimelineTrigger : MonoBehaviour
 
     private PlayableDirector myDirector = null;
     private bool timeLinePlaying = false;
+    public int TimelineID;
 
     // Start is called before the first frame update
     void Start()
@@ -20,10 +21,11 @@ public class TimelineTrigger : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if(!timeLinePlaying && other.tag == "Player")
+       if(!timeLinePlaying && other.tag == "Player")
         {
             timeLinePlaying = true;
-            myDirector.Play();
+            //myDirector.Play();
+            EventsManager.instance.OnAddTimelineToQueue(TimelineID);
             //Debug.Log("TimelineTrigger: Player entered trigger");
         }
     }
