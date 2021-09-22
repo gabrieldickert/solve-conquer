@@ -23,7 +23,7 @@ public class BallThrowSoundEntity : MonoBehaviour
     private void OnCollisionEnter(Collision collision)
     {
 
-        this.AudioSrc.Stop();
+       this.AudioSrc.Stop();
         /*
         if(!HasFirstCol) {
 
@@ -32,10 +32,10 @@ public class BallThrowSoundEntity : MonoBehaviour
             HasFirstCol = true;
         }
         */
-        this.AudioSrc.volume = 1;
+       /* this.AudioSrc.volume = 1;
         this.AudioSrc.clip = this.SoundSrc.clipList[1];
-        this.AudioSrc.Play();
-
+        this.AudioSrc.Play();*/
+        
 
       
     }
