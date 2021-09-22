@@ -6,14 +6,16 @@ using UnityEngine.Playables;
 public class TimelineTrigger : MonoBehaviour
 {
     public bool playOnlyOnce = true;
-    public PlayableDirector timeLine = null;
+    public GameObject timeLine = null;
 
+    private PlayableDirector myDirector = null;
     private bool timeLinePlaying = false;
 
     // Start is called before the first frame update
     void Start()
     {
-        timeLine.stopped += OnTimeLineStopped;
+        myDirector = timeLine.GetComponent<PlayableDirector>();
+        myDirector.stopped += OnTimeLineStopped;
     }
 
     private void OnTriggerEnter(Collider other)
@@ -21,13 +23,14 @@ public class TimelineTrigger : MonoBehaviour
         if(!timeLinePlaying && other.tag == "Player")
         {
             timeLinePlaying = true;
-            timeLine.Play();
+            myDirector.Play();
+            Debug.Log("TimelineTrigger: Player entered trigger");
         }
     }
 
     void OnTimeLineStopped(PlayableDirector aDirector)
     {
-        if (playOnlyOnce && aDirector == timeLine)
+        if (playOnlyOnce && aDirector == myDirector)
         {
             gameObject.GetComponent<TimelineTrigger>().enabled = false;
         } else
