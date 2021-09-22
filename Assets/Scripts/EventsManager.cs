@@ -202,10 +202,12 @@ public class EventsManager : MonoBehaviour
     {
         AudioManagerPause?.Invoke();
     }
+
     public void OnAudioManagerVolumeDown()
     {
         AudioManagerVolumeDown?.Invoke();
     }
+
     public void OnAudioManagerVolumeUp()
     {
         AudioManagerVolumeUp?.Invoke();

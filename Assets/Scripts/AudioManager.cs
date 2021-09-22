@@ -35,8 +35,7 @@ public class AudioManager : MonoBehaviour
         // 0 ist default clip
         currentTheme = 0;
         Play("Themes", currentTheme);
-
-       
+        
     }
 
     private void Update()
@@ -46,7 +45,7 @@ public class AudioManager : MonoBehaviour
         {
             Sound s = Array.Find(sounds, sound => sound.clipList[currentTheme]);
            
-            if (!s.source.isPlaying)
+            if (!s.source.isPlaying && !currentThemePaused)
             {
                 currentTheme++;
                 if (currentTheme < sounds[0].clipList.Length)
@@ -81,6 +80,7 @@ public class AudioManager : MonoBehaviour
     {
         Sound s = Array.Find(sounds, sound => sound.name == name && sound.clipList[clip]);
         s.source.clip = s.clipList[clip];
+        currentThemePaused = false;
 
         if (s == null)
         {
@@ -94,6 +94,7 @@ public class AudioManager : MonoBehaviour
         }
         else
         {
+            
             s.source.Play();
         }
     }
@@ -101,13 +102,46 @@ public class AudioManager : MonoBehaviour
     public void Pause(string name, int clip)
     {
         Sound s = Array.Find(sounds, sound => sound.name == name && sound.source.clip == sound.clipList[clip]);
+        currentThemePaused = true;
+
         if (s == null)
         {
             Debug.LogWarning("Sound:" + name + " not found");
             return;
         }
+
         s.source.Pause();
+        
     }
+
+    public void VolumeDown(string name, int clip)
+    {
+        Sound s = Array.Find(sounds, sound => sound.name == name && sound.source.clip == sound.clipList[clip]);
+
+        if (s == null)
+        {
+            Debug.LogWarning("Sound:" + name + " not found");
+            return;
+        }
+
+        s.source.volume = setVolumeTo;
+
+    }
+
+    public void VolumeUp(string name, int clip)
+    {
+        Sound s = Array.Find(sounds, sound => sound.name == name && sound.source.clip == sound.clipList[clip]);
+
+        if (s == null)
+        {
+            Debug.LogWarning("Sound:" + name + " not found");
+            return;
+        }
+
+        s.source.volume = s.volume;
+
+    }
+
 
     public void Stop(string name, int clip)
     {
@@ -170,22 +204,22 @@ public class AudioManager : MonoBehaviour
 
     void OnAudioManagerPlay()
     {
-        
+        Play("Themes", currentTheme);
     }
 
     void OnAudioManagerPause()
     {
-       
+        Pause("Themes", currentTheme);
     }
 
     void OnAudioManagerVolumeDown()
     {
-      
+        VolumeDown("Themes", currentTheme);
     }
 
     void OnAudioManagerVolumeUp()
     {
-        
+        VolumeUp("Themes", currentTheme);
     }
 
 }

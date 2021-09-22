@@ -44,6 +44,8 @@ public class Player : MonoBehaviour
             {
                 SceneManager.LoadScene("PlanetScene", LoadSceneMode.Single);
             }
+
+
             
             gameObject.GetComponent<Rigidbody>().isKinematic = false;
             gameObject.transform.parent = null;
@@ -132,7 +134,7 @@ public class Player : MonoBehaviour
     {
 
         GameData gd = SaveSystem.LoadGame();
-       
+        
         if (gd != null)
         {
             MovingPlatformNew nextPlatform = SkipLevelManager.SkipToNextLevel().GetComponent<MovingPlatformNew>();
