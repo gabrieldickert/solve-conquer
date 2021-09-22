@@ -9,6 +9,8 @@ public class AudioManager : MonoBehaviour
     public static int currentTheme;
     public static bool currentThemePaused;
 
+    public float setVolumeTo;
+
     private void Awake()
     {
         foreach (Sound s in sounds)
@@ -25,9 +27,16 @@ public class AudioManager : MonoBehaviour
 
     private void Start()
     {
+        EventsManager.instance.AudioManagerPlay += OnAudioManagerPlay;
+        EventsManager.instance.AudioManagerPause += OnAudioManagerPause;
+        EventsManager.instance.AudioManagerVolumeDown += OnAudioManagerVolumeDown;
+        EventsManager.instance.AudioManagerVolumeUp += OnAudioManagerVolumeUp;
+
         // 0 ist default clip
         currentTheme = 0;
         Play("Themes", currentTheme);
+
+       
     }
 
     private void Update()
@@ -158,4 +167,25 @@ public class AudioManager : MonoBehaviour
 
         s.source.volume = startVolume;
     }
+
+    void OnAudioManagerPlay()
+    {
+        
+    }
+
+    void OnAudioManagerPause()
+    {
+       
+    }
+
+    void OnAudioManagerVolumeDown()
+    {
+      
+    }
+
+    void OnAudioManagerVolumeUp()
+    {
+        
+    }
+
 }
