@@ -31,16 +31,19 @@ public class MovingPlatformSaveEntity : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-       
+
         GameData gd = SaveSystem.LoadGame();
         GameObject platform = null;
         MovingPlatformNew currentPlatform = null;
 
         if (gd != null)
         {
-           platform = GameObject.Find(gd.MovingPlatformName);
-           currentPlatform = platform.GetComponent<MovingPlatformNew>();
+            platform = GameObject.Find(gd.MovingPlatformName);
+            currentPlatform = platform.GetComponent<MovingPlatformNew>();
+        }
 
+        if(currentPlatform != null)
+        {
             if (other.gameObject.tag == "Player")
             {
                 currentPlatform.OnPlayerEnteredTrigger(other.gameObject.GetComponent<CapsuleCollider>());
@@ -49,24 +52,23 @@ public class MovingPlatformSaveEntity : MonoBehaviour
             if (other.gameObject.tag == "Companion")
             {
                 currentPlatform.OnCompanionEnteredTrigger(other.gameObject.GetComponent<BoxCollider>());
-
             }
-
         }
-     
 
-
-
-        if((gd == null || !this.name.Equals(gd.MovingPlatformName)))
+        if (other.tag == "Player")
         {
-            if ((currentPlatform != null && currentPlatform.hasRequiredPassengers) || gd == null)
+
+            if ((gd == null || !this.name.Equals(gd.MovingPlatformName)))
             {
-                SaveSystem.SaveGame(this.GetComponent<MovingPlatformNew>(), this.Stage, this.Lvl, this.Companion.GetComponent<NavMeshAgent>().enabled ? true : false);
-                this.Canvas.SetActive(true);
-                StartCoroutine("WaitForSec");
+                if ((currentPlatform != null && currentPlatform.hasRequiredPassengers) || gd == null)
+                {
+                    SaveSystem.SaveGame(this.GetComponent<MovingPlatformNew>(), this.Stage, this.Lvl, this.Companion.GetComponent<NavMeshAgent>().enabled ? true : false);
+                    this.Canvas.SetActive(true);
+                    StartCoroutine("WaitForSec");
+                }
+
             }
-            
-        } 
+        }
 
     }
 
