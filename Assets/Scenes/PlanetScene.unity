@@ -7460,15 +7460,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8771371527354331929, guid: 43ca70b3a08eacb4798bd0d81e97ff45, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8771371527354331929, guid: 43ca70b3a08eacb4798bd0d81e97ff45, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8771371527354331929, guid: 43ca70b3a08eacb4798bd0d81e97ff45, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 8
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9092928809790659586, guid: 43ca70b3a08eacb4798bd0d81e97ff45, type: 3}
       propertyPath: gameObjectToFollow
@@ -51007,6 +51007,14 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1777705085}
     - target: {fileID: 2785011409838814678, guid: d712d099a1ad7dc478c6982d23817140, type: 3}
+      propertyPath: m_SceneBindings.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 2785011409838814678, guid: d712d099a1ad7dc478c6982d23817140, type: 3}
+      propertyPath: m_SceneBindings.Array.data[3].key
+      value: 
+      objectReference: {fileID: 2959017755772347354, guid: 0ca55cae39c64904588c4c2a34cc3cc6, type: 2}
+    - target: {fileID: 2785011409838814678, guid: d712d099a1ad7dc478c6982d23817140, type: 3}
       propertyPath: m_SceneBindings.Array.data[1].value
       value: 
       objectReference: {fileID: 1777705085}
@@ -51014,6 +51022,10 @@ PrefabInstance:
       propertyPath: m_SceneBindings.Array.data[2].value
       value: 
       objectReference: {fileID: 1777705085}
+    - target: {fileID: 2785011409838814678, guid: d712d099a1ad7dc478c6982d23817140, type: 3}
+      propertyPath: m_SceneBindings.Array.data[3].value
+      value: 
+      objectReference: {fileID: 1236724307}
     - target: {fileID: 3211423730519125452, guid: d712d099a1ad7dc478c6982d23817140, type: 3}
       propertyPath: m_SceneBindings.Array.data[0].value
       value: 

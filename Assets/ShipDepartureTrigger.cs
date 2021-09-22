@@ -16,7 +16,6 @@ public class ShipDepartureTrigger : MonoBehaviour
         myDirector = timeLine.GetComponent<PlayableDirector>();
         myDirector.stopped += OnTimeLineStopped;
         player = GameObject.FindWithTag("Player");
-        Debug.Log("Hello from " + gameObject.GetInstanceID() + ", " + gameObject.GetComponent<ShipDepartureTrigger>().enabled);
     }
 
     private void Update()
