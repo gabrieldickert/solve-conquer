@@ -3,48 +3,44 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Playables;
 
-public class HackableConsole : MonoBehaviour
+public class Ending1CutsceneTrigger : MonoBehaviour
 {
+    public int listenForTriggerId = 0;
+    public int disableTriggerId = 0;
     public bool playOnlyOnce = true;
     public GameObject timeLine = null;
-    public bool hasAdditionalTriggers = false;
-    public int additionalTriggerId = 0;
 
     private PlayableDirector myDirector = null;
     private bool timeLinePlaying = false;
 
-    // Start is called before the first frame update
     void Start()
     {
-        EventsManager.instance.CompanionHackEnable += HandleHacked;
+        EventsManager.instance.SwitchEnable += HandleSwitchEnable;
         myDirector = timeLine.GetComponent<PlayableDirector>();
         myDirector.stopped += OnTimeLineStopped;
     }
 
-    private void HandleHacked(int instanceId)
+    private void HandleSwitchEnable(int triggerId)
     {
-        if(gameObject.GetInstanceID() == instanceId)
+        if(this.listenForTriggerId == triggerId)
         {
             if (!timeLinePlaying)
             {
                 timeLinePlaying = true;
                 myDirector.Play();
-                if(hasAdditionalTriggers)
-                {
-                    EventsManager.instance.OnSwitchDisable(additionalTriggerId);
-                }
+                EventsManager.instance.OnSwitchDisable(disableTriggerId);
             }
 
             if (playOnlyOnce)
             {
-                gameObject.GetComponent<HackableConsole>().enabled = false;
+                gameObject.GetComponent<Ending1CutsceneTrigger>().enabled = false;
             }
         }
     }
 
     void OnTimeLineStopped(PlayableDirector aDirector)
     {
-        if(!playOnlyOnce)
+        if (!playOnlyOnce)
         {
             timeLinePlaying = false;
         }

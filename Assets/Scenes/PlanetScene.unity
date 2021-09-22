@@ -2162,6 +2162,52 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 437022, guid: de863afb481be364ea04e5a347f5967f, type: 3}
   m_PrefabInstance: {fileID: 99582527}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &101252024 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 532968448057081021, guid: ee2c83ebb18fcbd4e9169f7d44ee25d6, type: 3}
+  m_PrefabInstance: {fileID: 3575086564659973140}
+  m_PrefabAsset: {fileID: 0}
+--- !u!23 &101252032
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 101252024}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 0}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
 --- !u!1001 &104882147
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -25536,7 +25582,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8142731926503275176, guid: bba3fd3e9e716a641b261ac2835e55f8, type: 3}
       propertyPath: m_LocalScale.x
-      value: 0.096396
+      value: 3.1912603
       objectReference: {fileID: 0}
     - target: {fileID: 8142731926503275176, guid: bba3fd3e9e716a641b261ac2835e55f8, type: 3}
       propertyPath: m_LocalPosition.x
@@ -42209,7 +42255,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6799725723337403679, guid: 0b66d14eb401bbd429c488babe4cfeb0, type: 3}
       propertyPath: AimCollisionLayerMask.m_Bits
-      value: 18433
+      value: 149505
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 1963012784408113288, guid: 0b66d14eb401bbd429c488babe4cfeb0, type: 3}
@@ -50738,6 +50784,10 @@ PrefabInstance:
       propertyPath: m_SceneBindings.Array.data[1].value
       value: 
       objectReference: {fileID: 1777705085}
+    - target: {fileID: 9102620997371202657, guid: d712d099a1ad7dc478c6982d23817140, type: 3}
+      propertyPath: m_Layer
+      value: 17
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d712d099a1ad7dc478c6982d23817140, type: 3}
 --- !u!1001 &2834223649109249612

@@ -18,6 +18,8 @@ public class Wire : MonoBehaviour
         EventsManager.instance.SwitchDisable += DeactivateWire;
         EventsManager.instance.AntennaEnable += ActivateWire;
         EventsManager.instance.AntennaDisable += DeactivateWire;
+        EventsManager.instance.LogicGateEnable += ActivateWire;
+        EventsManager.instance.LogicGateDisable += DeactivateWire;
     }
 
     // Update is called once per frame
