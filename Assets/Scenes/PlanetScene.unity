@@ -7216,6 +7216,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 8916922554972418689, guid: 94c2f1b333c4b5d4daf8261d8cf67623, type: 3}
   m_PrefabInstance: {fileID: 315024136}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &324582101 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 324358016758231110, guid: ee2c83ebb18fcbd4e9169f7d44ee25d6, type: 3}
+  m_PrefabInstance: {fileID: 3575086564659973140}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &326747977
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -40023,6 +40028,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: AudioManager
       objectReference: {fileID: 0}
+    - target: {fileID: 4671250621345544403, guid: 3e4ac03e7d0c94a47a456aff411b40c6, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3e4ac03e7d0c94a47a456aff411b40c6, type: 3}
 --- !u!1001 &1700644826
@@ -50711,6 +50720,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: TL-Stage1-8-SB
       objectReference: {fileID: 0}
+    - target: {fileID: 1470205059568825128, guid: ee2c83ebb18fcbd4e9169f7d44ee25d6, type: 3}
+      propertyPath: timeLine
+      value: 
+      objectReference: {fileID: 324582101}
+    - target: {fileID: 1996919151819616854, guid: ee2c83ebb18fcbd4e9169f7d44ee25d6, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3575086563842999439, guid: ee2c83ebb18fcbd4e9169f7d44ee25d6, type: 3}
       propertyPath: director
       value: 
@@ -50815,6 +50832,26 @@ PrefabInstance:
       propertyPath: m_Name
       value: TL-Stage1-9-C
       objectReference: {fileID: 0}
+    - target: {fileID: 8813780904738379828, guid: ee2c83ebb18fcbd4e9169f7d44ee25d6, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 17.701933
+      objectReference: {fileID: 0}
+    - target: {fileID: 8813780904738379828, guid: ee2c83ebb18fcbd4e9169f7d44ee25d6, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 55
+      objectReference: {fileID: 0}
+    - target: {fileID: 8813780904738379828, guid: ee2c83ebb18fcbd4e9169f7d44ee25d6, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 116.9
+      objectReference: {fileID: 0}
+    - target: {fileID: 9046206830694346322, guid: ee2c83ebb18fcbd4e9169f7d44ee25d6, type: 3}
+      propertyPath: testTL
+      value: 
+      objectReference: {fileID: 3575086564659973141}
+    - target: {fileID: 9046206830694346322, guid: ee2c83ebb18fcbd4e9169f7d44ee25d6, type: 3}
+      propertyPath: timeLine
+      value: 
+      objectReference: {fileID: 3575086564659973141}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ee2c83ebb18fcbd4e9169f7d44ee25d6, type: 3}
 --- !u!1 &3575086564659973141 stripped
@@ -50858,7 +50895,7 @@ PlayableDirector:
   m_Enabled: 1
   serializedVersion: 3
   m_PlayableAsset: {fileID: 11400000, guid: ad15975b3ef0a54488417037b646de53, type: 2}
-  m_InitialState: 1
+  m_InitialState: 0
   m_WrapMode: 2
   m_DirectorUpdateMode: 1
   m_InitialTime: 0
