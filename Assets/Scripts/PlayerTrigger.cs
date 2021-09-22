@@ -9,7 +9,7 @@ public class PlayerTrigger : MonoBehaviour
     {
         if(other.tag == "Player")
         {
-            Debug.Log("Trigger hit");
+            //Debug.Log("Trigger hit");
             EventsManager.instance.OnPlayerEnteredTrigger(this.triggerId);
             if(triggerOnlyOnce)
             {
