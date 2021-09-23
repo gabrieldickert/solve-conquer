@@ -10,6 +10,8 @@ public class LODManager : MonoBehaviour
     public float maxDistStage2;
     public float maxDistStage3;
     public float maxDistStage4;
+    public float maxDistLandingPlatform;
+    public float maxDistCrashedShip;
 
     private GameObject player;
     //private bool shouldWait = false;
@@ -28,6 +30,8 @@ public class LODManager : MonoBehaviour
         UpdateStage(stages_LOD0[1], stages_LOD1[1], maxDistStage2, 2);
         UpdateStage(stages_LOD0[2], stages_LOD1[2], maxDistStage3, 3);
         UpdateStage(stages_LOD0[3], stages_LOD1[3], maxDistStage4, 4);
+        UpdateStage(stages_LOD0[4], stages_LOD1[4], maxDistLandingPlatform, 5);
+        UpdateStage(stages_LOD0[5], stages_LOD1[5], maxDistCrashedShip, 6);
     }
 
     void UpdateStage(GameObject lod0, GameObject lod1, float maxDistanceStage, int stage)
