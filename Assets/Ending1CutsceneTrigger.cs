@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.Playables;
+using UnityEngine.SceneManagement;
 
 public class Ending1CutsceneTrigger : MonoBehaviour
 {
@@ -11,8 +12,11 @@ public class Ending1CutsceneTrigger : MonoBehaviour
     public bool playOnlyOnce = true;
     public GameObject timeLine = null;
     public GameObject triggerShipFlight = null;
+    public GameObject alternativeTrigger = null;
+    public GameObject reactorTimeline = null;
 
     private PlayableDirector myDirector = null;
+    private PlayableDirector reactorDirector = null;
     private bool timeLinePlaying = false;
 
     void Start()
@@ -20,6 +24,8 @@ public class Ending1CutsceneTrigger : MonoBehaviour
         EventsManager.instance.SwitchEnable += HandleSwitchEnable;
         myDirector = timeLine.GetComponent<PlayableDirector>();
         myDirector.stopped += OnTimeLineStopped;
+
+        reactorDirector = reactorTimeline.GetComponent<PlayableDirector>();
     }
 
     private void HandleSwitchEnable(int triggerId)
@@ -30,6 +36,7 @@ public class Ending1CutsceneTrigger : MonoBehaviour
             {
                 timeLinePlaying = true;
                 myDirector.Play();
+                reactorDirector.Play();
                 EventsManager.instance.OnSwitchDisable(disableTriggerId);
                 this.triggerShipFlight.GetComponent<BoxCollider>().enabled = true;
                 GameObject.FindWithTag("Companion").GetComponent<NavMeshAgent>().enabled = false;
@@ -37,7 +44,10 @@ public class Ending1CutsceneTrigger : MonoBehaviour
 
             if (playOnlyOnce)
             {
-                gameObject.GetComponent<Ending1CutsceneTrigger>().enabled = false;
+                if(alternativeTrigger != null)
+                {
+                    alternativeTrigger.GetComponent<HackableConsole>().enabled = false;
+                }
             }
         }
     }
@@ -47,6 +57,22 @@ public class Ending1CutsceneTrigger : MonoBehaviour
         if (!playOnlyOnce)
         {
             timeLinePlaying = false;
+        } else
+        {
+            StartCoroutine(LoadCreditsSceneAsync());
+            gameObject.GetComponent<Ending1CutsceneTrigger>().enabled = false;
+        }
+    }
+
+    IEnumerator LoadCreditsSceneAsync()
+    {
+        
+        AsyncOperation asyncLoad = SceneManager.LoadSceneAsync("DebugScene");
+
+        // Wait until the asynchronous scene fully loads
+        while (!asyncLoad.isDone)
+        {
+            yield return null;
         }
     }
 }

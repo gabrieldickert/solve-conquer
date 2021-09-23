@@ -2,13 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Playables;
+using UnityEngine.SceneManagement;
 
 public class ShipDepartureTrigger : MonoBehaviour
 {
     public GameObject prevTimeline = null;
     public GameObject timeLine = null;
+    public GameObject reactorTimeline = null;
+
     private PlayableDirector myDirector = null;
     private PlayableDirector prevDirector = null;
+    private PlayableDirector reactorDirector = null;
     private GameObject player = null;
     private bool shouldDisablePlayerMovement = false;
     private float playerEnteredTriggerTime = 0f;
@@ -17,6 +21,7 @@ public class ShipDepartureTrigger : MonoBehaviour
     {
         myDirector = timeLine.GetComponent<PlayableDirector>();
         prevDirector = prevTimeline.GetComponent<PlayableDirector>();
+        reactorDirector = reactorTimeline.GetComponent<PlayableDirector>();
         myDirector.stopped += OnTimeLineStopped;
         player = GameObject.FindWithTag("Player");
     }
@@ -39,6 +44,7 @@ public class ShipDepartureTrigger : MonoBehaviour
             playerEnteredTriggerTime = Time.time;
             myDirector.Play();
             prevDirector.Stop();
+            reactorDirector.Stop();
             shouldDisablePlayerMovement = true;
         }
         
@@ -51,5 +57,18 @@ public class ShipDepartureTrigger : MonoBehaviour
     void OnTimeLineStopped(PlayableDirector aDirector)
     {
         //load credits scene
+        StartCoroutine(LoadCreditsSceneAsync());
+    }
+
+    IEnumerator LoadCreditsSceneAsync()
+    {
+
+        AsyncOperation asyncLoad = SceneManager.LoadSceneAsync("DebugScene");
+
+        // Wait until the asynchronous scene fully loads
+        while (!asyncLoad.isDone)
+        {
+            yield return null;
+        }
     }
 }

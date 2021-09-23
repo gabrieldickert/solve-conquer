@@ -10,8 +10,12 @@ public class HackableConsole : MonoBehaviour
     public bool hasAdditionalTriggers = false;
     public int additionalTriggerId = 0;
     public GameObject timeLineTrigger = null;
+    public GameObject additionalTimeline = null;
+    public bool hasAdditionalTimeline = false;
+    public GameObject alternativeTrigger = null;
 
     private PlayableDirector myDirector = null;
+    private PlayableDirector additionalDirector = null;
     private bool timeLinePlaying = false;
 
     // Start is called before the first frame update
@@ -20,6 +24,9 @@ public class HackableConsole : MonoBehaviour
         EventsManager.instance.CompanionHackEnable += HandleHacked;
         myDirector = timeLine.GetComponent<PlayableDirector>();
         myDirector.stopped += OnTimeLineStopped;
+        if (hasAdditionalTimeline) {
+            additionalDirector = additionalTimeline.GetComponent<PlayableDirector>();
+        }
     }
 
     private void HandleHacked(int instanceId)
@@ -34,6 +41,14 @@ public class HackableConsole : MonoBehaviour
                 {
                     EventsManager.instance.OnSwitchDisable(additionalTriggerId);
                     timeLineTrigger.GetComponent<BoxCollider>().enabled = true;
+                }
+                if(hasAdditionalTimeline)
+                {
+                    additionalDirector.Play();
+                }
+                if(alternativeTrigger != null)
+                {
+                    alternativeTrigger.GetComponent<Ending1CutsceneTrigger>().enabled = false;
                 }
             }
 
