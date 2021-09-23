@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Text.RegularExpressions;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -23,12 +24,18 @@ public class MovingPlatformSaveEntity : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        gd = SaveSystem.LoadGame();
+
+        string nextPlatformInfo = Regex.Split(this.name, "MovingPlatformTrigger_")[1];
+        string nextPlatformStage = nextPlatformInfo[0].ToString();
+        string nextPlatformLevel = nextPlatformInfo[1].ToString();
+
         //Saving current MovingPlatform
         this.Player = GameObject.FindWithTag("Player");
         this.Companion = GameObject.FindWithTag("Companion");
         this.Canvas = this.Player.transform.Find("OVRCameraRig/TrackingSpace/CenterEyeAnchor/IngameMessageCanvas").gameObject;
-        this.Stage = this.transform.parent.parent.parent.parent.gameObject.name;
-        this.Lvl = this.transform.parent.parent.parent.gameObject.name;
+        this.Stage = nextPlatformStage;
+        this.Lvl = nextPlatformLevel;
         this.Canvas.SetActive(false);
 
     }
