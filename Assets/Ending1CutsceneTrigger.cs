@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 using UnityEngine.Playables;
 
 public class Ending1CutsceneTrigger : MonoBehaviour
@@ -9,6 +10,7 @@ public class Ending1CutsceneTrigger : MonoBehaviour
     public int disableTriggerId = 0;
     public bool playOnlyOnce = true;
     public GameObject timeLine = null;
+    public GameObject triggerShipFlight = null;
 
     private PlayableDirector myDirector = null;
     private bool timeLinePlaying = false;
@@ -29,6 +31,8 @@ public class Ending1CutsceneTrigger : MonoBehaviour
                 timeLinePlaying = true;
                 myDirector.Play();
                 EventsManager.instance.OnSwitchDisable(disableTriggerId);
+                this.triggerShipFlight.GetComponent<BoxCollider>().enabled = true;
+                GameObject.FindWithTag("Companion").GetComponent<NavMeshAgent>().enabled = false;
             }
 
             if (playOnlyOnce)

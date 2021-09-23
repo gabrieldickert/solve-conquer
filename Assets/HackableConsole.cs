@@ -9,6 +9,7 @@ public class HackableConsole : MonoBehaviour
     public GameObject timeLine = null;
     public bool hasAdditionalTriggers = false;
     public int additionalTriggerId = 0;
+    public GameObject timeLineTrigger = null;
 
     private PlayableDirector myDirector = null;
     private bool timeLinePlaying = false;
@@ -32,6 +33,7 @@ public class HackableConsole : MonoBehaviour
                 if(hasAdditionalTriggers)
                 {
                     EventsManager.instance.OnSwitchDisable(additionalTriggerId);
+                    timeLineTrigger.GetComponent<BoxCollider>().enabled = true;
                 }
             }
 

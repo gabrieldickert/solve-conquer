@@ -42,6 +42,10 @@ public class EventsManager : MonoBehaviour
     public event Action<int> LODManagerEnable;
     public event Action<int> PlayThrowSound;
     public event Action<int> AddTimelineToQueue;
+    public event Action AudioManagerPlay;
+    public event Action AudioManagerPause;
+    public event Action AudioManagerVolumeDown;
+    public event Action AudioManagerVolumeUp;
 
     private int companionId { get; set; }
 
@@ -194,4 +198,23 @@ public class EventsManager : MonoBehaviour
         AddTimelineToQueue?.Invoke(timelineID);
     }
 
+    public void OnAudioManagerPlay()
+    {
+        AudioManagerPlay?.Invoke();
+    }
+
+    public void OnAudioManagerPause()
+    {
+        AudioManagerPause?.Invoke();
+    }
+
+    public void OnAudioManagerVolumeDown()
+    {
+        AudioManagerVolumeDown?.Invoke();
+    }
+
+    public void OnAudioManagerVolumeUp()
+    {
+        AudioManagerVolumeUp?.Invoke();
+    }
 }

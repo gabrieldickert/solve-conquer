@@ -7,6 +7,7 @@ public class TimelineTrigger : MonoBehaviour
 {
     public bool playOnlyOnce = true;
     public GameObject timeLine = null;
+    public GameObject nextTimelineTrigger = null;
 
     private PlayableDirector myDirector = null;
     private bool timeLinePlaying = false;
@@ -40,5 +41,10 @@ public class TimelineTrigger : MonoBehaviour
             timeLinePlaying = false;
         }
 
+        if(nextTimelineTrigger != null)
+        {
+            nextTimelineTrigger.SetActive(true);
+        }
+            
     }
 }
