@@ -10,6 +10,10 @@ public class MovingPlatformSaveEntity : MonoBehaviour
     private GameObject Player;
     private GameObject Companion;
     private GameObject Canvas;
+    private GameData gd;
+    private MovingPlatformNew currentPlatform;
+    private GameObject platform;
+
 
     [HideInInspector] public string Stage;
     [HideInInspector] public string Lvl;
@@ -32,9 +36,9 @@ public class MovingPlatformSaveEntity : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
 
-        GameData gd = SaveSystem.LoadGame();
-        GameObject platform = null;
-        MovingPlatformNew currentPlatform = null;
+        gd = SaveSystem.LoadGame();
+        platform = null;
+        currentPlatform = null;
 
         if (gd != null)
         {
@@ -42,7 +46,7 @@ public class MovingPlatformSaveEntity : MonoBehaviour
             currentPlatform = platform.GetComponent<MovingPlatformNew>();
         }
 
-        if(currentPlatform != null)
+        if (currentPlatform != null)
         {
             if (other.gameObject.tag == "Player")
             {
@@ -55,9 +59,8 @@ public class MovingPlatformSaveEntity : MonoBehaviour
             }
         }
 
-        if (other.tag == "Player")
+        if (other.gameObject.tag == "Player")
         {
-
             if ((gd == null || !this.name.Equals(gd.MovingPlatformName)))
             {
                 if ((currentPlatform != null && currentPlatform.hasRequiredPassengers) || gd == null)
@@ -76,8 +79,7 @@ public class MovingPlatformSaveEntity : MonoBehaviour
     {
         yield return new WaitForSeconds(5);
         this.Canvas.SetActive(false);
-
-
     }
+
 
 }
