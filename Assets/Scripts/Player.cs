@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.IO;
+using System.Text.RegularExpressions;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.Playables;
@@ -10,15 +11,15 @@ public class Player : MonoBehaviour
     public Companion companion;
     public GameObject menu;
     public GameObject vehicle;
+    public GameObject canvas;
     public PlayableDirector landingCutscene;
 
     public bool gameLoadedOnStart = false;
-    /*private SaveGamePad pad;
-    private int currentStage = 0;
-    private int currentLevel = 0;*/
 
     private void Start()
     {
+        this.canvas = this.transform.Find("OVRCameraRig/TrackingSpace/CenterEyeAnchor/IngameMessageCanvas").gameObject;
+
         GameData gd = SaveSystem.LoadGame();
 
         if ( gd != null)
@@ -132,18 +133,30 @@ public class Player : MonoBehaviour
 
     public void SkipLevel()
     {
-
+     
         GameData gd = SaveSystem.LoadGame();
         
         if (gd != null)
         {
             MovingPlatformNew nextPlatform = SkipLevelManager.SkipToNextLevel().GetComponent<MovingPlatformNew>();
             
+            string nextPlatformInfo = Regex.Split(nextPlatform.name, "MovingPlatformTrigger_")[1];
+            string nextPlatformStage = nextPlatformInfo[0].ToString();
+            string nextPlatformLevel = nextPlatformInfo[1].ToString();
+
             GameObject player = GameObject.FindWithTag("Player");
 
-            
+            if (!nextPlatform.name.Equals(gd.MovingPlatformName))
+            {
+                SaveSystem.SaveGame(nextPlatform, nextPlatformStage, nextPlatformLevel, GameObject.FindWithTag("Companion").GetComponent<NavMeshAgent>().enabled ? true : false);
+                this.canvas.SetActive(true);
+                StartCoroutine("WaitForSec");
+                gd = SaveSystem.LoadGame();
+            }
+    
             EventsManager.instance.OnLODManagerEnable(Int32.Parse("" + gd.stage.ToCharArray()[gd.stage.Length - 1]));
-            if (gd.stage.ToCharArray()[gd.stage.Length - 1] > '1' || (gd.lvl.ToCharArray()[gd.lvl.Length - 1] == '4' && gd.stage.ToCharArray()[gd.stage.Length - 1] == '1') || (gd.lvl.ToCharArray()[gd.lvl.Length - 1] == '5' && gd.stage.ToCharArray()[gd.stage.Length - 1] == '1')) {
+
+            if (gd.stage.ToCharArray()[gd.stage.Length - 1] > '1' || (gd.lvl.ToCharArray()[gd.lvl.Length - 1] == '5' && gd.stage.ToCharArray()[gd.stage.Length - 1] == '1')) {
                 GameObject companion = GameObject.FindWithTag("Companion");
                 companion.GetComponent<NavMeshAgent>().enabled = false;
                 companion.transform.parent = nextPlatform.VisualTrigger2.transform;
@@ -153,6 +166,7 @@ public class Player : MonoBehaviour
                 
             }
 
+            nextPlatform.GetComponent<BoxCollider>().enabled = false;
             player.transform.parent = nextPlatform.transform;
             player.transform.position = nextPlatform.VisualTrigger1.GetComponent<MeshRenderer>().bounds.center + new Vector3(0f, 1f, 0f);
             
@@ -172,7 +186,8 @@ public class Player : MonoBehaviour
         GameObject player = GameObject.FindWithTag("Player");
 
         player.transform.parent = nextPlatform.transform;
-        
+        nextPlatform.GetComponent<BoxCollider>().enabled = true;
+
     }
 
     IEnumerator WaitForSecCompanion(MovingPlatformNew nextPlatform)
@@ -184,35 +199,11 @@ public class Player : MonoBehaviour
         companion.transform.parent = nextPlatform.VisualTrigger2.transform;
       
     }
-    /*
-    private void OnCollisionEnter(Collision collision)
+
+    IEnumerator WaitForSec()
     {
-        if(collision.transform.parent.parent.name == "Floor1" && !FindObjectOfType<AudioManager>().Playing("Theme", 0))
-        {
-            if (AudioManager.currentThemePaused)
-            {
-                AudioManager.currentTheme = 0;
-                FindObjectOfType<AudioManager>().ChangeToClip("Theme", AudioManager.currentTheme);
-            } else
-            {
-                AudioManager.currentTheme = 0;
-                FindObjectOfType<AudioManager>().ChangeToClip("Theme", AudioManager.currentTheme);
-                StartCoroutine(FindObjectOfType<AudioManager>().FadeIn("Theme", AudioManager.currentTheme, 3));
-            }
-        } else if(collision.transform.parent.parent.name == "Floor2" && !FindObjectOfType<AudioManager>().Playing("Theme", 1))
-        {
-            if (AudioManager.currentThemePaused)
-            {
-                AudioManager.currentTheme = 1;
-                FindObjectOfType<AudioManager>().ChangeToClip("Theme", AudioManager.currentTheme);
-            }
-            else
-            {
-                AudioManager.currentTheme = 1;
-                FindObjectOfType<AudioManager>().ChangeToClip("Theme", AudioManager.currentTheme);
-                StartCoroutine(FindObjectOfType<AudioManager>().FadeIn("Theme", AudioManager.currentTheme, 3));
-            }
-        }
+        yield return new WaitForSeconds(5);
+        this.canvas.SetActive(false);
     }
-    */
+
 }
