@@ -10,6 +10,7 @@ public class Player : MonoBehaviour
     public Companion companion;
     public GameObject menu;
     public GameObject vehicle;
+    private GameObject laserpointer;
     public PlayableDirector landingCutscene;
 
     public bool gameLoadedOnStart = false;
@@ -162,7 +163,12 @@ public class Player : MonoBehaviour
 
         menu.SetActive(false);
         IngameMenu.showMenu = false;
-
+        laserpointer = GameObject.Find("LaserPointer");
+        if (laserpointer != null)
+        {
+            laserpointer.SetActive(false);
+        }
+      
     }
 
     IEnumerator WaitForSecPlayer(MovingPlatformNew nextPlatform)
