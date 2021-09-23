@@ -26282,6 +26282,7 @@ MonoBehaviour:
   - {fileID: 2358654673262732412}
   - {fileID: 2358654673262732411}
   - {fileID: 2358654673262732410}
+  - {fileID: 1808861373}
   - {fileID: 1946541258}
   TimelineQueue: []
 --- !u!4 &1100634904
@@ -29402,6 +29403,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   prevTimeline: {fileID: 1946541258}
   timeLine: {fileID: 192880100}
+  reactorTimeline: {fileID: 2358654673262732417}
 --- !u!1001 &1235655540
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -43766,6 +43768,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 470440, guid: 8ed1fa325ca228645ad26dd6eff14768, type: 3}
   m_PrefabInstance: {fileID: 1807883817}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1808861373 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1530533747943230127, guid: d712d099a1ad7dc478c6982d23817140, type: 3}
+  m_PrefabInstance: {fileID: 2358654673262732409}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1809103597
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -45170,7 +45177,7 @@ MonoBehaviour:
   playOnlyOnce: 1
   timeLine: {fileID: 1946541258}
   nextTimelineTrigger: {fileID: 1230739515}
-  TimelineID: 25
+  TimelineID: 26
   activateNextTriggerImmediately: 1
 --- !u!1 &1906430744
 GameObject:
@@ -51254,6 +51261,10 @@ PrefabInstance:
       propertyPath: activatedByTriggerId.Array.data[0]
       value: 4411
       objectReference: {fileID: 0}
+    - target: {fileID: 1048978967065188431, guid: d712d099a1ad7dc478c6982d23817140, type: 3}
+      propertyPath: m_InitialState
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1161641159788976289, guid: d712d099a1ad7dc478c6982d23817140, type: 3}
       propertyPath: TimelineID
       value: 21
@@ -51267,6 +51278,10 @@ PrefabInstance:
       value: 24
       objectReference: {fileID: 0}
     - target: {fileID: 1776757110317558621, guid: d712d099a1ad7dc478c6982d23817140, type: 3}
+      propertyPath: TimelineID
+      value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 1776757110317558621, guid: d712d099a1ad7dc478c6982d23817140, type: 3}
       propertyPath: nextTimelineTrigger
       value: 
       objectReference: {fileID: 1230739515}
@@ -51274,6 +51289,18 @@ PrefabInstance:
       propertyPath: timeLineTrigger
       value: 
       objectReference: {fileID: 1903213437}
+    - target: {fileID: 2093820453065106594, guid: d712d099a1ad7dc478c6982d23817140, type: 3}
+      propertyPath: additionalTimeline
+      value: 
+      objectReference: {fileID: 2358654673262732417}
+    - target: {fileID: 2093820453065106594, guid: d712d099a1ad7dc478c6982d23817140, type: 3}
+      propertyPath: alternativeTrigger
+      value: 
+      objectReference: {fileID: 2358654673262732415}
+    - target: {fileID: 2093820453065106594, guid: d712d099a1ad7dc478c6982d23817140, type: 3}
+      propertyPath: hasAdditionalTimeline
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2224876299168910769, guid: d712d099a1ad7dc478c6982d23817140, type: 3}
       propertyPath: m_SceneBindings.Array.data[0].value
       value: 
@@ -51459,9 +51486,17 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4432828291492944634, guid: d712d099a1ad7dc478c6982d23817140, type: 3}
+      propertyPath: reactorTimeline
+      value: 
+      objectReference: {fileID: 2358654673262732417}
+    - target: {fileID: 4432828291492944634, guid: d712d099a1ad7dc478c6982d23817140, type: 3}
       propertyPath: triggerShipFlight
       value: 
       objectReference: {fileID: 1903213437}
+    - target: {fileID: 4432828291492944634, guid: d712d099a1ad7dc478c6982d23817140, type: 3}
+      propertyPath: alternativeTrigger
+      value: 
+      objectReference: {fileID: 2358654673262732416}
     - target: {fileID: 4515501299044642079, guid: d712d099a1ad7dc478c6982d23817140, type: 3}
       propertyPath: triggerId1
       value: 4412
@@ -51481,6 +51516,10 @@ PrefabInstance:
     - target: {fileID: 5747861533961070470, guid: d712d099a1ad7dc478c6982d23817140, type: 3}
       propertyPath: m_Layer
       value: 17
+      objectReference: {fileID: 0}
+    - target: {fileID: 5968935244026673223, guid: d712d099a1ad7dc478c6982d23817140, type: 3}
+      propertyPath: panLevelCustomCurve.m_Curve.Array.data[0].value
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6034298779324539022, guid: d712d099a1ad7dc478c6982d23817140, type: 3}
       propertyPath: m_Layer
@@ -51526,6 +51565,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 17
       objectReference: {fileID: 0}
+    - target: {fileID: 8819105828839548973, guid: d712d099a1ad7dc478c6982d23817140, type: 3}
+      propertyPath: panLevelCustomCurve.m_Curve.Array.data[0].value
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 9102620997371202657, guid: d712d099a1ad7dc478c6982d23817140, type: 3}
       propertyPath: m_Layer
       value: 17
@@ -51567,6 +51610,21 @@ GameObject:
 --- !u!1 &2358654673262732414 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6451837247299438673, guid: d712d099a1ad7dc478c6982d23817140, type: 3}
+  m_PrefabInstance: {fileID: 2358654673262732409}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &2358654673262732415 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6437635451784693834, guid: d712d099a1ad7dc478c6982d23817140, type: 3}
+  m_PrefabInstance: {fileID: 2358654673262732409}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &2358654673262732416 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2358654673173477341, guid: d712d099a1ad7dc478c6982d23817140, type: 3}
+  m_PrefabInstance: {fileID: 2358654673262732409}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &2358654673262732417 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1672432716950129645, guid: d712d099a1ad7dc478c6982d23817140, type: 3}
   m_PrefabInstance: {fileID: 2358654673262732409}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &2834223649109249612
