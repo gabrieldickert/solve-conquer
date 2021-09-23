@@ -12,6 +12,7 @@ public class TimelineTrigger : MonoBehaviour
     private PlayableDirector myDirector = null;
     private bool timeLinePlaying = false;
     public int TimelineID;
+    public bool activateNextTriggerImmediately = false;
 
     // Start is called before the first frame update
     void Start()
@@ -27,6 +28,10 @@ public class TimelineTrigger : MonoBehaviour
             timeLinePlaying = true;
             //myDirector.Play();
             EventsManager.instance.OnAddTimelineToQueue(TimelineID);
+            if(nextTimelineTrigger != null && activateNextTriggerImmediately)
+            {
+                nextTimelineTrigger.SetActive(true);
+            }
             //Debug.Log("TimelineTrigger: Player entered trigger");
         }
     }
@@ -41,7 +46,7 @@ public class TimelineTrigger : MonoBehaviour
             timeLinePlaying = false;
         }
 
-        if(nextTimelineTrigger != null)
+        if(nextTimelineTrigger != null && !activateNextTriggerImmediately)
         {
             nextTimelineTrigger.SetActive(true);
         }
