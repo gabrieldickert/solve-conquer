@@ -41,6 +41,7 @@ public class EventsManager : MonoBehaviour
     public event Action<int> AntennaDisable;
     public event Action<int> LODManagerEnable;
     public event Action<int> PlayThrowSound;
+    public event Action<int> AddTimelineToQueue;
     public event Action AudioManagerPlay;
     public event Action AudioManagerPause;
     public event Action AudioManagerVolumeDown;
@@ -191,6 +192,10 @@ public class EventsManager : MonoBehaviour
     public void OnPlayThrowSound(int objectId)
     {
         PlayThrowSound?.Invoke(objectId);
+    }
+    public void OnAddTimelineToQueue(int timelineID)
+    {
+        AddTimelineToQueue?.Invoke(timelineID);
     }
 
     public void OnAudioManagerPlay()
