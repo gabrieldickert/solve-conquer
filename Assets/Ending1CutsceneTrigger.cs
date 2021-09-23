@@ -67,7 +67,7 @@ public class Ending1CutsceneTrigger : MonoBehaviour
     IEnumerator LoadCreditsSceneAsync()
     {
         
-        AsyncOperation asyncLoad = SceneManager.LoadSceneAsync("DebugScene");
+        AsyncOperation asyncLoad = SceneManager.LoadSceneAsync("CreditScene");
 
         // Wait until the asynchronous scene fully loads
         while (!asyncLoad.isDone)
