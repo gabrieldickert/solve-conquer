@@ -24,12 +24,12 @@ MonoBehaviour:
   - m_Version: 1
     m_Start: 0
     m_ClipIn: 30.63333333333334
-    m_Asset: {fileID: 3688232895912215419}
-    m_Duration: 19.958666666666637
+    m_Asset: {fileID: -8359921890243223630}
+    m_Duration: 11.716666666666667
     m_TimeScale: 1
     m_ParentTrack: {fileID: -8650978954573693825}
     m_EaseInDuration: 0
-    m_EaseOutDuration: 19.958666666666637
+    m_EaseOutDuration: 11.4
     m_BlendInDuration: -1
     m_BlendOutDuration: -1
     m_MixInCurve:
@@ -62,20 +62,20 @@ MonoBehaviour:
       - serializedVersion: 3
         time: 0
         value: 1
-        inSlope: -2
-        outSlope: -2
+        inSlope: -4.2903337
+        outSlope: -4.2903337
         tangentMode: 0
         weightedMode: 0
         inWeight: 0
-        outWeight: 0
+        outWeight: 0.09447982
       - serializedVersion: 3
         time: 1
         value: 0
-        inSlope: -0
-        outSlope: -0
-        tangentMode: 0
+        inSlope: -1
+        outSlope: -1
+        tangentMode: 34
         weightedMode: 0
-        inWeight: 0
+        inWeight: 0.33333334
         outWeight: 0
       m_PreInfinity: 2
       m_PostInfinity: 2
@@ -91,7 +91,7 @@ MonoBehaviour:
     m_PreExtrapolationTime: 0
     m_DisplayName: airplane-apu
   - m_Version: 1
-    m_Start: 25.866666666666667
+    m_Start: 21.55
     m_ClipIn: 0
     m_Asset: {fileID: -8120245961694805669}
     m_Duration: 11.256310886268814
@@ -165,6 +165,23 @@ MonoBehaviour:
     volume: 1
     stereoPan: 0
     spatialBlend: 0
+--- !u!114 &-8359921890243223630
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4f10dd60657c6004587f237a7e90f8e4, type: 3}
+  m_Name: AudioPlayableAsset(Clone)(Clone)(Clone)(Clone)
+  m_EditorClassIdentifier: 
+  m_Clip: {fileID: 8300000, guid: 2d2e2082e1415db41bf517dc106e669c, type: 3}
+  m_Loop: 0
+  m_bufferingTime: 0.1
+  m_ClipProperties:
+    volume: 0.2
 --- !u!114 &-8120245961694805669
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -204,7 +221,7 @@ MonoBehaviour:
   m_Children: []
   m_Clips:
   - m_Version: 1
-    m_Start: 7.736462509259582
+    m_Start: 0
     m_ClipIn: 0
     m_Asset: {fileID: 1663161817813576858}
     m_Duration: 8.727958333333333
@@ -300,10 +317,10 @@ MonoBehaviour:
   m_Children: []
   m_Clips:
   - m_Version: 1
-    m_Start: 7.736462509259582
+    m_Start: 6.200699097383765
     m_ClipIn: 0
     m_Asset: {fileID: -4244288638314323378}
-    m_Duration: 21.24
+    m_Duration: 15.665967569282902
     m_TimeScale: 1
     m_ParentTrack: {fileID: -4547513410629032832}
     m_EaseInDuration: 0
@@ -415,12 +432,12 @@ MonoBehaviour:
   - m_Version: 1
     m_Start: 0
     m_ClipIn: 30.63333333333334
-    m_Asset: {fileID: 4661527593344279176}
-    m_Duration: 19.958666666666637
+    m_Asset: {fileID: -1282508670020772622}
+    m_Duration: 11.716666666666667
     m_TimeScale: 1
     m_ParentTrack: {fileID: -2832516323977158414}
     m_EaseInDuration: 0
-    m_EaseOutDuration: 19.958666666666637
+    m_EaseOutDuration: 11.4
     m_BlendInDuration: -1
     m_BlendOutDuration: -1
     m_MixInCurve:
@@ -453,20 +470,20 @@ MonoBehaviour:
       - serializedVersion: 3
         time: 0
         value: 1
-        inSlope: -2
-        outSlope: -2
+        inSlope: -4.2903337
+        outSlope: -4.2903337
         tangentMode: 0
         weightedMode: 0
         inWeight: 0
-        outWeight: 0
+        outWeight: 0.09447982
       - serializedVersion: 3
         time: 1
         value: 0
-        inSlope: -0
-        outSlope: -0
-        tangentMode: 0
+        inSlope: -1
+        outSlope: -1
+        tangentMode: 34
         weightedMode: 0
-        inWeight: 0
+        inWeight: 0.33333334
         outWeight: 0
       m_PreInfinity: 2
       m_PostInfinity: 2
@@ -482,7 +499,7 @@ MonoBehaviour:
     m_PreExtrapolationTime: 0
     m_DisplayName: airplane-apu
   - m_Version: 1
-    m_Start: 25.866666666666667
+    m_Start: 21.55
     m_ClipIn: 0
     m_Asset: {fileID: 8730308799867304009}
     m_Duration: 11.256310886268814
@@ -556,6 +573,23 @@ MonoBehaviour:
     volume: 1
     stereoPan: 0
     spatialBlend: 0
+--- !u!114 &-1282508670020772622
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4f10dd60657c6004587f237a7e90f8e4, type: 3}
+  m_Name: AudioPlayableAsset(Clone)(Clone)(Clone)
+  m_EditorClassIdentifier: 
+  m_Clip: {fileID: 8300000, guid: 2d2e2082e1415db41bf517dc106e669c, type: 3}
+  m_Loop: 0
+  m_bufferingTime: 0.1
+  m_ClipProperties:
+    volume: 0.2
 --- !u!114 &-1117664213651420720
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -638,40 +672,6 @@ MonoBehaviour:
   m_bufferingTime: 0.1
   m_ClipProperties:
     volume: 1
---- !u!114 &3688232895912215419
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4f10dd60657c6004587f237a7e90f8e4, type: 3}
-  m_Name: AudioPlayableAsset(Clone)(Clone)
-  m_EditorClassIdentifier: 
-  m_Clip: {fileID: 8300000, guid: 2d2e2082e1415db41bf517dc106e669c, type: 3}
-  m_Loop: 0
-  m_bufferingTime: 0.1
-  m_ClipProperties:
-    volume: 0.4
---- !u!114 &4661527593344279176
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4f10dd60657c6004587f237a7e90f8e4, type: 3}
-  m_Name: AudioPlayableAsset(Clone)
-  m_EditorClassIdentifier: 
-  m_Clip: {fileID: 8300000, guid: 2d2e2082e1415db41bf517dc106e669c, type: 3}
-  m_Loop: 0
-  m_bufferingTime: 0.1
-  m_ClipProperties:
-    volume: 0.4
 --- !u!114 &4707483314702951778
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -694,10 +694,10 @@ MonoBehaviour:
   m_Children: []
   m_Clips:
   - m_Version: 1
-    m_Start: 7.736462509259582
+    m_Start: 6.200699097383767
     m_ClipIn: 0
     m_Asset: {fileID: 564002711598381271}
-    m_Duration: 21.24
+    m_Duration: 15.6659675692829
     m_TimeScale: 1
     m_ParentTrack: {fileID: 4707483314702951778}
     m_EaseInDuration: 0
