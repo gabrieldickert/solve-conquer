@@ -10,6 +10,21 @@ public class Companion : MonoBehaviour
     //Transform that NPC has to follow
     public GameObject gameObjectToFollow;
     public float throwForce = 10f;
+    
+    /*required Order in audioClips array
+     * 0: idle
+     * 1: drive
+     * 2: follow
+     * 3: waitAt
+     * 4: fetch
+     * 5: hack
+     * 6: hacking
+     * 7: drop
+     */
+    public AudioClip[] audioClips;
+
+    private AudioSource audioSrc;
+    private bool isPlayingIdleLoop = false;
 
     private float maxDistanceFromDestination = 2f;
     private NavMeshAgent agent;
@@ -41,7 +56,9 @@ public class Companion : MonoBehaviour
         EventsManager.instance.CompanionHackObject += HandleCompanionHackObject;
         EventsManager.instance.CompanionFollow += HandleCompanionFollow;
         EventsManager.instance.CompanionDropObject += HandleCompanionDropObject;
-        
+
+        audioSrc = this.GetComponent<AudioSource>();
+
         agent = GetComponent<NavMeshAgent>();
         stoppingDistance = agent.stoppingDistance;
         companionRenderer = transform.GetChild(1).GetComponent<SkinnedMeshRenderer>();
@@ -85,7 +102,24 @@ public class Companion : MonoBehaviour
         } else if (this.carriedObject != null && this.carriedObject.transform.localPosition != this.localCarryPosition) {
             Drop(this.carriedObject);
         }
-        
+
+        if (agent.velocity == Vector3.zero)
+        {
+            if (!isPlayingIdleLoop)
+            {
+                PlaySoundFX(audioClips[0], true);
+                isPlayingIdleLoop = true;
+            }
+        }
+        else
+        {
+            if (isPlayingIdleLoop)
+            {
+                PlaySoundFX(audioClips[1], true);
+                isPlayingIdleLoop = false;
+            }
+        }
+
         switch (process.CurrentState)
         {
             case ProcessState.Following:
@@ -170,6 +204,7 @@ public class Companion : MonoBehaviour
     void HandleCompanionWaitAt(UnityEngine.Vector3 waitingPosition)
     {
         process.MoveNext(Command.WaitAt);
+        PlaySoundFX(audioClips[3], false);
         if(process.CurrentState == ProcessState.WaitingAt || process.CurrentState == ProcessState.AbortingHack)
         {
             companionRenderer.material.color = Color.red;
@@ -181,6 +216,7 @@ public class Companion : MonoBehaviour
 
     void HandleCompanionPickUpObject(GameObject targetObject)
     {
+        PlaySoundFX(audioClips[4], false);
         process.MoveNext(Command.Fetch);
         if (process.CurrentState == ProcessState.Fetching || process.CurrentState == ProcessState.AbortingHack)
         {
@@ -193,11 +229,13 @@ public class Companion : MonoBehaviour
 
     void HandleCompanionDropObject()
     {
+        PlaySoundFX(audioClips[7], false);
         Drop(this.carriedObject);
     }
 
     void HandleCompanionHackObject(GameObject targetObject)
     {
+        PlaySoundFX(audioClips[5], false);
         process.MoveNext(Command.Hack);
         if (process.CurrentState == ProcessState.Hacking || process.CurrentState == ProcessState.AbortingHack)
         {
@@ -210,6 +248,7 @@ public class Companion : MonoBehaviour
 
     void HandleCompanionFollow()
     {
+        PlaySoundFX(audioClips[2], false);
         process.MoveNext(Command.Follow);
     }
 
@@ -245,6 +284,7 @@ public class Companion : MonoBehaviour
 
     void Hack(GameObject targetGameObject)
     {
+        PlaySoundFX(audioClips[6], false);
         companionRenderer.material.color = Color.black;
         this.hackedObject = targetGameObject;
         EventsManager.instance.OnCompanionHackEnable(this.hackedObject.GetInstanceID());
@@ -254,6 +294,20 @@ public class Companion : MonoBehaviour
     {
         EventsManager.instance.OnCompanionHackDisable(targetGameObject.GetInstanceID());
         this.hackedObject = null;
+    }
+
+    private void PlaySoundFX(AudioClip ac, bool shouldLoop)
+    {
+        audioSrc.Stop();
+        audioSrc.loop = shouldLoop;
+        audioSrc.clip = ac;
+        if (shouldLoop)
+        {
+            audioSrc.Play();
+        } else
+        {
+            audioSrc.PlayOneShot(ac);
+        }
     }
 }
 
