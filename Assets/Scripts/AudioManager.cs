@@ -7,9 +7,12 @@ public class AudioManager : MonoBehaviour
     public Sound[] sounds;
 
     public static int currentTheme;
-    public static bool currentThemePaused;
-
+    public static bool currentThemePaused = true;
+   
     public float setVolumeTo;
+
+    private bool isFadingOut = false;
+    private int newTheme;
 
     private void Awake()
     {
@@ -32,31 +35,37 @@ public class AudioManager : MonoBehaviour
         EventsManager.instance.AudioManagerVolumeDown += OnAudioManagerVolumeDown;
         EventsManager.instance.AudioManagerVolumeUp += OnAudioManagerVolumeUp;
 
-        // 0 ist default clip
-        currentTheme = 0;
-        Play("Themes", currentTheme);
-        
+        currentTheme = UnityEngine.Random.Range(0, sounds[0].clipList.Length);
+
+        //StartCoroutine(FadeIn("Themes", currentTheme, 3));
+
     }
 
     private void Update()
     {
-        
-        if(currentTheme < sounds[0].clipList.Length)
+
+        if (!currentThemePaused)
         {
             Sound s = Array.Find(sounds, sound => sound.clipList[currentTheme]);
-           
-            if (!s.source.isPlaying && !currentThemePaused)
+
+            if (s.source.time / s.source.clip.length > 0.90 && !isFadingOut)
             {
-                currentTheme++;
-                if (currentTheme < sounds[0].clipList.Length)
-                {
-                    ChangeToClip("Themes", currentTheme);
-                }
+                StartCoroutine(FadeOut("Themes", currentTheme, 3));
             }
-        } else
-        {
-            currentTheme = 0;
-            ChangeToClip("Themes", currentTheme);
+
+            if (!s.source.isPlaying && !currentThemePaused && !isFadingOut)
+            {
+                newTheme = UnityEngine.Random.Range(0, sounds[0].clipList.Length);
+
+                while (newTheme == currentTheme)
+                {
+                    newTheme = UnityEngine.Random.Range(0, sounds[0].clipList.Length);
+                }
+
+                currentTheme = newTheme;
+                ChangeToClip("Themes", currentTheme);
+                   
+            }
         }
 
     }
@@ -73,7 +82,8 @@ public class AudioManager : MonoBehaviour
 
         s.source.Stop();
         s.source.clip = s.clipList[clip];
-        s.source.Play();
+        StartCoroutine(FadeIn("Themes", clip, 3));
+        //s.source.Play();
     }
 
     public void Play(string name, int clip)
@@ -170,6 +180,7 @@ public class AudioManager : MonoBehaviour
     public IEnumerator FadeOut(string name, int clip, float FadeTime)
     {
         Sound s = Array.Find(sounds, sound => sound.name == name && sound.source.clip == sound.clipList[clip]);
+        isFadingOut = true;
         float startVolume = s.source.volume;
 
         while (s.source.volume > 0)
@@ -179,13 +190,16 @@ public class AudioManager : MonoBehaviour
             yield return null;
         }
 
-        s.source.Pause();
+        s.source.Stop();
         s.source.volume = startVolume;
+        isFadingOut = false;
     }
 
     public IEnumerator FadeIn(string name, int clip, float FadeTime)
     {
-        Sound s = Array.Find(sounds, sound => sound.name == name && sound.source.clip == sound.clipList[clip]);
+        currentThemePaused = false;
+        Sound s = Array.Find(sounds, sound => sound.name == name && sound.clipList[clip]);
+
         s.source.clip = s.clipList[clip];
         float startVolume = s.source.volume;
 
@@ -199,12 +213,13 @@ public class AudioManager : MonoBehaviour
             yield return null;
         }
 
+        
         s.source.volume = startVolume;
     }
 
     void OnAudioManagerPlay()
     {
-        Play("Themes", currentTheme);
+        StartCoroutine(FadeIn("Themes", currentTheme, 3));
     }
 
     void OnAudioManagerPause()
