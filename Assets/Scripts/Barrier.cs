@@ -84,6 +84,19 @@ public class Barrier : MonoBehaviour
        
     }
 
+    private void OnEnable()
+    {
+        //Initialize Barrier (isBridge ? disable collision and fade color out : enable collision and fade color in)
+        if (!isActiveOnStart)
+        {
+            this.HinderPlayerPassing();
+        }
+        else
+        {
+            this.AllowPlayerPassing();
+        }
+    }
+
     private void PlaySoundFX(AudioClip ac)
     {
         AudioSource audiosrc = this.GetComponent<AudioSource>();
