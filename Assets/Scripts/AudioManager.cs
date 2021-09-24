@@ -37,7 +37,7 @@ public class AudioManager : MonoBehaviour
 
         currentTheme = UnityEngine.Random.Range(0, sounds[0].clipList.Length);
 
-        //StartCoroutine(FadeIn("Themes", currentTheme, 3));
+        StartCoroutine(FadeIn("Themes", currentTheme, 3));
 
     }
 
