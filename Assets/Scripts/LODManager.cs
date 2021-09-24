@@ -21,6 +21,14 @@ public class LODManager : MonoBehaviour
     {
         EventsManager.instance.LODManagerEnable += OnLODManagerEnable;
         this.player = GameObject.FindGameObjectWithTag("Player");
+
+        //halve the max distances to get the appropriate radius
+        this.maxDistStage1 = this.maxDistStage1 / 2;
+        this.maxDistStage2 = this.maxDistStage2 / 2;
+        this.maxDistStage3 = this.maxDistStage3 / 2;
+        this.maxDistStage4 = this.maxDistStage4 / 2;
+        this.maxDistLandingPlatform = this.maxDistLandingPlatform / 2;
+        this.maxDistCrashedShip = this.maxDistCrashedShip / 2;
     }
 
     // Update is called once per frame
