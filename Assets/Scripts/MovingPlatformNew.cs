@@ -62,7 +62,7 @@ public class MovingPlatformNew : MonoBehaviour
 
         if(points.Length != rotations.Length)
         {
-            Debug.LogError("MovingPlatformNew: The arrays points and rotations have to have the same length.");
+            //Debug.LogError("MovingPlatformNew: The arrays points and rotations have to have the same length.");
         }
         companionTriggerColorInitial = VisualTrigger2.GetComponent<MeshRenderer>().material.color;
         playerTriggerColorInitial = VisualTrigger1.GetComponent<MeshRenderer>().material.color;
@@ -112,7 +112,8 @@ public class MovingPlatformNew : MonoBehaviour
         }
         transform.localPosition = Vector3.MoveTowards(transform.localPosition, current_target, speed * Time.deltaTime);
         transform.localRotation = Quaternion.Slerp(transform.localRotation, current_rotation, rotation_speed * Time.deltaTime);
-        if (Vector3.Distance(transform.localPosition, current_target) == 0f && transform.localRotation == current_rotation)
+        
+        if (Vector3.Distance(transform.localPosition, current_target) == 0f && Vector3.Distance(transform.localRotation.eulerAngles, current_rotation.eulerAngles) < 0.1)
         {
             UpdateTarget();
         }
