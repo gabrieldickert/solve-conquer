@@ -51,6 +51,7 @@ public class TimelineManager: MonoBehaviour
 
         if (!IsPlaying)
         {
+            EventsManager.instance.OnAudioManagerVolumeDown();
             this.TimelineQueue.Last().GetComponent<PlayableDirector>().Play();
             this.IsPlaying = true;
         }
@@ -60,11 +61,13 @@ public class TimelineManager: MonoBehaviour
     private void TimelineManager_stopped(PlayableDirector obj)
     {
 
+        EventsManager.instance.OnAudioManagerVolumeUp();
         this.TimelineQueue.Remove(obj.transform.gameObject);
         this.IsPlaying = false;
 
         if (this.TimelineQueue.Count > 0)
         {
+            EventsManager.instance.OnAudioManagerVolumeDown();
             this.TimelineQueue.First().GetComponent<PlayableDirector>().Play();
             this.IsPlaying = true;
         }
