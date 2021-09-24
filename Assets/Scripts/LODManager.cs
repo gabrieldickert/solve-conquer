@@ -1,4 +1,3 @@
-using UnityEditor.SceneManagement;
 using UnityEngine;
 
 public class LODManager : MonoBehaviour
@@ -17,7 +16,12 @@ public class LODManager : MonoBehaviour
     public float maxDistStage3_L4;
     public float maxDistStage3_L5;
 
-    public float maxDistStage4;
+    //public float maxDistStage4;
+    public float maxDistStage4_L1;
+    public float maxDistStage4_L2;
+    public float maxDistStage4_L3;
+    public float maxDistStage4_L4;
+
     public float maxDistLandingPlatform;
     public float maxDistCrashedShip;
 
@@ -41,7 +45,12 @@ public class LODManager : MonoBehaviour
         this.maxDistStage3_L4 = this.maxDistStage3_L4 / 2;
         this.maxDistStage3_L5 = this.maxDistStage3_L5 / 2;
 
-        this.maxDistStage4 = this.maxDistStage4 / 2;
+        //this.maxDistStage4 = this.maxDistStage4 / 2;
+        this.maxDistStage4_L1 = this.maxDistStage4_L1 / 2;
+        this.maxDistStage4_L2 = this.maxDistStage4_L2 / 2;
+        this.maxDistStage4_L3 = this.maxDistStage4_L3 / 2;
+        this.maxDistStage4_L4 = this.maxDistStage4_L4 / 2;
+
         this.maxDistLandingPlatform = this.maxDistLandingPlatform / 2;
         this.maxDistCrashedShip = this.maxDistCrashedShip / 2;
     }
@@ -60,9 +69,14 @@ public class LODManager : MonoBehaviour
         UpdateStage(stages_LOD0[5], stages_LOD1[5], maxDistStage3_L4, 5);
         UpdateStage(stages_LOD0[6], stages_LOD1[6], maxDistStage3_L5, 6);
 
-        UpdateStage(stages_LOD0[7], stages_LOD1[7], maxDistStage4, 7);
-        UpdateStage(stages_LOD0[8], stages_LOD1[8], maxDistLandingPlatform, 8);
-        UpdateStage(stages_LOD0[9], stages_LOD1[9], maxDistCrashedShip, 9);
+        //UpdateStage(stages_LOD0[7], stages_LOD1[7], maxDistStage4, 7);
+        UpdateStage(stages_LOD0[7], stages_LOD1[7], maxDistStage4_L1, 7);
+        UpdateStage(stages_LOD0[8], stages_LOD1[8], maxDistStage4_L2, 8);
+        UpdateStage(stages_LOD0[9], stages_LOD1[9], maxDistStage4_L3, 9);
+        UpdateStage(stages_LOD0[10], stages_LOD1[10], maxDistStage4_L4, 10);
+
+        UpdateStage(stages_LOD0[11], stages_LOD1[11], maxDistLandingPlatform, 11);
+        UpdateStage(stages_LOD0[12], stages_LOD1[12], maxDistCrashedShip, 12);
     }
 
     void UpdateStage(GameObject lod0, GameObject lod1, float maxDistanceStage, int index)
@@ -101,8 +115,11 @@ public class LODManager : MonoBehaviour
             }
         } else if (stageNum == 4)
         {
-            stages_LOD1[stageNum - 1].SetActive(false);
-            stages_LOD0[stageNum - 1].SetActive(true);
+            for (int i = 7; i <= 10; i++)
+            {
+                stages_LOD1[i].SetActive(false);
+                stages_LOD0[i].SetActive(true);
+            }
         }
         
     }
