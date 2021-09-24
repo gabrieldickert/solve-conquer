@@ -14,8 +14,6 @@ public class Switch : MonoBehaviour
 
     private float switchRotation = 100;
 
-    private GameObject switchBase;
-
     public int triggerId_1;
     public int triggerId_2;
 
@@ -24,10 +22,6 @@ public class Switch : MonoBehaviour
     {
         source = gameObject.AddComponent<AudioSource>();
         source.spatialBlend = 1.0f;
-        switchBase = transform.GetChild(0).gameObject;
-        //EventsManager.instance.OnSwitchEnable(isActiveTrigger_2 ? triggerId_1 : triggerId_2);
-        //EventsManager.instance.OnSwitchDisable(isActiveTrigger_2 ? triggerId_2 : triggerId_1);
-
     }
 
     // Update is called once per frame
@@ -57,7 +51,7 @@ public class Switch : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player"))
+        if (other.gameObject.name.Equals("GrabVolumeBig"))
         {
             EventsManager.instance.OnSwitchEnable(isActiveTrigger_2 ? triggerId_1 : triggerId_2);
             EventsManager.instance.OnSwitchDisable(isActiveTrigger_2 ? triggerId_2 : triggerId_1);
