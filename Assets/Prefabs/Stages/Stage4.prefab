@@ -1771,6 +1771,9 @@ MonoBehaviour:
   hasAdditionalTriggers: 1
   additionalTriggerId: 4413
   timeLineTrigger: {fileID: 0}
+  additionalTimeline: {fileID: 0}
+  hasAdditionalTimeline: 0
+  alternativeTrigger: {fileID: 0}
 --- !u!1 &2358654673194798305
 GameObject:
   m_ObjectHideFlags: 0
@@ -3427,6 +3430,8 @@ MonoBehaviour:
   nextTimelineTrigger: {fileID: 0}
   TimelineID: 0
   activateNextTriggerImmediately: 0
+  shouldResumeMusic: 0
+  shouldPauseMusic: 0
 --- !u!1 &4217301632960775627
 GameObject:
   m_ObjectHideFlags: 0
@@ -3940,6 +3945,7 @@ MonoBehaviour:
   triggerId: 4413
   triggerOnlyOnce: 1
   sendSwitchEnable: 1
+  shouldPauseMusic: 1
 --- !u!1 &5408398418551222612
 GameObject:
   m_ObjectHideFlags: 0
@@ -4079,6 +4085,8 @@ MonoBehaviour:
   nextTimelineTrigger: {fileID: 0}
   TimelineID: 0
   activateNextTriggerImmediately: 0
+  shouldResumeMusic: 0
+  shouldPauseMusic: 0
 --- !u!1 &5889250967694440615
 GameObject:
   m_ObjectHideFlags: 0
@@ -4320,6 +4328,8 @@ MonoBehaviour:
   nextTimelineTrigger: {fileID: 0}
   TimelineID: 0
   activateNextTriggerImmediately: 0
+  shouldResumeMusic: 0
+  shouldPauseMusic: 0
 --- !u!1 &6394650863713051975
 GameObject:
   m_ObjectHideFlags: 0
@@ -4398,6 +4408,8 @@ MonoBehaviour:
   playOnlyOnce: 1
   timeLine: {fileID: 4493295690645534733}
   triggerShipFlight: {fileID: 0}
+  alternativeTrigger: {fileID: 0}
+  reactorTimeline: {fileID: 0}
 --- !u!1 &6451837247299438673
 GameObject:
   m_ObjectHideFlags: 0
@@ -12952,6 +12964,8 @@ MonoBehaviour:
   nextTimelineTrigger: {fileID: 0}
   TimelineID: 0
   activateNextTriggerImmediately: 0
+  shouldResumeMusic: 0
+  shouldPauseMusic: 0
 --- !u!1 &7650931113383097777
 GameObject:
   m_ObjectHideFlags: 0
@@ -13211,6 +13225,8 @@ MonoBehaviour:
   nextTimelineTrigger: {fileID: 0}
   TimelineID: 0
   activateNextTriggerImmediately: 0
+  shouldResumeMusic: 0
+  shouldPauseMusic: 0
 --- !u!1 &8698791877290325137
 GameObject:
   m_ObjectHideFlags: 0
@@ -13273,6 +13289,8 @@ MonoBehaviour:
   nextTimelineTrigger: {fileID: 0}
   TimelineID: 0
   activateNextTriggerImmediately: 0
+  shouldResumeMusic: 0
+  shouldPauseMusic: 0
 --- !u!1 &8795042259842362777
 GameObject:
   m_ObjectHideFlags: 0

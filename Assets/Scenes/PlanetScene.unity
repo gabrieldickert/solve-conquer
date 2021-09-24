@@ -45201,6 +45201,14 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 4671250621345544400, guid: 3e4ac03e7d0c94a47a456aff411b40c6, type: 3}
+      propertyPath: setVolumeTo
+      value: 0.02
+      objectReference: {fileID: 0}
+    - target: {fileID: 4671250621345544400, guid: 3e4ac03e7d0c94a47a456aff411b40c6, type: 3}
+      propertyPath: sounds.Array.data[0].volume
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4671250621345544400, guid: 3e4ac03e7d0c94a47a456aff411b40c6, type: 3}
       propertyPath: sounds.Array.data[0].attachTo
       value: 
       objectReference: {fileID: 1740702312}
@@ -45254,7 +45262,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4671250621345544403, guid: 3e4ac03e7d0c94a47a456aff411b40c6, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3e4ac03e7d0c94a47a456aff411b40c6, type: 3}
@@ -50393,6 +50401,8 @@ MonoBehaviour:
   nextTimelineTrigger: {fileID: 1230739515}
   TimelineID: 26
   activateNextTriggerImmediately: 1
+  shouldResumeMusic: 0
+  shouldPauseMusic: 0
 --- !u!1 &1906430744
 GameObject:
   m_ObjectHideFlags: 0
@@ -52915,19 +52925,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6958334331855951696, guid: a71db612bd93a0e40a769c40d1c325f6, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.8717446
+      value: 0.26996204
       objectReference: {fileID: 0}
     - target: {fileID: 6958334331855951696, guid: a71db612bd93a0e40a769c40d1c325f6, type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6958334331855951696, guid: a71db612bd93a0e40a769c40d1c325f6, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.48996067
+      value: 0.962871
       objectReference: {fileID: 0}
     - target: {fileID: 6958334331855951696, guid: a71db612bd93a0e40a769c40d1c325f6, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6958334331855951696, guid: a71db612bd93a0e40a769c40d1c325f6, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -52935,7 +52945,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6958334331855951696, guid: a71db612bd93a0e40a769c40d1c325f6, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 58.876
+      value: 148.676
       objectReference: {fileID: 0}
     - target: {fileID: 6958334331855951696, guid: a71db612bd93a0e40a769c40d1c325f6, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
@@ -53071,11 +53081,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7979011603370593683, guid: a71db612bd93a0e40a769c40d1c325f6, type: 3}
       propertyPath: rotations.Array.data[0].y
-      value: 58.676
+      value: 148.676
       objectReference: {fileID: 0}
     - target: {fileID: 7979011603370593683, guid: a71db612bd93a0e40a769c40d1c325f6, type: 3}
       propertyPath: rotations.Array.data[1].y
-      value: 58.676
+      value: 148.676
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a71db612bd93a0e40a769c40d1c325f6, type: 3}
