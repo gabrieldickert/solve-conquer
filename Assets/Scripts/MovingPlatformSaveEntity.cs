@@ -73,6 +73,7 @@ public class MovingPlatformSaveEntity : MonoBehaviour
                 if ((currentPlatform != null && currentPlatform.hasRequiredPassengers) || gd == null)
                 {
                     SaveSystem.SaveGame(this.GetComponent<MovingPlatformNew>(), this.Stage, this.Lvl, this.Companion.GetComponent<NavMeshAgent>().enabled ? true : false);
+                    SkipLevelManager.currentIndex++;
                     this.Canvas.SetActive(true);
                     StartCoroutine("WaitForSec");
                 }

@@ -15,6 +15,12 @@ public class Player : MonoBehaviour
     public GameObject canvas;
 
     private GameObject laserpointer;
+    private GameData gd;
+
+    private string nextPlatformInfo;
+    private string nextPlatformStage;
+    private string nextPlatformLevel;
+    private MovingPlatformNew nextPlatform;
 
     public PlayableDirector landingCutscene;
 
@@ -24,9 +30,9 @@ public class Player : MonoBehaviour
     {
         this.canvas = this.transform.Find("OVRCameraRig/TrackingSpace/CenterEyeAnchor/IngameMessageCanvas").gameObject;
 
-        GameData gd = SaveSystem.LoadGame();
+       gd = SaveSystem.LoadGame();
 
-        if ( gd != null)
+        if (gd != null)
         {
             this.LoadGame();
             gameLoadedOnStart = true;
@@ -137,46 +143,8 @@ public class Player : MonoBehaviour
 
     public void SkipLevel()
     {
-     
-        GameData gd = SaveSystem.LoadGame();
-        
-        if (gd != null)
-        {
-            MovingPlatformNew nextPlatform = SkipLevelManager.SkipToNextLevel().GetComponent<MovingPlatformNew>();
-            
-            string nextPlatformInfo = Regex.Split(nextPlatform.name, "MovingPlatformTrigger_")[1];
-            string nextPlatformStage = nextPlatformInfo[0].ToString();
-            string nextPlatformLevel = nextPlatformInfo[1].ToString();
-
-            GameObject player = GameObject.FindWithTag("Player");
-
-            if (!nextPlatform.name.Equals(gd.MovingPlatformName))
-            {
-                SaveSystem.SaveGame(nextPlatform, nextPlatformStage, nextPlatformLevel, GameObject.FindWithTag("Companion").GetComponent<NavMeshAgent>().enabled ? true : false);
-                this.canvas.SetActive(true);
-                StartCoroutine("WaitForSec");
-                gd = SaveSystem.LoadGame();
-            }
-    
-            EventsManager.instance.OnLODManagerEnable(Int32.Parse("" + gd.stage.ToCharArray()[gd.stage.Length - 1]));
-
-            if (gd.stage.ToCharArray()[gd.stage.Length - 1] > '1' || (gd.lvl.ToCharArray()[gd.lvl.Length - 1] == '5' && gd.stage.ToCharArray()[gd.stage.Length - 1] == '1')) {
-                GameObject companion = GameObject.FindWithTag("Companion");
-                companion.GetComponent<NavMeshAgent>().enabled = false;
-                companion.transform.parent = nextPlatform.VisualTrigger2.transform;
-                companion.transform.position = nextPlatform.VisualTrigger2.GetComponent<MeshRenderer>().bounds.center;
-                companion.GetComponent<NavMeshAgent>().enabled = true;
-                StartCoroutine("WaitForSecCompanion", nextPlatform);
-                
-            }
-
-            nextPlatform.GetComponent<BoxCollider>().enabled = false;
-            player.transform.parent = nextPlatform.transform;
-            player.transform.position = nextPlatform.VisualTrigger1.GetComponent<MeshRenderer>().bounds.center + new Vector3(0f, 1f, 0f);
-            
-            StartCoroutine("WaitForSecPlayer", nextPlatform);
-
-        }
+        gd = SaveSystem.LoadGame();
+        StartCoroutine("WaitForSecLoad");
 
         menu.SetActive(false);
         IngameMenu.showMenu = false;
@@ -211,8 +179,57 @@ public class Player : MonoBehaviour
 
     IEnumerator WaitForSec()
     {
+        this.canvas.SetActive(true);
         yield return new WaitForSeconds(5);
         this.canvas.SetActive(false);
+    }
+
+    IEnumerator WaitForSecSave()
+    {
+        yield return new WaitForSeconds(0.2f);
+        gd = SaveSystem.LoadGame();
+
+        EventsManager.instance.OnLODManagerEnable(Int32.Parse("" + gd.stage.ToCharArray()[gd.stage.Length - 1]));
+
+        if (gd.stage.ToCharArray()[gd.stage.Length - 1] > '1' || (gd.lvl.ToCharArray()[gd.lvl.Length - 1] == '5' && gd.stage.ToCharArray()[gd.stage.Length - 1] == '1'))
+        {
+            GameObject companion = GameObject.FindWithTag("Companion");
+            companion.GetComponent<NavMeshAgent>().enabled = false;
+            companion.transform.parent = nextPlatform.VisualTrigger2.transform;
+            companion.transform.position = nextPlatform.VisualTrigger2.GetComponent<MeshRenderer>().bounds.center;
+            companion.GetComponent<NavMeshAgent>().enabled = true;
+            StartCoroutine("WaitForSecCompanion", nextPlatform);
+
+        }
+
+        nextPlatform.GetComponent<BoxCollider>().enabled = false;
+        this.transform.parent = nextPlatform.transform;
+        this.transform.position = nextPlatform.VisualTrigger1.GetComponent<MeshRenderer>().bounds.center + new Vector3(0f, 1f, 0f);
+        StartCoroutine("WaitForSec");
+        StartCoroutine("WaitForSecPlayer", nextPlatform);
+    }
+
+    IEnumerator WaitForSecLoad()
+    {
+        yield return new WaitForSeconds(0.2f);
+        
+        if (gd != null)
+        {
+            nextPlatform = SkipLevelManager.SkipToNextLevel().GetComponent<MovingPlatformNew>();
+
+            nextPlatformInfo = Regex.Split(nextPlatform.name, "MovingPlatformTrigger_")[1];
+            nextPlatformStage = nextPlatformInfo[0].ToString();
+            nextPlatformLevel = nextPlatformInfo[1].ToString();
+
+            if (!nextPlatform.name.Equals(gd.MovingPlatformName))
+            {
+                SaveSystem.SaveGame(nextPlatform, nextPlatformStage, nextPlatformLevel, GameObject.FindWithTag("Companion").GetComponent<NavMeshAgent>().enabled ? true : false);
+
+                StartCoroutine("WaitForSecSave");
+
+            }
+
+        }
     }
 
 }
