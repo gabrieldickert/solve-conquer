@@ -28,8 +28,8 @@ public class Companion : MonoBehaviour
     
     private float maxDistanceFromDestination = 2f;
     private NavMeshAgent agent;
-    private Renderer companionRenderer;
-    private bool isFollowing = true;
+    //private Renderer companionRenderer;
+    //private bool isFollowing = true;
     private float stoppingDistance = 0f;
     private Process process = new Process();
     private GameObject targetObject;
@@ -59,8 +59,8 @@ public class Companion : MonoBehaviour
 
         agent = GetComponent<NavMeshAgent>();
         stoppingDistance = agent.stoppingDistance;
-        companionRenderer = transform.GetChild(1).GetComponent<SkinnedMeshRenderer>();
-        companionRenderer.material.color = isFollowing ? Color.green : Color.red;
+        //companionRenderer = transform.GetChild(1).GetComponent<SkinnedMeshRenderer>();
+        //companionRenderer.material.color = isFollowing ? Color.green : Color.red;
 
         animator = GetComponent<Animator>();
     }
@@ -123,7 +123,7 @@ public class Companion : MonoBehaviour
             case ProcessState.Following:
                 agent.stoppingDistance = this.stoppingDistance;
                 agent.isStopped = false;
-                companionRenderer.material.color = Color.green;
+                //companionRenderer.material.color = Color.green;
                 this.targetObject = this.gameObjectToFollow;
                 this.targetPosition = this.gameObjectToFollow.transform.position;
                 if(agent.velocity == Vector3.zero){
@@ -205,7 +205,7 @@ public class Companion : MonoBehaviour
         
         if(process.CurrentState == ProcessState.WaitingAt || process.CurrentState == ProcessState.AbortingHack)
         {
-            companionRenderer.material.color = Color.red;
+            //companionRenderer.material.color = Color.red;
             PlaySoundFX(audioSrc, audioClips[3], false);
             this.targetObject = null;
             this.targetPosition = waitingPosition;
@@ -219,7 +219,7 @@ public class Companion : MonoBehaviour
         if (process.CurrentState == ProcessState.Fetching || process.CurrentState == ProcessState.AbortingHack)
         {
             PlaySoundFX(audioSrc, audioClips[4], false);
-            companionRenderer.material.color = Color.blue;
+            //companionRenderer.material.color = Color.blue;
             this.targetObject = targetObject;
             this.targetPosition = targetObject.transform.position;
             agent.stoppingDistance = 0f;
@@ -237,7 +237,7 @@ public class Companion : MonoBehaviour
         process.MoveNext(Command.Hack);
         if (process.CurrentState == ProcessState.Hacking || process.CurrentState == ProcessState.AbortingHack)
         {
-            companionRenderer.material.color = Color.yellow;
+            //companionRenderer.material.color = Color.yellow;
             PlaySoundFX(audioSrc, audioClips[5], false);
             this.targetObject = targetObject;
             this.targetPosition = targetObject.transform.position;
@@ -257,7 +257,7 @@ public class Companion : MonoBehaviour
     {
         if(this.carriedObject == null)
         {
-            companionRenderer.material.color = Color.white;
+            //companionRenderer.material.color = Color.white;
             this.carriedObject = targetObject;
             EventsManager.instance.OnForceObjectBarrierEnableObstacle();
             targetObject.GetComponent<Rigidbody>().isKinematic = true;
@@ -283,7 +283,7 @@ public class Companion : MonoBehaviour
 
     void Hack(GameObject targetGameObject)
     {
-        companionRenderer.material.color = Color.black;
+        //companionRenderer.material.color = Color.black;
         this.hackedObject = targetGameObject;
         EventsManager.instance.OnCompanionHackEnable(this.hackedObject.GetInstanceID());
     }
