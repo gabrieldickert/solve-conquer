@@ -143,24 +143,10 @@ public class Player : MonoBehaviour
 
     public void SkipLevel()
     {
-        
-        if (gd != null)
-        {
-            nextPlatform = SkipLevelManager.SkipToNextLevel().GetComponent<MovingPlatformNew>();
-            
-            nextPlatformInfo = Regex.Split(nextPlatform.name, "MovingPlatformTrigger_")[1];
-            nextPlatformStage = nextPlatformInfo[0].ToString();
-            nextPlatformLevel = nextPlatformInfo[1].ToString();
+        gd = SaveSystem.LoadGame();
+        StartCoroutine("WaitForSecLoad");
 
-            if (!nextPlatform.name.Equals(gd.MovingPlatformName))
-            {
-                SaveSystem.SaveGame(nextPlatform, nextPlatformStage, nextPlatformLevel, GameObject.FindWithTag("Companion").GetComponent<NavMeshAgent>().enabled ? true : false);
-                
-                StartCoroutine("WaitForSecSave");
-
-            }
-
-        }
+       
 
         menu.SetActive(false);
         IngameMenu.showMenu = false;
@@ -223,6 +209,29 @@ public class Player : MonoBehaviour
         this.transform.position = nextPlatform.VisualTrigger1.GetComponent<MeshRenderer>().bounds.center + new Vector3(0f, 1f, 0f);
         StartCoroutine("WaitForSec");
         StartCoroutine("WaitForSecPlayer", nextPlatform);
+    }
+
+    IEnumerator WaitForSecLoad()
+    {
+        yield return new WaitForSeconds(0.3f);
+        
+        if (gd != null)
+        {
+            nextPlatform = SkipLevelManager.SkipToNextLevel().GetComponent<MovingPlatformNew>();
+
+            nextPlatformInfo = Regex.Split(nextPlatform.name, "MovingPlatformTrigger_")[1];
+            nextPlatformStage = nextPlatformInfo[0].ToString();
+            nextPlatformLevel = nextPlatformInfo[1].ToString();
+
+            if (!nextPlatform.name.Equals(gd.MovingPlatformName))
+            {
+                SaveSystem.SaveGame(nextPlatform, nextPlatformStage, nextPlatformLevel, GameObject.FindWithTag("Companion").GetComponent<NavMeshAgent>().enabled ? true : false);
+
+                StartCoroutine("WaitForSecSave");
+
+            }
+
+        }
     }
 
 }
