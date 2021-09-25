@@ -18,14 +18,14 @@ public class Companion : MonoBehaviour
      * 3: waitAt
      * 4: fetch
      * 5: hack
-     * 6: hacking
-     * 7: drop
+     * 6: drop
      */
     public AudioClip[] audioClips;
 
-    private AudioSource audioSrc;
+    public AudioSource audioSrc;
+    public AudioSource audioSrcLoop;
     private bool isPlayingIdleLoop = false;
-
+    
     private float maxDistanceFromDestination = 2f;
     private NavMeshAgent agent;
     private Renderer companionRenderer;
@@ -57,8 +57,6 @@ public class Companion : MonoBehaviour
         EventsManager.instance.CompanionFollow += HandleCompanionFollow;
         EventsManager.instance.CompanionDropObject += HandleCompanionDropObject;
 
-        audioSrc = this.GetComponent<AudioSource>();
-
         agent = GetComponent<NavMeshAgent>();
         stoppingDistance = agent.stoppingDistance;
         companionRenderer = transform.GetChild(1).GetComponent<SkinnedMeshRenderer>();
@@ -68,7 +66,7 @@ public class Companion : MonoBehaviour
     }
 
     void Update()
-    {
+    {   
         if (agent.path.status == NavMeshPathStatus.PathInvalid)
         {
             gameObject.GetComponent<NavMeshAgent>().enabled = false;
@@ -107,7 +105,7 @@ public class Companion : MonoBehaviour
         {
             if (!isPlayingIdleLoop)
             {
-                PlaySoundFX(audioClips[0], true);
+                PlaySoundFX(audioSrcLoop, audioClips[0], true);
                 isPlayingIdleLoop = true;
             }
         }
@@ -115,7 +113,7 @@ public class Companion : MonoBehaviour
         {
             if (isPlayingIdleLoop)
             {
-                PlaySoundFX(audioClips[1], true);
+                PlaySoundFX(audioSrcLoop, audioClips[1], true);
                 isPlayingIdleLoop = false;
             }
         }
@@ -204,10 +202,11 @@ public class Companion : MonoBehaviour
     void HandleCompanionWaitAt(UnityEngine.Vector3 waitingPosition)
     {
         process.MoveNext(Command.WaitAt);
-        PlaySoundFX(audioClips[3], false);
+        
         if(process.CurrentState == ProcessState.WaitingAt || process.CurrentState == ProcessState.AbortingHack)
         {
             companionRenderer.material.color = Color.red;
+            PlaySoundFX(audioSrc, audioClips[3], false);
             this.targetObject = null;
             this.targetPosition = waitingPosition;
             agent.stoppingDistance = 0f;
@@ -216,10 +215,10 @@ public class Companion : MonoBehaviour
 
     void HandleCompanionPickUpObject(GameObject targetObject)
     {
-        PlaySoundFX(audioClips[4], false);
         process.MoveNext(Command.Fetch);
         if (process.CurrentState == ProcessState.Fetching || process.CurrentState == ProcessState.AbortingHack)
         {
+            PlaySoundFX(audioSrc, audioClips[4], false);
             companionRenderer.material.color = Color.blue;
             this.targetObject = targetObject;
             this.targetPosition = targetObject.transform.position;
@@ -229,17 +228,17 @@ public class Companion : MonoBehaviour
 
     void HandleCompanionDropObject()
     {
-        PlaySoundFX(audioClips[7], false);
+        PlaySoundFX(audioSrc, audioClips[6], false);
         Drop(this.carriedObject);
     }
 
     void HandleCompanionHackObject(GameObject targetObject)
     {
-        PlaySoundFX(audioClips[5], false);
         process.MoveNext(Command.Hack);
         if (process.CurrentState == ProcessState.Hacking || process.CurrentState == ProcessState.AbortingHack)
         {
             companionRenderer.material.color = Color.yellow;
+            PlaySoundFX(audioSrc, audioClips[5], false);
             this.targetObject = targetObject;
             this.targetPosition = targetObject.transform.position;
             agent.stoppingDistance = 0f;
@@ -248,7 +247,7 @@ public class Companion : MonoBehaviour
 
     void HandleCompanionFollow()
     {
-        PlaySoundFX(audioClips[2], false);
+        PlaySoundFX(audioSrc, audioClips[2], false);
         process.MoveNext(Command.Follow);
     }
 
@@ -284,7 +283,6 @@ public class Companion : MonoBehaviour
 
     void Hack(GameObject targetGameObject)
     {
-        PlaySoundFX(audioClips[6], false);
         companionRenderer.material.color = Color.black;
         this.hackedObject = targetGameObject;
         EventsManager.instance.OnCompanionHackEnable(this.hackedObject.GetInstanceID());
@@ -296,18 +294,15 @@ public class Companion : MonoBehaviour
         this.hackedObject = null;
     }
 
-    private void PlaySoundFX(AudioClip ac, bool shouldLoop)
+    private void PlaySoundFX(AudioSource audioSource, AudioClip ac, bool shouldLoop)
     {
-        audioSrc.Stop();
-        audioSrc.loop = shouldLoop;
-        audioSrc.clip = ac;
-        if (shouldLoop)
+        if(shouldLoop)
         {
-            audioSrc.Play();
-        } else
-        {
-            audioSrc.PlayOneShot(ac);
+            audioSource.Stop();
         }
+        audioSource.loop = shouldLoop;
+        audioSource.clip = ac;
+        audioSource.PlayOneShot(ac);
     }
 }
 
