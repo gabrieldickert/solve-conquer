@@ -13,7 +13,7 @@ public class SkipLevelManager : MonoBehaviour
     public string stage;
     public string level;
     
-    private static int currentIndex = 0;
+    public static int currentIndex = 0;
 
     // Start is called before the first frame update
     void Start()
@@ -40,10 +40,13 @@ public class SkipLevelManager : MonoBehaviour
 
     private void Update()
     {
-        currentPlatform = movingPlatforms[currentIndex];
-        stage = movingPlatforms[currentIndex].Stage;
-        level = movingPlatforms[currentIndex].Lvl;
-
+        if (currentIndex + 1 < movingPlatforms.Length)
+        {
+            currentPlatform = movingPlatforms[currentIndex];
+            stage = movingPlatforms[currentIndex].Stage;
+            level = movingPlatforms[currentIndex].Lvl;
+        }
+        
         if (currentIndex + 1 < movingPlatforms.Length)
         {
             nextSavePlatform = movingPlatforms[currentIndex + 1];

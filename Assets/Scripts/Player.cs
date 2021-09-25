@@ -146,8 +146,6 @@ public class Player : MonoBehaviour
         gd = SaveSystem.LoadGame();
         StartCoroutine("WaitForSecLoad");
 
-       
-
         menu.SetActive(false);
         IngameMenu.showMenu = false;
         laserpointer = GameObject.Find("LaserPointer");
@@ -188,7 +186,7 @@ public class Player : MonoBehaviour
 
     IEnumerator WaitForSecSave()
     {
-        yield return new WaitForSeconds(0.3f);
+        yield return new WaitForSeconds(0.2f);
         gd = SaveSystem.LoadGame();
 
         EventsManager.instance.OnLODManagerEnable(Int32.Parse("" + gd.stage.ToCharArray()[gd.stage.Length - 1]));
@@ -213,7 +211,7 @@ public class Player : MonoBehaviour
 
     IEnumerator WaitForSecLoad()
     {
-        yield return new WaitForSeconds(0.3f);
+        yield return new WaitForSeconds(0.2f);
         
         if (gd != null)
         {
