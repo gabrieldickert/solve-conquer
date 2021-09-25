@@ -8,6 +8,7 @@ using UnityEngine.Playables;
 public class Stage1Level5 : MonoBehaviour
 {
     public int triggerIdCompanionDrop = 0;
+    public int triggerIdBotsDrop = 0;
     public int triggerFloor2 = 0;
     public int triggerFloor3 = 0;
     public int triggerFloor4 = 0;
@@ -26,8 +27,20 @@ public class Stage1Level5 : MonoBehaviour
     public GameObject cubeFloor2_b = null;
     public GameObject cubeFloor3 = null;
     public GameObject cubeFloor4 = null;
+    public GameObject bot1 = null;
+    public GameObject bot2 = null;
+    public GameObject bot3 = null;
+
+
+    public GameObject nextTimeline = null;
+    public GameObject prevTimeline = null;
+    public GameObject botAnimTimeline = null;
+    private PlayableDirector nextDirector = null;
+    private PlayableDirector prevDirector = null;
+    private PlayableDirector botAnimDirector = null;
 
     private int currentFloor = 0;
+    private bool botsWereDropped = false;
     bool companionDropped = false;
     
 
@@ -35,9 +48,12 @@ public class Stage1Level5 : MonoBehaviour
     void Start()
     {
         EventsManager.instance.SwitchEnable += HandleDropCompanion;
+        EventsManager.instance.SwitchDisable += HandleDropBots;
         EventsManager.instance.PlayerEnteredTrigger += HandlePlayerEnteredTrigger;
-        
-        
+
+        nextDirector = nextTimeline.GetComponent<PlayableDirector>();
+        prevDirector = prevTimeline.GetComponent<PlayableDirector>();
+        botAnimDirector = botAnimTimeline.GetComponent<PlayableDirector>();
     }
 
     // Update is called once per frame
@@ -62,7 +78,7 @@ public class Stage1Level5 : MonoBehaviour
         if(triggerIdCompanionDrop == triggerId && !companionDropped)
         {
             companionDropped = true;
-            Debug.Log("Stage1Level5: Dropping Companion");
+            //Debug.Log("Stage1Level5: Dropping Companion");
             director.Play();
             director.stopped += OnPlayableDirectorStopped;
         }
@@ -77,12 +93,25 @@ public class Stage1Level5 : MonoBehaviour
         //Debug.Log("CubeStatus: " + cube.GetComponent<Rigidbody>().isKinematic);
     }
 
+    private void HandleDropBots(int triggerId)
+    {
+        if(!botsWereDropped && triggerId == triggerIdBotsDrop)
+        {
+            botAnimDirector.Stop();
+            bot1.GetComponent<Rigidbody>().isKinematic = false;
+            bot2.GetComponent<Rigidbody>().isKinematic = false;
+            bot3.GetComponent<Rigidbody>().isKinematic = false;
+            prevDirector.Stop();
+            nextDirector.Play();
+        }
+    }
+
     
     private void HandlePlayerEnteredTrigger(int triggerId)
     {
         if(triggerId == triggerFloor2 && currentFloor != 2)
         {
-            Debug.Log("Stage1Level5: Player entered floor 2");
+            //Debug.Log("Stage1Level5: Player entered floor 2");
             currentFloor = 2;
             foreach(int bridgeTrigger in bridgeFloor1)
             {
@@ -96,7 +125,7 @@ public class Stage1Level5 : MonoBehaviour
             DropCube(cubeFloor2_b);
         } else if(triggerId == triggerFloor3 && currentFloor != 3)
         {
-            Debug.Log("Stage1Level5: Player entered floor 3");
+            //Debug.Log("Stage1Level5: Player entered floor 3");
             currentFloor = 3;
             foreach (int bridgeTrigger in bridgeFloor2)
             {
@@ -106,7 +135,7 @@ public class Stage1Level5 : MonoBehaviour
         }
         else if (triggerId == triggerFloor4 && currentFloor != 4)
         {
-            Debug.Log("Stage1Level5: Player entered floor 4");
+            //Debug.Log("Stage1Level5: Player entered floor 4");
             currentFloor = 4;
             foreach (int bridgeTrigger in bridgeFloor3)
             {
@@ -116,7 +145,7 @@ public class Stage1Level5 : MonoBehaviour
         }
         else if (triggerId == triggerFloor5 && currentFloor != 5)
         {
-            Debug.Log("Stage1Level5: Player entered floor 5");
+            //Debug.Log("Stage1Level5: Player entered floor 5");
             currentFloor = 5;
             trashSpawner.enabled = false;
             foreach (int bridgeTrigger in bridgeFloor4)

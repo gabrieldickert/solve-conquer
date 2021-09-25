@@ -13,12 +13,22 @@ public class TimelineTrigger : MonoBehaviour
     private bool timeLinePlaying = false;
     public int TimelineID;
     public bool activateNextTriggerImmediately = false;
+    public bool shouldResumeMusic = false;
+    public bool shouldPauseMusic = false;
 
     // Start is called before the first frame update
     void Start()
     {
         myDirector = timeLine.GetComponent<PlayableDirector>();
         myDirector.stopped += OnTimeLineStopped;
+        if(shouldResumeMusic)
+        {
+            EventsManager.instance.OnAudioManagerPlay();
+        }
+        if(shouldPauseMusic)
+        {
+            EventsManager.instance.OnAudioManagerPause();
+        }
     }
 
     private void OnTriggerEnter(Collider other)
@@ -26,7 +36,6 @@ public class TimelineTrigger : MonoBehaviour
        if(!timeLinePlaying && other.tag == "Player")
         {
             timeLinePlaying = true;
-            //myDirector.Play();
             EventsManager.instance.OnAddTimelineToQueue(TimelineID);
             if(nextTimelineTrigger != null && activateNextTriggerImmediately)
             {
