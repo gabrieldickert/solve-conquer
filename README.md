@@ -2,16 +2,16 @@
 ## (Arbeitstitel: Solve & Conquer)
 
 ## Beschreibung
-> Eine unbekannte Bedrohung verschlägt dich ins Endersystem.
-> Deine Aufgabe: Routineprüfung einer Ardit-Mine für einen ruchlosen Weltraumkonzern.
-> Doch nichts ist, wie es scheint: hier läuft einiges schief.
-> Statt einem funktionsfähigem Tagebau findest Du nur haufenweise Plattformen, Puzzles und nutzlose Roboter.
+> _Eine unbekannte Bedrohung verschlägt dich ins Endersystem._
+> _Deine Aufgabe: Routineprüfung einer Ardit-Mine für einen ruchlosen Weltraumkonzern._
+> _Doch nichts ist, wie es scheint: hier läuft einiges schief._
+> _Statt einem funktionsfähigem Tagebau findest Du nur haufenweise Plattformen, Puzzles und nutzlose Roboter._
 
-> Erkunde die Umgebung, erklimme das Gebirge und finde die Wahrheit über die Mine heraus!
+> _Erkunde die Umgebung, erklimme das Gebirge und finde die Wahrheit über die Mine heraus!_
 
-> Doch Der Weg birgt viele Gefahren und Rätsel, die deinen Verstand herausfordern!
+> _Doch Der Weg birgt viele Gefahren und Rätsel, die deinen Verstand herausfordern!_
 
-> Bist du bereit?
+> _Bist du bereit?_
 
 ---
 
