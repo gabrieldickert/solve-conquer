@@ -28,7 +28,7 @@ einen Weg durch den Tagebau bahnen, um dessen Geheimnis zu lüften.
 
 Dich erwarten verteilt über 4 Stages insgesamt 20 verschiedene Puzzle-Level mit wachsendem Schwierigkeitsgrad, die Dich mit unterschiedlichen Hindernissen konfrontieren.
 
-Dabei bist Du nie alleine: ein Wartungsroboter steht Dir zur Seite, um die Puzzles zu lösen.
+Dabei bist Du nie alleine: der Wartungsroboter steht Dir zur Seite, um die Puzzles zu lösen.
 
 Ganz nebenbei erfährst Du dank der voll vertonten Dialoge und Cutscenes Stück für Stück mehr über die Geschichte hinter diesem seltsamen Ort.
 
