@@ -81,6 +81,11 @@ Ganz nebenbei erfährst Du dank der voll vertonten Dialoge und Cutscenes Stück 
 
 ---
 
+## Vollständiger Walkthrough
+[![Video Walkthrough](https://img.youtube.com/vi/EAOaMGJqs1g/0.jpg)](https://youtu.be/EAOaMGJqs1g)
+
+---
+
 ## Funktionsnachweis
 [![Funktionsnachweis Solve & Conquer](https://img.youtube.com/vi/YRlsOEzoqT8/0.jpg)](https://www.youtube.com/watch?v=YRlsOEzoqT8)
 
