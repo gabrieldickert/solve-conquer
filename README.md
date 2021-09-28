@@ -15,6 +15,12 @@
 
 ---
 
+## Trailer
+
+[![Trailer The Mystery of the Ardit Mine](https://img.youtube.com/vi/z3HsYrJgATU/0.jpg)](https://www.youtube.com/watch?v=z3HsYrJgATU)
+
+---
+
 The Mystery of the Ardit Mine nimmt Dich mit auf ein Virtual-Reality-Abenteuer.
 
 Gemeinsam mit der vorschriftsbesessenen KI Deines Raumschiffs und einem einheimischen Wartungsroboter musst Du Dir
@@ -39,6 +45,8 @@ Ganz nebenbei erfährst Du dank der voll vertonten Dialoge und Cutscenes Stück 
 * Wurfobjekte: Müssen auf Zielscheiben geworfen werden, um diese zu (de-)aktivieren.
 * Zielscheiben: Müssen (de-)aktiviert werden, um voranzukommen.
 * und dein Begleiter: Kann ferngesteuert werden, um Druckplatten für Dich zu aktivieren, Würfel für Dich zu tragen und zu platzieren, bestimmte Barrieren kurzzeitig zu deaktivieren ode Konsolen zu hacken!
+
+[Main scene overview](documentation/img/scene-overview.png)
 
 ---
 
@@ -75,12 +83,6 @@ Ganz nebenbei erfährst Du dank der voll vertonten Dialoge und Cutscenes Stück 
 
 ## Funktionsnachweis
 [![Funktionsnachweis Solve & Conquer](https://img.youtube.com/vi/YRlsOEzoqT8/0.jpg)](https://www.youtube.com/watch?v=YRlsOEzoqT8)
-
----
-
-## Trailer
-
-[![Trailer The Mystery of the Ardit Mine](https://img.youtube.com/vi/z3HsYrJgATU/0.jpg)](https://www.youtube.com/watch?v=z3HsYrJgATU)
 
 ---
 
