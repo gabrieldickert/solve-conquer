@@ -46,7 +46,7 @@ Ganz nebenbei erfährst Du dank der voll vertonten Dialoge und Cutscenes Stück 
 * Zielscheiben: Müssen (de-)aktiviert werden, um voranzukommen.
 * und dein Begleiter: Kann ferngesteuert werden, um Druckplatten für Dich zu aktivieren, Würfel für Dich zu tragen und zu platzieren, bestimmte Barrieren kurzzeitig zu deaktivieren ode Konsolen zu hacken!
 
-[Main scene overview](documentation/img/scene-overview.png)
+![Main scene overview](documentation/img/scene-overview.png)
 
 ---
 
