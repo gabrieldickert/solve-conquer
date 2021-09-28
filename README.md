@@ -106,31 +106,24 @@ University of Applied Sciences Fulda
 
 Team-Lead: Christian Klüh
 
-Audio and Music: Julian Schuster & Gabriel Dickert
-
-Animations: Christian Klüh & Sven Zimny 
-
-Cutscenes: Christian Klüh & Gabriel Dickert
-
-Leveldesign: Christian Klüh & Sven Zimny
-
-Puzzle Mechanics & Design: Christian Klüh & Gabriel Dickert
-
-Lighting: Christian Klüh & Sven Zimny
-
-Scripting: Christian Klüh & Julian Schuster & Gabriel Dickert
-
-Optimization: Christian Klüh & Sven Zimny
-
-Textures & Models: Sven Zimny 
-
-Voices: Christian Klüh & Sven Zimny & Julian Schuster & Gabriel Dickert
+|Features|Contributers|
+|--------|------------|
+|Audio and Music|Julian Schuster & Gabriel Dickert|
+|Animations|Christian Klüh & Sven Zimny|
+|Cutscenes|Christian Klüh & Gabriel Dickert|
+|Leveldesign|Christian Klüh & Sven Zimny|
+|Puzzle Mechanics & Design|Christian Klüh & Gabriel Dickert|
+|Lighting|Christian Klüh & Sven Zimny|
+|Scripting|Christian Klüh & Julian Schuster & Gabriel Dickert|
+|Optimization|Christian Klüh & Sven Zimny|
+|Textures & Models|Sven Zimny|
+|Voices|Christian Klüh & Sven Zimny & Julian Schuster & Gabriel Dickert|
 
 ---
 
-Additional Assets
+## Additional Assets
 
-Licensed Music
+### Licensed Music
 
 "Sad or Happy Movie Scene" by Soundscapes55 - freesound.org
 
@@ -152,7 +145,7 @@ Licensed Music
 
 ---
 
-Sound 
+### Sound 
 
 "steel_pylon_cable_scraping_Rotterdam" by uair01
 
@@ -216,7 +209,7 @@ Sound
 
 ---
 
-Asset Packs
+### Asset Packs
 
 "Oculus Integration" by Oculus
 
@@ -242,7 +235,7 @@ Asset Packs
 
 ---
 
-3D Models
+### 3D Models
 
 "Raider Base" (https://skfb.ly/6RMUx) by BadPizza
 
